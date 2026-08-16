@@ -1,0 +1,191 @@
+{% load i18n static %}
+
+<header class="sticky top-0 z-50 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 transition-colors duration-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+        
+        <!-- Identity / Logo Anchor -->
+        <a href="{% url 'core:home' %}" class="flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-violet-500 rounded-lg">
+            <img src="{% static 'img/logo.avif' %}" alt="HTAP Algérie Logo" class="h-10 w-auto object-contain" />
+            <div class="flex flex-col">
+                <span class="font-bold text-slate-900 dark:text-white text-lg tracking-tight leading-none">HTAP ALGÉRIE</span>
+                <span class="text-[11px] text-slate-500 dark:text-slate-400 tracking-wider uppercase font-medium mt-1">Association Nationale</span>
+            </div>
+        </a>
+
+        <!-- Center Primary Navigation -->
+        <nav class="hidden lg:flex items-center gap-8">
+            <a href="{% url 'core:home' %}" class="text-sm font-medium transition-colors duration-150 py-1 border-b-2 {% if request.resolver_match.url_name == 'home' %}border-violet-600 text-slate-900 dark:text-white dark:border-violet-400{% else %}border-transparent text-slate-600 dark:text-slate-300 hover:border-slate-200 dark:hover:border-slate-700 hover:text-slate-900 dark:hover:text-white{% endif %}">
+                {% translate "Accueil" %}
+            </a>
+            <a href="{% url 'core:about' %}" class="text-sm font-medium transition-colors duration-150 py-1 border-b-2 {% if request.resolver_match.url_name == 'about' %}border-violet-600 text-slate-900 dark:text-white dark:border-violet-400{% else %}border-transparent text-slate-600 dark:text-slate-300 hover:border-slate-200 dark:hover:border-slate-700 hover:text-slate-900 dark:hover:text-white{% endif %}">
+                {% translate "À propos" %}
+            </a>
+            <a href="{% url 'core:htap' %}" class="text-sm font-medium transition-colors duration-150 py-1 border-b-2 {% if request.resolver_match.url_name == 'htap' %}border-violet-600 text-slate-900 dark:text-white dark:border-violet-400{% else %}border-transparent text-slate-600 dark:text-slate-300 hover:border-slate-200 dark:hover:border-slate-700 hover:text-slate-900 dark:hover:text-white{% endif %}">
+                {% translate "HTAP" %}
+            </a>
+            <a href="{% url 'articles:list' %}" class="text-sm font-medium transition-colors duration-150 py-1 border-b-2 {% if request.resolver_match.app_name == 'articles' %}border-violet-600 text-slate-900 dark:text-white dark:border-violet-400{% else %}border-transparent text-slate-600 dark:text-slate-300 hover:border-slate-200 dark:hover:border-slate-700 hover:text-slate-900 dark:hover:text-white{% endif %}">
+                {% translate "Articles" %}
+            </a>
+            <!-- <a href="{% url 'activities:list' %}" class="text-sm font-medium transition-colors duration-150 py-1 border-b-2 {% if request.resolver_match.app_name == 'activities' %}border-violet-600 text-slate-900 dark:text-white dark:border-violet-400{% else %}border-transparent text-slate-600 dark:text-slate-300 hover:border-slate-200 dark:hover:border-slate-700 hover:text-slate-900 dark:hover:text-white{% endif %}">
+                {% translate "Activités" %}
+            </a> -->
+            <!-- <a href="{% url 'core:help' %}" class="text-sm font-medium transition-colors duration-150 py-1 border-b-2 {% if request.resolver_match.url_name == 'help' %}border-violet-600 text-slate-900 dark:text-white dark:border-violet-400{% else %}border-transparent text-slate-600 dark:text-slate-300 hover:border-slate-200 dark:hover:border-slate-700 hover:text-slate-900 dark:hover:text-white{% endif %}">
+                {% translate "Aide & orientation" %}
+            </a> -->
+            <a href="{% url 'core:membership' %}" class="text-sm font-medium transition-colors duration-150 py-1 border-b-2 {% if request.resolver_match.url_name == 'membership' %}border-violet-600 text-slate-900 dark:text-white dark:border-violet-400{% else %}border-transparent text-slate-600 dark:text-slate-300 hover:border-slate-200 dark:hover:border-slate-700 hover:text-slate-900 dark:hover:text-white{% endif %}">
+                {% translate "Adhésion" %}
+            </a>
+        </nav>
+
+        <!-- Right Utilities & Support CTAs -->
+        <div class="hidden lg:flex items-center gap-4">
+            <!-- Theme Toggle Button -->
+            <button id="theme-toggle-btn" type="button" onclick="toggleTheme()" class="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-700 focus:outline-none" aria-label="Toggle dark/light mode">
+                <!-- Sun Icon (for dark mode) -->
+                <svg id="theme-toggle-light-icon" class="hidden h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+                <!-- Moon Icon (for light mode) -->
+                <svg id="theme-toggle-dark-icon" class="hidden h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+            </button>
+
+            {% include "components/language_switcher.html" %}
+            
+            <a href="{% url 'core:contact' %}" class="group inline-flex h-10 items-center justify-center gap-2 rounded-full bg-slate-900 dark:bg-violet-600 px-5 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-violet-700 dark:hover:bg-violet-500 hover:shadow-lg hover:shadow-violet-700/20">
+                {% translate "Contact" %}
+                <svg class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-6-6 6 6-6 6"/>
+                </svg>
+            </a>
+        </div>
+
+        <!-- Mobile Utility Controls -->
+        <div class="flex items-center gap-2 lg:hidden">
+
+            <!-- Mobile Drawer Toggle Button -->
+            <button id="mobile-menu-button" type="button" onclick="toggleMobileMenu()" class="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 transition hover:bg-slate-50 dark:hover:bg-slate-700" aria-expanded="false" aria-controls="mobile-menu" aria-label="{% translate 'Menu' %}">
+                <svg id="menu-icon-hamburger" class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+                <svg id="menu-icon-close" class="hidden h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Navigation Overlay Drawer -->
+    <div id="mobile-menu" class="hidden lg:hidden border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 pt-3 pb-6 transition-all duration-200">
+        <div class="flex flex-col gap-2">
+            <a href="{% url 'core:home' %}" class="text-base font-medium py-2 text-slate-900 dark:text-white">{% translate "Accueil" %}</a>
+            <a href="{% url 'core:about' %}" class="text-base font-medium py-2 text-slate-600 dark:text-slate-300">{% translate "À propos" %}</a>
+            <a href="{% url 'core:htap' %}" class="text-base font-medium py-2 text-slate-600 dark:text-slate-300">{% translate "HTAP" %}</a>
+            <a href="{% url 'articles:list' %}" class="text-base font-medium py-2 text-slate-600 dark:text-slate-300">{% translate "Articles" %}</a>
+            <a href="{% url 'activities:list' %}" class="text-base font-medium py-2 text-slate-600 dark:text-slate-300">{% translate "Activités" %}</a>
+            <a href="{% url 'core:help' %}" class="text-base font-medium py-2 text-slate-600 dark:text-slate-300">{% translate "Aide & orientation" %}</a>
+            <a href="{% url 'core:membership' %}" class="text-base font-medium py-2 text-slate-600 dark:text-slate-300">{% translate "Adhésion" %}</a>
+            <div class="pt-4 flex flex-col gap-3 border-t border-slate-100 dark:border-slate-800 mt-2">
+                
+                <div class="flex items-center justify-end gap-2">
+                <!-- Mobile Theme Toggle -->
+                <button type="button" onclick="toggleTheme()" class="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300" aria-label="Toggle dark/light mode">
+                    <svg class="theme-toggle-light-icon-mobile hidden h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                    <svg class="theme-toggle-dark-icon-mobile hidden h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
+                {% include "components/language_switcher.html" %}
+                </div>
+                <a href="{% url 'core:contact' %}" class="w-full text-center font-medium text-white bg-slate-900 dark:bg-violet-600 py-2.5 rounded-xl shadow-sm">{% translate "Contact" %}</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+{% block extra_js %}
+<script>
+    // Theme Switcher Initialization & Logic
+    function applyTheme(isDark) {
+        if (isDark) {
+            document.documentElement.classList.add('dark');
+            localStorage.setItem('color-theme', 'dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            localStorage.setItem('color-theme', 'light');
+        }
+        updateThemeIcons(isDark);
+    }
+
+    function updateThemeIcons(isDark) {
+        const lightIcons = [document.getElementById('theme-toggle-light-icon'), ...document.querySelectorAll('.theme-toggle-light-icon-mobile')];
+        const darkIcons = [document.getElementById('theme-toggle-dark-icon'), ...document.querySelectorAll('.theme-toggle-dark-icon-mobile')];
+
+        lightIcons.forEach(icon => icon && icon.classList.toggle('hidden', !isDark));
+        darkIcons.forEach(icon => icon && icon.classList.toggle('hidden', isDark));
+    }
+
+    function toggleTheme() {
+        const isDark = document.documentElement.classList.contains('dark');
+        applyTheme(!isDark);
+    }
+
+    // Initialize Theme State
+    (function initTheme() {
+        const savedTheme = localStorage.getItem('color-theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const isDark = savedTheme === 'dark' || (!savedTheme && prefersDark);
+        applyTheme(isDark);
+    })();
+
+    // Language Dropdown Logic
+    function toggleLanguageMenu() {
+        const switcher = document.getElementById("language-switcher");
+        const menu = switcher.querySelector("#language-menu");
+        const button = switcher.querySelector("#language-button");
+        const chevron = switcher.querySelector("#language-chevron");
+
+        const isHidden = menu.classList.contains("hidden");
+        menu.classList.toggle("hidden", !isHidden);
+
+        button.setAttribute("aria-expanded", String(isHidden));
+        if (chevron) {
+            chevron.classList.toggle("rotate-180", isHidden);
+        }
+    }
+
+    // Mobile Menu Toggle Logic
+    function toggleMobileMenu() {
+        const menu = document.getElementById("mobile-menu");
+        const button = document.getElementById("mobile-menu-button");
+        const iconHamburger = document.getElementById("menu-icon-hamburger");
+        const iconClose = document.getElementById("menu-icon-close");
+
+        const isHidden = menu.classList.contains("hidden");
+        menu.classList.toggle("hidden", !isHidden);
+        button.setAttribute("aria-expanded", String(isHidden));
+
+        iconHamburger.classList.toggle("hidden", isHidden);
+        iconClose.classList.toggle("hidden", !isHidden);
+    }
+
+    // Global Outside Click Listener
+    document.addEventListener("click", function (event) {
+        const switcher = document.getElementById("language-switcher");
+        if (switcher && !switcher.contains(event.target)) {
+            const menu = switcher.querySelector("#language-menu");
+            const button = switcher.querySelector("#language-button");
+            const chevron = switcher.querySelector("#language-chevron");
+
+            if (menu && !menu.classList.contains("hidden")) {
+                menu.classList.add("hidden");
+                button.setAttribute("aria-expanded", "false");
+                if (chevron) chevron.classList.remove("rotate-180");
+            }
+        }
+    });
+</script>
+{% endblock %}

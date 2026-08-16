@@ -1,0 +1,86 @@
+{% load i18n static %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
+
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}" class="h-full scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}HTAP Algérie — Association Nationale pour l’Hypertension Artérielle Pulmonaire{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}Association dédiée à l’information, la sensibilisation et l’accompagnement des personnes concernées par l’Hypertension Artérielle Pulmonaire en Algérie.{% endblock %}">
+    
+    {% block extra_meta %}{% endblock %}
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'img/logo.avif' %}" type="image/x-icon">
+
+    <!-- Prevent Dark Mode FOUC (Flash of Unstyled Content) -->
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('color-theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        })();
+    </script>
+
+    <!-- Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/output.css' %}"> 
+    <!-- Tailwind CSS Engine -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        background: { DEFAULT: '#FFFFFF', warm: '#FAFAF9', soft: '#F6F7F9' },
+                        surface: { DEFAULT: '#FFFFFF', border: '#E7E9EE' },
+                        text: { primary: '#172033', secondary: '#4B5565', muted: '#7B8494' },
+                        navy: { DEFAULT: '#172A46', light: '#223B5D' },
+                        brand: { purple: '#74358F', violet: '#8D4BA6', magenta: '#C45A91', rose: '#D979A0' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans Arabic', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        subtle: '0 8px 30px rgba(20, 30, 50, 0.04)',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body class="flex flex-col min-h-full bg-background dark:bg-slate-950 text-text-primary dark:text-slate-100 font-sans antialiased selection:bg-brand-purple/10 selection:text-brand-purple transition-colors duration-200">
+
+    {% include "components/navbar.html" %}
+
+    <main id="main-content" class="flex-grow">
+        {% include "components/messages.html" %}
+        {% block content %}{% endblock %}
+    </main>
+
+    {% include "components/footer.html" %}
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        });
+    </script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

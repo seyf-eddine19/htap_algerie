@@ -1,0 +1,191 @@
+{% extends "base.html" %}
+{% load i18n static %}
+
+{% block title %}{% translate "Actualités & Publications" %} — HTAP Algérie{% endblock %}
+
+{% block content %}
+<!-- En-tête de page -->
+<section class="bg-gradient-to-br from-slate-900 via-navy to-slate-900 text-white py-12 md:py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-xs font-semibold text-brand-rose uppercase tracking-wider">
+            <i data-lucide="newspaper" class="w-4 h-4"></i>
+            {% translate "Médias & Information" %}
+        </span>
+        <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight">
+            {% translate "Actualités & Publications" %}
+        </h1>
+        <p class="text-slate-300 max-w-2xl mx-auto text-sm sm:text-base">
+            {% translate "Retrouvez les derniers articles, guides et rapports médicaux sur l'Hypertension Artérielle Pulmonaire." %}
+        </p>
+    </div>
+</section>
+
+<!-- Barre de Recherche et Catégories -->
+<section class="py-8 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-20 shadow-sm transition-colors">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+        <form method="get" action="{% url 'articles:list' %}" class="flex flex-col sm:flex-row items-center gap-4">
+            
+            <!-- Recherche textuelle -->
+            <div class="relative w-full sm:w-80">
+                <input type="text" name="q" value="{{ search_query }}" placeholder="{% translate 'Rechercher un article...' %}"
+                       class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white text-sm focus:ring-2 focus:ring-brand-purple focus:outline-none">
+                <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-3.5"></i>
+            </div>
+
+            <!-- Filtre par catégorie -->
+            <div class="flex items-center gap-2 overflow-x-auto w-full pb-2 sm:pb-0 scrollbar-none">
+                <a href="{% url 'articles:list' %}"
+                   class="px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all {% if not selected_category %}bg-brand-purple text-white shadow-md{% else %}bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700{% endif %}">
+                    {% translate "Toutes" %}
+                </a>
+                {% for cat in categories %}
+                    <a href="?category={{ cat.slug }}"
+                       class="px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all {% if selected_category == cat.slug %}bg-brand-purple text-white shadow-md{% else %}bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700{% endif %}">
+                        {{ cat.name }}
+                    </a>
+                {% endfor %}
+            </div>
+
+        </form>
+    </div>
+</section>
+
+<section class="py-12 bg-slate-50 dark:bg-slate-950 transition-colors min-h-[60vh]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+
+        <!-- Article à la une (Featured) -->
+        {% if featured_article and not selected_category and not search_query and page_obj.number == 1 %}
+            {% with featured_article.current_translation.0 as trans %}
+            <div class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 overflow-hidden shadow-xl grid grid-cols-1 lg:grid-cols-12 gap-0">
+                <div class="lg:col-span-7 relative min-h-[300px] lg:min-h-[420px]">
+                    {% if featured_article.featured_image %}
+                        <img src="{{ featured_article.featured_image.url }}" alt="{{ trans.title }}" class="absolute inset-0 w-full h-full object-cover">
+                    {% else %}
+                        <div class="absolute inset-0 bg-gradient-to-br from-brand-purple to-slate-900 flex items-center justify-center text-white">
+                            <i data-lucide="newspaper" class="w-16 h-16 opacity-40"></i>
+                        </div>
+                    {% endif %}
+                    <span class="absolute top-4 left-4 bg-brand-rose text-slate-900 font-extrabold text-xs uppercase px-3 py-1 rounded-full shadow">
+                        {% translate "À la une" %}
+                    </span>
+                </div>
+                
+                <div class="lg:col-span-5 p-6 sm:p-10 flex flex-col justify-between space-y-6">
+                    <div class="space-y-4">
+                        {% if featured_article.category %}
+                            <span class="text-xs font-bold uppercase tracking-wider text-brand-purple dark:text-brand-rose">
+                                {{ featured_article.category.name }}
+                            </span>
+                        {% endif %}
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white leading-tight">
+                            {{ trans.title|default:_("Article sans titre") }}
+                        </h2>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 line-clamp-4 leading-relaxed">
+                            {{ trans.excerpt }}
+                        </p>
+                    </div>
+
+                    <div class="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-800 text-xs text-slate-500">
+                        <span>{{ featured_article.published_at|date:"d F Y" }}</span>
+                        <a href="{{ featured_article.get_absolute_url }}" class="inline-flex items-center gap-2 font-bold text-brand-purple dark:text-brand-rose hover:underline">
+                            <span>{% translate "Lire l'article" %}</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4 rtl:rotate-180"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endwith %}
+        {% endif %}
+
+        <!-- Grille des articles -->
+        {% if articles %}
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {% for article in articles %}
+                    {% with article.current_translation.0 as trans %}
+                    <article class="flex flex-col rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 overflow-hidden hover:shadow-xl transition-all group">
+                        
+                        <!-- Image -->
+                        <a href="{{ article.get_absolute_url }}" class="relative h-48 w-full overflow-hidden bg-slate-100 dark:bg-slate-800">
+                            {% if article.featured_image %}
+                                <img src="{{ article.featured_image.url }}" alt="{{ trans.title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            {% else %}
+                                <div class="w-full h-full flex items-center justify-center text-slate-400">
+                                    <i data-lucide="file-text" class="w-10 h-10"></i>
+                                </div>
+                            {% endif %}
+                            {% if article.category %}
+                                <span class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md text-white text-[10px] font-bold px-2.5 py-1 rounded-md">
+                                    {{ article.category.name }}
+                                </span>
+                            {% endif %}
+                        </a>
+
+                        <!-- Contenu -->
+                        <div class="p-6 flex flex-col flex-grow justify-between space-y-4">
+                            <div class="space-y-2">
+                                <span class="text-xs text-slate-400 font-medium">
+                                    {{ article.published_at|date:"d M Y" }}
+                                </span>
+                                <h3 class="font-bold text-slate-900 dark:text-white text-lg line-clamp-2 group-hover:text-brand-purple dark:group-hover:text-brand-rose transition-colors">
+                                    <a href="{{ article.get_absolute_url }}">
+                                        {{ trans.title|default:_("Titre indisponible") }}
+                                    </a>
+                                </h3>
+                                <p class="text-xs text-slate-600 dark:text-slate-400 line-clamp-3 leading-relaxed">
+                                    {{ trans.excerpt }}
+                                </p>
+                            </div>
+
+                            <div class="pt-3 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-xs font-semibold">
+                                <span class="text-slate-500">{{ article.author|default:_("HTAP Algérie") }}</span>
+                                <a href="{{ article.get_absolute_url }}" class="inline-flex items-center gap-1 text-brand-purple dark:text-brand-rose hover:underline">
+                                    <span>{% translate "Lire" %}</span>
+                                    <i data-lucide="chevron-right" class="w-4 h-4 rtl:rotate-180"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                    </article>
+                    {% endwith %}
+                {% endfor %}
+            </div>
+
+            <!-- Pagination -->
+            {% if is_paginated %}
+                <div class="flex justify-center items-center gap-2 pt-8">
+                    {% if page_obj.has_previous %}
+                        <a href="?page={{ page_obj.previous_page_number }}{% if selected_category %}&category={{ selected_category }}{% endif %}{% if search_query %}&q={{ search_query }}{% endif %}"
+                           class="p-2 rounded-lg border border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">
+                            <i data-lucide="chevron-left" class="w-5 h-5 rtl:rotate-180"></i>
+                        </a>
+                    {% endif %}
+
+                    <span class="text-xs text-slate-600 dark:text-slate-400 px-4">
+                        {% translate "Page" %} {{ page_obj.number }} {% translate "sur" %} {{ page_obj.paginator.num_pages }}
+                    </span>
+
+                    {% if page_obj.has_next %}
+                        <a href="?page={{ page_obj.next_page_number }}{% if selected_category %}&category={{ selected_category }}{% endif %}{% if search_query %}&q={{ search_query }}{% endif %}"
+                           class="p-2 rounded-lg border border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">
+                            <i data-lucide="chevron-right" class="w-5 h-5 rtl:rotate-180"></i>
+                        </a>
+                    {% endif %}
+                </div>
+            {% endif %}
+
+        {% else %}
+            <!-- État vide -->
+            <div class="text-center py-16 space-y-4">
+                <div class="w-16 h-16 bg-slate-200 dark:bg-slate-800 text-slate-400 rounded-full flex items-center justify-center mx-auto">
+                    <i data-lucide="file-x" class="w-8 h-8"></i>
+                </div>
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white">{% translate "Aucun article trouvé" %}</h3>
+                <p class="text-xs text-slate-500 max-w-sm mx-auto">
+                    {% translate "Essayez de modifier votre recherche ou de réinitialiser le filtre des catégories." %}
+                </p>
+            </div>
+        {% endif %}
+
+    </div>
+</section>
+{% endblock %}
