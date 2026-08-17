@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: HTaP ALGERIA\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-17 16:20+0100\n"
+"POT-Creation-Date: 2026-08-17 16:24+0100\n"
 "PO-Revision-Date: 2026-08-17 14:25+0100\n"
 "Last-Translator: HTaP ALGERIA\n"
 "Language-Team: Arabic <ar@li.org>\n"
@@ -315,7 +315,7 @@ msgstr "الأعضاء"
 msgid "New"
 msgstr "جديد"
 
-#: .\core\models.py:85
+#: .\core\models.py:85 .\templates\articles\list.html:150
 msgid "Read"
 msgstr "مقروء"
 
@@ -715,6 +715,79 @@ msgstr "أن تصبح عضوًا"
 #: .\templates\activities\list.html:1616
 msgid "Nous contacter"
 msgstr "اتصل بنا"
+
+#: .\templates\articles\list.html:4 .\templates\articles\list.html:16
+#: .\templates\core\home.html:792
+msgid "News & Publications"
+msgstr "الأخبار والمنشورات"
+
+#: .\templates\articles\list.html:13
+msgid "Media & Information"
+msgstr "الإعلام والمعلومات"
+
+#: .\templates\articles\list.html:19
+msgid ""
+"Find the latest articles, guides, and medical reports on Pulmonary Arterial "
+"Hypertension."
+msgstr ""
+"ابحث عن أحدث المقالات والأدلة والتقارير الطبية حول ارتفاع ضغط الدم الشرياني "
+"الرئوي."
+
+#: .\templates\articles\list.html:34
+msgid "Search articles..."
+msgstr "البحث عن مقالات..."
+
+#: .\templates\articles\list.html:46
+msgid "All"
+msgstr "الكل"
+
+#: .\templates\articles\list.html:77
+msgid "Featured"
+msgstr "مميز"
+
+#: .\templates\articles\list.html:89
+msgid "Untitled Article"
+msgstr "مقال بدون عنوان"
+
+#: .\templates\articles\list.html:99 .\templates\core\home.html:881
+msgid "Read article"
+msgstr "قراءة المقال"
+
+#: .\templates\articles\list.html:139
+msgid "Title unavailable"
+msgstr "العنوان غير متاح"
+
+#: .\templates\articles\list.html:148
+msgid "HTAP Algeria"
+msgstr "HTaP الجزائر"
+
+#: .\templates\articles\list.html:167
+msgid "Previous page"
+msgstr "الصفحة السابقة"
+
+#: .\templates\articles\list.html:173
+msgid "Page"
+msgstr "صفحة"
+
+#: .\templates\articles\list.html:173
+msgid "of"
+msgstr "من"
+
+#: .\templates\articles\list.html:179
+msgid "Next page"
+msgstr "الصفحة التالية"
+
+#: .\templates\articles\list.html:192
+msgid "No articles found"
+msgstr "لم يتم العثور على مقالات"
+
+#: .\templates\articles\list.html:194
+msgid "Try adjusting your search terms or resetting the category filters."
+msgstr "حاول تعديل كلمات البحث أو إعادة تعيين مرشحات التصنيف."
+
+#: .\templates\articles\list.html:198
+msgid "Reset filters"
+msgstr "إعادة تعيين المرشحات"
 
 #: .\templates\components\footer.html:20
 msgid ""
@@ -1693,10 +1766,6 @@ msgstr ""
 msgid "Discover our story"
 msgstr "اكتشف قصتنا"
 
-#: .\templates\core\home.html:792
-msgid "News & Publications"
-msgstr "الأخبار والمنشورات"
-
 #: .\templates\core\home.html:796
 msgid "Latest Published Articles"
 msgstr "أحدث المقالات المنشورة"
@@ -1712,10 +1781,6 @@ msgstr ""
 #: .\templates\core\home.html:807
 msgid "View all articles"
 msgstr "عرض جميع المقالات"
-
-#: .\templates\core\home.html:881
-msgid "Read article"
-msgstr "قراءة المقال"
 
 #: .\templates\core\home.html:897
 msgid "No articles published yet"
@@ -2109,55 +2174,6 @@ msgstr "للحصول على البيانات البنكية أو الوصول إ
 
 #~ msgid "Related articles"
 #~ msgstr "مقالات ذات صلة"
-
-#~ msgid "Media & Information"
-#~ msgstr "الإعلام والمعلومات"
-
-#~ msgid ""
-#~ "Find the latest articles, guides, and medical reports on Pulmonary "
-#~ "Arterial Hypertension."
-#~ msgstr ""
-#~ "ابحث عن أحدث المقالات والأدلة والتقارير الطبية حول ارتفاع ضغط الدم "
-#~ "الشرياني الرئوي."
-
-#~ msgid "Search articles..."
-#~ msgstr "البحث عن مقالات..."
-
-#~ msgid "All"
-#~ msgstr "الكل"
-
-#~ msgid "Featured"
-#~ msgstr "مميز"
-
-#~ msgid "Untitled Article"
-#~ msgstr "مقال بدون عنوان"
-
-#~ msgid "Title unavailable"
-#~ msgstr "العنوان غير متاح"
-
-#~ msgid "HTAP Algeria"
-#~ msgstr "HTaP الجزائر"
-
-#~ msgid "Previous page"
-#~ msgstr "الصفحة السابقة"
-
-#~ msgid "Page"
-#~ msgstr "صفحة"
-
-#~ msgid "of"
-#~ msgstr "من"
-
-#~ msgid "Next page"
-#~ msgstr "الصفحة التالية"
-
-#~ msgid "No articles found"
-#~ msgstr "لم يتم العثور على مقالات"
-
-#~ msgid "Try adjusting your search terms or resetting the category filters."
-#~ msgstr "حاول تعديل كلمات البحث أو إعادة تعيين مرشحات التصنيف."
-
-#~ msgid "Reset filters"
-#~ msgstr "إعادة تعيين المرشحات"
 
 #~ msgid "full name"
 #~ msgstr "الاسم الكامل"

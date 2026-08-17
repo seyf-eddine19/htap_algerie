@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-17 16:20+0100\n"
+"POT-Creation-Date: 2026-08-17 16:24+0100\n"
 "PO-Revision-Date: 2026-08-17 14:46+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: fr_FR <LL@li.org>\n"
@@ -304,7 +304,7 @@ msgstr "Membres"
 msgid "New"
 msgstr "Nouveau"
 
-#: .\core\models.py:85
+#: .\core\models.py:85 .\templates\articles\list.html:150
 msgid "Read"
 msgstr "Lu"
 
@@ -719,6 +719,81 @@ msgstr "Devenir membre"
 #: .\templates\activities\list.html:1616
 msgid "Nous contacter"
 msgstr "Nous contacter"
+
+#: .\templates\articles\list.html:4 .\templates\articles\list.html:16
+#: .\templates\core\home.html:792
+msgid "News & Publications"
+msgstr "Actualités et publications"
+
+#: .\templates\articles\list.html:13
+msgid "Media & Information"
+msgstr "Médias et informations"
+
+#: .\templates\articles\list.html:19
+msgid ""
+"Find the latest articles, guides, and medical reports on Pulmonary Arterial "
+"Hypertension."
+msgstr ""
+"Découvrez les derniers articles, guides et rapports médicaux sur "
+"l’hypertension artérielle pulmonaire."
+
+#: .\templates\articles\list.html:34
+msgid "Search articles..."
+msgstr "Rechercher des articles..."
+
+#: .\templates\articles\list.html:46
+msgid "All"
+msgstr "Tous"
+
+#: .\templates\articles\list.html:77
+msgid "Featured"
+msgstr "À la une"
+
+#: .\templates\articles\list.html:89
+msgid "Untitled Article"
+msgstr "Article sans titre"
+
+#: .\templates\articles\list.html:99 .\templates\core\home.html:881
+msgid "Read article"
+msgstr "Lire l’article"
+
+#: .\templates\articles\list.html:139
+msgid "Title unavailable"
+msgstr "Titre indisponible"
+
+#: .\templates\articles\list.html:148
+msgid "HTAP Algeria"
+msgstr "HTaP ALGERIA"
+
+#: .\templates\articles\list.html:167
+msgid "Previous page"
+msgstr "Page précédente"
+
+#: .\templates\articles\list.html:173
+msgid "Page"
+msgstr "Page"
+
+#: .\templates\articles\list.html:173
+msgid "of"
+msgstr "sur"
+
+#: .\templates\articles\list.html:179
+msgid "Next page"
+msgstr "Page suivante"
+
+#: .\templates\articles\list.html:192
+msgid "No articles found"
+msgstr "Aucun article trouvé"
+
+#: .\templates\articles\list.html:194
+msgid "Try adjusting your search terms or resetting the category filters."
+msgstr ""
+"Essayez de modifier vos termes de recherche ou de réinitialiser les filtres "
+"de catégorie."
+
+#: .\templates\articles\list.html:198
+msgid "Reset filters"
+msgstr "Réinitialiser les filtres"
 
 #: .\templates\components\footer.html:20
 msgid ""
@@ -1756,10 +1831,6 @@ msgstr ""
 msgid "Discover our story"
 msgstr "Découvrez notre histoire"
 
-#: .\templates\core\home.html:792
-msgid "News & Publications"
-msgstr "Actualités et publications"
-
 #: .\templates\core\home.html:796
 msgid "Latest Published Articles"
 msgstr "Derniers articles publiés"
@@ -1775,10 +1846,6 @@ msgstr ""
 #: .\templates\core\home.html:807
 msgid "View all articles"
 msgstr "Voir tous les articles"
-
-#: .\templates\core\home.html:881
-msgid "Read article"
-msgstr "Lire l’article"
 
 #: .\templates\core\home.html:897
 msgid "No articles published yet"
@@ -2189,57 +2256,6 @@ msgstr ""
 
 #~ msgid "Related articles"
 #~ msgstr "Articles associés"
-
-#~ msgid "Media & Information"
-#~ msgstr "Médias et informations"
-
-#~ msgid ""
-#~ "Find the latest articles, guides, and medical reports on Pulmonary "
-#~ "Arterial Hypertension."
-#~ msgstr ""
-#~ "Découvrez les derniers articles, guides et rapports médicaux sur "
-#~ "l’hypertension artérielle pulmonaire."
-
-#~ msgid "Search articles..."
-#~ msgstr "Rechercher des articles..."
-
-#~ msgid "All"
-#~ msgstr "Tous"
-
-#~ msgid "Featured"
-#~ msgstr "À la une"
-
-#~ msgid "Untitled Article"
-#~ msgstr "Article sans titre"
-
-#~ msgid "Title unavailable"
-#~ msgstr "Titre indisponible"
-
-#~ msgid "HTAP Algeria"
-#~ msgstr "HTaP ALGERIA"
-
-#~ msgid "Previous page"
-#~ msgstr "Page précédente"
-
-#~ msgid "Page"
-#~ msgstr "Page"
-
-#~ msgid "of"
-#~ msgstr "sur"
-
-#~ msgid "Next page"
-#~ msgstr "Page suivante"
-
-#~ msgid "No articles found"
-#~ msgstr "Aucun article trouvé"
-
-#~ msgid "Try adjusting your search terms or resetting the category filters."
-#~ msgstr ""
-#~ "Essayez de modifier vos termes de recherche ou de réinitialiser les "
-#~ "filtres de catégorie."
-
-#~ msgid "Reset filters"
-#~ msgstr "Réinitialiser les filtres"
 
 #~ msgid "full name"
 #~ msgstr "nom complet"
