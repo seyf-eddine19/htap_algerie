@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-17 16:24+0100\n"
+"POT-Creation-Date: 2026-08-17 17:01+0100\n"
 "PO-Revision-Date: 2026-08-17 14:46+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: fr_FR <LL@li.org>\n"
@@ -106,8 +106,8 @@ msgstr "mis à jour le"
 msgid "Activity"
 msgstr "Activité"
 
-#: .\activities\models.py:42 .\templates\components\footer.html:83
-#: .\templates\components\navbar.html:79
+#: .\activities\models.py:42 .\templates\components\footer.html:84
+#: .\templates\components\navbar.html:80
 msgid "Activities"
 msgstr "Activités"
 
@@ -245,8 +245,8 @@ msgstr "publié le"
 msgid "Article"
 msgstr "Article"
 
-#: .\articles\models.py:46 .\templates\components\footer.html:69
-#: .\templates\components\navbar.html:27 .\templates\components\navbar.html:78
+#: .\articles\models.py:46 .\templates\components\footer.html:70
+#: .\templates\components\navbar.html:28 .\templates\components\navbar.html:79
 msgid "Articles"
 msgstr "Articles"
 
@@ -283,14 +283,12 @@ msgid "Role (French)"
 msgstr "Rôle (français)"
 
 #: .\core\models.py:52
-#, fuzzy
 msgid "Photo"
 msgstr "Photo"
 
 #: .\core\models.py:53
-#, fuzzy
 msgid "Bio"
-msgstr "Bio"
+msgstr "Biographie"
 
 #: .\core\models.py:59
 msgid "Member"
@@ -352,373 +350,21 @@ msgstr "Messages de contact"
 msgid "Your message has been sent successfully."
 msgstr "Votre message a été envoyé avec succès."
 
-#: .\templates\activities\list.html:4
-msgid "Accueil"
-msgstr "Accueil"
-
-#: .\templates\activities\list.html:27
-msgid "Association HTaP ALGERIA"
-msgstr "Association HTaP ALGERIA"
-
-#: .\templates\activities\list.html:32
-msgid "Ensemble pour mieux vivre avec l’HTAP."
-msgstr "Ensemble pour mieux vivre avec l’HTAP."
-
-#: .\templates\activities\list.html:34
-msgid "Une association au service des patients."
-msgstr "Une association au service des patients."
-
-#: .\templates\activities\list.html:40
-msgid ""
-"HTaP ALGERIA est une association engagée aux côtés des personnes concernées "
-"par l’hypertension artérielle pulmonaire, de leurs familles et de leurs "
-"proches."
-msgstr ""
-"HTaP ALGERIA est une association engagée aux côtés des personnes concernées "
-"par l’hypertension artérielle pulmonaire, de leurs familles et de leurs "
-"proches."
-
-#: .\templates\activities\list.html:44
-msgid ""
-"Nous œuvrons pour informer, accompagner et sensibiliser, et pour faire "
-"entendre la voix des patients en Algérie."
-msgstr ""
-"Nous œuvrons pour informer, accompagner et sensibiliser, et pour faire "
-"entendre la voix des patients en Algérie."
-
-#: .\templates\activities\list.html:52
-msgid "Rejoindre l’association"
-msgstr "Rejoindre l’association"
-
-#: .\templates\activities\list.html:74
-msgid "Qui sommes-nous ?"
-msgstr "Qui sommes-nous ?"
-
-#: .\templates\activities\list.html:92
-msgid "Écouter"
-msgstr "Écouter"
-
-#: .\templates\activities\list.html:93
-msgid "Être à vos côtés"
-msgstr "Être à vos côtés"
-
-#: .\templates\activities\list.html:103
-msgid "Rassembler"
-msgstr "Rassembler"
-
-#: .\templates\activities\list.html:104
-msgid "Créer du lien"
-msgstr "Créer du lien"
-
-#: .\templates\activities\list.html:113
-msgid "Agir"
-msgstr "Agir"
-
-#: .\templates\activities\list.html:114
-msgid "Faire avancer la cause"
-msgstr "Faire avancer la cause"
-
-#: .\templates\activities\list.html:132
-msgid "Patients et membres de l’association HTaP ALGERIA"
-msgstr "Patients et membres de l’association HTaP ALGERIA"
-
-#: .\templates\activities\list.html:141
-msgid "Une communauté engagée"
-msgstr "Une communauté engagée"
-
-#: .\templates\activities\list.html:144
-msgid "À vos côtés, à chaque étape."
-msgstr "À vos côtés, à chaque étape."
-
-#: .\templates\activities\list.html:147
-msgid ""
-"Créer du lien, partager l’information et soutenir les patients et leurs "
-"proches."
-msgstr ""
-"Créer du lien, partager l’information et soutenir les patients et leurs "
-"proches."
-
-#: .\templates\activities\list.html:162
-msgid "Notre priorité"
-msgstr "Notre priorité"
-
-#: .\templates\activities\list.html:163
-msgid "Les patients"
-msgstr "Les patients"
-
-#: .\templates\activities\list.html:177
-msgid "Notre engagement"
-msgstr "Notre engagement"
-
-#: .\templates\activities\list.html:178
-msgid "Informer • Soutenir • Agir"
-msgstr "Informer • Soutenir • Agir"
-
-#: .\templates\activities\list.html:263
-msgid "Nos missions"
-msgstr "Nos missions"
-
-#: .\templates\activities\list.html:275
-msgid "Être présents, informer, rassembler et agir."
-msgstr "Être présents, informer, rassembler et agir."
-
-#: .\templates\activities\list.html:286
-msgid ""
-"HTaP ALGERIA développe ses actions autour de trois missions essentielles "
-"pour accompagner les patients et leurs proches."
-msgstr ""
-"HTaP ALGERIA développe ses actions autour de trois missions essentielles "
-"pour accompagner les patients et leurs proches."
-
-#: .\templates\activities\list.html:354
-msgid "Orienter & Accompagner"
-msgstr "Orienter & Accompagner"
-
-#: .\templates\activities\list.html:365
-msgid ""
-"Écouter les besoins des patients et de leurs proches, partager des "
-"informations utiles et faciliter l'orientation vers les ressources et "
-"structures adaptées."
-msgstr ""
-"Écouter les besoins des patients et de leurs proches, partager des "
-"informations utiles et faciliter l'orientation vers les ressources et "
-"structures adaptées."
-
-#: .\templates\activities\list.html:380
-msgid "Un accompagnement de proximité"
-msgstr "Un accompagnement de proximité"
-
-#: .\templates\activities\list.html:438
-msgid "Écouter & Rassembler"
-msgstr "Écouter & Rassembler"
-
-#: .\templates\activities\list.html:449
-msgid ""
-"Créer des espaces d’échange, de rencontre et de partage afin de favoriser "
-"l’entraide entre patients, familles et proches."
-msgstr ""
-"Créer des espaces d’échange, de rencontre et de partage afin de favoriser "
-"l’entraide entre patients, familles et proches."
-
-#: .\templates\activities\list.html:464
-msgid "Une communauté qui se soutient"
-msgstr "Une communauté qui se soutient"
-
-#: .\templates\activities\list.html:522
-msgid "Sensibiliser & Agir"
-msgstr "Sensibiliser & Agir"
-
-#: .\templates\activities\list.html:533
-msgid ""
-"Faire connaître la réalité vécue par les patients, sensibiliser le public et "
-"porter leur voix auprès des acteurs concernés."
-msgstr ""
-"Faire connaître la réalité vécue par les patients, sensibiliser le public et "
-"porter leur voix auprès des acteurs concernés."
-
-#: .\templates\activities\list.html:548
-msgid "Faire entendre la voix des patients"
-msgstr "Faire entendre la voix des patients"
-
-#: .\templates\activities\list.html:589
-msgid "Une même volonté : créer du lien et ne laisser personne avancer seul."
-msgstr "Une même volonté : créer du lien et ne laisser personne avancer seul."
-
-#: .\templates\activities\list.html:621
-msgid "Comprendre la maladie"
-msgstr "Comprendre la maladie"
-
-#: .\templates\activities\list.html:625
-msgid "Qu'est-ce que l'Hypertension Artérielle Pulmonaire ?"
-msgstr "Qu'est-ce que l'Hypertension Artérielle Pulmonaire ?"
-
-#: .\templates\activities\list.html:629
-msgid ""
-"L’Hypertension Artérielle Pulmonaire (HTAP) est une maladie rare qui se "
-"caractérise par une augmentation anormale de la pression dans les artères "
-"pulmonaires. Cette augmentation de pression peut entraîner une surcharge de "
-"travail pour le cœur, en particulier pour le ventricule droit."
-msgstr ""
-"L’Hypertension Artérielle Pulmonaire (HTAP) est une maladie rare qui se "
-"caractérise par une augmentation anormale de la pression dans les artères "
-"pulmonaires. Cette augmentation de pression peut entraîner une surcharge de "
-"travail pour le cœur, en particulier pour le ventricule droit."
-
-#: .\templates\activities\list.html:633
-msgid ""
-"L’HTAP nécessite une évaluation médicale spécialisée afin d’en confirmer le "
-"diagnostic, d’en rechercher la cause et de déterminer une prise en charge "
-"adaptée à chaque personne."
-msgstr ""
-"L’HTAP nécessite une évaluation médicale spécialisée afin d’en confirmer le "
-"diagnostic, d’en rechercher la cause et de déterminer une prise en charge "
-"adaptée à chaque personne."
-
-#: .\templates\activities\list.html:647
-msgid "Essoufflement"
-msgstr "Essoufflement"
-
-#: .\templates\activities\list.html:650
-msgid ""
-"Un essoufflement, notamment lors des efforts, peut faire partie des signes "
-"de la maladie."
-msgstr ""
-"Un essoufflement, notamment lors des efforts, peut faire partie des signes "
-"de la maladie."
-
-#: .\templates\activities\list.html:664
-msgid "Fatigue persistante"
-msgstr "Fatigue persistante"
-
-#: .\templates\activities\list.html:667
-msgid "Une fatigue inhabituelle peut également être observée."
-msgstr "Une fatigue inhabituelle peut également être observée."
-
-#: .\templates\activities\list.html:681
-msgid "Diagnostic spécialisé"
-msgstr "Diagnostic spécialisé"
-
-#: .\templates\activities\list.html:684
-msgid ""
-"Le diagnostic repose sur plusieurs examens médicaux et peut nécessiter "
-"l'avis d'un centre spécialisé."
-msgstr ""
-"Le diagnostic repose sur plusieurs examens médicaux et peut nécessiter "
-"l'avis d'un centre spécialisé."
-
-#: .\templates\activities\list.html:701
-msgid "En savoir plus sur l'HTAP"
-msgstr "En savoir plus sur l'HTAP"
-
-#: .\templates\activities\list.html:768
-msgid "HTAP"
-msgstr "HTAP"
-
-#: .\templates\activities\list.html:773
-msgid "Une maladie qui concerne les artères pulmonaires"
-msgstr "Une maladie qui concerne les artères pulmonaires"
-
-#: .\templates\activities\list.html:850
-msgid "Pression pulmonaire"
-msgstr "Pression pulmonaire"
-
-#: .\templates\activities\list.html:855
-msgid "Une pression anormalement élevée dans les artères pulmonaires."
-msgstr "Une pression anormalement élevée dans les artères pulmonaires."
-
-#: .\templates\activities\list.html:881
-msgid "Cœur droit"
-msgstr "Cœur droit"
-
-#: .\templates\activities\list.html:886
-msgid "Le cœur droit peut être soumis à une charge de travail accrue."
-msgstr "Le cœur droit peut être soumis à une charge de travail accrue."
-
-#: .\templates\activities\list.html:911
-msgid "L'HTAP en Algérie"
-msgstr "L'HTAP en Algérie"
-
-#: .\templates\activities\list.html:916
-msgid "Mieux connaître la réalité de l'HTAP en Algérie"
-msgstr "Mieux connaître la réalité de l'HTAP en Algérie"
-
-#: .\templates\activities\list.html:940
-msgid "patients atteints d'HTAP pris en charge depuis 2007"
-msgstr "patients atteints d'HTAP pris en charge depuis 2007"
-
-#: .\templates\activities\list.html:944
-msgid "Estimation issue de données algériennes disponibles"
-msgstr "Estimation issue de données algériennes disponibles"
-
-#: .\templates\activities\list.html:968
-msgid "patients inclus dans une étude algérienne prospective"
-msgstr "patients inclus dans une étude algérienne prospective"
-
-#: .\templates\activities\list.html:972
-msgid "HTAP et hypertension pulmonaire thromboembolique chronique"
-msgstr "HTAP et hypertension pulmonaire thromboembolique chronique"
-
-#: .\templates\activities\list.html:996
-msgid "des patients de cette étude avaient une HTAP du groupe 1"
-msgstr "des patients de cette étude avaient une HTAP du groupe 1"
-
-#: .\templates\activities\list.html:1000
-msgid "Étude algérienne de 70 patients"
-msgstr "Étude algérienne de 70 patients"
-
-#: .\templates\activities\list.html:1024
-msgid "des patients du groupe HTAP étaient des femmes"
-msgstr "des patients du groupe HTAP étaient des femmes"
-
-#: .\templates\activities\list.html:1028
-msgid "Données d'une étude prospective menée en Algérie"
-msgstr "Données d'une étude prospective menée en Algérie"
-
-#: .\templates\activities\list.html:1045
-msgid ""
-"Les données épidémiologiques nationales de l'HTAP restent parcellaires et "
-"dispersées. Ces chiffres ne constituent donc pas une estimation de la "
-"prévalence actuelle de l'HTAP dans toute la population algérienne."
-msgstr ""
-"Les données épidémiologiques nationales de l'HTAP restent parcellaires et "
-"dispersées. Ces chiffres ne constituent donc pas une estimation de la "
-"prévalence actuelle de l'HTAP dans toute la population algérienne."
-
-#: .\templates\activities\list.html:1118
-msgid "Actualités & Publications"
-msgstr "Actualités & Publications"
-
-#: .\templates\activities\list.html:1130
-msgid "Derniers articles publiés"
-msgstr "Derniers articles publiés"
-
-#: .\templates\activities\list.html:1141
-msgid ""
-"Retrouvez nos dernières actualités, informations et publications pour mieux "
-"comprendre l’HTAP et suivre les actions de l’association."
-msgstr ""
-"Retrouvez nos dernières actualités, informations et publications pour mieux "
-"comprendre l’HTAP et suivre les actions de l’association."
-
-#: .\templates\activities\list.html:1160
-msgid "Voir tous les articles"
-msgstr "Voir tous les articles"
-
-#: .\templates\activities\list.html:1390
-msgid "Lire l'article"
-msgstr "Lire l'article"
-
-#: .\templates\activities\list.html:1444
-msgid "Aucun article publié pour le moment"
-msgstr "Aucun article publié pour le moment"
-
-#: .\templates\activities\list.html:1453
-msgid "Les prochaines actualités de l’association apparaîtront ici."
-msgstr "Les prochaines actualités de l’association apparaîtront ici."
-
-#: .\templates\activities\list.html:1541
-msgid "Rejoignez-nous"
-msgstr "Rejoignez-nous"
-
-#: .\templates\activities\list.html:1552
-msgid "Faites partie du changement."
-msgstr "Faites partie du changement."
-
-#: .\templates\activities\list.html:1562
-msgid ""
-"Chaque adhésion renforce notre voix collective et nous permet d'étendre nos "
-"actions auprès des patients et de leurs proches à travers l'Algérie."
-msgstr ""
-"Chaque adhésion renforce notre voix collective et nous permet d'étendre nos "
-"actions auprès des patients et de leurs proches à travers l'Algérie."
-
-#: .\templates\activities\list.html:1589
-msgid "Devenir membre"
-msgstr "Devenir membre"
-
-#: .\templates\activities\list.html:1616
-msgid "Nous contacter"
-msgstr "Nous contacter"
+#: .\templates\articles\detail.html:20
+msgid "Back to articles"
+msgstr "Retour aux articles"
+
+#: .\templates\articles\detail.html:33
+msgid "By"
+msgstr "Par"
+
+#: .\templates\articles\detail.html:97
+msgid "Content under preparation..."
+msgstr "Contenu en préparation..."
+
+#: .\templates\articles\detail.html:104
+msgid "Related articles"
+msgstr "Articles associés"
 
 #: .\templates\articles\list.html:4 .\templates\articles\list.html:16
 #: .\templates\core\home.html:792
@@ -795,7 +441,23 @@ msgstr ""
 msgid "Reset filters"
 msgstr "Réinitialiser les filtres"
 
-#: .\templates\components\footer.html:20
+#: .\templates\components\footer.html:15 .\templates\components\navbar.html:10
+#: .\templates\core\about.html:166 .\templates\core\about.html:210
+#: .\templates\core\about.html:217 .\templates\core\about.html:224
+#: .\templates\core\about.html:231 .\templates\core\about.html:238
+#: .\templates\core\about.html:245 .\templates\core\about.html:252
+msgid "HTaP ALGERIA"
+msgstr "HTaP ALGÉRIE"
+
+#: .\templates\components\footer.html:17 .\templates\components\navbar.html:11
+msgid "KHADIDJA National Association for "
+msgstr "Association nationale KHADIDJA pour "
+
+#: .\templates\components\footer.html:18 .\templates\components\navbar.html:12
+msgid "Pulmonary Arterial Hypertension"
+msgstr "Hypertension artérielle pulmonaire"
+
+#: .\templates\components\footer.html:21
 msgid ""
 "Association dedicated to providing information, raising awareness, and "
 "supporting people affected by Pulmonary Arterial Hypertension in Algeria."
@@ -803,64 +465,64 @@ msgstr ""
 "Association dédiée à l’information, à la sensibilisation et au soutien des "
 "personnes touchées par l’hypertension artérielle pulmonaire en Algérie."
 
-#: .\templates\components\footer.html:28
+#: .\templates\components\footer.html:29
 msgid "50 ex 60 Cooperative El Bina, Birkhadem, Algiers, Algeria 16330"
 msgstr "50 ex 60 Cooperative El Bina, Birkhadem, Algiers, Algeria 16330"
 
-#: .\templates\components\footer.html:49
+#: .\templates\components\footer.html:50
 msgid "Navigation"
 msgstr "Navigation"
 
-#: .\templates\components\footer.html:54 .\templates\components\navbar.html:18
-#: .\templates\components\navbar.html:75 .\templates\core\home.html:4
+#: .\templates\components\footer.html:55 .\templates\components\navbar.html:19
+#: .\templates\components\navbar.html:76 .\templates\core\home.html:4
 msgid "Home"
 msgstr "Accueil"
 
-#: .\templates\components\footer.html:59 .\templates\components\navbar.html:21
-#: .\templates\components\navbar.html:76 .\templates\core\about.html:4
+#: .\templates\components\footer.html:60 .\templates\components\navbar.html:22
+#: .\templates\components\navbar.html:77 .\templates\core\about.html:4
 msgid "About Us"
 msgstr "À propos de nous"
 
-#: .\templates\components\footer.html:64 .\templates\components\navbar.html:24
-#: .\templates\components\navbar.html:77 .\templates\core\home.html:384
+#: .\templates\components\footer.html:65 .\templates\components\navbar.html:25
+#: .\templates\components\navbar.html:78 .\templates\core\home.html:384
 msgid "PAH"
 msgstr "HTAP"
 
-#: .\templates\components\footer.html:78
+#: .\templates\components\footer.html:79
 msgid "Resources"
 msgstr "Ressources"
 
-#: .\templates\components\footer.html:88 .\templates\components\navbar.html:80
+#: .\templates\components\footer.html:89 .\templates\components\navbar.html:81
 msgid "Help & Support"
 msgstr "Aide et soutien"
 
-#: .\templates\components\footer.html:93 .\templates\components\navbar.html:30
-#: .\templates\components\navbar.html:81
+#: .\templates\components\footer.html:94 .\templates\components\navbar.html:31
+#: .\templates\components\navbar.html:82
 msgid "Membership"
 msgstr "Adhésion"
 
-#: .\templates\components\footer.html:98 .\templates\components\navbar.html:51
-#: .\templates\components\navbar.html:97 .\templates\core\about.html:543
+#: .\templates\components\footer.html:99 .\templates\components\navbar.html:52
+#: .\templates\components\navbar.html:98 .\templates\core\about.html:543
 msgid "Contact Us"
 msgstr "Nous contacter"
 
-#: .\templates\components\footer.html:107 .\templates\core\home.html:927
+#: .\templates\components\footer.html:108 .\templates\core\home.html:927
 msgid "Join Us"
 msgstr "Rejoignez-nous"
 
-#: .\templates\components\footer.html:111
+#: .\templates\components\footer.html:112
 msgid "Follow our activities on social media."
 msgstr "Suivez nos activités sur les réseaux sociaux."
 
-#: .\templates\components\footer.html:137
+#: .\templates\components\footer.html:138
 msgid "All rights reserved."
 msgstr "Tous droits réservés."
 
-#: .\templates\components\footer.html:139
+#: .\templates\components\footer.html:140
 msgid "Legal Notice"
 msgstr "Mentions légales"
 
-#: .\templates\components\footer.html:140
+#: .\templates\components\footer.html:141
 msgid "Privacy Policy"
 msgstr "Politique de confidentialité"
 
@@ -868,21 +530,7 @@ msgstr "Politique de confidentialité"
 msgid "Fermer"
 msgstr "Fermer"
 
-#: .\templates\components\navbar.html:10 .\templates\core\about.html:166
-#: .\templates\core\about.html:210 .\templates\core\about.html:217
-#: .\templates\core\about.html:224 .\templates\core\about.html:231
-#: .\templates\core\about.html:238 .\templates\core\about.html:245
-#: .\templates\core\about.html:252
-msgid "HTaP ALGERIA"
-msgstr "HTaP ALGÉRIE"
-
-#: .\templates\components\navbar.html:11
-#, fuzzy
-#| msgid "HTaP Algeria Association"
-msgid "National Association"
-msgstr "Association HTaP ALGERIA"
-
-#: .\templates\components\navbar.html:61
+#: .\templates\components\navbar.html:62
 msgid "Menu"
 msgstr "Menu"
 
@@ -896,11 +544,11 @@ msgstr "À propos de HTaP ALGÉRIE"
 
 #: .\templates\core\about.html:18
 msgid ""
-"The Pulmonary Arterial Hypertension Association of Algeria (HTaP ALGERIA) is "
-"a registered national charitable organization."
+"KHADIDJA National Association for Pulmonary Arterial Hypertension (HTaP "
+"ALGERIA) is a registered national charitable organization."
 msgstr ""
-"L’Association de l’hypertension artérielle pulmonaire d’Algérie (HTaP "
-"ALGÉRIE) est une organisation caritative nationale enregistrée."
+"L’Association nationale KHADIDJA pour l’hypertension artérielle pulmonaire "
+"(HTaP ALGÉRIE) est une organisation caritative nationale enregistrée."
 
 #: .\templates\core\about.html:30 .\templates\core\home.html:143
 msgid "Our Commitment"
@@ -970,13 +618,6 @@ msgid "An association born from a deeply human commitment"
 msgstr "Une association née d’un engagement profondément humain"
 
 #: .\templates\core\about.html:108
-#, fuzzy
-#| msgid ""
-#| "\n"
-#| "                        The KHADIDJA National Association for Pulmonary "
-#| "Arterial Hypertension (HTaP ALGÉRIE) was established in 2018 by its "
-#| "founder and first president, Mrs. Khadidja Ali Kacem.\n"
-#| "                        "
 msgid ""
 "\n"
 "                        The KHADIDJA National Association for Pulmonary "
@@ -985,9 +626,9 @@ msgid ""
 "                        "
 msgstr ""
 "\n"
-"                        The KHADIDJA National Association for Pulmonary "
-"Arterial Hypertension (HTaP ALGERIA) was established in 2018 by its founder "
-"and first president, Mrs. Khadidja Ali Kacem.\n"
+"                        L’Association nationale KHADIDJA pour l’hypertension "
+"artérielle pulmonaire (HTaP ALGÉRIE) a été créée en 2018 par sa fondatrice "
+"et première présidente, Mme Khadidja Ali Kacem.\n"
 "                        "
 
 #: .\templates\core\about.html:114
@@ -2245,17 +1886,300 @@ msgstr ""
 "Pour obtenir les coordonnées bancaires ou l’accès PayPal, veuillez nous "
 "écrire par e-mail:"
 
-#~ msgid "Back to articles"
-#~ msgstr "Retour aux articles"
+#~ msgid "Accueil"
+#~ msgstr "Accueil"
 
-#~ msgid "By"
-#~ msgstr "Par"
+#~ msgid "Association HTaP ALGERIA"
+#~ msgstr "Association HTaP ALGERIA"
 
-#~ msgid "Content under preparation..."
-#~ msgstr "Contenu en préparation..."
+#~ msgid "Ensemble pour mieux vivre avec l’HTAP."
+#~ msgstr "Ensemble pour mieux vivre avec l’HTAP."
 
-#~ msgid "Related articles"
-#~ msgstr "Articles associés"
+#~ msgid "Une association au service des patients."
+#~ msgstr "Une association au service des patients."
+
+#~ msgid ""
+#~ "HTaP ALGERIA est une association engagée aux côtés des personnes "
+#~ "concernées par l’hypertension artérielle pulmonaire, de leurs familles et "
+#~ "de leurs proches."
+#~ msgstr ""
+#~ "HTaP ALGERIA est une association engagée aux côtés des personnes "
+#~ "concernées par l’hypertension artérielle pulmonaire, de leurs familles et "
+#~ "de leurs proches."
+
+#~ msgid ""
+#~ "Nous œuvrons pour informer, accompagner et sensibiliser, et pour faire "
+#~ "entendre la voix des patients en Algérie."
+#~ msgstr ""
+#~ "Nous œuvrons pour informer, accompagner et sensibiliser, et pour faire "
+#~ "entendre la voix des patients en Algérie."
+
+#~ msgid "Rejoindre l’association"
+#~ msgstr "Rejoindre l’association"
+
+#~ msgid "Qui sommes-nous ?"
+#~ msgstr "Qui sommes-nous ?"
+
+#~ msgid "Écouter"
+#~ msgstr "Écouter"
+
+#~ msgid "Être à vos côtés"
+#~ msgstr "Être à vos côtés"
+
+#~ msgid "Rassembler"
+#~ msgstr "Rassembler"
+
+#~ msgid "Créer du lien"
+#~ msgstr "Créer du lien"
+
+#~ msgid "Agir"
+#~ msgstr "Agir"
+
+#~ msgid "Faire avancer la cause"
+#~ msgstr "Faire avancer la cause"
+
+#~ msgid "Patients et membres de l’association HTaP ALGERIA"
+#~ msgstr "Patients et membres de l’association HTaP ALGERIA"
+
+#~ msgid "Une communauté engagée"
+#~ msgstr "Une communauté engagée"
+
+#~ msgid "À vos côtés, à chaque étape."
+#~ msgstr "À vos côtés, à chaque étape."
+
+#~ msgid ""
+#~ "Créer du lien, partager l’information et soutenir les patients et leurs "
+#~ "proches."
+#~ msgstr ""
+#~ "Créer du lien, partager l’information et soutenir les patients et leurs "
+#~ "proches."
+
+#~ msgid "Notre priorité"
+#~ msgstr "Notre priorité"
+
+#~ msgid "Les patients"
+#~ msgstr "Les patients"
+
+#~ msgid "Notre engagement"
+#~ msgstr "Notre engagement"
+
+#~ msgid "Informer • Soutenir • Agir"
+#~ msgstr "Informer • Soutenir • Agir"
+
+#~ msgid "Nos missions"
+#~ msgstr "Nos missions"
+
+#~ msgid "Être présents, informer, rassembler et agir."
+#~ msgstr "Être présents, informer, rassembler et agir."
+
+#~ msgid ""
+#~ "HTaP ALGERIA développe ses actions autour de trois missions essentielles "
+#~ "pour accompagner les patients et leurs proches."
+#~ msgstr ""
+#~ "HTaP ALGERIA développe ses actions autour de trois missions essentielles "
+#~ "pour accompagner les patients et leurs proches."
+
+#~ msgid "Orienter & Accompagner"
+#~ msgstr "Orienter & Accompagner"
+
+#~ msgid ""
+#~ "Écouter les besoins des patients et de leurs proches, partager des "
+#~ "informations utiles et faciliter l'orientation vers les ressources et "
+#~ "structures adaptées."
+#~ msgstr ""
+#~ "Écouter les besoins des patients et de leurs proches, partager des "
+#~ "informations utiles et faciliter l'orientation vers les ressources et "
+#~ "structures adaptées."
+
+#~ msgid "Un accompagnement de proximité"
+#~ msgstr "Un accompagnement de proximité"
+
+#~ msgid "Écouter & Rassembler"
+#~ msgstr "Écouter & Rassembler"
+
+#~ msgid ""
+#~ "Créer des espaces d’échange, de rencontre et de partage afin de favoriser "
+#~ "l’entraide entre patients, familles et proches."
+#~ msgstr ""
+#~ "Créer des espaces d’échange, de rencontre et de partage afin de favoriser "
+#~ "l’entraide entre patients, familles et proches."
+
+#~ msgid "Une communauté qui se soutient"
+#~ msgstr "Une communauté qui se soutient"
+
+#~ msgid "Sensibiliser & Agir"
+#~ msgstr "Sensibiliser & Agir"
+
+#~ msgid ""
+#~ "Faire connaître la réalité vécue par les patients, sensibiliser le public "
+#~ "et porter leur voix auprès des acteurs concernés."
+#~ msgstr ""
+#~ "Faire connaître la réalité vécue par les patients, sensibiliser le public "
+#~ "et porter leur voix auprès des acteurs concernés."
+
+#~ msgid "Faire entendre la voix des patients"
+#~ msgstr "Faire entendre la voix des patients"
+
+#~ msgid ""
+#~ "Une même volonté : créer du lien et ne laisser personne avancer seul."
+#~ msgstr ""
+#~ "Une même volonté : créer du lien et ne laisser personne avancer seul."
+
+#~ msgid "Comprendre la maladie"
+#~ msgstr "Comprendre la maladie"
+
+#~ msgid "Qu'est-ce que l'Hypertension Artérielle Pulmonaire ?"
+#~ msgstr "Qu'est-ce que l'Hypertension Artérielle Pulmonaire ?"
+
+#~ msgid ""
+#~ "L’Hypertension Artérielle Pulmonaire (HTAP) est une maladie rare qui se "
+#~ "caractérise par une augmentation anormale de la pression dans les artères "
+#~ "pulmonaires. Cette augmentation de pression peut entraîner une surcharge "
+#~ "de travail pour le cœur, en particulier pour le ventricule droit."
+#~ msgstr ""
+#~ "L’Hypertension Artérielle Pulmonaire (HTAP) est une maladie rare qui se "
+#~ "caractérise par une augmentation anormale de la pression dans les artères "
+#~ "pulmonaires. Cette augmentation de pression peut entraîner une surcharge "
+#~ "de travail pour le cœur, en particulier pour le ventricule droit."
+
+#~ msgid ""
+#~ "L’HTAP nécessite une évaluation médicale spécialisée afin d’en confirmer "
+#~ "le diagnostic, d’en rechercher la cause et de déterminer une prise en "
+#~ "charge adaptée à chaque personne."
+#~ msgstr ""
+#~ "L’HTAP nécessite une évaluation médicale spécialisée afin d’en confirmer "
+#~ "le diagnostic, d’en rechercher la cause et de déterminer une prise en "
+#~ "charge adaptée à chaque personne."
+
+#~ msgid "Essoufflement"
+#~ msgstr "Essoufflement"
+
+#~ msgid ""
+#~ "Un essoufflement, notamment lors des efforts, peut faire partie des "
+#~ "signes de la maladie."
+#~ msgstr ""
+#~ "Un essoufflement, notamment lors des efforts, peut faire partie des "
+#~ "signes de la maladie."
+
+#~ msgid "Fatigue persistante"
+#~ msgstr "Fatigue persistante"
+
+#~ msgid "Une fatigue inhabituelle peut également être observée."
+#~ msgstr "Une fatigue inhabituelle peut également être observée."
+
+#~ msgid "Diagnostic spécialisé"
+#~ msgstr "Diagnostic spécialisé"
+
+#~ msgid ""
+#~ "Le diagnostic repose sur plusieurs examens médicaux et peut nécessiter "
+#~ "l'avis d'un centre spécialisé."
+#~ msgstr ""
+#~ "Le diagnostic repose sur plusieurs examens médicaux et peut nécessiter "
+#~ "l'avis d'un centre spécialisé."
+
+#~ msgid "En savoir plus sur l'HTAP"
+#~ msgstr "En savoir plus sur l'HTAP"
+
+#~ msgid "HTAP"
+#~ msgstr "HTAP"
+
+#~ msgid "Une maladie qui concerne les artères pulmonaires"
+#~ msgstr "Une maladie qui concerne les artères pulmonaires"
+
+#~ msgid "Pression pulmonaire"
+#~ msgstr "Pression pulmonaire"
+
+#~ msgid "Une pression anormalement élevée dans les artères pulmonaires."
+#~ msgstr "Une pression anormalement élevée dans les artères pulmonaires."
+
+#~ msgid "Cœur droit"
+#~ msgstr "Cœur droit"
+
+#~ msgid "Le cœur droit peut être soumis à une charge de travail accrue."
+#~ msgstr "Le cœur droit peut être soumis à une charge de travail accrue."
+
+#~ msgid "L'HTAP en Algérie"
+#~ msgstr "L'HTAP en Algérie"
+
+#~ msgid "Mieux connaître la réalité de l'HTAP en Algérie"
+#~ msgstr "Mieux connaître la réalité de l'HTAP en Algérie"
+
+#~ msgid "patients atteints d'HTAP pris en charge depuis 2007"
+#~ msgstr "patients atteints d'HTAP pris en charge depuis 2007"
+
+#~ msgid "Estimation issue de données algériennes disponibles"
+#~ msgstr "Estimation issue de données algériennes disponibles"
+
+#~ msgid "patients inclus dans une étude algérienne prospective"
+#~ msgstr "patients inclus dans une étude algérienne prospective"
+
+#~ msgid "HTAP et hypertension pulmonaire thromboembolique chronique"
+#~ msgstr "HTAP et hypertension pulmonaire thromboembolique chronique"
+
+#~ msgid "des patients de cette étude avaient une HTAP du groupe 1"
+#~ msgstr "des patients de cette étude avaient une HTAP du groupe 1"
+
+#~ msgid "Étude algérienne de 70 patients"
+#~ msgstr "Étude algérienne de 70 patients"
+
+#~ msgid "des patients du groupe HTAP étaient des femmes"
+#~ msgstr "des patients du groupe HTAP étaient des femmes"
+
+#~ msgid "Données d'une étude prospective menée en Algérie"
+#~ msgstr "Données d'une étude prospective menée en Algérie"
+
+#~ msgid ""
+#~ "Les données épidémiologiques nationales de l'HTAP restent parcellaires et "
+#~ "dispersées. Ces chiffres ne constituent donc pas une estimation de la "
+#~ "prévalence actuelle de l'HTAP dans toute la population algérienne."
+#~ msgstr ""
+#~ "Les données épidémiologiques nationales de l'HTAP restent parcellaires et "
+#~ "dispersées. Ces chiffres ne constituent donc pas une estimation de la "
+#~ "prévalence actuelle de l'HTAP dans toute la population algérienne."
+
+#~ msgid "Actualités & Publications"
+#~ msgstr "Actualités & Publications"
+
+#~ msgid "Derniers articles publiés"
+#~ msgstr "Derniers articles publiés"
+
+#~ msgid ""
+#~ "Retrouvez nos dernières actualités, informations et publications pour "
+#~ "mieux comprendre l’HTAP et suivre les actions de l’association."
+#~ msgstr ""
+#~ "Retrouvez nos dernières actualités, informations et publications pour "
+#~ "mieux comprendre l’HTAP et suivre les actions de l’association."
+
+#~ msgid "Voir tous les articles"
+#~ msgstr "Voir tous les articles"
+
+#~ msgid "Lire l'article"
+#~ msgstr "Lire l'article"
+
+#~ msgid "Aucun article publié pour le moment"
+#~ msgstr "Aucun article publié pour le moment"
+
+#~ msgid "Les prochaines actualités de l’association apparaîtront ici."
+#~ msgstr "Les prochaines actualités de l’association apparaîtront ici."
+
+#~ msgid "Rejoignez-nous"
+#~ msgstr "Rejoignez-nous"
+
+#~ msgid "Faites partie du changement."
+#~ msgstr "Faites partie du changement."
+
+#~ msgid ""
+#~ "Chaque adhésion renforce notre voix collective et nous permet d'étendre "
+#~ "nos actions auprès des patients et de leurs proches à travers l'Algérie."
+#~ msgstr ""
+#~ "Chaque adhésion renforce notre voix collective et nous permet d'étendre "
+#~ "nos actions auprès des patients et de leurs proches à travers l'Algérie."
+
+#~ msgid "Devenir membre"
+#~ msgstr "Devenir membre"
+
+#~ msgid "Nous contacter"
+#~ msgstr "Nous contacter"
 
 #~ msgid "full name"
 #~ msgstr "nom complet"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: HTaP ALGERIA\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-17 16:24+0100\n"
+"POT-Creation-Date: 2026-08-17 17:01+0100\n"
 "PO-Revision-Date: 2026-08-17 14:25+0100\n"
 "Last-Translator: HTaP ALGERIA\n"
 "Language-Team: Arabic <ar@li.org>\n"
@@ -107,8 +107,8 @@ msgstr "تاريخ التحديث"
 msgid "Activity"
 msgstr "نشاط"
 
-#: .\activities\models.py:42 .\templates\components\footer.html:83
-#: .\templates\components\navbar.html:79
+#: .\activities\models.py:42 .\templates\components\footer.html:84
+#: .\templates\components\navbar.html:80
 msgid "Activities"
 msgstr "الأنشطة"
 
@@ -246,8 +246,8 @@ msgstr "تاريخ النشر"
 msgid "Article"
 msgstr "مقال"
 
-#: .\articles\models.py:46 .\templates\components\footer.html:69
-#: .\templates\components\navbar.html:27 .\templates\components\navbar.html:78
+#: .\articles\models.py:46 .\templates\components\footer.html:70
+#: .\templates\components\navbar.html:28 .\templates\components\navbar.html:79
 msgid "Articles"
 msgstr "المقالات"
 
@@ -265,43 +265,31 @@ msgstr "ترجمات المقال"
 
 #: .\core\models.py:47
 msgid "Name (Latin characters)"
-msgstr ""
+msgstr "الاسم (بالأحرف اللاتينية)"
 
 #: .\core\models.py:48
-#, fuzzy
-#| msgid "Arabic"
 msgid "Name (Arabic)"
-msgstr "العربية"
+msgstr "الاسم (بالعربية)"
 
 #: .\core\models.py:49
-#, fuzzy
-#| msgid "Arabic"
 msgid "Role (Arabic)"
-msgstr "العربية"
+msgstr "الصفة (بالعربية)"
 
 #: .\core\models.py:50
-#, fuzzy
-#| msgid "English"
 msgid "Role (English)"
-msgstr "الإنجليزية"
+msgstr "الصفة (بالإنجليزية)"
 
 #: .\core\models.py:51
-#, fuzzy
-#| msgid "French"
 msgid "Role (French)"
-msgstr "الفرنسية"
+msgstr "الصفة (بالفرنسية)"
 
 #: .\core\models.py:52
-#, fuzzy
-#| msgid "photo"
 msgid "Photo"
 msgstr "الصورة"
 
 #: .\core\models.py:53
-#, fuzzy
-#| msgid "bio"
 msgid "Bio"
-msgstr "نبذة"
+msgstr "النبذة"
 
 #: .\core\models.py:59
 msgid "Member"
@@ -363,358 +351,21 @@ msgstr "رسائل التواصل"
 msgid "Your message has been sent successfully."
 msgstr "تم إرسال رسالتك بنجاح."
 
-#: .\templates\activities\list.html:4
-msgid "Accueil"
-msgstr "الرئيسية"
-
-#: .\templates\activities\list.html:27
-msgid "Association HTaP ALGERIA"
-msgstr "جمعية HTaP الجزائر"
-
-#: .\templates\activities\list.html:32
-msgid "Ensemble pour mieux vivre avec l’HTAP."
-msgstr "معًا لحياة أفضل مع ارتفاع ضغط الدم الشرياني الرئوي."
-
-#: .\templates\activities\list.html:34
-msgid "Une association au service des patients."
-msgstr "جمعية في خدمة المرضى."
-
-#: .\templates\activities\list.html:40
-msgid ""
-"HTaP ALGERIA est une association engagée aux côtés des personnes concernées "
-"par l’hypertension artérielle pulmonaire, de leurs familles et de leurs "
-"proches."
-msgstr ""
-"HTaP الجزائر جمعية ملتزمة إلى جانب الأشخاص المصابين بارتفاع ضغط الدم "
-"الشرياني الرئوي وعائلاتهم وذويهم."
-
-#: .\templates\activities\list.html:44
-msgid ""
-"Nous œuvrons pour informer, accompagner et sensibiliser, et pour faire "
-"entendre la voix des patients en Algérie."
-msgstr "نعمل على الإعلام والمرافقة والتوعية، وإيصال صوت المرضى في الجزائر."
-
-#: .\templates\activities\list.html:52
-msgid "Rejoindre l’association"
-msgstr "الانضمام إلى الجمعية"
-
-#: .\templates\activities\list.html:74
-msgid "Qui sommes-nous ?"
-msgstr "من نحن؟"
-
-#: .\templates\activities\list.html:92
-msgid "Écouter"
-msgstr "الاستماع"
-
-#: .\templates\activities\list.html:93
-msgid "Être à vos côtés"
-msgstr "الوقوف إلى جانبكم"
-
-#: .\templates\activities\list.html:103
-msgid "Rassembler"
-msgstr "التوحيد"
-
-#: .\templates\activities\list.html:104
-msgid "Créer du lien"
-msgstr "بناء الروابط"
-
-#: .\templates\activities\list.html:113
-msgid "Agir"
-msgstr "العمل"
-
-#: .\templates\activities\list.html:114
-msgid "Faire avancer la cause"
-msgstr "دفع القضية إلى الأمام"
-
-#: .\templates\activities\list.html:132
-msgid "Patients et membres de l’association HTaP ALGERIA"
-msgstr "مرضى وأعضاء جمعية HTaP الجزائر"
-
-#: .\templates\activities\list.html:141
-msgid "Une communauté engagée"
-msgstr "مجتمع ملتزم"
-
-#: .\templates\activities\list.html:144
-msgid "À vos côtés, à chaque étape."
-msgstr "إلى جانبكم في كل خطوة."
-
-#: .\templates\activities\list.html:147
-msgid ""
-"Créer du lien, partager l’information et soutenir les patients et leurs "
-"proches."
-msgstr "بناء الروابط، ومشاركة المعلومات، ودعم المرضى وذويهم."
-
-#: .\templates\activities\list.html:162
-msgid "Notre priorité"
-msgstr "أولويتنا"
-
-#: .\templates\activities\list.html:163
-msgid "Les patients"
-msgstr "المرضى"
-
-#: .\templates\activities\list.html:177
-msgid "Notre engagement"
-msgstr "التزامنا"
-
-#: .\templates\activities\list.html:178
-msgid "Informer • Soutenir • Agir"
-msgstr "الإعلام • الدعم • العمل"
-
-#: .\templates\activities\list.html:263
-msgid "Nos missions"
-msgstr "مهامنا"
-
-#: .\templates\activities\list.html:275
-msgid "Être présents, informer, rassembler et agir."
-msgstr "الحضور، والإعلام، والتوحيد، والعمل."
-
-#: .\templates\activities\list.html:286
-msgid ""
-"HTaP ALGERIA développe ses actions autour de trois missions essentielles "
-"pour accompagner les patients et leurs proches."
-msgstr "تطور HTaP الجزائر أعمالها حول ثلاث مهام أساسية لمرافقة المرضى وذويهم."
-
-#: .\templates\activities\list.html:354
-msgid "Orienter & Accompagner"
-msgstr "التوجيه والمرافقة"
-
-#: .\templates\activities\list.html:365
-msgid ""
-"Écouter les besoins des patients et de leurs proches, partager des "
-"informations utiles et faciliter l'orientation vers les ressources et "
-"structures adaptées."
-msgstr ""
-"الاستماع إلى احتياجات المرضى وذويهم، ومشاركة المعلومات المفيدة، وتسهيل "
-"التوجيه نحو الموارد والهياكل المناسبة."
-
-#: .\templates\activities\list.html:380
-msgid "Un accompagnement de proximité"
-msgstr "مرافقة قريبة منكم"
-
-#: .\templates\activities\list.html:438
-msgid "Écouter & Rassembler"
-msgstr "الاستماع والتوحيد"
-
-#: .\templates\activities\list.html:449
-msgid ""
-"Créer des espaces d’échange, de rencontre et de partage afin de favoriser "
-"l’entraide entre patients, familles et proches."
-msgstr ""
-"إنشاء مساحات للتبادل واللقاء والمشاركة لتعزيز التكافل بين المرضى والعائلات "
-"والأقارب."
-
-#: .\templates\activities\list.html:464
-msgid "Une communauté qui se soutient"
-msgstr "مجتمع يدعم أفراده بعضهم بعضًا"
-
-#: .\templates\activities\list.html:522
-msgid "Sensibiliser & Agir"
-msgstr "التوعية والعمل"
-
-#: .\templates\activities\list.html:533
-msgid ""
-"Faire connaître la réalité vécue par les patients, sensibiliser le public et "
-"porter leur voix auprès des acteurs concernés."
-msgstr ""
-"التعريف بالواقع الذي يعيشه المرضى، وتوعية الجمهور، وإيصال صوتهم إلى الجهات "
-"المعنية."
-
-#: .\templates\activities\list.html:548
-msgid "Faire entendre la voix des patients"
-msgstr "إيصال صوت المرضى"
-
-#: .\templates\activities\list.html:589
-msgid "Une même volonté : créer du lien et ne laisser personne avancer seul."
-msgstr "إرادة واحدة: بناء الروابط وعدم ترك أي شخص يواجه الطريق وحده."
-
-#: .\templates\activities\list.html:621
-msgid "Comprendre la maladie"
-msgstr "فهم المرض"
-
-#: .\templates\activities\list.html:625
-msgid "Qu'est-ce que l'Hypertension Artérielle Pulmonaire ?"
-msgstr "ما هو ارتفاع ضغط الدم الشرياني الرئوي؟"
-
-#: .\templates\activities\list.html:629
-msgid ""
-"L’Hypertension Artérielle Pulmonaire (HTAP) est une maladie rare qui se "
-"caractérise par une augmentation anormale de la pression dans les artères "
-"pulmonaires. Cette augmentation de pression peut entraîner une surcharge de "
-"travail pour le cœur, en particulier pour le ventricule droit."
-msgstr ""
-"ارتفاع ضغط الدم الشرياني الرئوي (HTAP) مرض نادر يتميز بارتفاع غير طبيعي في "
-"الضغط داخل الشرايين الرئوية. ويمكن أن يؤدي هذا الارتفاع إلى زيادة عبء العمل "
-"على القلب، وخاصة البطين الأيمن."
-
-#: .\templates\activities\list.html:633
-msgid ""
-"L’HTAP nécessite une évaluation médicale spécialisée afin d’en confirmer le "
-"diagnostic, d’en rechercher la cause et de déterminer une prise en charge "
-"adaptée à chaque personne."
-msgstr ""
-"تتطلب HTAP تقييمًا طبيًا متخصصًا لتأكيد التشخيص والبحث عن أسبابه وتحديد التكفل "
-"المناسب لكل شخص."
-
-#: .\templates\activities\list.html:647
-msgid "Essoufflement"
-msgstr "ضيق التنفس"
-
-#: .\templates\activities\list.html:650
-msgid ""
-"Un essoufflement, notamment lors des efforts, peut faire partie des signes "
-"de la maladie."
-msgstr "قد يكون ضيق التنفس، خاصة أثناء الجهد، أحد علامات المرض."
-
-#: .\templates\activities\list.html:664
-msgid "Fatigue persistante"
-msgstr "التعب المستمر"
-
-#: .\templates\activities\list.html:667
-msgid "Une fatigue inhabituelle peut également être observée."
-msgstr "قد يُلاحظ أيضًا تعب غير معتاد."
-
-#: .\templates\activities\list.html:681
-msgid "Diagnostic spécialisé"
-msgstr "تشخيص متخصص"
-
-#: .\templates\activities\list.html:684
-msgid ""
-"Le diagnostic repose sur plusieurs examens médicaux et peut nécessiter "
-"l'avis d'un centre spécialisé."
-msgstr "يعتمد التشخيص على عدة فحوصات طبية وقد يتطلب رأي مركز متخصص."
-
-#: .\templates\activities\list.html:701
-msgid "En savoir plus sur l'HTAP"
-msgstr "معرفة المزيد عن HTAP"
-
-#: .\templates\activities\list.html:768
-msgid "HTAP"
-msgstr "HTAP"
-
-#: .\templates\activities\list.html:773
-msgid "Une maladie qui concerne les artères pulmonaires"
-msgstr "مرض يصيب الشرايين الرئوية"
-
-#: .\templates\activities\list.html:850
-msgid "Pression pulmonaire"
-msgstr "الضغط الرئوي"
-
-#: .\templates\activities\list.html:855
-msgid "Une pression anormalement élevée dans les artères pulmonaires."
-msgstr "ضغط مرتفع بشكل غير طبيعي في الشرايين الرئوية."
-
-#: .\templates\activities\list.html:881
-msgid "Cœur droit"
-msgstr "القلب الأيمن"
-
-#: .\templates\activities\list.html:886
-msgid "Le cœur droit peut être soumis à une charge de travail accrue."
-msgstr "قد يتعرض الجانب الأيمن من القلب إلى عبء عمل متزايد."
-
-#: .\templates\activities\list.html:911
-msgid "L'HTAP en Algérie"
-msgstr "HTAP في الجزائر"
-
-#: .\templates\activities\list.html:916
-msgid "Mieux connaître la réalité de l'HTAP en Algérie"
-msgstr "معرفة واقع HTAP في الجزائر بشكل أفضل"
-
-#: .\templates\activities\list.html:940
-msgid "patients atteints d'HTAP pris en charge depuis 2007"
-msgstr "مريضًا مصابًا بـ HTAP تمت رعايتهم منذ 2007"
-
-#: .\templates\activities\list.html:944
-msgid "Estimation issue de données algériennes disponibles"
-msgstr "تقدير مستند إلى البيانات الجزائرية المتاحة"
-
-#: .\templates\activities\list.html:968
-msgid "patients inclus dans une étude algérienne prospective"
-msgstr "مريضًا أُدرجوا في دراسة جزائرية استباقية"
-
-#: .\templates\activities\list.html:972
-msgid "HTAP et hypertension pulmonaire thromboembolique chronique"
-msgstr "HTAP وارتفاع ضغط الدم الرئوي الخثاري المزمن"
-
-#: .\templates\activities\list.html:996
-msgid "des patients de cette étude avaient une HTAP du groupe 1"
-msgstr "من مرضى هذه الدراسة كانوا مصابين بـ HTAP من المجموعة الأولى"
-
-#: .\templates\activities\list.html:1000
-msgid "Étude algérienne de 70 patients"
-msgstr "دراسة جزائرية شملت 70 مريضًا"
-
-#: .\templates\activities\list.html:1024
-msgid "des patients du groupe HTAP étaient des femmes"
-msgstr "من مرضى مجموعة HTAP كانوا من النساء"
-
-#: .\templates\activities\list.html:1028
-msgid "Données d'une étude prospective menée en Algérie"
-msgstr "بيانات من دراسة استباقية أُجريت في الجزائر"
-
-#: .\templates\activities\list.html:1045
-msgid ""
-"Les données épidémiologiques nationales de l'HTAP restent parcellaires et "
-"dispersées. Ces chiffres ne constituent donc pas une estimation de la "
-"prévalence actuelle de l'HTAP dans toute la population algérienne."
-msgstr ""
-"لا تزال البيانات الوبائية الوطنية حول HTAP محدودة ومتفرقة. ولذلك لا تمثل هذه "
-"الأرقام تقديرًا للانتشار الحالي لـ HTAP بين جميع أفراد السكان الجزائريين."
-
-#: .\templates\activities\list.html:1118
-msgid "Actualités & Publications"
-msgstr "الأخبار والمنشورات"
-
-#: .\templates\activities\list.html:1130
-msgid "Derniers articles publiés"
-msgstr "أحدث المقالات المنشورة"
-
-#: .\templates\activities\list.html:1141
-msgid ""
-"Retrouvez nos dernières actualités, informations et publications pour mieux "
-"comprendre l’HTAP et suivre les actions de l’association."
-msgstr ""
-"اطلعوا على آخر أخبارنا ومعلوماتنا ومنشوراتنا لفهم HTAP بشكل أفضل ومتابعة "
-"أنشطة الجمعية."
-
-#: .\templates\activities\list.html:1160
-msgid "Voir tous les articles"
-msgstr "عرض جميع المقالات"
-
-#: .\templates\activities\list.html:1390
-msgid "Lire l'article"
-msgstr "قراءة المقال"
-
-#: .\templates\activities\list.html:1444
-msgid "Aucun article publié pour le moment"
-msgstr "لا توجد مقالات منشورة حاليًا"
-
-#: .\templates\activities\list.html:1453
-msgid "Les prochaines actualités de l’association apparaîtront ici."
-msgstr "ستظهر أخبار الجمعية القادمة هنا."
-
-#: .\templates\activities\list.html:1541
-msgid "Rejoignez-nous"
-msgstr "انضموا إلينا"
-
-#: .\templates\activities\list.html:1552
-msgid "Faites partie du changement."
-msgstr "كونوا جزءًا من التغيير."
-
-#: .\templates\activities\list.html:1562
-msgid ""
-"Chaque adhésion renforce notre voix collective et nous permet d'étendre nos "
-"actions auprès des patients et de leurs proches à travers l'Algérie."
-msgstr ""
-"كل عضوية تعزز صوتنا الجماعي وتسمح لنا بتوسيع أعمالنا لصالح المرضى وذويهم عبر "
-"الجزائر."
-
-#: .\templates\activities\list.html:1589
-msgid "Devenir membre"
-msgstr "أن تصبح عضوًا"
-
-#: .\templates\activities\list.html:1616
-msgid "Nous contacter"
-msgstr "اتصل بنا"
+#: .\templates\articles\detail.html:20
+msgid "Back to articles"
+msgstr "العودة إلى المقالات"
+
+#: .\templates\articles\detail.html:33
+msgid "By"
+msgstr "بواسطة"
+
+#: .\templates\articles\detail.html:97
+msgid "Content under preparation..."
+msgstr "المحتوى قيد الإعداد..."
+
+#: .\templates\articles\detail.html:104
+msgid "Related articles"
+msgstr "مقالات ذات صلة"
 
 #: .\templates\articles\list.html:4 .\templates\articles\list.html:16
 #: .\templates\core\home.html:792
@@ -789,7 +440,23 @@ msgstr "حاول تعديل كلمات البحث أو إعادة تعيين م�
 msgid "Reset filters"
 msgstr "إعادة تعيين المرشحات"
 
-#: .\templates\components\footer.html:20
+#: .\templates\components\footer.html:15 .\templates\components\navbar.html:10
+#: .\templates\core\about.html:166 .\templates\core\about.html:210
+#: .\templates\core\about.html:217 .\templates\core\about.html:224
+#: .\templates\core\about.html:231 .\templates\core\about.html:238
+#: .\templates\core\about.html:245 .\templates\core\about.html:252
+msgid "HTaP ALGERIA"
+msgstr "HTaP الجزائر"
+
+#: .\templates\components\footer.html:17 .\templates\components\navbar.html:11
+msgid "KHADIDJA National Association for "
+msgstr "الجمعية الوطنية خديجة"
+
+#: .\templates\components\footer.html:18 .\templates\components\navbar.html:12
+msgid "Pulmonary Arterial Hypertension"
+msgstr " لارتفاع ضغط الدم الشرياني الرئوي"
+
+#: .\templates\components\footer.html:21
 msgid ""
 "Association dedicated to providing information, raising awareness, and "
 "supporting people affected by Pulmonary Arterial Hypertension in Algeria."
@@ -797,66 +464,66 @@ msgstr ""
 "جمعية مكرسة لتقديم المعلومات والتوعية ودعم الأشخاص المصابين بارتفاع ضغط الدم "
 "الشرياني الرئوي في الجزائر."
 
-#: .\templates\components\footer.html:28
+#: .\templates\components\footer.html:29
 msgid "50 ex 60 Cooperative El Bina, Birkhadem, Algiers, Algeria 16330"
 msgstr ""
 "تعاونية البناء رقم 50 / 60 سابقا . بئر خادم . الجزائر العاصمة ،الجزائر ، "
 "16330"
 
-#: .\templates\components\footer.html:49
+#: .\templates\components\footer.html:50
 msgid "Navigation"
 msgstr "التنقل"
 
-#: .\templates\components\footer.html:54 .\templates\components\navbar.html:18
-#: .\templates\components\navbar.html:75 .\templates\core\home.html:4
+#: .\templates\components\footer.html:55 .\templates\components\navbar.html:19
+#: .\templates\components\navbar.html:76 .\templates\core\home.html:4
 msgid "Home"
 msgstr "الرئيسية"
 
-#: .\templates\components\footer.html:59 .\templates\components\navbar.html:21
-#: .\templates\components\navbar.html:76 .\templates\core\about.html:4
+#: .\templates\components\footer.html:60 .\templates\components\navbar.html:22
+#: .\templates\components\navbar.html:77 .\templates\core\about.html:4
 msgid "About Us"
 msgstr "من نحن"
 
-#: .\templates\components\footer.html:64 .\templates\components\navbar.html:24
-#: .\templates\components\navbar.html:77 .\templates\core\home.html:384
+#: .\templates\components\footer.html:65 .\templates\components\navbar.html:25
+#: .\templates\components\navbar.html:78 .\templates\core\home.html:384
 msgid "PAH"
 msgstr "HTAP"
 
-#: .\templates\components\footer.html:78
+#: .\templates\components\footer.html:79
 msgid "Resources"
 msgstr "الموارد"
 
-#: .\templates\components\footer.html:88 .\templates\components\navbar.html:80
+#: .\templates\components\footer.html:89 .\templates\components\navbar.html:81
 msgid "Help & Support"
 msgstr "المساعدة والدعم"
 
-#: .\templates\components\footer.html:93 .\templates\components\navbar.html:30
-#: .\templates\components\navbar.html:81
+#: .\templates\components\footer.html:94 .\templates\components\navbar.html:31
+#: .\templates\components\navbar.html:82
 msgid "Membership"
 msgstr "العضوية"
 
-#: .\templates\components\footer.html:98 .\templates\components\navbar.html:51
-#: .\templates\components\navbar.html:97 .\templates\core\about.html:543
+#: .\templates\components\footer.html:99 .\templates\components\navbar.html:52
+#: .\templates\components\navbar.html:98 .\templates\core\about.html:543
 msgid "Contact Us"
 msgstr "اتصل بنا"
 
-#: .\templates\components\footer.html:107 .\templates\core\home.html:927
+#: .\templates\components\footer.html:108 .\templates\core\home.html:927
 msgid "Join Us"
 msgstr "انضم إلينا"
 
-#: .\templates\components\footer.html:111
+#: .\templates\components\footer.html:112
 msgid "Follow our activities on social media."
 msgstr "تابعوا أنشطتنا على وسائل التواصل الاجتماعي."
 
-#: .\templates\components\footer.html:137
+#: .\templates\components\footer.html:138
 msgid "All rights reserved."
 msgstr "جميع الحقوق محفوظة."
 
-#: .\templates\components\footer.html:139
+#: .\templates\components\footer.html:140
 msgid "Legal Notice"
 msgstr "الإشعارات القانونية"
 
-#: .\templates\components\footer.html:140
+#: .\templates\components\footer.html:141
 msgid "Privacy Policy"
 msgstr "سياسة الخصوصية"
 
@@ -864,21 +531,7 @@ msgstr "سياسة الخصوصية"
 msgid "Fermer"
 msgstr "إغلاق"
 
-#: .\templates\components\navbar.html:10 .\templates\core\about.html:166
-#: .\templates\core\about.html:210 .\templates\core\about.html:217
-#: .\templates\core\about.html:224 .\templates\core\about.html:231
-#: .\templates\core\about.html:238 .\templates\core\about.html:245
-#: .\templates\core\about.html:252
-msgid "HTaP ALGERIA"
-msgstr "HTaP الجزائر"
-
-#: .\templates\components\navbar.html:11
-#, fuzzy
-#| msgid "HTaP Algeria Association"
-msgid "National Association"
-msgstr "جمعية HTaP الجزائر"
-
-#: .\templates\components\navbar.html:61
+#: .\templates\components\navbar.html:62
 msgid "Menu"
 msgstr "القائمة"
 
@@ -892,11 +545,11 @@ msgstr "حول HTaP الجزائر"
 
 #: .\templates\core\about.html:18
 msgid ""
-"The Pulmonary Arterial Hypertension Association of Algeria (HTaP ALGERIA) is "
-"a registered national charitable organization."
+"KHADIDJA National Association for Pulmonary Arterial Hypertension (HTaP "
+"ALGERIA) is a registered national charitable organization."
 msgstr ""
-"جمعية ارتفاع ضغط الدم الشرياني الرئوي في الجزائر (HTaP الجزائر) منظمة وطنية "
-"خيرية مسجلة."
+"الجمعية الوطنية خديجة لارتفاع ضغط الدم الشرياني الرئوي (HTaP الجزائر) هي "
+"منظمة وطنية خيرية مسجلة."
 
 #: .\templates\core\about.html:30 .\templates\core\home.html:143
 msgid "Our Commitment"
@@ -2163,17 +1816,286 @@ msgstr "PayPal أو تحويل بنكي"
 msgid "To obtain bank account details or PayPal access, please email:"
 msgstr "للحصول على البيانات البنكية أو الوصول إلى PayPal، يرجى مراسلة:"
 
-#~ msgid "Back to articles"
-#~ msgstr "العودة إلى المقالات"
+#~ msgid "Accueil"
+#~ msgstr "الرئيسية"
 
-#~ msgid "By"
-#~ msgstr "بواسطة"
+#~ msgid "Association HTaP ALGERIA"
+#~ msgstr "جمعية HTaP الجزائر"
 
-#~ msgid "Content under preparation..."
-#~ msgstr "المحتوى قيد الإعداد..."
+#~ msgid "Ensemble pour mieux vivre avec l’HTAP."
+#~ msgstr "معًا لحياة أفضل مع ارتفاع ضغط الدم الشرياني الرئوي."
 
-#~ msgid "Related articles"
-#~ msgstr "مقالات ذات صلة"
+#~ msgid "Une association au service des patients."
+#~ msgstr "جمعية في خدمة المرضى."
+
+#~ msgid ""
+#~ "HTaP ALGERIA est une association engagée aux côtés des personnes "
+#~ "concernées par l’hypertension artérielle pulmonaire, de leurs familles et "
+#~ "de leurs proches."
+#~ msgstr ""
+#~ "HTaP الجزائر جمعية ملتزمة إلى جانب الأشخاص المصابين بارتفاع ضغط الدم "
+#~ "الشرياني الرئوي وعائلاتهم وذويهم."
+
+#~ msgid ""
+#~ "Nous œuvrons pour informer, accompagner et sensibiliser, et pour faire "
+#~ "entendre la voix des patients en Algérie."
+#~ msgstr "نعمل على الإعلام والمرافقة والتوعية، وإيصال صوت المرضى في الجزائر."
+
+#~ msgid "Rejoindre l’association"
+#~ msgstr "الانضمام إلى الجمعية"
+
+#~ msgid "Qui sommes-nous ?"
+#~ msgstr "من نحن؟"
+
+#~ msgid "Écouter"
+#~ msgstr "الاستماع"
+
+#~ msgid "Être à vos côtés"
+#~ msgstr "الوقوف إلى جانبكم"
+
+#~ msgid "Rassembler"
+#~ msgstr "التوحيد"
+
+#~ msgid "Créer du lien"
+#~ msgstr "بناء الروابط"
+
+#~ msgid "Agir"
+#~ msgstr "العمل"
+
+#~ msgid "Faire avancer la cause"
+#~ msgstr "دفع القضية إلى الأمام"
+
+#~ msgid "Patients et membres de l’association HTaP ALGERIA"
+#~ msgstr "مرضى وأعضاء جمعية HTaP الجزائر"
+
+#~ msgid "Une communauté engagée"
+#~ msgstr "مجتمع ملتزم"
+
+#~ msgid "À vos côtés, à chaque étape."
+#~ msgstr "إلى جانبكم في كل خطوة."
+
+#~ msgid ""
+#~ "Créer du lien, partager l’information et soutenir les patients et leurs "
+#~ "proches."
+#~ msgstr "بناء الروابط، ومشاركة المعلومات، ودعم المرضى وذويهم."
+
+#~ msgid "Notre priorité"
+#~ msgstr "أولويتنا"
+
+#~ msgid "Les patients"
+#~ msgstr "المرضى"
+
+#~ msgid "Notre engagement"
+#~ msgstr "التزامنا"
+
+#~ msgid "Informer • Soutenir • Agir"
+#~ msgstr "الإعلام • الدعم • العمل"
+
+#~ msgid "Nos missions"
+#~ msgstr "مهامنا"
+
+#~ msgid "Être présents, informer, rassembler et agir."
+#~ msgstr "الحضور، والإعلام، والتوحيد، والعمل."
+
+#~ msgid ""
+#~ "HTaP ALGERIA développe ses actions autour de trois missions essentielles "
+#~ "pour accompagner les patients et leurs proches."
+#~ msgstr ""
+#~ "تطور HTaP الجزائر أعمالها حول ثلاث مهام أساسية لمرافقة المرضى وذويهم."
+
+#~ msgid "Orienter & Accompagner"
+#~ msgstr "التوجيه والمرافقة"
+
+#~ msgid ""
+#~ "Écouter les besoins des patients et de leurs proches, partager des "
+#~ "informations utiles et faciliter l'orientation vers les ressources et "
+#~ "structures adaptées."
+#~ msgstr ""
+#~ "الاستماع إلى احتياجات المرضى وذويهم، ومشاركة المعلومات المفيدة، وتسهيل "
+#~ "التوجيه نحو الموارد والهياكل المناسبة."
+
+#~ msgid "Un accompagnement de proximité"
+#~ msgstr "مرافقة قريبة منكم"
+
+#~ msgid "Écouter & Rassembler"
+#~ msgstr "الاستماع والتوحيد"
+
+#~ msgid ""
+#~ "Créer des espaces d’échange, de rencontre et de partage afin de favoriser "
+#~ "l’entraide entre patients, familles et proches."
+#~ msgstr ""
+#~ "إنشاء مساحات للتبادل واللقاء والمشاركة لتعزيز التكافل بين المرضى "
+#~ "والعائلات والأقارب."
+
+#~ msgid "Une communauté qui se soutient"
+#~ msgstr "مجتمع يدعم أفراده بعضهم بعضًا"
+
+#~ msgid "Sensibiliser & Agir"
+#~ msgstr "التوعية والعمل"
+
+#~ msgid ""
+#~ "Faire connaître la réalité vécue par les patients, sensibiliser le public "
+#~ "et porter leur voix auprès des acteurs concernés."
+#~ msgstr ""
+#~ "التعريف بالواقع الذي يعيشه المرضى، وتوعية الجمهور، وإيصال صوتهم إلى "
+#~ "الجهات المعنية."
+
+#~ msgid "Faire entendre la voix des patients"
+#~ msgstr "إيصال صوت المرضى"
+
+#~ msgid ""
+#~ "Une même volonté : créer du lien et ne laisser personne avancer seul."
+#~ msgstr "إرادة واحدة: بناء الروابط وعدم ترك أي شخص يواجه الطريق وحده."
+
+#~ msgid "Comprendre la maladie"
+#~ msgstr "فهم المرض"
+
+#~ msgid "Qu'est-ce que l'Hypertension Artérielle Pulmonaire ?"
+#~ msgstr "ما هو ارتفاع ضغط الدم الشرياني الرئوي؟"
+
+#~ msgid ""
+#~ "L’Hypertension Artérielle Pulmonaire (HTAP) est une maladie rare qui se "
+#~ "caractérise par une augmentation anormale de la pression dans les artères "
+#~ "pulmonaires. Cette augmentation de pression peut entraîner une surcharge "
+#~ "de travail pour le cœur, en particulier pour le ventricule droit."
+#~ msgstr ""
+#~ "ارتفاع ضغط الدم الشرياني الرئوي (HTAP) مرض نادر يتميز بارتفاع غير طبيعي "
+#~ "في الضغط داخل الشرايين الرئوية. ويمكن أن يؤدي هذا الارتفاع إلى زيادة عبء "
+#~ "العمل على القلب، وخاصة البطين الأيمن."
+
+#~ msgid ""
+#~ "L’HTAP nécessite une évaluation médicale spécialisée afin d’en confirmer "
+#~ "le diagnostic, d’en rechercher la cause et de déterminer une prise en "
+#~ "charge adaptée à chaque personne."
+#~ msgstr ""
+#~ "تتطلب HTAP تقييمًا طبيًا متخصصًا لتأكيد التشخيص والبحث عن أسبابه وتحديد "
+#~ "التكفل المناسب لكل شخص."
+
+#~ msgid "Essoufflement"
+#~ msgstr "ضيق التنفس"
+
+#~ msgid ""
+#~ "Un essoufflement, notamment lors des efforts, peut faire partie des "
+#~ "signes de la maladie."
+#~ msgstr "قد يكون ضيق التنفس، خاصة أثناء الجهد، أحد علامات المرض."
+
+#~ msgid "Fatigue persistante"
+#~ msgstr "التعب المستمر"
+
+#~ msgid "Une fatigue inhabituelle peut également être observée."
+#~ msgstr "قد يُلاحظ أيضًا تعب غير معتاد."
+
+#~ msgid "Diagnostic spécialisé"
+#~ msgstr "تشخيص متخصص"
+
+#~ msgid ""
+#~ "Le diagnostic repose sur plusieurs examens médicaux et peut nécessiter "
+#~ "l'avis d'un centre spécialisé."
+#~ msgstr "يعتمد التشخيص على عدة فحوصات طبية وقد يتطلب رأي مركز متخصص."
+
+#~ msgid "En savoir plus sur l'HTAP"
+#~ msgstr "معرفة المزيد عن HTAP"
+
+#~ msgid "HTAP"
+#~ msgstr "HTAP"
+
+#~ msgid "Une maladie qui concerne les artères pulmonaires"
+#~ msgstr "مرض يصيب الشرايين الرئوية"
+
+#~ msgid "Pression pulmonaire"
+#~ msgstr "الضغط الرئوي"
+
+#~ msgid "Une pression anormalement élevée dans les artères pulmonaires."
+#~ msgstr "ضغط مرتفع بشكل غير طبيعي في الشرايين الرئوية."
+
+#~ msgid "Cœur droit"
+#~ msgstr "القلب الأيمن"
+
+#~ msgid "Le cœur droit peut être soumis à une charge de travail accrue."
+#~ msgstr "قد يتعرض الجانب الأيمن من القلب إلى عبء عمل متزايد."
+
+#~ msgid "L'HTAP en Algérie"
+#~ msgstr "HTAP في الجزائر"
+
+#~ msgid "Mieux connaître la réalité de l'HTAP en Algérie"
+#~ msgstr "معرفة واقع HTAP في الجزائر بشكل أفضل"
+
+#~ msgid "patients atteints d'HTAP pris en charge depuis 2007"
+#~ msgstr "مريضًا مصابًا بـ HTAP تمت رعايتهم منذ 2007"
+
+#~ msgid "Estimation issue de données algériennes disponibles"
+#~ msgstr "تقدير مستند إلى البيانات الجزائرية المتاحة"
+
+#~ msgid "patients inclus dans une étude algérienne prospective"
+#~ msgstr "مريضًا أُدرجوا في دراسة جزائرية استباقية"
+
+#~ msgid "HTAP et hypertension pulmonaire thromboembolique chronique"
+#~ msgstr "HTAP وارتفاع ضغط الدم الرئوي الخثاري المزمن"
+
+#~ msgid "des patients de cette étude avaient une HTAP du groupe 1"
+#~ msgstr "من مرضى هذه الدراسة كانوا مصابين بـ HTAP من المجموعة الأولى"
+
+#~ msgid "Étude algérienne de 70 patients"
+#~ msgstr "دراسة جزائرية شملت 70 مريضًا"
+
+#~ msgid "des patients du groupe HTAP étaient des femmes"
+#~ msgstr "من مرضى مجموعة HTAP كانوا من النساء"
+
+#~ msgid "Données d'une étude prospective menée en Algérie"
+#~ msgstr "بيانات من دراسة استباقية أُجريت في الجزائر"
+
+#~ msgid ""
+#~ "Les données épidémiologiques nationales de l'HTAP restent parcellaires et "
+#~ "dispersées. Ces chiffres ne constituent donc pas une estimation de la "
+#~ "prévalence actuelle de l'HTAP dans toute la population algérienne."
+#~ msgstr ""
+#~ "لا تزال البيانات الوبائية الوطنية حول HTAP محدودة ومتفرقة. ولذلك لا تمثل "
+#~ "هذه الأرقام تقديرًا للانتشار الحالي لـ HTAP بين جميع أفراد السكان "
+#~ "الجزائريين."
+
+#~ msgid "Actualités & Publications"
+#~ msgstr "الأخبار والمنشورات"
+
+#~ msgid "Derniers articles publiés"
+#~ msgstr "أحدث المقالات المنشورة"
+
+#~ msgid ""
+#~ "Retrouvez nos dernières actualités, informations et publications pour "
+#~ "mieux comprendre l’HTAP et suivre les actions de l’association."
+#~ msgstr ""
+#~ "اطلعوا على آخر أخبارنا ومعلوماتنا ومنشوراتنا لفهم HTAP بشكل أفضل ومتابعة "
+#~ "أنشطة الجمعية."
+
+#~ msgid "Voir tous les articles"
+#~ msgstr "عرض جميع المقالات"
+
+#~ msgid "Lire l'article"
+#~ msgstr "قراءة المقال"
+
+#~ msgid "Aucun article publié pour le moment"
+#~ msgstr "لا توجد مقالات منشورة حاليًا"
+
+#~ msgid "Les prochaines actualités de l’association apparaîtront ici."
+#~ msgstr "ستظهر أخبار الجمعية القادمة هنا."
+
+#~ msgid "Rejoignez-nous"
+#~ msgstr "انضموا إلينا"
+
+#~ msgid "Faites partie du changement."
+#~ msgstr "كونوا جزءًا من التغيير."
+
+#~ msgid ""
+#~ "Chaque adhésion renforce notre voix collective et nous permet d'étendre "
+#~ "nos actions auprès des patients et de leurs proches à travers l'Algérie."
+#~ msgstr ""
+#~ "كل عضوية تعزز صوتنا الجماعي وتسمح لنا بتوسيع أعمالنا لصالح المرضى وذويهم "
+#~ "عبر الجزائر."
+
+#~ msgid "Devenir membre"
+#~ msgstr "أن تصبح عضوًا"
+
+#~ msgid "Nous contacter"
+#~ msgstr "اتصل بنا"
 
 #~ msgid "full name"
 #~ msgstr "الاسم الكامل"
