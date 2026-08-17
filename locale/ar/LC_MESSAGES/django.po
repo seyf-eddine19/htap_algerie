@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: HTaP ALGERIA\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-17 16:01+0100\n"
+"POT-Creation-Date: 2026-08-17 16:20+0100\n"
 "PO-Revision-Date: 2026-08-17 14:25+0100\n"
 "Last-Translator: HTaP ALGERIA\n"
 "Language-Team: Arabic <ar@li.org>\n"
@@ -369,7 +369,7 @@ msgstr "الرئيسية"
 
 #: .\templates\activities\list.html:27
 msgid "Association HTaP ALGERIA"
-msgstr "جمعية HTAP الجزائر"
+msgstr "جمعية HTaP الجزائر"
 
 #: .\templates\activities\list.html:32
 msgid "Ensemble pour mieux vivre avec l’HTAP."
@@ -385,7 +385,7 @@ msgid ""
 "par l’hypertension artérielle pulmonaire, de leurs familles et de leurs "
 "proches."
 msgstr ""
-"HTAP الجزائر جمعية ملتزمة إلى جانب الأشخاص المصابين بارتفاع ضغط الدم "
+"HTaP الجزائر جمعية ملتزمة إلى جانب الأشخاص المصابين بارتفاع ضغط الدم "
 "الشرياني الرئوي وعائلاتهم وذويهم."
 
 #: .\templates\activities\list.html:44
@@ -428,7 +428,7 @@ msgstr "دفع القضية إلى الأمام"
 
 #: .\templates\activities\list.html:132
 msgid "Patients et membres de l’association HTaP ALGERIA"
-msgstr "مرضى وأعضاء جمعية HTAP الجزائر"
+msgstr "مرضى وأعضاء جمعية HTaP الجزائر"
 
 #: .\templates\activities\list.html:141
 msgid "Une communauté engagée"
@@ -472,7 +472,7 @@ msgstr "الحضور، والإعلام، والتوحيد، والعمل."
 msgid ""
 "HTaP ALGERIA développe ses actions autour de trois missions essentielles "
 "pour accompagner les patients et leurs proches."
-msgstr "تطور HTAP الجزائر أعمالها حول ثلاث مهام أساسية لمرافقة المرضى وذويهم."
+msgstr "تطور HTaP الجزائر أعمالها حول ثلاث مهام أساسية لمرافقة المرضى وذويهم."
 
 #: .\templates\activities\list.html:354
 msgid "Orienter & Accompagner"
@@ -791,6 +791,20 @@ msgstr "سياسة الخصوصية"
 msgid "Fermer"
 msgstr "إغلاق"
 
+#: .\templates\components\navbar.html:10 .\templates\core\about.html:166
+#: .\templates\core\about.html:210 .\templates\core\about.html:217
+#: .\templates\core\about.html:224 .\templates\core\about.html:231
+#: .\templates\core\about.html:238 .\templates\core\about.html:245
+#: .\templates\core\about.html:252
+msgid "HTaP ALGERIA"
+msgstr "HTaP الجزائر"
+
+#: .\templates\components\navbar.html:11
+#, fuzzy
+#| msgid "HTaP Algeria Association"
+msgid "National Association"
+msgstr "جمعية HTaP الجزائر"
+
 #: .\templates\components\navbar.html:61
 msgid "Menu"
 msgstr "القائمة"
@@ -801,14 +815,14 @@ msgstr "من نحن؟"
 
 #: .\templates\core\about.html:15
 msgid "About HTaP ALGERIA"
-msgstr "حول HTAP الجزائر"
+msgstr "حول HTaP الجزائر"
 
 #: .\templates\core\about.html:18
 msgid ""
 "The Pulmonary Arterial Hypertension Association of Algeria (HTaP ALGERIA) is "
 "a registered national charitable organization."
 msgstr ""
-"جمعية ارتفاع ضغط الدم الشرياني الرئوي في الجزائر (HTAP الجزائر) منظمة وطنية "
+"جمعية ارتفاع ضغط الدم الشرياني الرئوي في الجزائر (HTaP الجزائر) منظمة وطنية "
 "خيرية مسجلة."
 
 #: .\templates\core\about.html:30 .\templates\core\home.html:143
@@ -838,7 +852,7 @@ msgid ""
 "support, and a valuable platform to exchange experiences among those "
 "affected. Our primary goal remains to break the isolation of every patient."
 msgstr ""
-"تقدم HTAP الجزائر للمرضى معلومات حول المرض ودعمًا نفسيًا ومنصة قيّمة لتبادل "
+"تقدم HTaP الجزائر للمرضى معلومات حول المرض ودعمًا نفسيًا ومنصة قيّمة لتبادل "
 "الخبرات بين المصابين. ويبقى هدفنا الأساسي كسر عزلة كل مريض."
 
 #: .\templates\core\about.html:51
@@ -855,7 +869,7 @@ msgstr ""
 
 #: .\templates\core\about.html:77 .\templates\core\home.html:713
 msgid "Mrs. Khadidja Ali Kacem, founder and first president of HTaP ALGERIA"
-msgstr "السيدة خديجة علي قاسم، مؤسسة ورئيسة HTAP الجزائر الأولى"
+msgstr "السيدة خديجة علي قاسم، مؤسسة ورئيسة HTaP الجزائر الأولى"
 
 #: .\templates\core\about.html:82
 msgid "Founder & First President"
@@ -883,7 +897,7 @@ msgid ""
 msgstr ""
 "\n"
 "                        تأسست الجمعية الوطنية خديجة لارتفاع ضغط الدم "
-"الشرياني الرئوي (HTAP الجزائر) سنة 2018 على يد مؤسستها ورئيستها الأولى، "
+"الشرياني الرئوي (HTaP الجزائر) سنة 2018 على يد مؤسستها ورئيستها الأولى، "
 "السيدة خديجة علي قاسم.\n"
 "                        "
 
@@ -935,7 +949,7 @@ msgstr ""
 
 #: .\templates\core\about.html:148
 msgid "Founder of HTaP ALGERIA — 2018"
-msgstr "مؤسسة HTAP الجزائر — 2018"
+msgstr "مؤسسة HTaP الجزائر — 2018"
 
 #: .\templates\core\about.html:158
 msgid "Association Name"
@@ -944,13 +958,6 @@ msgstr "اسم الجمعية"
 #: .\templates\core\about.html:162 .\templates\core\home.html:616
 msgid "KHADIDJA National Association for Pulmonary Arterial Hypertension"
 msgstr "الجمعية الوطنية خديجة لارتفاع ضغط الدم الشرياني الرئوي"
-
-#: .\templates\core\about.html:166 .\templates\core\about.html:210
-#: .\templates\core\about.html:217 .\templates\core\about.html:224
-#: .\templates\core\about.html:231 .\templates\core\about.html:238
-#: .\templates\core\about.html:245 .\templates\core\about.html:252
-msgid "HTaP ALGERIA"
-msgstr "HTAP الجزائر"
 
 #: .\templates\core\about.html:185
 msgid "In Pictures"
@@ -1171,7 +1178,7 @@ msgstr "البريد الإلكتروني"
 
 #: .\templates\core\contact.html:90
 msgid "HTAP Algeria Location - Birkhadem, Algiers"
-msgstr "موقع HTAP الجزائر - بئر خادم، الجزائر العاصمة"
+msgstr "موقع HTaP الجزائر - بئر خادم، الجزائر العاصمة"
 
 #: .\templates\core\contact.html:124
 msgid "Send Us a Message"
@@ -1311,7 +1318,7 @@ msgstr "طلب المساعدة"
 
 #: .\templates\core\home.html:27
 msgid "HTaP Algeria Association"
-msgstr "جمعية HTAP الجزائر"
+msgstr "جمعية HTaP الجزائر"
 
 #: .\templates\core\home.html:32
 msgid "Together to live better with PAH."
@@ -1326,7 +1333,7 @@ msgid ""
 "HTaP Algeria is committed to supporting individuals affected by pulmonary "
 "arterial hypertension, as well as their families and loved ones."
 msgstr ""
-"تلتزم HTAP الجزائر بدعم الأشخاص المصابين بارتفاع ضغط الدم الشرياني الرئوي "
+"تلتزم HTaP الجزائر بدعم الأشخاص المصابين بارتفاع ضغط الدم الشرياني الرئوي "
 "وعائلاتهم وذويهم."
 
 #: .\templates\core\home.html:44
@@ -1371,7 +1378,7 @@ msgstr "دفع القضية إلى الأمام"
 
 #: .\templates\core\home.html:103
 msgid "Patients and members of the HTaP Algeria association"
-msgstr "مرضى وأعضاء جمعية HTAP الجزائر"
+msgstr "مرضى وأعضاء جمعية HTaP الجزائر"
 
 #: .\templates\core\home.html:112
 msgid "A committed community"
@@ -1411,7 +1418,7 @@ msgstr "الخدمة والإعلام والتوحيد والعمل."
 msgid ""
 "HTaP ALGERIA focuses its efforts on three core missions to support patients "
 "and their families."
-msgstr "تركز HTAP الجزائر جهودها على ثلاث مهام أساسية لدعم المرضى وعائلاتهم."
+msgstr "تركز HTaP الجزائر جهودها على ثلاث مهام أساسية لدعم المرضى وعائلاتهم."
 
 #: .\templates\core\home.html:211
 msgid "Guide & Support"
@@ -1611,14 +1618,14 @@ msgid ""
 msgstr ""
 "\n"
 "                وراء كل تشخيص يوجد شخص وعائلة وحياة يومية تحتاج إلى إعادة "
-"بناء. تعمل HTAP الجزائر لضمان ألا يواجه المرضى المرض وحدهم.\n"
+"بناء. تعمل HTaP الجزائر لضمان ألا يواجه المرضى المرض وحدهم.\n"
 "                "
 
 #: .\templates\core\home.html:577
 msgid ""
 "Presentation of HTaP ALGERIA and testimonials about Pulmonary Arterial "
 "Hypertension"
-msgstr "تقديم HTAP الجزائر وشهادات حول ارتفاع ضغط الدم الشرياني الرئوي"
+msgstr "تقديم جمعية HTaP الجزائر وشهادات حول ارتفاع ضغط الدم الشرياني الرئوي"
 
 #: .\templates\core\home.html:579
 msgid "Your browser does not support video playback."
@@ -1626,7 +1633,7 @@ msgstr "متصفحك لا يدعم تشغيل الفيديو."
 
 #: .\templates\core\home.html:591
 msgid "HTaP ALGERIA — A voice for patients"
-msgstr "HTAP الجزائر — صوت المرضى"
+msgstr "HTaP الجزائر — صوت المرضى"
 
 #: .\templates\core\home.html:595
 msgid ""
@@ -1660,7 +1667,7 @@ msgid ""
 "                    "
 msgstr ""
 "\n"
-"                    تأسست HTAP الجزائر سنة 2018 على يد السيدة خديجة علي "
+"                    تأسست HTaP الجزائر سنة 2018 على يد السيدة خديجة علي "
 "قاسم، أول رئيسة للجمعية، وتواصل اليوم الالتزام الذي بدأته في خدمة الأشخاص "
 "المصابين بارتفاع ضغط الدم الشرياني الرئوي.\n"
 "                    "
@@ -2025,7 +2032,7 @@ msgstr "العضوية والدعم"
 
 #: .\templates\core\membership.html:32
 msgid "Become a Member of HTaP ALGERIA"
-msgstr "أن تصبح عضوًا في HTAP الجزائر"
+msgstr "أن تصبح عضوًا في HTaP الجزائر"
 
 #: .\templates\core\membership.html:35
 msgid ""
@@ -2129,7 +2136,7 @@ msgstr "للحصول على البيانات البنكية أو الوصول إ
 #~ msgstr "العنوان غير متاح"
 
 #~ msgid "HTAP Algeria"
-#~ msgstr "HTAP الجزائر"
+#~ msgstr "HTaP الجزائر"
 
 #~ msgid "Previous page"
 #~ msgstr "الصفحة السابقة"

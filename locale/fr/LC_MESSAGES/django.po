@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-17 16:07+0100\n"
+"POT-Creation-Date: 2026-08-17 16:20+0100\n"
 "PO-Revision-Date: 2026-08-17 14:46+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: fr_FR <LL@li.org>\n"
@@ -793,6 +793,20 @@ msgstr "Politique de confidentialité"
 msgid "Fermer"
 msgstr "Fermer"
 
+#: .\templates\components\navbar.html:10 .\templates\core\about.html:166
+#: .\templates\core\about.html:210 .\templates\core\about.html:217
+#: .\templates\core\about.html:224 .\templates\core\about.html:231
+#: .\templates\core\about.html:238 .\templates\core\about.html:245
+#: .\templates\core\about.html:252
+msgid "HTaP ALGERIA"
+msgstr "HTaP ALGÉRIE"
+
+#: .\templates\components\navbar.html:11
+#, fuzzy
+#| msgid "HTaP Algeria Association"
+msgid "National Association"
+msgstr "Association HTaP ALGERIA"
+
 #: .\templates\components\navbar.html:61
 msgid "Menu"
 msgstr "Menu"
@@ -962,13 +976,6 @@ msgstr "Nom de l’association"
 msgid "KHADIDJA National Association for Pulmonary Arterial Hypertension"
 msgstr ""
 "Association nationale KHADIDJA pour l’hypertension artérielle pulmonaire"
-
-#: .\templates\core\about.html:166 .\templates\core\about.html:210
-#: .\templates\core\about.html:217 .\templates\core\about.html:224
-#: .\templates\core\about.html:231 .\templates\core\about.html:238
-#: .\templates\core\about.html:245 .\templates\core\about.html:252
-msgid "HTaP ALGERIA"
-msgstr "HTaP ALGÉRIE"
 
 #: .\templates\core\about.html:185
 msgid "In Pictures"
