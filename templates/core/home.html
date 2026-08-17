@@ -1,13 +1,12 @@
 {% extends "base.html" %}
 {% load i18n static %}
 
-{% block title %}{% translate "Accueil" %} — HTAP Algérie{% endblock %}
+{% block title %}{% translate "Home" %} — HTAP Algeria{% endblock %}
 
 {% block content %}
-<!-- HERO — HTAP Algérie -->
+<!-- 1. HERO SECTION — PAH Algeria -->
 <section class="relative overflow-hidden bg-slate-800 text-white">
-<!-- <section class="relative overflow-hidden bg-gradient-to-br from-violet-950 via-purple-900 to-fuchsia-900 text-white"> -->
-    <!-- Background decoration -->
+    <!-- Background Decoration -->
     <div class="absolute inset-0 pointer-events-none">
         <div class="absolute -top-40 -right-40 w-[550px] h-[550px] rounded-full bg-brand-purple/40 blur-3xl"></div>
         <div class="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-brand-magenta/20 blur-3xl"></div>
@@ -16,7 +15,8 @@
 
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center min-h-[680px] py-20 lg:py-24">
-            <!-- LEFT — ASSOCIATION MESSAGE -->
+            
+            <!-- LEFT COLUMN: ASSOCIATION MESSAGE -->
             <div class="lg:col-span-7">
                 <!-- Badge -->
                 <div class="inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-semibold uppercase tracking-wider text-brand-rose backdrop-blur-sm">
@@ -24,84 +24,59 @@
                         <span class="absolute inline-flex h-full w-full rounded-full bg-brand-rose opacity-75 animate-ping"></span>
                         <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-rose"></span>
                     </span>
-                    {% translate "Association HTAP Algérie" %}
+                    {% translate "PAH Algeria Association" %}
                 </div>
 
-                <!-- Heading -->
+                <!-- Main Heading -->
                 <h1 class="mt-6 text-3xl sm:text-4xl lg:text-6xl font-extrabold tracking-tight leading-[1.06]">
-                    {% translate "Ensemble pour mieux vivre avec l’HTAP." %}
+                    {% translate "Together to live better with PAH." %}
                     <span class="block text-2xl lg:text-4xl mt-3 text-transparent bg-clip-text bg-gradient-to-r from-brand-purple via-brand-magenta to-brand-rose">
-                        {% translate "Une association au service des patients." %}
+                        {% translate "An association dedicated to supporting patients." %}
                     </span>
                 </h1>
 
-                <!-- Description -->
+                <!-- Subtitles / Description -->
                 <p class="mt-7 max-w-2xl text-base sm:text-lg leading-relaxed text-slate-300">
-                    {% translate "HTAP Algérie est une association engagée aux côtés des personnes concernées par l’hypertension artérielle pulmonaire, de leurs familles et de leurs proches." %}
+                    {% translate "PAH Algeria is committed to supporting individuals affected by pulmonary arterial hypertension, as well as their families and loved ones." %}
                 </p>
 
                 <p class="mt-4 max-w-2xl text-sm sm:text-base leading-relaxed text-slate-400">
-                    {% translate "Nous œuvrons pour informer, accompagner et sensibiliser, et pour faire entendre la voix des patients en Algérie." %}
+                    {% translate "We strive to inform, assist, raise awareness, and make patients' voices heard across Algeria." %}
                 </p>
 
-                <!-- CTA -->
+                <!-- Call to Action Buttons -->
                 <div class="mt-9 flex flex-wrap gap-4">
                     <a href="{% url 'core:membership' %}" class="group inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-brand-purple hover:bg-brand-violet text-white font-semibold shadow-lg shadow-brand-purple/20 transition-all duration-300 hover:-translate-y-1">
                         <i data-lucide="users" class="w-5 h-5"></i>
-
-                        <span>{% translate "Rejoindre l’association" %}</span>
-
-                        <i data-lucide="arrow-right"
-                           class="w-4 h-4 rtl:rotate-180 transition-transform group-hover:translate-x-1"></i>
-
+                        <span>{% translate "Join the association" %}</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4 rtl:rotate-180 transition-transform group-hover:translate-x-1"></i>
                     </a>
 
-
-                    <a href="{% url 'core:about' %}"
-                       class="group inline-flex items-center justify-center
-                              gap-2 px-6 py-3.5 rounded-xl
-                              bg-white/5 hover:bg-white/10
-                              border border-white/10
-                              hover:border-white/20
-                              text-white font-semibold
-                              backdrop-blur-sm
-                              transition-all duration-300">
-
-                        <i data-lucide="heart-handshake"
-                           class="w-5 h-5"></i>
-
-                        <span>
-                            {% translate "Qui sommes-nous ?" %}
-                        </span>
-
+                    <a href="{% url 'core:about' %}" class="group inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 text-white font-semibold backdrop-blur-sm transition-all duration-300">
+                        <i data-lucide="heart-handshake" class="w-5 h-5"></i>
+                        <span>{% translate "About us" %}</span>
                     </a>
-
                 </div>
 
-
-                <!-- Small values -->
+                <!-- Core Values -->
                 <div class="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-5 max-w-2xl">
-
                     <div class="flex items-center gap-3">
                         <div class="w-10 h-10 rounded-xl bg-violet-900/30 text-violet-300 flex items-center justify-center">
-                            <i data-lucide="heart" class="w-5 h-5">
-                            </i>
+                            <i data-lucide="heart" class="w-5 h-5"></i>
                         </div>
-
                         <div>
-                            <p class="text-sm font-bold">{% translate "Écouter" %}</p>
-                            <p class="text-xs text-slate-400">{% translate "Être à vos côtés" %}</p>
+                            <p class="text-sm font-bold">{% translate "Listen" %}</p>
+                            <p class="text-xs text-slate-400">{% translate "Standing by your side" %}</p>
                         </div>
                     </div>
 
                     <div class="flex items-center gap-3">
                         <div class="w-10 h-10 rounded-xl bg-fuchsia-900/30 text-fuchsia-300 flex items-center justify-center">
-                            <i data-lucide="users" class="w-5 h-5">
-                            </i>
+                            <i data-lucide="users" class="w-5 h-5"></i>
                         </div>
                         <div>
-                            <p class="text-sm font-bold">{% translate "Rassembler" %}</p>
-                            <p class="text-xs text-slate-500">{% translate "Créer du lien" %}</p>
+                            <p class="text-sm font-bold">{% translate "Unite" %}</p>
+                            <p class="text-xs text-slate-400">{% translate "Building connections" %}</p>
                         </div>
                     </div>
 
@@ -110,93 +85,83 @@
                             <i data-lucide="megaphone" class="w-5 h-5"></i>
                         </div>
                         <div>
-                            <p class="text-sm font-bold">{% translate "Agir" %}</p>
-                            <p class="text-xs text-slate-500">{% translate "Faire avancer la cause" %}</p>
+                            <p class="text-sm font-bold">{% translate "Act" %}</p>
+                            <p class="text-xs text-slate-400">{% translate "Advancing the cause" %}</p>
                         </div>
                     </div>
-
                 </div>
             </div>
 
-
-            <!-- ================================================= -->
-            <!-- RIGHT — IMAGE / COMMUNITY -->
-            <!-- ================================================= -->
+            <!-- RIGHT COLUMN: HERO IMAGE & CARDS -->
             <div class="lg:col-span-5">
                 <div class="relative mx-auto max-w-lg">
-                    <!-- Decorative glow -->
+                    <!-- Decorative Glow -->
                     <div class="absolute -inset-8 bg-brand-purple/20 blur-3xl rounded-full"></div>
 
-                    <!-- Main image -->
+                    <!-- Main Image Card -->
                     <div class="relative rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl group">
-                        <img src="{% static 'img/hero-1.avif' %}" alt="{% translate 'Patients et membres de l’association HTAP Algérie' %}" class="w-full h-[500px] object-cover transition-transform duration-700 group-hover:scale-105">
+                        <img src="{% static 'img/hero-1.avif' %}" alt="{% translate 'Patients and members of the PAH Algeria association' %}" class="w-full h-[500px] object-cover transition-transform duration-700 group-hover:scale-105">
 
-                        <!-- Image overlay -->
+                        <!-- Image Overlay -->
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent"></div>
 
-                        <!-- Image content -->
+                        <!-- Overlay Content -->
                         <div class="absolute bottom-0 left-0 right-0 p-6">
                             <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-xs text-white">
                                 <span class="w-2 h-2 rounded-full bg-brand-rose"></span>
-                                {% translate "Une communauté engagée" %}
+                                {% translate "A committed community" %}
                             </div>
                             <h2 class="mt-3 text-2xl font-bold">
-                                {% translate "À vos côtés, à chaque étape." %}
+                                {% translate "By your side at every step." %}
                             </h2>
                             <p class="mt-2 text-sm text-slate-300 max-w-sm">
-                                {% translate "Créer du lien, partager l’information et soutenir les patients et leurs proches." %}
+                                {% translate "Creating connections, sharing information, and supporting patients and their loved ones." %}
                             </p>
                         </div>
                     </div>
 
-
-                    <!-- ================================================= -->
-                    <!-- FLOATING CARD — TOP -->
-                    <!-- ================================================= -->
+                    <!-- Top Floating Card -->
                     <div class="absolute -top-5 -left-5 sm:-left-8 px-4 py-3 rounded-2xl bg-white text-slate-900 shadow-xl border border-slate-100 animate-[float_4s_ease-in-out_infinite]">
                         <div class="flex items-center gap-3">
                             <div class="w-10 h-10 rounded-xl bg-brand-purple/10 text-brand-purple flex items-center justify-center">
-                                <i data-lucide="users"class="w-5 h-5"></i>
+                                <i data-lucide="users" class="w-5 h-5"></i>
                             </div>
                             <div>
-                                <p class="text-[10px] uppercase tracking-wider text-slate-400 font-semibold">{% translate "Notre priorité" %}</p>
-                                <p class="text-sm font-bold">{% translate "Les patients" %}</p>
+                                <p class="text-[10px] uppercase tracking-wider text-slate-400 font-semibold">{% translate "Our Priority" %}</p>
+                                <p class="text-sm font-bold">{% translate "The Patients" %}</p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- ================================================= -->
-                    <!-- FLOATING CARD — BOTTOM -->
-                    <!-- ================================================= -->
+                    <!-- Bottom Floating Card -->
                     <div class="absolute -bottom-6 -right-4 sm:-right-8 px-4 py-3 rounded-2xl bg-slate-900/95 backdrop-blur-xl border border-white/10 shadow-xl animate-[float_5s_ease-in-out_infinite]">
                         <div class="flex items-center gap-3">
                             <div class="w-10 h-10 rounded-xl bg-brand-rose/10 text-brand-rose flex items-center justify-center">
                                 <i data-lucide="heart-handshake" class="w-5 h-5"></i>
                             </div>
                             <div>
-                                <p class="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">{% translate "Notre engagement" %}</p>
-                                <p class="text-sm font-bold text-white">{% translate "Informer • Soutenir • Agir" %}</p>
+                                <p class="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">{% translate "Our Commitment" %}</p>
+                                <p class="text-sm font-bold text-white">{% translate "Inform • Support • Act" %}</p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Decorative circles -->
+                    <!-- Decorative Background Circles -->
                     <div class="absolute -z-10 top-1/2 -right-8 w-16 h-16 rounded-full border border-brand-purple/30"></div>
                     <div class="absolute -z-10 bottom-16 -left-8 w-10 h-10 rounded-full bg-brand-magenta/20 blur-sm"></div>
                 </div>
             </div>
+
         </div>
     </div>
 </section>
 
-
-<!-- Small floating animation -->
+<!-- Inline CSS Keyframes -->
 <style>
 @keyframes float {
     0%, 100% {
         transform: translateY(0);
     }
-
     50% {
         transform: translateY(-8px);
     }
@@ -204,1426 +169,788 @@
 </style>
 
 <!-- 2. Core Missions / Pillars -->
-<section id="missions"
-         class="relative overflow-hidden
-                py-16 md:py-24
-                bg-slate-50 dark:bg-slate-950
-                border-b border-slate-200 dark:border-slate-800
-                transition-colors">
-
+<section id="missions" class="relative overflow-hidden py-16 md:py-24 bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 transition-colors">
     <!-- Soft background decoration -->
-    <div class="absolute inset-0 pointer-events-none overflow-hidden">
-
-        <div class="absolute -top-32 -right-32
-                    w-80 h-80
-                    rounded-full
-                    bg-violet-200/30
-                    dark:bg-violet-900/10
-                    blur-3xl">
-        </div>
-
-        <div class="absolute -bottom-40 -left-32
-                    w-96 h-96
-                    rounded-full
-                    bg-fuchsia-200/25
-                    dark:bg-fuchsia-900/10
-                    blur-3xl">
-        </div>
-
+    <div class="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+        <div class="absolute -top-32 -right-32 w-80 h-80 rounded-full bg-brand-purple/10 dark:bg-brand-purple/10 blur-3xl"></div>
+        <div class="absolute -bottom-40 -left-32 w-96 h-96 rounded-full bg-brand-magenta/10 dark:bg-brand-magenta/10 blur-3xl"></div>
     </div>
 
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-    <div class="relative z-10
-                max-w-7xl mx-auto
-                px-4 sm:px-6 lg:px-8">
-
-        <!-- ===================================================== -->
-        <!-- SECTION HEADER -->
-        <!-- ===================================================== -->
-
-        <div class="max-w-3xl mx-auto text-center">
-
-            <span class="inline-flex items-center gap-2
-                         px-3.5 py-1.5
-                         rounded-full
-                         bg-violet-100
-                         dark:bg-violet-900/20
-                         border border-violet-200
-                         dark:border-violet-800/30
-                         text-violet-700
-                         dark:text-violet-300
-                         text-xs font-bold
-                         uppercase tracking-wider">
-
-                <span class="w-1.5 h-1.5 rounded-full
-                             bg-gradient-to-r
-                             from-violet-600 to-fuchsia-500">
-                </span>
-
-                {% translate "Nos missions" %}
-
+        <!-- Header -->
+        <header class="max-w-3xl mx-auto text-center">
+            <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-purple/10 dark:bg-brand-purple/20 border border-brand-purple/20 dark:border-brand-purple/30 text-brand-purple dark:text-brand-rose text-xs font-bold uppercase tracking-wider">
+                <span class="w-1.5 h-1.5 rounded-full bg-brand-purple dark:bg-brand-rose" aria-hidden="true"></span>
+                {% translate "Our Missions" %}
             </span>
 
-
-            <h2 class="mt-5
-                       text-3xl sm:text-4xl
-                       font-extrabold
-                       tracking-tight
-                       text-slate-900
-                       dark:text-white">
-
-                {% translate "Être présents, informer, rassembler et agir." %}
-
+            <h2 class="mt-5 text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+                {% translate "To serve, inform, unite, and take action." %}
             </h2>
 
-
-            <p class="mt-4
-                      text-base sm:text-lg
-                      leading-relaxed
-                      text-slate-600
-                      dark:text-slate-400">
-
-                {% translate "HTAP Algérie développe ses actions autour de trois missions essentielles pour accompagner les patients et leurs proches." %}
-
+            <p class="mt-4 text-base sm:text-lg leading-relaxed text-slate-600 dark:text-slate-400">
+                {% translate "HTAP Algérie focuses its efforts on three core missions to support patients and their families." %}
             </p>
+        </header>
 
-        </div>
+        <!-- Pillars Grid -->
+        <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
 
-
-        <!-- ===================================================== -->
-        <!-- THREE PILLARS -->
-        <!-- ===================================================== -->
-
-        <div class="mt-12
-                    grid grid-cols-1
-                    md:grid-cols-3
-                    gap-6 lg:gap-8">
-
-
-            <!-- ================================================= -->
-            <!-- PILLAR 1 — ORIENTATION -->
-            <!-- ================================================= -->
-
-            <article class="group relative
-                            p-7 sm:p-8
-                            rounded-[1.75rem]
-                            bg-white
-                            dark:bg-slate-900
-                            border border-slate-200
-                            dark:border-slate-800
-                            shadow-sm
-                            hover:shadow-xl
-                            hover:-translate-y-1
-                            transition-all duration-300">
-
-                <!-- Number -->
-                <div class="absolute top-6 right-7
-                            text-5xl font-black
-                            text-slate-100
-                            dark:text-slate-800
-                            select-none">
+            <!-- Pillar 1: Guidance -->
+            <article class="group relative p-7 sm:p-8 rounded-[1.75rem] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <span class="absolute top-6 right-7 text-5xl font-black text-slate-100 dark:text-slate-800 select-none" aria-hidden="true">
                     01
+                </span>
+
+                <div class="relative w-14 h-14 rounded-2xl bg-violet-100 dark:bg-violet-900/30 text-brand-purple dark:text-brand-rose flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                    <i data-lucide="compass" class="w-7 h-7"></i>
                 </div>
 
-
-                <!-- Icon -->
-                <div class="relative
-                            w-14 h-14
-                            rounded-2xl
-                            bg-violet-100
-                            dark:bg-violet-900/30
-                            text-violet-700
-                            dark:text-violet-300
-                            flex items-center justify-center
-                            group-hover:scale-105
-                            transition-transform duration-300">
-
-                    <i data-lucide="compass"
-                       class="w-7 h-7">
-                    </i>
-
-                </div>
-
-
-                <h3 class="mt-6
-                           text-xl
-                           font-bold
-                           text-slate-900
-                           dark:text-white">
-
-                    {% translate "Orienter & Accompagner" %}
-
+                <h3 class="mt-6 text-xl font-bold text-slate-900 dark:text-white">
+                    {% translate "Guide & Support" %}
                 </h3>
 
-
-                <p class="mt-3
-                          text-sm
-                          leading-relaxed
-                          text-slate-600
-                          dark:text-slate-400">
-
-                    {% translate "Écouter les besoins des patients et de leurs proches, partager des informations utiles et faciliter l'orientation vers les ressources et structures adaptées." %}
-
+                <p class="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                    {% translate "Listen to the needs of patients and their families, share essential information, and facilitate guidance toward the right healthcare resources and institutions." %}
                 </p>
 
-
-                <div class="mt-6
-                            flex items-center gap-2
-                            text-xs font-semibold
-                            text-violet-700
-                            dark:text-violet-300">
-
-                    <i data-lucide="arrow-right"
-                       class="w-4 h-4 rtl:rotate-180">
-                    </i>
-
-                    {% translate "Un accompagnement de proximité" %}
-
+                <div class="mt-6 flex items-center gap-2 text-xs font-semibold text-brand-purple dark:text-brand-rose">
+                    <i data-lucide="arrow-right" class="w-4 h-4 rtl:rotate-180" aria-hidden="true"></i>
+                    <span>{% translate "Close personal support" %}</span>
                 </div>
-
             </article>
 
-
-            <!-- ================================================= -->
-            <!-- PILLAR 2 — COMMUNITY -->
-            <!-- ================================================= -->
-
-            <article class="group relative
-                            p-7 sm:p-8
-                            rounded-[1.75rem]
-                            bg-white
-                            dark:bg-slate-900
-                            border border-slate-200
-                            dark:border-slate-800
-                            shadow-sm
-                            hover:shadow-xl
-                            hover:-translate-y-1
-                            transition-all duration-300">
-
-                <!-- Number -->
-                <div class="absolute top-6 right-7
-                            text-5xl font-black
-                            text-slate-100
-                            dark:text-slate-800
-                            select-none">
+            <!-- Pillar 2: Community -->
+            <article class="group relative p-7 sm:p-8 rounded-[1.75rem] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <span class="absolute top-6 right-7 text-5xl font-black text-slate-100 dark:text-slate-800 select-none" aria-hidden="true">
                     02
+                </span>
+
+                <div class="relative w-14 h-14 rounded-2xl bg-brand-magenta/10 dark:bg-brand-magenta/20 text-brand-magenta flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                    <i data-lucide="messages-square" class="w-7 h-7"></i>
                 </div>
 
-
-                <!-- Icon -->
-                <div class="relative
-                            w-14 h-14
-                            rounded-2xl
-                            bg-fuchsia-100
-                            dark:bg-fuchsia-900/30
-                            text-fuchsia-700
-                            dark:text-fuchsia-300
-                            flex items-center justify-center
-                            group-hover:scale-105
-                            transition-transform duration-300">
-
-                    <i data-lucide="messages-square"
-                       class="w-7 h-7">
-                    </i>
-
-                </div>
-
-
-                <h3 class="mt-6
-                           text-xl
-                           font-bold
-                           text-slate-900
-                           dark:text-white">
-
-                    {% translate "Écouter & Rassembler" %}
-
+                <h3 class="mt-6 text-xl font-bold text-slate-900 dark:text-white">
+                    {% translate "Listen & Unite" %}
                 </h3>
 
-
-                <p class="mt-3
-                          text-sm
-                          leading-relaxed
-                          text-slate-600
-                          dark:text-slate-400">
-
-                    {% translate "Créer des espaces d’échange, de rencontre et de partage afin de favoriser l’entraide entre patients, familles et proches." %}
-
+                <p class="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                    {% translate "Build spaces for exchange, connection, and experience sharing to foster mutual support among patients, families, and loved ones." %}
                 </p>
 
-
-                <div class="mt-6
-                            flex items-center gap-2
-                            text-xs font-semibold
-                            text-fuchsia-700
-                            dark:text-fuchsia-300">
-
-                    <i data-lucide="arrow-right"
-                       class="w-4 h-4 rtl:rotate-180">
-                    </i>
-
-                    {% translate "Une communauté qui se soutient" %}
-
+                <div class="mt-6 flex items-center gap-2 text-xs font-semibold text-brand-magenta">
+                    <i data-lucide="arrow-right" class="w-4 h-4 rtl:rotate-180" aria-hidden="true"></i>
+                    <span>{% translate "A supportive community" %}</span>
                 </div>
-
             </article>
 
-
-            <!-- ================================================= -->
-            <!-- PILLAR 3 — AWARENESS -->
-            <!-- ================================================= -->
-
-            <article class="group relative
-                            p-7 sm:p-8
-                            rounded-[1.75rem]
-                            bg-white
-                            dark:bg-slate-900
-                            border border-slate-200
-                            dark:border-slate-800
-                            shadow-sm
-                            hover:shadow-xl
-                            hover:-translate-y-1
-                            transition-all duration-300">
-
-                <!-- Number -->
-                <div class="absolute top-6 right-7
-                            text-5xl font-black
-                            text-slate-100
-                            dark:text-slate-800
-                            select-none">
+            <!-- Pillar 3: Advocacy -->
+            <article class="group relative p-7 sm:p-8 rounded-[1.75rem] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <span class="absolute top-6 right-7 text-5xl font-black text-slate-100 dark:text-slate-800 select-none" aria-hidden="true">
                     03
+                </span>
+
+                <div class="relative w-14 h-14 rounded-2xl bg-brand-rose/15 dark:bg-brand-rose/20 text-brand-rose flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                    <i data-lucide="megaphone" class="w-7 h-7"></i>
                 </div>
 
-
-                <!-- Icon -->
-                <div class="relative
-                            w-14 h-14
-                            rounded-2xl
-                            bg-pink-100
-                            dark:bg-pink-900/30
-                            text-pink-700
-                            dark:text-pink-300
-                            flex items-center justify-center
-                            group-hover:scale-105
-                            transition-transform duration-300">
-
-                    <i data-lucide="megaphone"
-                       class="w-7 h-7">
-                    </i>
-
-                </div>
-
-
-                <h3 class="mt-6
-                           text-xl
-                           font-bold
-                           text-slate-900
-                           dark:text-white">
-
-                    {% translate "Sensibiliser & Agir" %}
-
+                <h3 class="mt-6 text-xl font-bold text-slate-900 dark:text-white">
+                    {% translate "Advocate & Act" %}
                 </h3>
 
-
-                <p class="mt-3
-                          text-sm
-                          leading-relaxed
-                          text-slate-600
-                          dark:text-slate-400">
-
-                    {% translate "Faire connaître la réalité vécue par les patients, sensibiliser le public et porter leur voix auprès des acteurs concernés." %}
-
+                <p class="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                    {% translate "Raise awareness about the reality of living with the condition, inform the public, and advocate for patient needs with key stakeholders." %}
                 </p>
 
-
-                <div class="mt-6
-                            flex items-center gap-2
-                            text-xs font-semibold
-                            text-pink-700
-                            dark:text-pink-300">
-
-                    <i data-lucide="arrow-right"
-                       class="w-4 h-4 rtl:rotate-180">
-                    </i>
-
-                    {% translate "Faire entendre la voix des patients" %}
-
+                <div class="mt-6 flex items-center gap-2 text-xs font-semibold text-brand-rose">
+                    <i data-lucide="arrow-right" class="w-4 h-4 rtl:rotate-180" aria-hidden="true"></i>
+                    <span>{% translate "Giving patients a voice" %}</span>
                 </div>
-
             </article>
 
         </div>
 
-
-        <!-- ===================================================== -->
-        <!-- BOTTOM MESSAGE -->
-        <!-- ===================================================== -->
-
-        <div class="mt-10
-                    rounded-2xl
-                    bg-gradient-to-r
-                    from-violet-50
-                    via-fuchsia-50
-                    to-pink-50
-                    dark:from-violet-950/30
-                    dark:via-fuchsia-950/20
-                    dark:to-pink-950/20
-                    border border-violet-100
-                    dark:border-violet-900/30
-                    px-6 py-5
-                    text-center">
-
-            <div class="flex flex-col sm:flex-row
-                        items-center justify-center
-                        gap-3 text-sm">
-
-                <i data-lucide="heart-handshake"
-                   class="w-5 h-5
-                          text-violet-600
-                          dark:text-violet-300">
-                </i>
-
-                <p class="font-medium
-                          text-slate-700
-                          dark:text-slate-300">
-
-                    {% translate "Une même volonté : créer du lien et ne laisser personne avancer seul." %}
-
+        <!-- Callout Banner -->
+        <aside class="mt-10 rounded-2xl bg-gradient-to-r from-violet-50 via-fuchsia-50 to-pink-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-900 border border-violet-100 dark:border-slate-800 px-6 py-5 text-center">
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-3 text-sm">
+                <i data-lucide="heart-handshake" class="w-5 h-5 text-brand-purple dark:text-brand-rose" aria-hidden="true"></i>
+                <p class="font-medium text-slate-700 dark:text-slate-300">
+                    {% translate "A shared vision: building connections so no one has to walk this path alone." %}
                 </p>
-
             </div>
-
-        </div>
+        </aside>
 
     </div>
 </section>
 
-<!-- 3. Comprendre l'HTAP -->
-<!-- <section class="py-16 bg-slate-50 dark:bg-slate-950 transition-colors">
-<section id="missions"
-         class="relative overflow-hidden
-                py-16 md:py-24
-                bg-gradient-to-br
-                from-violet-50
-                via-white
-                to-fuchsia-50
-                dark:from-slate-950
-                dark:via-violet-950/20
-                dark:to-fuchsia-950/20
-                border-b border-slate-200
-                dark:border-slate-800
-                transition-colors"> -->
+<!-- 3. Understanding PAH -->
 <section class="relative overflow-hidden py-12 bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 transition-colors">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            
             <!-- Content -->
             <div class="space-y-6">
                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-brand-purple/10 text-brand-purple dark:text-brand-rose text-xs font-bold uppercase tracking-wider">
-                    {% translate "Comprendre la maladie" %}
+                    {% translate "Understanding the Disease" %}
                 </div>
 
                 <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">
-                    {% translate "Qu'est-ce que l'Hypertension Artérielle Pulmonaire ?" %}
+                    {% translate "What is Pulmonary Arterial Hypertension?" %}
                 </h2>
 
                 <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
-                    {% translate "L’Hypertension Artérielle Pulmonaire (HTAP) est une maladie rare qui se caractérise par une augmentation anormale de la pression dans les artères pulmonaires. Cette augmentation de pression peut entraîner une surcharge de travail pour le cœur, en particulier pour le ventricule droit." %}
+                    {% translate "Pulmonary Arterial Hypertension (PAH) is a rare condition characterized by an abnormal increase in blood pressure within the pulmonary arteries. This elevated pressure places an increased workload on the heart, particularly affecting the right ventricle." %}
                 </p>
 
                 <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
-                    {% translate "L’HTAP nécessite une évaluation médicale spécialisée afin d’en confirmer le diagnostic, d’en rechercher la cause et de déterminer une prise en charge adaptée à chaque personne." %}
+                    {% translate "PAH requires a specialized medical evaluation to confirm the diagnosis, identify underlying causes, and establish a personalized treatment plan." %}
                 </p>
 
-
-                <!-- Key information -->
+                <!-- Key Information -->
                 <div class="space-y-3 pt-2">
-
                     <div class="flex items-start gap-3">
                         <div class="p-1.5 rounded-lg bg-violet-100 dark:bg-violet-900/40 text-brand-purple dark:text-brand-rose shrink-0 mt-0.5">
                             <i data-lucide="wind" class="w-4 h-4"></i>
                         </div>
-
                         <div>
                             <span class="text-sm font-semibold text-slate-800 dark:text-slate-200">
-                                {% translate "Essoufflement" %}
+                                {% translate "Shortness of Breath" %}
                             </span>
                             <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                                {% translate "Un essoufflement, notamment lors des efforts, peut faire partie des signes de la maladie." %}
+                                {% translate "Breathlessness, particularly during physical exertion, can be a key indicator of the condition." %}
                             </p>
                         </div>
                     </div>
 
-
                     <div class="flex items-start gap-3">
-                        <div class="p-1.5 rounded-lg bg-violet-100 dark:bg-violet-900/40
-                                    text-brand-purple dark:text-brand-rose shrink-0 mt-0.5">
+                        <div class="p-1.5 rounded-lg bg-violet-100 dark:bg-violet-900/40 text-brand-purple dark:text-brand-rose shrink-0 mt-0.5">
                             <i data-lucide="battery-low" class="w-4 h-4"></i>
                         </div>
-
                         <div>
                             <span class="text-sm font-semibold text-slate-800 dark:text-slate-200">
-                                {% translate "Fatigue persistante" %}
+                                {% translate "Persistent Fatigue" %}
                             </span>
                             <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                                {% translate "Une fatigue inhabituelle peut également être observée." %}
+                                {% translate "Unusual and persistent tiredness may also be experienced." %}
                             </p>
                         </div>
                     </div>
-
 
                     <div class="flex items-start gap-3">
-                        <div class="p-1.5 rounded-lg bg-violet-100 dark:bg-violet-900/40
-                                    text-brand-purple dark:text-brand-rose shrink-0 mt-0.5">
+                        <div class="p-1.5 rounded-lg bg-violet-100 dark:bg-violet-900/40 text-brand-purple dark:text-brand-rose shrink-0 mt-0.5">
                             <i data-lucide="stethoscope" class="w-4 h-4"></i>
                         </div>
-
                         <div>
                             <span class="text-sm font-semibold text-slate-800 dark:text-slate-200">
-                                {% translate "Diagnostic spécialisé" %}
+                                {% translate "Specialized Diagnosis" %}
                             </span>
                             <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                                {% translate "Le diagnostic repose sur plusieurs examens médicaux et peut nécessiter l'avis d'un centre spécialisé." %}
+                                {% translate "Diagnosis relies on targeted medical tests and often requires evaluation at a specialized center." %}
                             </p>
                         </div>
                     </div>
-
                 </div>
 
-
-                <!-- CTA -->
+                <!-- Call to Action -->
                 <div class="pt-4">
-
-                    <a href="{% url 'core:htap' %}"
-                       class="inline-flex items-center gap-2 text-sm font-bold
-                              text-brand-purple dark:text-brand-rose
-                              hover:gap-3 transition-all">
-
-                        <span>
-                            {% translate "En savoir plus sur l'HTAP" %}
-                        </span>
-
-                        <i data-lucide="arrow-right"
-                           class="w-4 h-4 rtl:rotate-180"></i>
-
+                    <a href="{% url 'core:htap' %}" class="inline-flex items-center gap-2 text-sm font-bold text-brand-purple dark:text-brand-rose hover:gap-3 transition-all">
+                        <span>{% translate "Learn more about PAH" %}</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4 rtl:rotate-180"></i>
                     </a>
-
                 </div>
-
             </div>
 
-
             <!-- Medical Information Card -->
-            <div class="relative rounded-3xl overflow-hidden
-                        border border-slate-200 dark:border-slate-800
-                        bg-white dark:bg-slate-900
-                        shadow-xl
-                        min-h-[420px]">
-
+            <div class="relative rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xl min-h-[420px]">
+                
                 <!-- Decorative background -->
-                <div class="absolute inset-0
-                            bg-gradient-to-br
-                            from-violet-50 via-white to-rose-50
-                            dark:from-slate-900
-                            dark:via-slate-900
-                            dark:to-violet-950/30">
-                </div>
-
+                <div class="absolute inset-0 bg-gradient-to-br from-violet-50 via-white to-rose-50 dark:from-slate-900 dark:via-slate-900 dark:to-violet-950/30"></div>
 
                 <!-- Decorative circles -->
-                <div class="absolute -top-20 -right-20
-                            w-56 h-56 rounded-full
-                            bg-brand-purple/10 dark:bg-brand-purple/10">
-                </div>
+                <div class="absolute -top-20 -right-20 w-56 h-56 rounded-full bg-brand-purple/10 dark:bg-brand-purple/10"></div>
+                <div class="absolute -bottom-24 -left-20 w-64 h-64 rounded-full bg-brand-rose/10"></div>
 
-                <div class="absolute -bottom-24 -left-20
-                            w-64 h-64 rounded-full
-                            bg-brand-rose/10">
-                </div>
-
-
-                <div class="relative z-10 p-8 sm:p-10 h-full
-                            flex flex-col justify-between">
-
-                    <!-- Header -->
+                <div class="relative z-10 p-8 sm:p-10 h-full flex flex-col justify-between">
+                    
+                    <!-- Card Header -->
                     <div class="space-y-5">
-
-                        <div class="w-14 h-14 rounded-2xl
-                                    bg-brand-purple/10
-                                    dark:bg-brand-purple/20
-                                    text-brand-purple
-                                    dark:text-brand-rose
-                                    flex items-center justify-center">
-
-                            <i data-lucide="heart-pulse"
-                               class="w-7 h-7">
-                            </i>
-
+                        <div class="w-14 h-14 rounded-2xl bg-brand-purple/10 dark:bg-brand-purple/20 text-brand-purple dark:text-brand-rose flex items-center justify-center">
+                            <i data-lucide="heart-pulse" class="w-7 h-7"></i>
                         </div>
 
                         <div>
-
-                            <span class="text-xs font-bold
-                                         text-brand-purple
-                                         dark:text-brand-rose
-                                         uppercase tracking-wider">
-                                {% translate "HTAP" %}
+                            <span class="text-xs font-bold text-brand-purple dark:text-brand-rose uppercase tracking-wider">
+                                {% translate "PAH" %}
                             </span>
-
-                            <h3 class="mt-2 text-2xl font-bold
-                                       text-slate-900 dark:text-white">
-                                {% translate "Une maladie qui concerne les artères pulmonaires" %}
+                            <h3 class="mt-2 text-2xl font-bold text-slate-900 dark:text-white">
+                                {% translate "A disease affecting the pulmonary arteries" %}
                             </h3>
-
                         </div>
-
                     </div>
 
-
-                    <!-- Information visual -->
+                    <!-- Information Visual -->
                     <div class="py-8">
-
                         <div class="flex items-center justify-center gap-3">
-
                             <!-- Heart -->
-                            <div class="w-16 h-16 rounded-full
-                                        bg-rose-100 dark:bg-rose-950/40
-                                        text-brand-rose
-                                        flex items-center justify-center">
-
-                                <i data-lucide="heart-pulse"
-                                   class="w-8 h-8">
-                                </i>
-
+                            <div class="w-16 h-16 rounded-full bg-rose-100 dark:bg-rose-950/40 text-brand-rose flex items-center justify-center">
+                                <i data-lucide="heart-pulse" class="w-8 h-8"></i>
                             </div>
 
                             <!-- Arrow -->
                             <div class="text-slate-300 dark:text-slate-600">
-                                <i data-lucide="arrow-right"
-                                   class="w-7 h-7 rtl:rotate-180">
-                                </i>
+                                <i data-lucide="arrow-right" class="w-7 h-7 rtl:rotate-180"></i>
                             </div>
 
                             <!-- Lungs -->
-                            <div class="w-16 h-16 rounded-full
-                                        bg-violet-100 dark:bg-violet-950/40
-                                        text-brand-purple
-                                        dark:text-brand-rose
-                                        flex items-center justify-center">
-
-                                <i data-lucide="wind"
-                                   class="w-8 h-8">
-                                </i>
-
+                            <div class="w-16 h-16 rounded-full bg-violet-100 dark:bg-violet-950/40 text-brand-purple dark:text-brand-rose flex items-center justify-center">
+                                <i data-lucide="wind" class="w-8 h-8"></i>
                             </div>
-
                         </div>
-
                     </div>
 
-
-                    <!-- Bottom information -->
-                    <div class="pt-6 border-t
-                                border-slate-200
-                                dark:border-slate-800">
-
+                    <!-- Card Bottom Information -->
+                    <div class="pt-6 border-t border-slate-200 dark:border-slate-800">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-
+                            
                             <div class="flex items-start gap-3">
-
-                                <div class="w-8 h-8 rounded-lg
-                                            bg-violet-100
-                                            dark:bg-violet-900/40
-                                            text-brand-purple
-                                            dark:text-brand-rose
-                                            flex items-center justify-center
-                                            shrink-0">
-
-                                    <i data-lucide="activity"
-                                       class="w-4 h-4">
-                                    </i>
-
+                                <div class="w-8 h-8 rounded-lg bg-violet-100 dark:bg-violet-900/40 text-brand-purple dark:text-brand-rose flex items-center justify-center shrink-0">
+                                    <i data-lucide="activity" class="w-4 h-4"></i>
                                 </div>
-
                                 <div>
-                                    <p class="text-sm font-semibold
-                                              text-slate-900
-                                              dark:text-white">
-                                        {% translate "Pression pulmonaire" %}
+                                    <p class="text-sm font-semibold text-slate-900 dark:text-white">
+                                        {% translate "Pulmonary Pressure" %}
                                     </p>
-
-                                    <p class="text-xs text-slate-500
-                                              dark:text-slate-400 mt-1">
-                                        {% translate "Une pression anormalement élevée dans les artères pulmonaires." %}
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                                        {% translate "Abnormally high pressure in the pulmonary arteries." %}
                                     </p>
                                 </div>
-
                             </div>
 
-
                             <div class="flex items-start gap-3">
-
-                                <div class="w-8 h-8 rounded-lg
-                                            bg-rose-100
-                                            dark:bg-rose-900/30
-                                            text-brand-rose
-                                            flex items-center justify-center
-                                            shrink-0">
-
-                                    <i data-lucide="heart"
-                                       class="w-4 h-4">
-                                    </i>
-
+                                <div class="w-8 h-8 rounded-lg bg-rose-100 dark:bg-rose-900/30 text-brand-rose flex items-center justify-center shrink-0">
+                                    <i data-lucide="heart" class="w-4 h-4"></i>
                                 </div>
-
                                 <div>
-                                    <p class="text-sm font-semibold
-                                              text-slate-900
-                                              dark:text-white">
-                                        {% translate "Cœur droit" %}
+                                    <p class="text-sm font-semibold text-slate-900 dark:text-white">
+                                        {% translate "Right Ventricle" %}
                                     </p>
-
-                                    <p class="text-xs text-slate-500
-                                              dark:text-slate-400 mt-1">
-                                        {% translate "Le cœur droit peut être soumis à une charge de travail accrue." %}
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                                        {% translate "The right side of the heart experiences an increased strain." %}
                                     </p>
                                 </div>
-
                             </div>
 
                         </div>
-
                     </div>
 
                 </div>
-
             </div>
 
         </div>
     </div>
 </section>
 
-
-<!-- 4. L'HTAP en Algérie : quelques chiffres -->
+<!-- 4. Key Statistics L'HTAP en Algérie -->
 <section class="relative overflow-hidden py-12 bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 transition-colors">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
         <div class="text-center max-w-2xl mx-auto mb-8">
-            <span class="text-xs font-bold uppercase tracking-wider
-                         text-brand-purple dark:text-brand-rose">
-                {% translate "L'HTAP en Algérie" %}
+            <span class="text-xs font-bold uppercase tracking-wider text-brand-purple dark:text-brand-rose">
+                {% translate "PAH in Algeria" %}
             </span>
-
-            <!-- <h2 class="mt-2 text-2xl sm:text-3xl font-bold
-                       text-slate-900 dark:text-white">
-                {% translate "Mieux connaître la réalité de l'HTAP en Algérie" %}
-            </h2> -->
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            
             <!-- Stat 1 -->
-            <div class="relative p-6 rounded-2xl
-                        bg-slate-50 dark:bg-slate-800/60
-                        border border-slate-200 dark:border-slate-700
-                        text-center">
-
-                <div class="w-12 h-12 mx-auto mb-4 rounded-xl
-                            bg-brand-purple/10 dark:bg-brand-purple/20
-                            text-brand-purple dark:text-brand-rose
-                            flex items-center justify-center">
+            <div class="relative p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-center">
+                <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-brand-purple/10 dark:bg-brand-purple/20 text-brand-purple dark:text-brand-rose flex items-center justify-center">
                     <i data-lucide="users" class="w-6 h-6"></i>
                 </div>
-
-                <div class="text-3xl font-extrabold
-                            text-brand-purple dark:text-brand-rose">
+                <div class="text-3xl font-extrabold text-brand-purple dark:text-brand-rose">
                     ≈ 700
                 </div>
-
                 <p class="mt-2 text-sm font-medium text-slate-700 dark:text-slate-300">
-                    {% translate "patients atteints d'HTAP pris en charge depuis 2007" %}
+                    {% translate "PAH patients treated since 2007" %}
                 </p>
-
                 <p class="mt-2 text-[11px] text-slate-400">
-                    {% translate "Estimation issue de données algériennes disponibles" %}
+                    {% translate "Estimate based on available Algerian data" %}
                 </p>
             </div>
-
 
             <!-- Stat 2 -->
-            <div class="relative p-6 rounded-2xl
-                        bg-slate-50 dark:bg-slate-800/60
-                        border border-slate-200 dark:border-slate-700
-                        text-center">
-
-                <div class="w-12 h-12 mx-auto mb-4 rounded-xl
-                            bg-brand-magenta/10
-                            text-brand-magenta
-                            flex items-center justify-center">
+            <div class="relative p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-center">
+                <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-brand-magenta/10 text-brand-magenta flex items-center justify-center">
                     <i data-lucide="database" class="w-6 h-6"></i>
                 </div>
-
-                <div class="text-3xl font-extrabold
-                            text-brand-purple dark:text-brand-rose">
+                <div class="text-3xl font-extrabold text-brand-purple dark:text-brand-rose">
                     70
                 </div>
-
                 <p class="mt-2 text-sm font-medium text-slate-700 dark:text-slate-300">
-                    {% translate "patients inclus dans une étude algérienne prospective" %}
+                    {% translate "patients enrolled in a prospective Algerian study" %}
                 </p>
-
                 <p class="mt-2 text-[11px] text-slate-400">
-                    {% translate "HTAP et hypertension pulmonaire thromboembolique chronique" %}
+                    {% translate "PAH and chronic thromboembolic pulmonary hypertension" %}
                 </p>
             </div>
-
 
             <!-- Stat 3 -->
-            <div class="relative p-6 rounded-2xl
-                        bg-slate-50 dark:bg-slate-800/60
-                        border border-slate-200 dark:border-slate-700
-                        text-center">
-
-                <div class="w-12 h-12 mx-auto mb-4 rounded-xl
-                            bg-violet-100 dark:bg-violet-900/30
-                            text-brand-purple dark:text-brand-rose
-                            flex items-center justify-center">
+            <div class="relative p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-center">
+                <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-violet-100 dark:bg-violet-900/30 text-brand-purple dark:text-brand-rose flex items-center justify-center">
                     <i data-lucide="activity" class="w-6 h-6"></i>
                 </div>
-
-                <div class="text-3xl font-extrabold
-                            text-brand-purple dark:text-brand-rose">
+                <div class="text-3xl font-extrabold text-brand-purple dark:text-brand-rose">
                     60 %
                 </div>
-
                 <p class="mt-2 text-sm font-medium text-slate-700 dark:text-slate-300">
-                    {% translate "des patients de cette étude avaient une HTAP du groupe 1" %}
+                    {% translate "of patients in this study presented Group 1 PAH" %}
                 </p>
-
                 <p class="mt-2 text-[11px] text-slate-400">
-                    {% translate "Étude algérienne de 70 patients" %}
+                    {% translate "Algerian study of 70 patients" %}
                 </p>
             </div>
 
-
             <!-- Stat 4 -->
-            <div class="relative p-6 rounded-2xl
-                        bg-slate-50 dark:bg-slate-800/60
-                        border border-slate-200 dark:border-slate-700
-                        text-center">
-
-                <div class="w-12 h-12 mx-auto mb-4 rounded-xl
-                            bg-brand-rose/15
-                            text-brand-rose
-                            flex items-center justify-center">
+            <div class="relative p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-center">
+                <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-brand-rose/15 text-brand-rose flex items-center justify-center">
                     <i data-lucide="user-round" class="w-6 h-6"></i>
                 </div>
-
-                <div class="text-3xl font-extrabold
-                            text-brand-purple dark:text-brand-rose">
-                    73,8 %
+                <div class="text-3xl font-extrabold text-brand-purple dark:text-brand-rose">
+                    73.8 %
                 </div>
-
                 <p class="mt-2 text-sm font-medium text-slate-700 dark:text-slate-300">
-                    {% translate "des patients du groupe HTAP étaient des femmes" %}
+                    {% translate "of patients in the PAH group were female" %}
                 </p>
-
                 <p class="mt-2 text-[11px] text-slate-400">
-                    {% translate "Données d'une étude prospective menée en Algérie" %}
+                    {% translate "Data from a prospective study conducted in Algeria" %}
                 </p>
             </div>
 
         </div>
 
-        <!-- Important note -->
-        <div class="mt-7 flex items-start gap-3 max-w-4xl mx-auto
-                    p-4 rounded-xl
-                    bg-violet-50 dark:bg-slate-800
-                    border border-violet-100 dark:border-slate-700">
-
-            <i data-lucide="info"
-               class="w-5 h-5 shrink-0 mt-0.5
-                      text-brand-purple dark:text-brand-rose"></i>
-
+        <!-- Important Note Callout -->
+        <div class="mt-7 flex items-start gap-3 max-w-4xl mx-auto p-4 rounded-xl bg-violet-50 dark:bg-slate-800 border border-violet-100 dark:border-slate-700">
+            <i data-lucide="info" class="w-5 h-5 shrink-0 mt-0.5 text-brand-purple dark:text-brand-rose"></i>
             <p class="text-xs leading-relaxed text-slate-600 dark:text-slate-400">
-                {% translate "Les données épidémiologiques nationales de l'HTAP restent parcellaires et dispersées. Ces chiffres ne constituent donc pas une estimation de la prévalence actuelle de l'HTAP dans toute la population algérienne." %}
+                {% translate "National epidemiological data on PAH remains fragmented and dispersed. Consequently, these figures do not constitute a definitive estimate of the current prevalence across the entire Algerian population." %}
             </p>
         </div>
 
     </div>
 </section>
 
+<!-- 5. Association & Patients Video -->
+<section class="relative overflow-hidden bg-white py-20 dark:bg-slate-950">
+    <div class="pointer-events-none absolute -right-32 top-20 h-72 w-72 rounded-full bg-brand-purple/10 blur-3xl"></div>
+    <div class="pointer-events-none absolute -left-32 bottom-0 h-72 w-72 rounded-full bg-brand-rose/10 blur-3xl"></div>
 
-<!-- 5. Actualités & Publications -->
-<section class="relative overflow-hidden
-                py-16 md:py-24
-                bg-white
-                dark:bg-slate-950
-                border-b border-slate-200
-                dark:border-slate-800
-                transition-colors">
+    <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
-    <!-- Background decoration -->
-    <div class="absolute inset-0 pointer-events-none overflow-hidden">
+        <!-- Section Header -->
+        <div class="mx-auto max-w-3xl text-center">
+            <span class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-brand-purple dark:text-brand-rose">
+                <span class="h-px w-8 bg-brand-purple dark:bg-brand-rose"></span>
+                {% translate "Our fight, our commitment" %}
+                <span class="h-px w-8 bg-brand-purple dark:bg-brand-rose"></span>
+            </span>
 
-        <div class="absolute -top-32 -right-32
-                    w-80 h-80
-                    rounded-full
-                    bg-violet-200/25
-                    dark:bg-violet-900/10
-                    blur-3xl">
+            <h2 class="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+                {% translate "Listening to patients, Acting together" %}
+            </h2>
+
+            <p class="mt-4 text-base leading-7 text-slate-600 dark:text-slate-300">
+                {% blocktranslate %}
+                Behind every diagnosis, there is a person, a family, and a daily life to rebuild. HTAP Algérie works to ensure that patients do not face the disease alone.
+                {% endblocktranslate %}
+            </p>
         </div>
 
-        <div class="absolute -bottom-40 -left-32
-                    w-96 h-96
-                    rounded-full
-                    bg-fuchsia-200/20
-                    dark:bg-fuchsia-900/10
-                    blur-3xl">
-        </div>
+        <!-- Video + Content -->
+        <div class="mt-12 grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-14">
 
+            <!-- Video -->
+            <div class="lg:col-span-7">
+                <div class="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-900 shadow-2xl dark:border-slate-800">
+
+                    <!-- Replace with your actual video -->
+                    <video class="aspect-video w-full object-cover" controls preload="metadata" poster="{% static 'img/video-cover.jpg' %}" aria-label="{% translate 'Presentation of HTAP Algérie and testimonials about Pulmonary Arterial Hypertension' %}">
+                        <source src="{% static 'videos/htap-algerie.mp4' %}" type="video/mp4">
+                        {% translate "Your browser does not support video playback." %}
+                    </video>
+
+                    <!-- Video Caption -->
+                    <div class="border-t border-white/10 bg-slate-950/95 px-5 py-4 sm:px-6">
+                        <div class="flex items-start gap-3 rtl:flex-row-reverse">
+                            <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-purple/20 text-brand-rose">
+                                <i data-lucide="play-circle" class="h-5 w-5" aria-hidden="true"></i>
+                            </div>
+
+                            <div>
+                                <h3 class="text-sm font-bold text-white">
+                                    {% translate "HTAP Algérie — A voice for patients" %}
+                                </h3>
+
+                                <p class="mt-1 text-xs leading-5 text-slate-400">
+                                    {% translate "Discover our association, our mission, and the lived reality of people affected by PAH." %}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text Content -->
+            <div class="lg:col-span-5 rounded-2xl border border-slate-200 bg-white p-5 dark:border-slate-700 dark:bg-slate-800/70">
+                <div class="mb-5 flex items-center gap-3 rtl:flex-row-reverse">
+                    <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-purple/10 text-brand-purple dark:bg-brand-purple/20 dark:text-brand-rose">
+                        <i data-lucide="contact" class="h-5 w-5" aria-hidden="true"></i>
+                    </div>
+
+                    <div>
+                        <h3 class="text-sm font-bold text-slate-900 dark:text-white">
+                            {% translate "Contact us" %}
+                        </h3>
+
+                        <p class="text-xs text-slate-500 dark:text-slate-400">
+                            {% translate "KHADIDJA National Association for Pulmonary Arterial Hypertension" %}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+
+                    <!-- Address -->
+                    <div class="col-span-2 flex items-start gap-3 rounded-xl bg-slate-50 p-4 dark:bg-slate-900/60 rtl:flex-row-reverse">
+                        <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white text-brand-purple shadow-sm dark:bg-slate-800 dark:text-brand-rose">
+                            <i data-lucide="map-pin" class="h-4 w-4" aria-hidden="true"></i>
+                        </div>
+
+                        <div>
+                            <span class="block text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+                                {% translate "Address" %}
+                            </span>
+
+                            <p class="mt-1 text-sm font-medium leading-6 text-slate-700 dark:text-slate-200">
+                                50 / 60 Cooperative El Bina
+                                Birkhadem, Algiers, Algeria 16330
+                            </p>
+
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <a href="mailto:htap.algerie@gmail.com" class="col-span-2 group flex items-start gap-3 rounded-xl bg-slate-50 p-4 transition-colors hover:bg-brand-purple/5 dark:bg-slate-900/60 dark:hover:bg-brand-purple/10 rtl:flex-row-reverse">
+                        <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white text-brand-purple shadow-sm dark:bg-slate-800 dark:text-brand-rose">
+                            <i data-lucide="mail" class="h-4 w-4" aria-hidden="true"></i>
+                        </div>
+
+                        <div class="min-w-0">
+                            <span class="block text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+                                {% translate "Email" %}
+                            </span>
+
+                            <span class="mt-1 block break-all text-sm font-medium text-slate-700 transition-colors group-hover:text-brand-purple dark:text-slate-200 dark:group-hover:text-brand-rose">
+                                htap.algerie@gmail.com
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- Mobile Phone -->
+                    <a href="tel:+213550054444" class="group flex items-start gap-3 rounded-xl bg-slate-50 p-4 transition-colors hover:bg-brand-purple/5 dark:bg-slate-900/60 dark:hover:bg-brand-purple/10 rtl:flex-row-reverse">
+                        <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white text-brand-purple shadow-sm dark:bg-slate-800 dark:text-brand-rose">
+                            <i data-lucide="smartphone" class="h-4 w-4" aria-hidden="true"></i>
+                        </div>
+
+                        <div>
+                            <span class="block text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+                                {% translate "Phone" %}
+                            </span>
+
+                            <span class="mt-1 block text-sm font-medium text-slate-700 transition-colors group-hover:text-brand-purple dark:text-slate-200 dark:group-hover:text-brand-rose">
+                                +213 550 05 44 44
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- Fixed / Fax -->
+                    <a href="tel:+21328537357" class="group flex items-start gap-3 rounded-xl bg-slate-50 p-4 transition-colors hover:bg-brand-purple/5 dark:bg-slate-900/60 dark:hover:bg-brand-purple/10 rtl:flex-row-reverse">
+                        <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white text-brand-purple shadow-sm dark:bg-slate-800 dark:text-brand-rose">
+                            <i data-lucide="phone" class="h-4 w-4" aria-hidden="true"></i>
+                        </div>
+
+                        <div>
+                            <span class="block text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+                                {% translate "Landline / Fax" %}
+                            </span>
+
+                            <span class="mt-1 block text-sm font-medium text-slate-700 transition-colors group-hover:text-brand-purple dark:text-slate-200 dark:group-hover:text-brand-rose">
+                                +213 285 373 57
+                            </span>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </div>
     </div>
+</section>
 
+<!-- 6. Founder Tribute -->
+<section class="relative overflow-hidden border-y border-slate-200 bg-slate-50 py-16 dark:border-slate-800 dark:bg-slate-900/50">
+    <div class="absolute -left-20 top-0 h-56 w-56 rounded-full bg-brand-purple/10 blur-3xl pointer-events-none"></div>
+    <div class="absolute -right-20 bottom-0 h-56 w-56 rounded-full bg-brand-rose/10 blur-3xl pointer-events-none"></div>
 
-    <div class="relative z-10
-                max-w-7xl mx-auto
-                px-4 sm:px-6 lg:px-8">
+    <div class="relative z-10 mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col items-center gap-8 text-center sm:flex-row sm:text-left rtl:sm:flex-row-reverse rtl:sm:text-right">
 
+            <!-- Founder Image -->
+            <div class="shrink-0">
+                <div class="relative">
+                    <div class="pointer-events-none absolute -inset-3 rounded-[1.5rem] bg-gradient-to-br from-brand-purple/20 to-brand-rose/20 blur-lg"></div>
 
-        <!-- ================================================= -->
-        <!-- HEADER -->
-        <!-- ================================================= -->
+                    <div class="relative h-full w-full max-w-[250px] overflow-hidden rounded-[1.5rem] border-4 border-white bg-slate-200 shadow-xl dark:border-slate-800 dark:bg-slate-700">
+                        <img src="{% static 'img/mme-khadidja-ali-kacem-1.jpg' %}" alt="{% translate 'Mrs. Khadidja Ali Kacem, founder and first president of HTAP Algérie' %}" class="h-full w-full object-cover" width="192" height="288" loading="lazy">
+                    </div>
 
-        <div class="flex flex-col
-                    md:flex-row
-                    md:items-end
-                    md:justify-between
-                    gap-6">
+                    <div class="absolute -bottom-4 -right-4 rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-lg dark:border-slate-700 dark:bg-slate-800">
+                        <p class="text-xs font-bold uppercase tracking-wider text-brand-purple dark:text-brand-rose">
+                            {% translate "Founded in" %}
+                        </p>
+                        <p class="mt-0.5 text-xl font-extrabold text-slate-900 dark:text-white">
+                            2018
+                        </p>
+                    </div>
+                </div>
+            </div>
 
-            <div class="max-w-2xl">
-
-                <span class="inline-flex items-center gap-2
-                             px-3.5 py-1.5
-                             rounded-full
-                             bg-violet-100
-                             dark:bg-violet-900/20
-                             border border-violet-200
-                             dark:border-violet-800/30
-                             text-violet-700
-                             dark:text-violet-300
-                             text-xs font-bold
-                             uppercase tracking-wider">
-
-                    <span class="w-1.5 h-1.5 rounded-full
-                                 bg-gradient-to-r
-                                 from-violet-600 to-fuchsia-500">
-                    </span>
-
-                    {% translate "Actualités & Publications" %}
-
+            <!-- Content -->
+            <div class="flex-1">
+                <span class="text-xs font-bold uppercase tracking-[0.18em] text-brand-purple dark:text-brand-rose">
+                    {% translate "Our Story" %}
                 </span>
 
-
-                <h2 class="mt-5
-                           text-3xl sm:text-4xl
-                           font-extrabold
-                           tracking-tight
-                           text-slate-900
-                           dark:text-white">
-
-                    {% translate "Derniers articles publiés" %}
-
+                <h2 class="mt-2 text-2xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-3xl">
+                    {% translate "In memory of our founder" %}
                 </h2>
 
-
-                <p class="mt-4
-                          text-base
-                          leading-relaxed
-                          text-slate-600
-                          dark:text-slate-400">
-
-                    {% translate "Retrouvez nos dernières actualités, informations et publications pour mieux comprendre l’HTAP et suivre les actions de l’association." %}
-
+                <p class="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-300 sm:text-base">
+                    {% blocktranslate %}
+                    Founded in 2018 by Mrs. Khadidja Ali Kacem, the association's first president, HTAP Algérie continues today the commitment she initiated in service of people affected by Pulmonary Arterial Hypertension.
+                    {% endblocktranslate %}
                 </p>
 
-            </div>
+                <!-- Tribute -->
+                <div class="rounded-2xl border border-brand-purple/15 bg-white/80 p-5 mt-5 dark:border-brand-purple/20 dark:bg-slate-800/60">
+                    <div class="flex gap-3 rtl:flex-row-reverse">
+                        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-purple/10 text-brand-purple dark:bg-brand-purple/20 dark:text-brand-rose">
+                            <i data-lucide="heart" class="h-4 w-4" aria-hidden="true"></i>
+                        </div>
 
+                        <div>
+                            <h3 class="text-sm font-bold text-slate-900 dark:text-white">
+                                {% translate "In tribute to our founder" %}
+                            </h3>
 
-            <!-- All articles -->
-            <div class="shrink-0">
+                            <p class="mt-1.5 text-sm italic leading-6 text-slate-500 dark:text-slate-400">
+                                {% blocktranslate %}
+                                May God have mercy on her soul and grant her Paradise. Her name, commitment, and work remain at the heart of our association's history.
+                                {% endblocktranslate %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
 
-                <a href="{% url 'articles:list' %}"
-                   class="group inline-flex items-center gap-2
-                          text-sm font-bold
-                          text-violet-700
-                          dark:text-violet-300
-                          hover:text-fuchsia-600
-                          dark:hover:text-fuchsia-300
-                          transition-colors">
-
-                    {% translate "Voir tous les articles" %}
-
-                    <i data-lucide="arrow-right"
-                       class="w-4 h-4
-                              rtl:rotate-180
-                              group-hover:translate-x-1
-                              transition-transform">
-                    </i>
-
-                </a>
-
+                <div class="mt-5">
+                    <a href="{% url 'core:about' %}" class="group inline-flex items-center gap-2 text-sm font-semibold text-brand-purple transition-colors hover:text-brand-violet dark:text-brand-rose dark:hover:text-brand-magenta">
+                        {% translate "Discover our story" %}
+                        <i data-lucide="arrow-right" class="h-4 w-4 transition-transform group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" aria-hidden="true"></i>
+                    </a>
+                </div>
             </div>
 
         </div>
+    </div>
+</section>
 
+<!-- 7. NEWS & PUBLICATIONS SECTION -->
+<section class="relative overflow-hidden py-16 md:py-24 bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 transition-colors">
 
-        <!-- ================================================= -->
-        <!-- ARTICLES -->
-        <!-- ================================================= -->
+    <!-- Background Decoration -->
+    <div class="absolute inset-0 pointer-events-none overflow-hidden">
+        <div class="absolute -top-32 -right-32 w-80 h-80 rounded-full bg-violet-200/25 dark:bg-violet-900/10 blur-3xl"></div>
+        <div class="absolute -bottom-40 -left-32 w-96 h-96 rounded-full bg-fuchsia-200/20 dark:bg-fuchsia-900/10 blur-3xl"></div>
+    </div>
 
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+            <div class="max-w-2xl">
+                <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-violet-100 dark:bg-violet-900/20 border border-violet-200 dark:border-violet-800/30 text-violet-700 dark:text-violet-300 text-xs font-bold uppercase tracking-wider">
+                    <span class="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-violet-600 to-fuchsia-500"></span>
+                    {% translate "News & Publications" %}
+                </span>
+
+                <h2 class="mt-5 text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+                    {% translate "Latest Published Articles" %}
+                </h2>
+
+                <p class="mt-4 text-base leading-relaxed text-slate-600 dark:text-slate-400">
+                    {% translate "Find our latest news, information, and publications to better understand PAH and follow the association's actions." %}
+                </p>
+            </div>
+
+            <!-- View All Link -->
+            <div class="shrink-0">
+                <a href="{% url 'articles:list' %}" class="group inline-flex items-center gap-2 text-sm font-bold text-violet-700 dark:text-violet-300 hover:text-fuchsia-600 dark:hover:text-fuchsia-300 transition-colors">
+                    {% translate "View all articles" %}
+                    <i data-lucide="arrow-right" class="w-4 h-4 rtl:rotate-180 group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Articles Grid -->
         {% if latest_articles %}
-
-            <div class="mt-12
-                        grid grid-cols-1
-                        md:grid-cols-2
-                        lg:grid-cols-3
-                        gap-6 lg:gap-8">
-
+            <div class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
                 {% for article in latest_articles %}
-
-                    <article class="group
-                                    flex flex-col
-                                    overflow-hidden
-                                    rounded-[1.75rem]
-                                    bg-slate-50
-                                    dark:bg-slate-900
-                                    border border-slate-200
-                                    dark:border-slate-800
-                                    shadow-sm
-                                    hover:shadow-xl
-                                    hover:-translate-y-1
-                                    transition-all duration-300">
-
-
-                        <!-- ============================= -->
-                        <!-- IMAGE -->
-                        <!-- ============================= -->
-
-                        <a href="{{ article.get_absolute_url }}"
-                           class="relative block
-                                  aspect-[16/10]
-                                  overflow-hidden
-                                  bg-slate-100
-                                  dark:bg-slate-800">
-
+                    <article class="group flex flex-col overflow-hidden rounded-[1.75rem] bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                        
+                        <!-- Thumbnail Image -->
+                        <a href="{{ article.get_absolute_url }}" class="relative block aspect-[16/10] overflow-hidden bg-slate-100 dark:bg-slate-800">
                             {% if article.featured_image %}
-
                                 <img src="{{ article.featured_image.url }}"
                                      alt="{{ article.translations.first.title }}"
-                                     class="w-full h-full
-                                            object-cover
-                                            transition-transform
-                                            duration-700
-                                            group-hover:scale-105">
-
+                                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                             {% else %}
-
-                                <div class="w-full h-full
-                                            flex items-center justify-center
-                                            bg-gradient-to-br
-                                            from-violet-100
-                                            via-fuchsia-50
-                                            to-pink-100
-                                            dark:from-violet-950
-                                            dark:via-slate-900
-                                            dark:to-fuchsia-950">
-
-                                    <i data-lucide="newspaper"
-                                       class="w-12 h-12
-                                              text-violet-500
-                                              dark:text-violet-300">
-                                    </i>
-
+                                <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-violet-100 via-fuchsia-50 to-pink-100 dark:from-violet-950 dark:via-slate-900 dark:to-fuchsia-950">
+                                    <i data-lucide="newspaper" class="w-12 h-12 text-violet-500 dark:text-violet-300"></i>
                                 </div>
-
                             {% endif %}
 
+                            <!-- Hover Overlay -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
-                            <!-- Image overlay -->
-
-                            <div class="absolute inset-0
-                                        bg-gradient-to-t
-                                        from-slate-950/40
-                                        via-transparent
-                                        to-transparent
-                                        opacity-0
-                                        group-hover:opacity-100
-                                        transition-opacity duration-300">
-                            </div>
-
-
-                            <!-- Category -->
-
+                            <!-- Category Badge -->
                             {% if article.category %}
-
                                 <div class="absolute top-4 left-4">
-
-                                    <span class="inline-flex
-                                                 px-3 py-1.5
-                                                 rounded-full
-                                                 bg-white/90
-                                                 dark:bg-slate-900/90
-                                                 backdrop-blur-sm
-                                                 text-xs
-                                                 font-bold
-                                                 text-violet-700
-                                                 dark:text-violet-300
-                                                 shadow-sm">
-
+                                    <span class="inline-flex px-3 py-1.5 rounded-full bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm text-xs font-bold text-violet-700 dark:text-violet-300 shadow-sm">
                                         {{ article.category.name }}
-
                                     </span>
-
                                 </div>
-
                             {% endif %}
-
                         </a>
 
-
-                        <!-- ============================= -->
-                        <!-- CONTENT -->
-                        <!-- ============================= -->
-
+                        <!-- Content Body -->
                         <div class="flex flex-col flex-1 p-6">
-
-
-                            <!-- Meta -->
-
-                            <div class="flex items-center gap-3
-                                        text-xs
-                                        text-slate-500
-                                        dark:text-slate-400">
-
+                            
+                            <!-- Metadata -->
+                            <div class="flex items-center gap-3 text-xs text-slate-500 dark:text-slate-400">
                                 {% if article.published_at %}
-
                                     <span class="inline-flex items-center gap-1.5">
-
-                                        <i data-lucide="calendar"
-                                           class="w-3.5 h-3.5">
-                                        </i>
-
+                                        <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
                                         {{ article.published_at|date:"d/m/Y" }}
-
                                     </span>
-
                                 {% endif %}
-
 
                                 {% if article.author %}
-
-                                    <span class="w-1 h-1
-                                                 rounded-full
-                                                 bg-slate-300
-                                                 dark:bg-slate-600">
-                                    </span>
-
-                                    <span>
-                                        {{ article.author }}
-                                    </span>
-
+                                    <span class="w-1 h-1 rounded-full bg-slate-300 dark:bg-slate-600"></span>
+                                    <span>{{ article.author }}</span>
                                 {% endif %}
-
                             </div>
 
-
                             <!-- Title -->
-
-                            <h3 class="mt-4
-                                       text-xl
-                                       font-bold
-                                       leading-snug
-                                       text-slate-900
-                                       dark:text-white">
-
-                                <a href="{{ article.get_absolute_url }}"
-                                   class="hover:text-violet-700
-                                          dark:hover:text-violet-300
-                                          transition-colors">
-
+                            <h3 class="mt-4 text-xl font-bold leading-snug text-slate-900 dark:text-white">
+                                <a href="{{ article.get_absolute_url }}" class="hover:text-violet-700 dark:hover:text-violet-300 transition-colors">
                                     {{ article.translations.first.title }}
-
                                 </a>
-
                             </h3>
 
-
                             <!-- Excerpt -->
-
                             {% with translation=article.translations.first %}
-
                                 {% if translation.excerpt %}
-
-                                    <p class="mt-3
-                                              text-sm
-                                              leading-relaxed
-                                              text-slate-600
-                                              dark:text-slate-400
-                                              line-clamp-3">
-
+                                    <p class="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-400 line-clamp-3">
                                         {{ translation.excerpt }}
-
                                     </p>
-
                                 {% endif %}
-
                             {% endwith %}
 
-
-                            <!-- Read more -->
-
+                            <!-- Action -->
                             <div class="mt-auto pt-6">
-
-                                <a href="{{ article.get_absolute_url }}"
-                                   class="group/link
-                                          inline-flex items-center gap-2
-                                          text-sm font-bold
-                                          text-violet-700
-                                          dark:text-violet-300">
-
-                                    {% translate "Lire l'article" %}
-
-                                    <i data-lucide="arrow-right"
-                                       class="w-4 h-4
-                                              rtl:rotate-180
-                                              group-hover/link:translate-x-1
-                                              transition-transform">
-                                    </i>
-
+                                <a href="{{ article.get_absolute_url }}" class="group/link inline-flex items-center gap-2 text-sm font-bold text-violet-700 dark:text-violet-300">
+                                    {% translate "Read article" %}
+                                    <i data-lucide="arrow-right" class="w-4 h-4 rtl:rotate-180 group-hover/link:translate-x-1 transition-transform"></i>
                                 </a>
-
                             </div>
 
                         </div>
-
                     </article>
-
                 {% endfor %}
-
             </div>
-
         {% else %}
-
-            <!-- Empty state -->
-
-            <div class="mt-12
-                        rounded-3xl
-                        border border-dashed
-                        border-slate-300
-                        dark:border-slate-700
-                        bg-slate-50
-                        dark:bg-slate-900/50
-                        p-10
-                        text-center">
-
-                <div class="w-14 h-14 mx-auto
-                            rounded-2xl
-                            bg-violet-100
-                            dark:bg-violet-900/30
-                            text-violet-600
-                            dark:text-violet-300
-                            flex items-center justify-center">
-
-                    <i data-lucide="newspaper"
-                       class="w-7 h-7">
-                    </i>
-
+            <!-- Empty State -->
+            <div class="mt-12 rounded-3xl border border-dashed border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/50 p-10 text-center">
+                <div class="w-14 h-14 mx-auto rounded-2xl bg-violet-100 dark:bg-violet-900/30 text-violet-600 dark:text-violet-300 flex items-center justify-center">
+                    <i data-lucide="newspaper" class="w-7 h-7"></i>
                 </div>
-
-                <h3 class="mt-5
-                           text-lg font-bold
-                           text-slate-900
-                           dark:text-white">
-
-                    {% translate "Aucun article publié pour le moment" %}
-
+                <h3 class="mt-5 text-lg font-bold text-slate-900 dark:text-white">
+                    {% translate "No articles published yet" %}
                 </h3>
-
-                <p class="mt-2
-                          text-sm
-                          text-slate-500
-                          dark:text-slate-400">
-
-                    {% translate "Les prochaines actualités de l’association apparaîtront ici." %}
-
+                <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">
+                    {% translate "Upcoming news from the association will appear here." %}
                 </p>
-
             </div>
-
         {% endif %}
 
     </div>
-
 </section>
-<!-- 5. Call To Action -->
-<section class="relative overflow-hidden
-                py-16 md:py-20
-                bg-slate-50
-                dark:bg-slate-950
-                border-t border-slate-200
-                dark:border-slate-800">
 
-    <!-- Background decoration -->
+<!-- 8. CALL TO ACTION SECTION -->
+<section class="relative overflow-hidden py-16 md:py-20 bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800">
+
+    <!-- Background Decoration -->
     <div class="absolute inset-0 pointer-events-none overflow-hidden">
-
-        <div class="absolute -top-32 -right-32
-                    w-80 h-80
-                    rounded-full
-                    bg-violet-200/30
-                    dark:bg-violet-900/10
-                    blur-3xl">
-        </div>
-
-        <div class="absolute -bottom-40 -left-32
-                    w-96 h-96
-                    rounded-full
-                    bg-fuchsia-200/25
-                    dark:bg-fuchsia-900/10
-                    blur-3xl">
-        </div>
-
+        <div class="absolute -top-32 -right-32 w-80 h-80 rounded-full bg-violet-200/30 dark:bg-violet-900/10 blur-3xl"></div>
+        <div class="absolute -bottom-40 -left-32 w-96 h-96 rounded-full bg-fuchsia-200/25 dark:bg-fuchsia-900/10 blur-3xl"></div>
     </div>
 
+    <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="relative overflow-hidden rounded-[2rem] px-6 py-12 sm:px-10 sm:py-14 text-center bg-gradient-to-br from-violet-700 via-purple-700 to-fuchsia-700 shadow-2xl shadow-violet-900/20">
 
-    <div class="relative z-10
-                max-w-5xl mx-auto
-                px-4 sm:px-6 lg:px-8">
-
-        <div class="relative overflow-hidden
-                    rounded-[2rem]
-                    px-6 py-12
-                    sm:px-10 sm:py-14
-                    text-center
-                    bg-gradient-to-br
-                    from-violet-700
-                    via-purple-700
-                    to-fuchsia-700
-                    shadow-2xl
-                    shadow-violet-900/20">
-
-            <!-- Inner decoration -->
-            <div class="absolute -top-24 -right-24
-                        w-64 h-64
-                        rounded-full
-                        bg-white/10
-                        blur-2xl">
-            </div>
-
-            <div class="absolute -bottom-32 -left-24
-                        w-72 h-72
-                        rounded-full
-                        bg-fuchsia-400/20
-                        blur-3xl">
-            </div>
-
+            <!-- Inner Decoration -->
+            <div class="absolute -top-24 -right-24 w-64 h-64 rounded-full bg-white/10 blur-2xl"></div>
+            <div class="absolute -bottom-32 -left-24 w-72 h-72 rounded-full bg-fuchsia-400/20 blur-3xl"></div>
 
             <div class="relative z-10 max-w-2xl mx-auto">
-
-                <span class="inline-flex items-center gap-2
-                             px-3.5 py-1.5
-                             rounded-full
-                             bg-white/10
-                             border border-white/15
-                             text-white/90
-                             text-xs font-bold
-                             uppercase tracking-wider">
-
-                    <i data-lucide="heart-handshake"
-                       class="w-4 h-4">
-                    </i>
-
-                    {% translate "Rejoignez-nous" %}
-
+                <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/15 text-white/90 text-xs font-bold uppercase tracking-wider">
+                    <i data-lucide="heart-handshake" class="w-4 h-4"></i>
+                    {% translate "Join Us" %}
                 </span>
 
-
-                <h2 class="mt-5
-                           text-3xl sm:text-4xl
-                           font-extrabold
-                           tracking-tight
-                           text-white">
-
-                    {% translate "Faites partie du changement." %}
-
+                <h2 class="mt-5 text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
+                    {% translate "Be part of the change." %}
                 </h2>
 
-
-                <p class="mt-4
-                          text-sm sm:text-base
-                          leading-relaxed
-                          text-white/80">
-
-                    {% translate "Chaque adhésion renforce notre voix collective et nous permet d'étendre nos actions auprès des patients et de leurs proches à travers l'Algérie." %}
-
+                <p class="mt-4 text-sm sm:text-base leading-relaxed text-white/80">
+                    {% translate "Every membership strengthens our collective voice and allows us to expand our outreach to patients and their loved ones across Algeria." %}
                 </p>
 
-
-                <div class="mt-8
-                            flex flex-wrap
-                            items-center
-                            justify-center
-                            gap-4">
-
-                    <a href="{% url 'core:membership' %}"
-                       class="group inline-flex items-center gap-2
-                              px-7 py-3.5
-                              rounded-xl
-                              bg-white
-                              text-violet-800
-                              font-extrabold
-                              shadow-lg
-                              hover:-translate-y-0.5
-                              hover:bg-slate-50
-                              transition-all duration-300">
-
-                        <i data-lucide="users"
-                           class="w-5 h-5">
-                        </i>
-
-                        {% translate "Devenir membre" %}
-
-                        <i data-lucide="arrow-right"
-                           class="w-4 h-4
-                                  rtl:rotate-180
-                                  group-hover:translate-x-1
-                                  transition-transform">
-                        </i>
-
+                <!-- CTA Buttons -->
+                <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+                    <a href="{% url 'core:membership' %}" class="group inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-white text-violet-800 font-extrabold shadow-lg hover:-translate-y-0.5 hover:bg-slate-50 transition-all duration-300">
+                        <i data-lucide="users" class="w-5 h-5"></i>
+                        {% translate "Become a member" %}
+                        <i data-lucide="arrow-right" class="w-4 h-4 rtl:rotate-180 group-hover:translate-x-1 transition-transform"></i>
                     </a>
 
-
-                    <a href="{% url 'core:contact' %}"
-                       class="inline-flex items-center gap-2
-                              px-7 py-3.5
-                              rounded-xl
-                              bg-white/10
-                              hover:bg-white/15
-                              border border-white/20
-                              text-white
-                              font-bold
-                              transition-all duration-300">
-
-                        <i data-lucide="heart-handshake"
-                           class="w-5 h-5">
-                        </i>
-
-                        {% translate "Nous contacter" %}
-
+                    <a href="{% url 'core:contact' %}" class="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/20 text-white font-bold transition-all duration-300">
+                        <i data-lucide="heart-handshake" class="w-5 h-5"></i>
+                        {% translate "Contact us" %}
                     </a>
-
                 </div>
 
             </div>
-
         </div>
-
     </div>
-
 </section>
 {% endblock %}

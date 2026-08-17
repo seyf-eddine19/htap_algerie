@@ -13,26 +13,32 @@
                     <img src="{% static 'img/logo.avif' %}" alt="HTAP Algérie Logo" class="h-10 w-auto object-contain" />
                     <div class="flex flex-col">
                         <span class="font-bold text-white text-lg tracking-tight leading-none">HTAP ALGÉRIE</span>
-                        <span class="text-[11px] text-slate-400 tracking-wider uppercase font-medium mt-1">Association Nationale</span>
+                        <span class="text-[11px] text-slate-400 tracking-wider uppercase font-medium mt-1">National Association</span>
                     </div>
                 </a>
                 <p class="text-sm text-slate-300 max-w-sm leading-relaxed">
-                    {% translate "Association dédiée à l’information, la sensibilisation et l’accompagnement des personnes concernées par l’Hypertension Artérielle Pulmonaire en Algérie." %}
+                    {% translate "Association dedicated to providing information, raising awareness, and supporting people affected by Pulmonary Arterial Hypertension in Algeria." %}
                 </p>
                 
                 <!-- Quick Contact Meta -->
                 <div class="pt-1 flex flex-col gap-2.5 text-sm text-slate-400">
-                    <div class="flex items-center gap-2">
-                        <i data-lucide="map-pin" class="w-4 h-4 text-violet-400 shrink-0"></i>
-                        <span>{% translate "Alger, Algérie" %}</span>
+                    <div class="flex items-start gap-2">
+                        <i data-lucide="map-pin" class="w-4 h-4 text-violet-400 shrink-0 mt-0.5"></i>
+                        <div class="flex flex-col gap-1">
+                            <span>{% translate "50 ex 60 Cooperative El Bina, Birkhadem, Algiers, Algeria 16330" %}</span>
+                        </div>
                     </div>
                     <div class="flex items-center gap-2">
                         <i data-lucide="mail" class="w-4 h-4 text-violet-400 shrink-0"></i>
-                        <a href="mailto:contact@htapalgerie.dz" class="hover:text-violet-400 transition-colors">contact@htapalgerie.dz</a>
+                        <a href="mailto:htap.algerie@gmail.com" class="hover:text-violet-400 transition-colors">htap.algerie@gmail.com</a>
                     </div>
                     <div class="flex items-center gap-2">
                         <i data-lucide="phone" class="w-4 h-4 text-violet-400 shrink-0"></i>
-                        <span>{{ association_info.phone|default:"+213 (0) 23 XX XX XX" }}</span>
+                        <span>+213 550 05 44 44</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="printer" class="w-4 h-4 text-violet-400 shrink-0"></i>
+                        <span>Fixe/Fax: +213 285 373 57</span>
                     </div>
                 </div>
             </div>
@@ -45,17 +51,17 @@
                 <ul class="space-y-2 text-sm">
                     <li>
                         <a href="{% url 'core:home' %}" class="text-slate-300 hover:text-violet-400 transition-colors">
-                            {% translate "Accueil" %}
+                            {% translate "Home" %}
                         </a>
                     </li>
                     <li>
                         <a href="{% url 'core:about' %}" class="text-slate-300 hover:text-violet-400 transition-colors">
-                            {% translate "À propos" %}
+                            {% translate "About Us" %}
                         </a>
                     </li>
                     <li>
                         <a href="{% url 'core:htap' %}" class="text-slate-300 hover:text-violet-400 transition-colors">
-                            {% translate "HTAP" %}
+                            {% translate "PAH" %}
                         </a>
                     </li>
                     <li>
@@ -69,27 +75,27 @@
             <!-- Column 3: Resources & Engagement -->
             <div class="space-y-3">
                 <h3 class="text-sm font-bold text-white tracking-wider uppercase">
-                    {% translate "Ressources" %}
+                    {% translate "Resources" %}
                 </h3>
                 <ul class="space-y-2 text-sm">
                     <li>
                         <a href="{% url 'activities:list' %}" class="text-slate-300 hover:text-violet-400 transition-colors">
-                            {% translate "Activités" %}
+                            {% translate "Activities" %}
                         </a>
                     </li>
                     <li>
                         <a href="{% url 'core:help' %}" class="text-slate-300 hover:text-violet-400 transition-colors">
-                            {% translate "Aide & orientation" %}
+                            {% translate "Help & Support" %}
                         </a>
                     </li>
                     <li>
                         <a href="{% url 'core:membership' %}" class="text-slate-300 hover:text-violet-400 transition-colors">
-                            {% translate "Adhésion" %}
+                            {% translate "Membership" %}
                         </a>
                     </li>
                     <li>
                         <a href="{% url 'core:contact' %}" class="text-slate-300 hover:text-violet-400 transition-colors">
-                            {% translate "Contact" %}
+                            {% translate "Contact Us" %}
                         </a>
                     </li>
                 </ul>
@@ -98,22 +104,24 @@
             <!-- Column 4: Social & Contact Meta -->
             <div class="space-y-3">
                 <h3 class="text-sm font-bold text-white tracking-wider uppercase">
-                    {% translate "Rejoignez-nous" %}
+                    {% translate "Join Us" %}
                 </h3>
 
                 <p class="text-sm text-slate-400 pt-1">
-                    {% translate "Suivez nos activités sur les réseaux sociaux." %}
+                    {% translate "Follow our activities on social media." %}
                 </p>
                 
                 <div class="flex items-center gap-3 pt-1">
                     <a href="#" aria-label="Facebook" class="flex h-9 w-9 items-center justify-center rounded-full border border-slate-700 bg-slate-800 text-slate-300 transition hover:border-violet-600 hover:bg-violet-600 hover:text-white">
                         <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
                             <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                        </svg>                    </a>
+                        </svg>
+                    </a>
                     <a href="#" aria-label="Instagram" class="flex h-9 w-9 items-center justify-center rounded-full border border-slate-700 bg-slate-800 text-slate-300 transition hover:border-violet-600 hover:bg-violet-600 hover:text-white">
                         <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
                             <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                        </svg>                    </a>
+                        </svg>
+                    </a>
                     <a href="#" aria-label="LinkedIn" class="flex h-9 w-9 items-center justify-center rounded-full border border-slate-700 bg-slate-800 text-slate-300 transition hover:border-violet-600 hover:bg-violet-600 hover:text-white">
                         <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
                             <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
@@ -126,12 +134,10 @@
 
         <!-- Bottom Copyright & Legal Sub-bar -->
         <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
-            <p>
-                &copy; {% now "Y" %} HTAP Algérie. {% translate "Tous droits réservés." %}
-            </p>
+            <p>&copy; {% now "Y" %} HTAP Algérie. {% translate "All rights reserved." %}</p>
             <div class="flex items-center gap-6">
-                <a href="#" class="hover:text-white transition-colors">{% translate "Mentions légales" %}</a>
-                <a href="#" class="hover:text-white transition-colors">{% translate "Politique de confidentialité" %}</a>
+                <a href="#" class="hover:text-white transition-colors">{% translate "Legal Notice" %}</a>
+                <a href="#" class="hover:text-white transition-colors">{% translate "Privacy Policy" %}</a>
             </div>
         </div>
 

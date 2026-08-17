@@ -1,296 +1,293 @@
 {% extends "base.html" %}
 {% load i18n static %}
 
-{% block title %}{% trans "Comprendre l'HTAP — Information Médicale" %}{% endblock %}
+{% block title %}{% trans "Understanding PAH — Medical Information" %}{% endblock %}
 
 {% block content %}
 
 <!-- Hero Header Section -->
-<section class="bg-gradient-to-b from-background-soft via-white to-white dark:from-slate-900 dark:via-slate-950 dark:to-slate-950 py-16 border-b border-surface-border dark:border-slate-800 transition-colors duration-200">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <span class="text-xs font-bold text-brand-purple dark:text-purple-400 tracking-widest uppercase block mb-2">
-            {% trans "Ressource Médicale & Information Patient" %}
+<section class="border-b border-surface-border bg-gradient-to-b from-background-soft via-white to-white py-16 transition-colors duration-200 dark:border-slate-800 dark:from-slate-900 dark:via-slate-950 dark:to-slate-950">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <span class="mb-2 block text-xs font-bold uppercase tracking-widest text-brand-purple dark:text-purple-400">
+            {% trans "Medical Resource & Patient Information" %}
         </span>
-        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-navy dark:text-slate-100 tracking-tight mb-4">
-            {% trans "Comprendre l’Hypertension Artérielle Pulmonaire" %}
+        <h1 class="mb-4 text-3xl font-extrabold tracking-tight text-navy dark:text-slate-100 sm:text-4xl lg:text-5xl">
+            {% trans "Understanding Pulmonary Arterial Hypertension" %}
         </h1>
-        <p class="text-base sm:text-lg text-text-secondary dark:text-slate-400 max-w-3xl leading-relaxed">
-            {% trans "Un guide complet pour mieux appréhender l'HTAP, ses mécanismes, ses symptômes et découvrir nos dossiers médicaux détaillés." %}
+        <p class="max-w-3xl text-base leading-relaxed text-text-secondary dark:text-slate-400 sm:text-lg">
+            {% trans "A comprehensive guide to better understand PAH, its mechanisms, symptoms, and explore our detailed medical files." %}
         </p>
     </div>
 </section>
 
 <!-- Main Grid Section -->
-<section class="py-16 bg-white dark:bg-slate-950 transition-colors duration-200">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+<section class="bg-white py-16 transition-colors duration-200 dark:bg-slate-950">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 gap-12 lg:grid-cols-12">
             
             <!-- Sidebar Navigation (Sticky) -->
-            <aside class="hidden lg:block lg:col-span-3">
+            <aside class="hidden lg:col-span-3 lg:block">
                 <div class="sticky top-28 space-y-6">
-                    <nav class="space-y-1 border-l-2 border-surface-border dark:border-slate-800 pl-4">
-                        <a href="#definition" class="block text-xs font-semibold text-navy dark:text-slate-200 hover:text-brand-purple dark:hover:text-purple-400 py-1.5 transition-colors">
-                            1. {% trans "Qu'est-ce que l'HTAP ?" %}
+                    <nav class="space-y-1 border-l-2 border-surface-border pl-4 dark:border-slate-800">
+                        <a href="#definition" class="block py-1.5 text-xs font-semibold text-navy transition-colors hover:text-brand-purple dark:text-slate-200 dark:hover:text-purple-400">
+                            1. {% trans "What is PAH?" %}
                         </a>
-                        <a href="#symptoms" class="block text-xs font-medium text-text-muted dark:text-slate-400 hover:text-navy dark:hover:text-slate-200 py-1.5 transition-colors">
-                            2. {% trans "Symptômes & Signes" %}
+                        <a href="#symptoms" class="block py-1.5 text-xs font-medium text-text-muted transition-colors hover:text-navy dark:text-slate-400 dark:hover:text-slate-200">
+                            2. {% trans "Symptoms & Signs" %}
                         </a>
-                        <a href="#articles" class="block text-xs font-medium text-text-muted dark:text-slate-400 hover:text-navy dark:hover:text-slate-200 py-1.5 transition-colors">
-                            3. {% trans "Dossiers & Articles Médicaux" %}
+                        <a href="#articles" class="block py-1.5 text-xs font-medium text-text-muted transition-colors hover:text-navy dark:text-slate-400 dark:hover:text-slate-200">
+                            3. {% trans "Medical Files & Articles" %}
                         </a>
-                        <a href="#disclaimer" class="block text-xs font-medium text-text-muted dark:text-slate-400 hover:text-navy dark:hover:text-slate-200 py-1.5 transition-colors">
-                            4. {% trans "Avertissement médical" %}
+                        <a href="#disclaimer" class="block py-1.5 text-xs font-medium text-text-muted transition-colors hover:text-navy dark:text-slate-400 dark:hover:text-slate-200">
+                            4. {% trans "Medical Disclaimer" %}
                         </a>
                     </nav>
 
-                    <div class="p-4 bg-background-soft dark:bg-slate-900 rounded-xl border border-surface-border dark:border-slate-800">
-                        <p class="text-xs text-text-secondary dark:text-slate-400 mb-3 font-medium">{% trans "Besoin d'orientation ?" %}</p>
-                        <a href="{% url 'core:contact' %}" class="inline-flex items-center gap-2 text-xs font-semibold text-brand-purple dark:text-purple-400 hover:underline">
-                            {% trans "Contactez l'association" %}
-                            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                    <div class="rounded-xl border border-surface-border bg-background-soft p-4 dark:border-slate-800 dark:bg-slate-900">
+                        <p class="mb-3 text-xs font-medium text-text-secondary dark:text-slate-400">
+                            {% trans "Need guidance?" %}
+                        </p>
+                        <a href="{% url 'core:contact' %}" class="inline-flex items-center gap-2 text-xs font-semibold text-brand-purple hover:underline dark:text-purple-400">
+                            {% trans "Contact the association" %}
+                            <i data-lucide="arrow-right" class="h-3.5 w-3.5"></i>
                         </a>
                     </div>
                 </div>
             </aside>
 
             <!-- Main Content Area -->
-            <div class="lg:col-span-9 space-y-12">
+            <div class="space-y-12 lg:col-span-9">
                 
                 <!-- Section 1: Définition -->
-                <div id="definition" class="scroll-mt-28 space-y-4">
-                    <h2 class="text-2xl font-bold text-navy dark:text-slate-100 flex items-center gap-2">
-                        <span class="w-2 h-6 bg-brand-purple dark:bg-purple-500 rounded-full inline-block"></span>
-                        {% trans "1. Qu'est-ce que l'HTAP ?" %}
+                <article id="definition" class="scroll-mt-28 space-y-4">
+                    <h2 class="flex items-center gap-2 text-2xl font-bold text-navy dark:text-slate-100">
+                        <span class="inline-block h-6 w-2 rounded-full bg-brand-purple dark:bg-purple-500"></span>
+                        {% trans "1. What is PAH?" %}
                     </h2>
-                    <p class="text-text-secondary dark:text-slate-300 leading-relaxed">
-                        {% trans "L’Hypertension Artérielle Pulmonaire (HTAP) est une maladie cardiovasculaire rare et sévère caractérisée par une augmentation anormale de la pression sanguine dans les artères pulmonaires. Contrairement à l'hypertension artérielle systémique classique, elle touche spécifiquement le réseau vasculaire reliant le cœur droit aux poumons." %}
+                    <p class="leading-relaxed text-text-secondary dark:text-slate-300">
+                        {% trans "Pulmonary Arterial Hypertension (PAH) is a rare and severe cardiovascular disease characterized by an abnormal increase in blood pressure within the pulmonary arteries. Unlike classic systemic arterial hypertension, it specifically affects the vascular network connecting the right side of the heart to the lungs." %}
                     </p>
                     
-                    <!-- Main Illustration: Cœur et circulation pulmonaire -->
-                    <div class="my-6 rounded-2xl overflow-hidden border border-surface-border dark:border-slate-800 bg-slate-100 dark:bg-slate-900">
+                    <!-- Main Illustration -->
+                    <figure class="my-6 overflow-hidden rounded-2xl border border-surface-border bg-slate-100 dark:border-slate-800 dark:bg-slate-900">
                         <img src="{% static 'img/coach-ph-image.jpg' %}" 
-                             alt="{% trans 'Système cardiovasculaire et anatomie cardiaque' %}" 
-                             class="w-full h-64 object-cover"
-                             onerror="this.src='https://placehold.co/1200x400/1e293b/ffffff?text=Anatomie+Cardio-Pulmonaire'">
-                    </div>
+                             alt="{% trans 'Cardiovascular system and cardiac anatomy' %}" 
+                             class="h-64 w-full object-cover"
+                             onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1530497610245-94d3c16cda28?auto=format&fit=crop&w=1200&q=80';">
+                    </figure>
 
-                    <p class="text-text-secondary dark:text-slate-300 leading-relaxed">
-                        {% trans "Ce rétrécissement des petits vaisseaux pulmonaires contraint le ventricule droit à fournir un effort continu accru, pouvant entraîner à terme une insuffisance cardiaque droite si elle n'est pas prise en charge à temps." %}
+                    <p class="leading-relaxed text-text-secondary dark:text-slate-300">
+                        {% trans "This narrowing of the small pulmonary vessels forces the right ventricle to exert continuous increased effort, which can eventually lead to right heart failure if not managed in time." %}
                     </p>
-                </div>
+                </article>
 
                 <!-- Section 2: Symptômes -->
-                <div id="symptoms" class="scroll-mt-28 pt-8 border-t border-surface-border dark:border-slate-800 space-y-4">
-                    <h2 class="text-2xl font-bold text-navy dark:text-slate-100 flex items-center gap-2">
-                        <span class="w-2 h-6 bg-brand-purple dark:bg-purple-500 rounded-full inline-block"></span>
-                        {% trans "2. Symptômes & Signes d'alerte" %}
+                <section id="symptoms" class="scroll-mt-28 space-y-4 border-t border-surface-border pt-8 dark:border-slate-800">
+                    <h2 class="flex items-center gap-2 text-2xl font-bold text-navy dark:text-slate-100">
+                        <span class="inline-block h-6 w-2 rounded-full bg-brand-purple dark:bg-purple-500"></span>
+                        {% trans "2. Symptoms & Warning Signs" %}
                     </h2>
-                    <p class="text-text-secondary dark:text-slate-300 leading-relaxed">
-                        {% trans "Les symptômes s'installent souvent progressivement, ce qui rend le diagnostic précoce parfois complexe :" %}
+                    <p class="leading-relaxed text-text-secondary dark:text-slate-300">
+                        {% trans "Symptoms often develop gradually, which sometimes makes early diagnosis complex:" %}
                     </p>
-                    <div class="grid sm:grid-cols-2 gap-4 pt-2">
-                        <div class="p-4 rounded-xl border border-surface-border dark:border-slate-800 bg-background-soft dark:bg-slate-900">
-                            <strong class="text-navy dark:text-slate-200 text-sm block mb-1">{% trans "Dyspnée d'effort" %}</strong>
-                            <p class="text-xs text-text-secondary dark:text-slate-400">{% trans "Essoufflement inhabituel lors d'activités physiques légères ou du quotidien." %}</p>
+                    <div class="grid gap-4 pt-2 sm:grid-cols-2">
+                        <div class="rounded-xl border border-surface-border bg-background-soft p-4 dark:border-slate-800 dark:bg-slate-900">
+                            <strong class="mb-1 block text-sm font-semibold text-navy dark:text-slate-200">{% trans "Exertional Dyspnea" %}</strong>
+                            <p class="text-xs text-text-secondary dark:text-slate-400">{% trans "Unusual shortness of breath during light physical activity or daily tasks." %}</p>
                         </div>
-                        <div class="p-4 rounded-xl border border-surface-border dark:border-slate-800 bg-background-soft dark:bg-slate-900">
-                            <strong class="text-navy dark:text-slate-200 text-sm block mb-1">{% trans "Fatigue chronique" %}</strong>
-                            <p class="text-xs text-text-secondary dark:text-slate-400">{% trans "Sensation d'épuisement persistant non soulagée par le repos." %}</p>
+                        <div class="rounded-xl border border-surface-border bg-background-soft p-4 dark:border-slate-800 dark:bg-slate-900">
+                            <strong class="mb-1 block text-sm font-semibold text-navy dark:text-slate-200">{% trans "Chronic Fatigue" %}</strong>
+                            <p class="text-xs text-text-secondary dark:text-slate-400">{% trans "Persistent feeling of exhaustion that is not relieved by rest." %}</p>
                         </div>
-                        <div class="p-4 rounded-xl border border-surface-border dark:border-slate-800 bg-background-soft dark:bg-slate-900">
-                            <strong class="text-navy dark:text-slate-200 text-sm block mb-1">{% trans "Vertiges & Syncopes" %}</strong>
-                            <p class="text-xs text-text-secondary dark:text-slate-400">{% trans "Malaise ou perte de connaissance survenant principalement à l'effort." %}</p>
+                        <div class="rounded-xl border border-surface-border bg-background-soft p-4 dark:border-slate-800 dark:bg-slate-900">
+                            <strong class="mb-1 block text-sm font-semibold text-navy dark:text-slate-200">{% trans "Dizziness & Syncope" %}</strong>
+                            <p class="text-xs text-text-secondary dark:text-slate-400">{% trans "Lightheadedness or loss of consciousness occurring mainly during exertion." %}</p>
                         </div>
-                        <div class="p-4 rounded-xl border border-surface-border dark:border-slate-800 bg-background-soft dark:bg-slate-900">
-                            <strong class="text-navy dark:text-slate-200 text-sm block mb-1">{% trans "Œdèmes" %}</strong>
-                            <p class="text-xs text-text-secondary dark:text-slate-400">{% trans "Gonflement au niveau des chevilles, des jambes ou de l'abdomen." %}</p>
+                        <div class="rounded-xl border border-surface-border bg-background-soft p-4 dark:border-slate-800 dark:bg-slate-900">
+                            <strong class="mb-1 block text-sm font-semibold text-navy dark:text-slate-200">{% trans "Edema" %}</strong>
+                            <p class="text-xs text-text-secondary dark:text-slate-400">{% trans "Swelling in the ankles, legs, or abdomen." %}</p>
                         </div>
                     </div>
-                </div>
+                </section>
 
-                <!-- Section 3: Cartes des 5 Articles Médicaux -->
-                <div id="articles" class="scroll-mt-28 pt-8 border-t border-surface-border dark:border-slate-800 space-y-6">
+                <!-- Section 3: Articles List -->
+                <section id="articles" class="scroll-mt-28 space-y-6 border-t border-surface-border pt-8 dark:border-slate-800">
                     <div>
-                        <h2 class="text-2xl font-bold text-navy dark:text-slate-100 flex items-center gap-2 mb-2">
-                            <span class="w-2 h-6 bg-brand-purple dark:bg-purple-500 rounded-full inline-block"></span>
-                            {% trans "3. Dossiers & Articles Médicaux" %}
+                        <h2 class="mb-2 flex items-center gap-2 text-2xl font-bold text-navy dark:text-slate-100">
+                            <span class="inline-block h-6 w-2 rounded-full bg-brand-purple dark:bg-purple-500"></span>
+                            {% trans "3. Medical Files & Articles" %}
                         </h2>
-                        <p class="text-text-secondary dark:text-slate-400 text-sm">
-                            {% trans "Explorez nos dossiers spécialisés rédigés pour vous informer sur chaque aspect de la maladie." %}
+                        <p class="text-sm text-text-secondary dark:text-slate-400">
+                            {% trans "Explore our specialized files written to inform you about every aspect of the disease." %}
                         </p>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+                    <div class="grid grid-cols-1 gap-6 pt-2 md:grid-cols-2">
                         
-                        <!-- Article 1: À propos de l'HTAP — Visuel auscultation/poumons -->
+                        <!-- Article 1 -->
                         <a href="{% url 'articles:detail' slug='a-propos-htap' %}" 
-                           class="group overflow-hidden rounded-2xl border border-surface-border dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-brand-purple dark:hover:border-purple-500 hover:shadow-lg transition-all flex flex-col justify-between">
-                            <div class="h-44 overflow-hidden bg-slate-100 dark:bg-slate-800 relative">
+                           class="group flex flex-col justify-between overflow-hidden rounded-2xl border border-surface-border bg-white transition-all hover:border-brand-purple hover:shadow-lg dark:border-slate-800 dark:bg-slate-900 dark:hover:border-purple-500">
+                            <div class="relative h-44 overflow-hidden bg-slate-100 dark:bg-slate-800">
                                 <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80" 
-                                     alt="{% trans 'Auscultation pulmonaire et cardiaque' %}" 
-                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                     onerror="this.src='https://placehold.co/600x400/1e293b/ffffff?text=Generalites+HTAP'">
-                                <span class="absolute top-3 left-3 px-2.5 py-1 rounded-md text-[10px] font-bold bg-white/90 dark:bg-slate-900/90 text-brand-purple dark:text-purple-400 uppercase tracking-wider backdrop-blur-sm">
-                                    {% trans "Article 01 — Généralités" %}
+                                     alt="{% trans 'Pulmonary and cardiac auscultation' %}" 
+                                     class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105">
+                                <span class="absolute left-3 top-3 rounded-md bg-white/90 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-brand-purple backdrop-blur-sm dark:bg-slate-900/90 dark:text-purple-400">
+                                    {% trans "Article 01 — Overview" %}
                                 </span>
                             </div>
-                            <div class="p-6 flex-1 flex flex-col justify-between">
+                            <div class="flex flex-1 flex-col justify-between p-6">
                                 <div>
-                                    <h3 class="text-lg font-bold text-navy dark:text-slate-100 group-hover:text-brand-purple dark:group-hover:text-purple-400 transition-colors mb-3">
-                                        {% trans "A propos de l'HTAP" %}
+                                    <h3 class="mb-3 text-lg font-bold text-navy transition-colors group-hover:text-brand-purple dark:text-slate-100 dark:group-hover:text-purple-400">
+                                        {% trans "About PAH" %}
                                     </h3>
-                                    <ul class="space-y-1.5 text-xs text-text-secondary dark:text-slate-400 list-disc list-inside">
-                                        <li>{% trans "Qu'est-ce que l'HTAP ?" %}</li>
-                                        <li>{% trans "Symptômes de la maladie" %}</li>
-                                        <li>{% trans "Mécanismes et pression pulmonaire" %}</li>
-                                        <li>{% trans "Personnes touchées" %}</li>
+                                    <ul class="list-inside list-disc space-y-1.5 text-xs text-text-secondary dark:text-slate-400">
+                                        <li>{% trans "What is PAH?" %}</li>
+                                        <li>{% trans "Symptoms of the disease" %}</li>
+                                        <li>{% trans "Mechanisms and pulmonary pressure" %}</li>
+                                        <li>{% trans "Affected individuals" %}</li>
                                     </ul>
                                 </div>
-                                <div class="mt-5 pt-4 border-t border-surface-border/60 dark:border-slate-800 flex items-center justify-between text-xs font-semibold text-brand-purple dark:text-purple-400">
-                                    <span>{% trans "Lire la suite" %}</span>
-                                    <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                                <div class="mt-5 flex items-center justify-between border-t border-surface-border/60 pt-4 text-xs font-semibold text-brand-purple dark:border-slate-800 dark:text-purple-400">
+                                    <span>{% trans "Read more" %}</span>
+                                    <i data-lucide="arrow-right" class="h-4 w-4 transition-transform group-hover:translate-x-1"></i>
                                 </div>
                             </div>
                         </a>
 
-                        <!-- Article 2: Diagnostic de l'HTAP — Visuel Imagerie / Échocardiographie -->
+                        <!-- Article 2 -->
                         <a href="{% url 'articles:detail' slug='diagnostic-htap' %}" 
-                           class="group overflow-hidden rounded-2xl border border-surface-border dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-brand-purple dark:hover:border-purple-500 hover:shadow-lg transition-all flex flex-col justify-between">
-                            <div class="h-44 overflow-hidden bg-slate-100 dark:bg-slate-800 relative">
+                           class="group flex flex-col justify-between overflow-hidden rounded-2xl border border-surface-border bg-white transition-all hover:border-brand-purple hover:shadow-lg dark:border-slate-800 dark:bg-slate-900 dark:hover:border-purple-500">
+                            <div class="relative h-44 overflow-hidden bg-slate-100 dark:bg-slate-800">
                                 <img src="https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=600&q=80" 
-                                     alt="{% trans 'Imagerie médicale et diagnostic cardiaque' %}" 
-                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                     onerror="this.src='https://placehold.co/600x400/1e293b/ffffff?text=Diagnostic+Medical'">
-                                <span class="absolute top-3 left-3 px-2.5 py-1 rounded-md text-[10px] font-bold bg-white/90 dark:bg-slate-900/90 text-brand-purple dark:text-purple-400 uppercase tracking-wider backdrop-blur-sm">
-                                    {% trans "Article 02 — Examens" %}
+                                     alt="{% trans 'Medical imaging and cardiac diagnosis' %}" 
+                                     class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105">
+                                <span class="absolute left-3 top-3 rounded-md bg-white/90 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-brand-purple backdrop-blur-sm dark:bg-slate-900/90 dark:text-purple-400">
+                                    {% trans "Article 02 — Examinations" %}
                                 </span>
                             </div>
-                            <div class="p-6 flex-1 flex flex-col justify-between">
+                            <div class="flex flex-1 flex-col justify-between p-6">
                                 <div>
-                                    <h3 class="text-lg font-bold text-navy dark:text-slate-100 group-hover:text-brand-purple dark:group-hover:text-purple-400 transition-colors mb-3">
-                                        {% trans "Diagnostic de l'HTAP" %}
+                                    <h3 class="mb-3 text-lg font-bold text-navy transition-colors group-hover:text-brand-purple dark:text-slate-100 dark:group-hover:text-purple-400">
+                                        {% trans "Diagnosis of PAH" %}
                                     </h3>
-                                    <ul class="space-y-1.5 text-xs text-text-secondary dark:text-slate-400 list-disc list-inside">
-                                        <li>{% trans "Classifications de l'hypertension" %}</li>
-                                        <li>{% trans "Examens cardiaques & pulmonaires" %}</li>
-                                        <li>{% trans "Le cathétérisme cardiaque" %}</li>
-                                        <li>{% trans "Recherche des causes" %}</li>
+                                    <ul class="list-inside list-disc space-y-1.5 text-xs text-text-secondary dark:text-slate-400">
+                                        <li>{% trans "Classifications of hypertension" %}</li>
+                                        <li>{% trans "Cardiac & pulmonary examinations" %}</li>
+                                        <li>{% trans "Cardiac catheterization" %}</li>
+                                        <li>{% trans "Identifying underlying causes" %}</li>
                                     </ul>
                                 </div>
-                                <div class="mt-5 pt-4 border-t border-surface-border/60 dark:border-slate-800 flex items-center justify-between text-xs font-semibold text-brand-purple dark:text-purple-400">
-                                    <span>{% trans "Lire la suite" %}</span>
-                                    <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                                <div class="mt-5 flex items-center justify-between border-t border-surface-border/60 pt-4 text-xs font-semibold text-brand-purple dark:border-slate-800 dark:text-purple-400">
+                                    <span>{% trans "Read more" %}</span>
+                                    <i data-lucide="arrow-right" class="h-4 w-4 transition-transform group-hover:translate-x-1"></i>
                                 </div>
                             </div>
                         </a>
 
-                        <!-- Article 3: Génétique et HTAP — Visuel Génétique/Séquençage -->
+                        <!-- Article 3 -->
                         <a href="{% url 'articles:detail' slug='genetique-et-htap' %}" 
-                           class="group overflow-hidden rounded-2xl border border-surface-border dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-brand-purple dark:hover:border-purple-500 hover:shadow-lg transition-all flex flex-col justify-between">
-                            <div class="h-44 overflow-hidden bg-slate-100 dark:bg-slate-800 relative">
+                           class="group flex flex-col justify-between overflow-hidden rounded-2xl border border-surface-border bg-white transition-all hover:border-brand-purple hover:shadow-lg dark:border-slate-800 dark:bg-slate-900 dark:hover:border-purple-500">
+                            <div class="relative h-44 overflow-hidden bg-slate-100 dark:bg-slate-800">
                                 <img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=600&q=80" 
-                                     alt="{% trans 'Recherche génétique et ADN' %}" 
-                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                     onerror="this.src='https://placehold.co/600x400/1e293b/ffffff?text=Genetique+HTAP'">
-                                <span class="absolute top-3 left-3 px-2.5 py-1 rounded-md text-[10px] font-bold bg-white/90 dark:bg-slate-900/90 text-brand-purple dark:text-purple-400 uppercase tracking-wider backdrop-blur-sm">
-                                    {% trans "Article 03 — Recherche" %}
+                                     alt="{% trans 'Genetic research and DNA' %}" 
+                                     class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105">
+                                <span class="absolute left-3 top-3 rounded-md bg-white/90 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-brand-purple backdrop-blur-sm dark:bg-slate-900/90 dark:text-purple-400">
+                                    {% trans "Article 03 — Research" %}
                                 </span>
                             </div>
-                            <div class="p-6 flex-1 flex flex-col justify-between">
+                            <div class="flex flex-1 flex-col justify-between p-6">
                                 <div>
-                                    <h3 class="text-lg font-bold text-navy dark:text-slate-100 group-hover:text-brand-purple dark:group-hover:text-purple-400 transition-colors mb-3">
-                                        {% trans "Génétique et HTAP" %}
+                                    <h3 class="mb-3 text-lg font-bold text-navy transition-colors group-hover:text-brand-purple dark:text-slate-100 dark:group-hover:text-purple-400">
+                                        {% trans "Genetics and PAH" %}
                                     </h3>
-                                    <ul class="space-y-1.5 text-xs text-text-secondary dark:text-slate-400 list-disc list-inside">
-                                        <li>{% trans "Anomalies génétiques impliquées" %}</li>
-                                        <li>{% trans "Transmission génétique de la maladie" %}</li>
-                                        <li>{% trans "Le conseil génétique" %}</li>
-                                        <li>{% trans "Maladie veino-occlusive (MVO)" %}</li>
+                                    <ul class="list-inside list-disc space-y-1.5 text-xs text-text-secondary dark:text-slate-400">
+                                        <li>{% trans "Genetic abnormalities involved" %}</li>
+                                        <li>{% trans "Genetic transmission of the disease" %}</li>
+                                        <li>{% trans "Genetic counseling" %}</li>
+                                        <li>{% trans "Pulmonary veno-occlusive disease (PVOD)" %}</li>
                                     </ul>
                                 </div>
-                                <div class="mt-5 pt-4 border-t border-surface-border/60 dark:border-slate-800 flex items-center justify-between text-xs font-semibold text-brand-purple dark:text-purple-400">
-                                    <span>{% trans "Lire la suite" %}</span>
-                                    <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                                <div class="mt-5 flex items-center justify-between border-t border-surface-border/60 pt-4 text-xs font-semibold text-brand-purple dark:border-slate-800 dark:text-purple-400">
+                                    <span>{% trans "Read more" %}</span>
+                                    <i data-lucide="arrow-right" class="h-4 w-4 transition-transform group-hover:translate-x-1"></i>
                                 </div>
                             </div>
                         </a>
 
-                        <!-- Article 4: HTAP associées — Visuel Bilan sanguin / Analyse systémique -->
+                        <!-- Article 4 -->
                         <a href="{% url 'articles:detail' slug='htap-associees' %}" 
-                           class="group overflow-hidden rounded-2xl border border-surface-border dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-brand-purple dark:hover:border-purple-500 hover:shadow-lg transition-all flex flex-col justify-between">
-                            <div class="h-44 overflow-hidden bg-slate-100 dark:bg-slate-800 relative">
-                                <img src="https://images.unsplash.com/photo-1615461066841-6116e61058f4?auto=format&fit=crop&w=600&q=80" 
-                                     alt="{% trans 'Bilan biologique et maladies associées' %}" 
-                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                     onerror="this.src='https://placehold.co/600x400/1e293b/ffffff?text=Pathologies+Associees'">
-                                <span class="absolute top-3 left-3 px-2.5 py-1 rounded-md text-[10px] font-bold bg-white/90 dark:bg-slate-900/90 text-brand-purple dark:text-purple-400 uppercase tracking-wider backdrop-blur-sm">
-                                    {% trans "Article 04 — Pathologies" %}
+                           class="group flex flex-col justify-between overflow-hidden rounded-2xl border border-surface-border bg-white transition-all hover:border-brand-purple hover:shadow-lg dark:border-slate-800 dark:bg-slate-900 dark:hover:border-purple-500">
+                            <div class="relative h-44 overflow-hidden bg-slate-100 dark:bg-slate-800">
+                                <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=600&q=80" 
+                                     alt="{% trans 'Biological evaluation and associated conditions' %}" 
+                                     class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105">
+                                <span class="absolute left-3 top-3 rounded-md bg-white/90 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-brand-purple backdrop-blur-sm dark:bg-slate-900/90 dark:text-purple-400">
+                                    {% trans "Article 04 — Conditions" %}
                                 </span>
                             </div>
-                            <div class="p-6 flex-1 flex flex-col justify-between">
+                            <div class="flex flex-1 flex-col justify-between p-6">
                                 <div>
-                                    <h3 class="text-lg font-bold text-navy dark:text-slate-100 group-hover:text-brand-purple dark:group-hover:text-purple-400 transition-colors mb-3">
-                                        {% trans "HTAP associées" %}
+                                    <h3 class="mb-3 text-lg font-bold text-navy transition-colors group-hover:text-brand-purple dark:text-slate-100 dark:group-hover:text-purple-400">
+                                        {% trans "Associated PAH" %}
                                     </h3>
-                                    <ul class="space-y-1.5 text-xs text-text-secondary dark:text-slate-400 list-disc list-inside">
-                                        <li>{% trans "HTAP associée à une Connectivite" %}</li>
-                                        <li>{% trans "HTAP associée au VIH" %}</li>
-                                        <li>{% trans "HTAP associée à l'Hypertension Portale" %}</li>
-                                        <li>{% trans "HTAP et Cardiopathie Congénitale" %}</li>
+                                    <ul class="list-inside list-disc space-y-1.5 text-xs text-text-secondary dark:text-slate-400">
+                                        <li>{% trans "PAH associated with Connective Tissue Disease" %}</li>
+                                        <li>{% trans "PAH associated with HIV" %}</li>
+                                        <li>{% trans "PAH associated with Portal Hypertension" %}</li>
+                                        <li>{% trans "PAH and Congenital Heart Disease" %}</li>
                                     </ul>
                                 </div>
-                                <div class="mt-5 pt-4 border-t border-surface-border/60 dark:border-slate-800 flex items-center justify-between text-xs font-semibold text-brand-purple dark:text-purple-400">
-                                    <span>{% trans "Lire la suite" %}</span>
-                                    <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                                <div class="mt-5 flex items-center justify-between border-t border-surface-border/60 pt-4 text-xs font-semibold text-brand-purple dark:border-slate-800 dark:text-purple-400">
+                                    <span>{% trans "Read more" %}</span>
+                                    <i data-lucide="arrow-right" class="h-4 w-4 transition-transform group-hover:translate-x-1"></i>
                                 </div>
                             </div>
                         </a>
 
-                        <!-- Article 5: HTAP Thromboembolique Chronique — Visuel Bloc opératoire / Chirurgie cardiovasculaire -->
+                        <!-- Article 5 (Full width) -->
                         <a href="{% url 'articles:detail' slug='chronic-thromboembolic-pulmonary-hypertension' %}" 
-                           class="group overflow-hidden rounded-2xl border border-surface-border dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-brand-purple dark:hover:border-purple-500 hover:shadow-lg transition-all flex flex-col md:flex-row md:col-span-2">
-                            <div class="h-48 md:h-auto md:w-2/5 overflow-hidden bg-slate-100 dark:bg-slate-800 relative">
+                           class="group flex flex-col overflow-hidden rounded-2xl border border-surface-border bg-white transition-all hover:border-brand-purple hover:shadow-lg dark:border-slate-800 dark:bg-slate-900 dark:hover:border-purple-500 md:col-span-2 md:flex-row">
+                            <div class="relative h-48 overflow-hidden bg-slate-100 dark:bg-slate-800 md:h-auto md:w-2/5">
                                 <img src="https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&w=600&q=80" 
-                                     alt="{% trans 'Bloc opératoire et chirurgie vasculaire' %}" 
-                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                     onerror="this.src='https://placehold.co/600x400/1e293b/ffffff?text=Chirurgie+HTP-TEC'">
-                                <span class="absolute top-3 left-3 px-2.5 py-1 rounded-md text-[10px] font-bold bg-white/90 dark:bg-slate-900/90 text-brand-purple dark:text-purple-400 uppercase tracking-wider backdrop-blur-sm">
-                                    {% trans "Article 05 — Chirurgie" %}
+                                     alt="{% trans 'Operating room and vascular surgery' %}" 
+                                     class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105">
+                                <span class="absolute left-3 top-3 rounded-md bg-white/90 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-brand-purple backdrop-blur-sm dark:bg-slate-900/90 dark:text-purple-400">
+                                    {% trans "Article 05 — Surgery" %}
                                 </span>
                             </div>
-                            <div class="p-6 md:w-3/5 flex flex-col justify-between">
+                            <div class="flex flex-col justify-between p-6 md:w-3/5">
                                 <div>
-                                    <h3 class="text-lg font-bold text-navy dark:text-slate-100 group-hover:text-brand-purple dark:group-hover:text-purple-400 transition-colors mb-3">
-                                        {% trans "L'HTAP Thromboembolique Chronique (HTP-TEC)" %}
+                                    <h3 class="mb-3 text-lg font-bold text-navy transition-colors group-hover:text-brand-purple dark:text-slate-100 dark:group-hover:text-purple-400">
+                                        {% trans "Chronic Thromboembolic Pulmonary Hypertension (CTEPH)" %}
                                     </h3>
-                                    <p class="text-xs text-text-secondary dark:text-slate-400 leading-relaxed mb-3">
-                                        {% trans "Prise en charge de la maladie thrombo-embolique, interventions spécialisées et traitements par angioplastie." %}
+                                    <p class="mb-3 text-xs leading-relaxed text-text-secondary dark:text-slate-400">
+                                        {% trans "Management of thromboembolic disease, specialized surgical interventions, and angioplasty treatments." %}
                                     </p>
-                                    <ul class="space-y-1.5 text-xs text-text-secondary dark:text-slate-400 list-disc list-inside">
-                                        <li>{% trans "Angioplasties pulmonaires à l'HEGP" %}</li>
-                                        <li>{% trans "Prise en charge chirurgicale & Endartériectomie" %}</li>
+                                    <ul class="list-inside list-disc space-y-1.5 text-xs text-text-secondary dark:text-slate-400">
+                                        <li>{% trans "Pulmonary angioplasties at HEGP" %}</li>
+                                        <li>{% trans "Surgical management & Endarterectomy" %}</li>
                                     </ul>
                                 </div>
-                                <div class="mt-5 pt-4 border-t border-surface-border/60 dark:border-slate-800 flex items-center justify-between text-xs font-semibold text-brand-purple dark:text-purple-400">
-                                    <span>{% trans "Lire la suite" %}</span>
-                                    <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                                <div class="mt-5 flex items-center justify-between border-t border-surface-border/60 pt-4 text-xs font-semibold text-brand-purple dark:border-slate-800 dark:text-purple-400">
+                                    <span>{% trans "Read more" %}</span>
+                                    <i data-lucide="arrow-right" class="h-4 w-4 transition-transform group-hover:translate-x-1"></i>
                                 </div>
                             </div>
                         </a>
 
                     </div>
-                </div>
+                </section>
 
                 <!-- Medical Disclaimer Block -->
-                <div id="disclaimer" class="scroll-mt-28 p-6 rounded-2xl bg-background-soft dark:bg-slate-900 border border-surface-border dark:border-slate-800 relative">
+                <section id="disclaimer" class="scroll-mt-28 rounded-2xl border border-surface-border bg-background-soft p-6 dark:border-slate-800 dark:bg-slate-900">
                     <div class="flex items-start gap-3">
-                        <i data-lucide="shield-alert" class="w-5 h-5 text-brand-purple dark:text-purple-400 shrink-0 mt-0.5"></i>
-                        <div class="text-xs text-text-secondary dark:text-slate-400 leading-relaxed">
-                            <strong class="text-navy dark:text-slate-200 block mb-1 font-bold">{% trans "Avertissement Médical Important" %}</strong>
-                            {% trans "Les informations présentées sur ce site sont destinées à soutenir et non à remplacer la relation entre le patient et son médecin. Seul un professionnel de santé qualifié est habilité à poser un diagnostic et à prescrire un traitement adapté." %}
+                        <i data-lucide="shield-alert" class="mt-0.5 h-5 w-5 shrink-0 text-brand-purple dark:text-purple-400"></i>
+                        <div class="text-xs leading-relaxed text-text-secondary dark:text-slate-400">
+                            <strong class="mb-1 block font-bold text-navy dark:text-slate-200">{% trans "Important Medical Disclaimer" %}</strong>
+                            {% trans "The information provided on this site is designed to support, not replace, the relationship between a patient and their physician. Only a qualified healthcare professional is authorized to make a diagnosis and prescribe appropriate treatment." %}
                         </div>
                     </div>
-                </div>
+                </section>
 
             </div>
 

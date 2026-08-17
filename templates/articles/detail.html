@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load i18n static %}
 
-{% block title %}{{ translation.meta_title|default:translation.title }} — HTAP Algérie{% endblock %}
+{% block title %}{{ translation.meta_title|default:translation.title }} — HTAP Algeria{% endblock %}
 
 {% block meta %}
     {% if translation.meta_description %}
@@ -10,107 +10,113 @@
 {% endblock %}
 
 {% block content %}
-<article class="py-12 bg-white dark:bg-slate-900 transition-colors">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+<article class="bg-white py-12 transition-colors dark:bg-slate-900">
+    <div class="mx-auto max-w-4xl space-y-8 px-4 sm:px-6 lg:px-8">
 
-        <!-- Fil d'ariane & En-tête -->
-        <div class="space-y-4">
-            <a href="{% url 'articles:list' %}" class="inline-flex items-center gap-2 text-xs font-semibold text-brand-purple dark:text-brand-rose hover:underline">
-                <i data-lucide="arrow-left" class="w-4 h-4 rtl:rotate-180"></i>
-                <span>{% translate "Retour aux articles" %}</span>
+        <!-- Breadcrumb & Header -->
+        <header class="space-y-4">
+            <a href="{% url 'articles:list' %}" class="inline-flex items-center gap-2 text-xs font-semibold text-brand-purple hover:underline dark:text-brand-rose">
+                <i data-lucide="arrow-left" class="h-4 w-4 rtl:rotate-180"></i>
+                <span>{% translate "Back to articles" %}</span>
             </a>
 
-            <div class="flex items-center gap-3 flex-wrap text-xs text-slate-500">
+            <div class="flex flex-wrap items-center gap-3 text-xs text-slate-500 dark:text-slate-400">
                 {% if article.category %}
-                    <span class="px-2.5 py-1 rounded-md bg-brand-purple/10 text-brand-purple dark:text-brand-rose font-bold">
+                    <span class="rounded-md bg-brand-purple/10 px-2.5 py-1 font-bold text-brand-purple dark:bg-brand-rose/10 dark:text-brand-rose">
                         {{ article.category.name }}
                     </span>
+                    <span>•</span>
                 {% endif %}
-                <span>•</span>
-                <span>{{ article.published_at|date:"d F Y" }}</span>
+                <time datetime="{{ article.published_at|date:'Y-m-d' }}">{{ article.published_at|date:"d F Y" }}</time>
                 {% if article.author %}
                     <span>•</span>
-                    <span>{% translate "Par" %} <strong>{{ article.author }}</strong></span>
+                    <span>{% translate "By" %} <strong class="text-slate-700 dark:text-slate-300">{{ article.author }}</strong></span>
                 {% endif %}
             </div>
 
-            <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white leading-tight">
+            <h1 class="text-3xl font-extrabold leading-tight text-slate-900 dark:text-white sm:text-4xl md:text-5xl">
                 {{ translation.title }}
             </h1>
 
             {% if translation.excerpt %}
-                <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 font-medium leading-relaxed border-l-4 border-brand-purple pl-4 italic">
+                <p class="border-l-4 border-brand-purple pl-4 text-base font-medium italic leading-relaxed text-slate-600 dark:border-brand-rose dark:text-slate-300 sm:text-lg">
                     {{ translation.excerpt }}
                 </p>
             {% endif %}
-        </div>
+        </header>
 
-        <!-- Image Principale -->
+        <!-- Main Featured Image -->
         {% if article.featured_image %}
-            <div class="rounded-3xl overflow-hidden shadow-lg max-h-[450px]">
-                <img src="{{ article.featured_image.url }}" alt="{{ translation.title }}" class="w-full h-full object-cover">
-            </div>
+            <figure class="overflow-hidden rounded-3xl shadow-lg">
+                <img src="{{ article.featured_image.url }}" 
+                     alt="{{ translation.title }}" 
+                     class="max-h-[450px] w-full object-cover">
+            </figure>
         {% endif %}
 
-        <!-- Blocs de Contenu (ArticleBlock) -->
-        <div class="space-y-8 text-slate-700 dark:text-slate-300 leading-relaxed pt-6 border-t border-slate-100 dark:border-slate-800">
+        <!-- Content Blocks (ArticleBlock) -->
+        <div class="space-y-8 border-t border-slate-100 pt-6 leading-relaxed text-slate-700 dark:border-slate-800 dark:text-slate-300">
             {% for block in blocks %}
                 
                 {% if block.block_type == 'heading' %}
-                    <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mt-8 mb-4">
+                    <h2 class="mb-4 mt-8 text-2xl font-bold text-slate-900 dark:text-white sm:text-3xl">
                         {{ block.title|default:block.text }}
                     </h2>
 
                 {% elif block.block_type == 'paragraph' %}
-                    <div class="prose dark:prose-invert max-w-none text-sm sm:text-base whitespace-pre-line">
+                    <div class="prose max-w-none text-sm whitespace-pre-line dark:prose-invert sm:text-base">
                         {{ block.text }}
                     </div>
 
                 {% elif block.block_type == 'image' %}
                     <figure class="my-8 space-y-2">
                         {% if block.image %}
-                            <div class="rounded-2xl overflow-hidden shadow-md">
-                                <img src="{{ block.image.url }}" alt="{{ block.image_caption }}" class="w-full max-h-[500px] object-cover">
+                            <div class="overflow-hidden rounded-2xl shadow-md">
+                                <img src="{{ block.image.url }}" 
+                                     alt="{{ block.image_caption|default:translation.title }}" 
+                                     class="max-h-[500px] w-full object-cover">
                             </div>
                         {% endif %}
                         {% if block.image_caption %}
-                            <figcaption class="text-center text-xs text-slate-500 italic">
+                            <figcaption class="text-center text-xs italic text-slate-500 dark:text-slate-400">
                                 {{ block.image_caption }}
                             </figcaption>
                         {% endif %}
                     </figure>
 
                 {% elif block.block_type == 'quote' %}
-                    <blockquote class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border-l-4 border-brand-rose text-slate-900 dark:text-white font-serif text-lg italic my-6 space-y-2">
+                    <blockquote class="my-6 space-y-2 rounded-2xl border-l-4 border-brand-rose bg-slate-50 p-6 font-serif text-lg italic text-slate-900 dark:bg-slate-800/60 dark:text-white">
                         <p>“{{ block.text }}”</p>
                         {% if block.title %}
-                            <cite class="block text-xs font-sans font-bold text-slate-500 not-italic">— {{ block.title }}</cite>
+                            <cite class="block font-sans text-xs font-bold not-italic text-slate-500 dark:text-slate-400">— {{ block.title }}</cite>
                         {% endif %}
                     </blockquote>
                 {% endif %}
 
             {% empty %}
-                <p class="text-slate-400 italic">{% translate "Contenu en cours de rédaction..." %}</p>
+                <p class="italic text-slate-400 dark:text-slate-500">{% translate "Content under preparation..." %}</p>
             {% endfor %}
         </div>
 
-        <!-- Articles Reliés -->
+        <!-- Related Articles -->
         {% if related_articles %}
-            <div class="pt-12 border-t border-slate-200 dark:border-slate-800 space-y-6">
-                <h3 class="text-xl font-bold text-slate-900 dark:text-white">{% translate "Articles similaires" %}</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <section class="space-y-6 border-t border-slate-200 pt-12 dark:border-slate-800">
+                <h3 class="text-xl font-bold text-slate-900 dark:text-white">{% translate "Related articles" %}</h3>
+                <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
                     {% for item in related_articles %}
                         {% with item.current_translation.0 as rel_trans %}
-                        <a href="{{ item.get_absolute_url }}" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
-                            <span class="text-[10px] text-slate-400">{{ item.published_at|date:"d M Y" }}</span>
-                            <h4 class="font-bold text-sm text-slate-900 dark:text-white line-clamp-2 group-hover:text-brand-purple dark:group-hover:text-brand-rose transition-colors mt-1">
+                        <a href="{{ item.get_absolute_url }}" class="group block rounded-xl bg-slate-50 p-4 transition-colors hover:bg-slate-100 dark:bg-slate-800/50 dark:hover:bg-slate-800">
+                            <time datetime="{{ item.published_at|date:'Y-m-d' }}" class="text-[10px] text-slate-400 dark:text-slate-500">
+                                {{ item.published_at|date:"d M Y" }}
+                            </time>
+                            <h4 class="mt-1 line-clamp-2 text-sm font-bold text-slate-900 transition-colors group-hover:text-brand-purple dark:text-white dark:group-hover:text-brand-rose">
                                 {{ rel_trans.title }}
                             </h4>
                         </a>
                         {% endwith %}
                     {% endfor %}
                 </div>
-            </div>
+            </section>
         {% endif %}
 
     </div>

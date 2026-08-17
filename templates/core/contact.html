@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% load i18n static %}
 
-{% block title %}{% translate "Contact & Assistance" %} - HTAP Algérie{% endblock %}
+{% block title %}{% translate "Contact & Support" %} - HTAP Algeria{% endblock %}
 
 {% block content %}
-<main class="flex-grow py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+<section class="flex-grow py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
     
     <!-- Page Header -->
-    {% include "components/section_header.html" with align="center" eyebrow="Formulaire de Contact" title="Contactez-nous" description="L'équipe d'HTAP Algérie est à votre disposition pour toute question, demande d'information ou besoin d'accompagnement. Nous vous répondrons dans les plus brefs délais." %}
+    {% include "components/section_header.html" with align="center" eyebrow="Contact Form" title="Get in Touch" description="The HTAP Algeria team is at your disposal for any questions, information requests, or support needs. We will respond as soon as possible." %}
 
     <!-- Bento Grid Layout -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
@@ -18,7 +18,7 @@
             <!-- Contact Details Card -->
             <div class="bg-white dark:bg-slate-900 rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 dark:border-slate-800 hover:-translate-y-0.5 transition-all duration-300">
                 <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-6">
-                    {% translate "Nos Coordonnées" %}
+                    {% translate "Contact Details" %}
                 </h2>
                 
                 <ul class="space-y-6">
@@ -32,10 +32,10 @@
                         </div>
                         <div>
                             <span class="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-0.5">
-                                {% translate "Adresse" %}
+                                {% translate "Address" %}
                             </span>
                             <span class="text-sm sm:text-base font-medium text-slate-900 dark:text-slate-200 leading-snug">
-                                {{ association_info.address|default:"50 ex 60, Birkhadem, Alger"|linebreaksbr }}
+                                {{ association_info.address|default:"50 ex 60, Birkhadem, Algiers"|linebreaksbr }}
                             </span>
                         </div>
                     </li>
@@ -49,11 +49,13 @@
                         </div>
                         <div>
                             <span class="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-0.5">
-                                {% translate "Téléphone" %}
+                                {% translate "Phone" %}
                             </span>
-                            <a href="tel:{{ association_info.phone|default:'+213550054444' }}" class="text-sm sm:text-base font-medium text-slate-900 dark:text-slate-200 hover:text-violet-600 dark:hover:text-violet-400 transition-colors">
-                                {{ association_info.phone|default:"+213 550-05-44-44" }}
+                            {% with phone_number=association_info.phone|default:"+213 550-05-44-44" %}
+                            <a href="tel:{{ phone_number|cut:' '|cut:'-' }}" class="text-sm sm:text-base font-medium text-slate-900 dark:text-slate-200 hover:text-violet-600 dark:hover:text-violet-400 transition-colors">
+                                {{ phone_number }}
                             </a>
+                            {% endwith %}
                         </div>
                     </li>
 
@@ -85,36 +87,33 @@
                     allowfullscreen="" 
                     loading="lazy" 
                     referrerpolicy="no-referrer-when-downgrade"
-                    title="{% translate 'Localisation HTAP Algérie - Birkhadem, Alger' %}">
+                    title="{% translate 'HTAP Algeria Location - Birkhadem, Algiers' %}">
                 </iframe>
-                <div class="absolute inset-0 bg-slate-900/10 dark:bg-slate-950/20 flex items-center justify-center pointer-events-none">
-                    <div class="bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm p-3 rounded-full shadow-lg text-slate-800 dark:text-slate-200">
-                        <svg class="w-6 h-6 fill-none stroke-current stroke-2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                            <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon>
-                            <line x1="9" x2="9" y1="3" y2="18"></line>
-                            <line x1="15" x2="15" y1="6" y2="21"></line>
-                        </svg>
-                    </div>
-                </div>
             </div>
 
             <!-- Social Links -->
             <div class="flex items-center gap-3">
-                <a href="{{ association_info.facebook_url|default:'#' }}" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="w-11 h-11 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-700 dark:text-slate-300 hover:bg-violet-600 dark:hover:bg-violet-600 hover:border-violet-600 dark:hover:border-violet-600 hover:text-white dark:hover:text-white transition-all shadow-sm">
+                {% if association_info.facebook_url %}
+                <a href="{{ association_info.facebook_url }}" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="w-11 h-11 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-700 dark:text-slate-300 hover:bg-violet-600 dark:hover:bg-violet-600 hover:border-violet-600 dark:hover:border-violet-600 hover:text-white transition-all shadow-sm">
                     <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
                         <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                     </svg>
                 </a>
-                <a href="{{ association_info.instagram_url|default:'#' }}" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="w-11 h-11 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-700 dark:text-slate-300 hover:bg-violet-600 dark:hover:bg-violet-600 hover:border-violet-600 dark:hover:border-violet-600 hover:text-white dark:hover:text-white transition-all shadow-sm">
+                {% endif %}
+                {% if association_info.instagram_url %}
+                <a href="{{ association_info.instagram_url }}" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="w-11 h-11 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-700 dark:text-slate-300 hover:bg-violet-600 dark:hover:bg-violet-600 hover:border-violet-600 dark:hover:border-violet-600 hover:text-white transition-all shadow-sm">
                     <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
                         <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                     </svg>
                 </a>
-                <a href="{{ association_info.linkedin_url|default:'#' }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="w-11 h-11 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-700 dark:text-slate-300 hover:bg-violet-600 dark:hover:bg-violet-600 hover:border-violet-600 dark:hover:border-violet-600 hover:text-white dark:hover:text-white transition-all shadow-sm">
+                {% endif %}
+                {% if association_info.linkedin_url %}
+                <a href="{{ association_info.linkedin_url }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="w-11 h-11 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-700 dark:text-slate-300 hover:bg-violet-600 dark:hover:bg-violet-600 hover:border-violet-600 dark:hover:border-violet-600 hover:text-white transition-all shadow-sm">
                     <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
                         <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
                     </svg>
                 </a>
+                {% endif %}
             </div>
         </div>
 
@@ -122,10 +121,10 @@
         <div class="lg:col-span-7">
             <div class="bg-white dark:bg-slate-900 rounded-2xl p-6 sm:p-8 lg:p-10 shadow-sm border border-slate-200 dark:border-slate-800">
                 <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-2">
-                    {% translate "Envoyez-nous un message" %}
+                    {% translate "Send Us a Message" %}
                 </h2>
                 <p class="text-sm sm:text-base text-slate-600 dark:text-slate-400 mb-8">
-                    {% translate "Remplissez le formulaire ci-dessous et nous vous contacterons rapidement." %}
+                    {% translate "Fill out the form below and we will get back to you shortly." %}
                 </p>
 
                 <!-- Django Messages Alerts -->
@@ -143,16 +142,16 @@
                     {% csrf_token %}
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Nom -->
+                        <!-- Full Name -->
                         <div>
                             <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-2" for="id_name">
-                                {% translate "Nom complet" %} <span class="text-rose-500 dark:text-rose-400">*</span>
+                                {% translate "Full Name" %} <span class="text-rose-500 dark:text-rose-400">*</span>
                             </label>
                             <input type="text" 
                                    id="id_name" 
                                    name="name" 
                                    value="{{ form.name.value|default:'' }}"
-                                   placeholder="{% translate 'Votre nom' %}" 
+                                   placeholder="{% translate 'Your full name' %}" 
                                    required 
                                    class="w-full bg-slate-50 dark:bg-slate-800/60 border border-slate-300 dark:border-slate-700 focus:border-violet-600 dark:focus:border-violet-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-violet-600/20 rounded-xl px-4 py-3 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 text-sm transition-all outline-none {% if form.name.errors %}border-red-500 dark:border-red-500{% endif %}" />
                             {% if form.name.errors %}
@@ -163,13 +162,13 @@
                         <!-- Email -->
                         <div>
                             <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-2" for="id_email">
-                                {% translate "Adresse email" %} <span class="text-rose-500 dark:text-rose-400">*</span>
+                                {% translate "Email Address" %} <span class="text-rose-500 dark:text-rose-400">*</span>
                             </label>
                             <input type="email" 
                                    id="id_email" 
                                    name="email" 
                                    value="{{ form.email.value|default:'' }}"
-                                   placeholder="exemple@email.com" 
+                                   placeholder="example@email.com" 
                                    required 
                                    class="w-full bg-slate-50 dark:bg-slate-800/60 border border-slate-300 dark:border-slate-700 focus:border-violet-600 dark:focus:border-violet-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-violet-600/20 rounded-xl px-4 py-3 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 text-sm transition-all outline-none {% if form.email.errors %}border-red-500 dark:border-red-500{% endif %}" />
                             {% if form.email.errors %}
@@ -179,10 +178,10 @@
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Téléphone -->
+                        <!-- Phone -->
                         <div>
                             <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-2" for="id_phone">
-                                {% translate "Téléphone" %}
+                                {% translate "Phone Number" %}
                             </label>
                             <input type="tel" 
                                    id="id_phone" 
@@ -198,23 +197,23 @@
                         <!-- Wilaya -->
                         <div>
                             <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-2" for="id_wilaya">
-                                {% translate "Wilaya" %} <span class="text-rose-500 dark:text-rose-400">*</span>
+                                {% translate "Province (Wilaya)" %} <span class="text-rose-500 dark:text-rose-400">*</span>
                             </label>
                             <select id="id_wilaya" 
                                     name="wilaya" 
                                     required 
                                     class="w-full bg-slate-50 dark:bg-slate-800/60 border border-slate-300 dark:border-slate-700 focus:border-violet-600 dark:focus:border-violet-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-violet-600/20 rounded-xl px-4 py-3 text-slate-900 dark:text-slate-100 text-sm transition-all outline-none {% if form.wilaya.errors %}border-red-500 dark:border-red-500{% endif %}">
-                                <option value="" disabled {% if not form.wilaya.value %}selected{% endif %} class="dark:bg-slate-800">{% translate "Sélectionnez votre wilaya" %}</option>
+                                <option value="" disabled {% if not form.wilaya.value %}selected{% endif %} class="dark:bg-slate-800">{% translate "Select your wilaya" %}</option>
                                 {% if form.wilaya.field.choices %}
                                     {% for value, label in form.wilaya.field.choices %}
                                         <option value="{{ value }}" {% if form.wilaya.value == value %}selected{% endif %} class="dark:bg-slate-800">{{ label }}</option>
                                     {% endfor %}
                                 {% else %}
-                                    <option value="16" class="dark:bg-slate-800">16 - Alger</option>
+                                    <option value="16" class="dark:bg-slate-800">16 - Algiers</option>
                                     <option value="09" class="dark:bg-slate-800">09 - Blida</option>
                                     <option value="31" class="dark:bg-slate-800">31 - Oran</option>
                                     <option value="13" class="dark:bg-slate-800">13 - Tlemcen</option>
-                                    <option value="autre" class="dark:bg-slate-800">{% translate "Autre" %}</option>
+                                    <option value="other" class="dark:bg-slate-800">{% translate "Other" %}</option>
                                 {% endif %}
                             </select>
                             {% if form.wilaya.errors %}
@@ -223,25 +222,25 @@
                         </div>
                     </div>
 
-                    <!-- Sujet -->
+                    <!-- Subject -->
                     <div>
                         <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-2" for="id_subject">
-                            {% translate "Sujet de votre demande" %} <span class="text-rose-500 dark:text-rose-400">*</span>
+                            {% translate "Subject of Interest" %} <span class="text-rose-500 dark:text-rose-400">*</span>
                         </label>
                         <select id="id_subject" 
                                 name="subject" 
                                 required 
                                 class="w-full bg-slate-50 dark:bg-slate-800/60 border border-slate-300 dark:border-slate-700 focus:border-violet-600 dark:focus:border-violet-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-violet-600/20 rounded-xl px-4 py-3 text-slate-900 dark:text-slate-100 text-sm transition-all outline-none {% if form.subject.errors %}border-red-500 dark:border-red-500{% endif %}">
-                            <option value="" disabled {% if not form.subject.value %}selected{% endif %} class="dark:bg-slate-800">{% translate "Sélectionnez un sujet" %}</option>
+                            <option value="" disabled {% if not form.subject.value %}selected{% endif %} class="dark:bg-slate-800">{% translate "Select a subject" %}</option>
                             {% if form.subject.field.choices %}
                                 {% for value, label in form.subject.field.choices %}
                                     <option value="{{ value }}" {% if form.subject.value == value %}selected{% endif %} class="dark:bg-slate-800">{{ label }}</option>
                                 {% endfor %}
                             {% else %}
-                                <option value="info" class="dark:bg-slate-800">{% translate "Demande d'information sur l'HTAP" %}</option>
-                                <option value="aide" class="dark:bg-slate-800">{% translate "Demande d'aide / accompagnement" %}</option>
-                                <option value="don" class="dark:bg-slate-800">{% translate "Faire un don ou devenir bénévole" %}</option>
-                                <option value="autre" class="dark:bg-slate-800">{% translate "Autre demande" %}</option>
+                                <option value="info" class="dark:bg-slate-800">{% translate "Information about HTAP" %}</option>
+                                <option value="help" class="dark:bg-slate-800">{% translate "Request for assistance / support" %}</option>
+                                <option value="donate" class="dark:bg-slate-800">{% translate "Make a donation or volunteer" %}</option>
+                                <option value="other" class="dark:bg-slate-800">{% translate "Other inquiry" %}</option>
                             {% endif %}
                         </select>
                         {% if form.subject.errors %}
@@ -252,13 +251,13 @@
                     <!-- Message -->
                     <div>
                         <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-2" for="id_message">
-                            {% translate "Votre message" %} <span class="text-rose-500 dark:text-rose-400">*</span>
+                            {% translate "Your Message" %} <span class="text-rose-500 dark:text-rose-400">*</span>
                         </label>
                         <textarea id="id_message" 
                                   name="message" 
                                   rows="5" 
                                   required 
-                                  placeholder="{% translate 'Comment pouvons-nous vous aider ?' %}" 
+                                  placeholder="{% translate 'How can we help you?' %}" 
                                   class="w-full bg-slate-50 dark:bg-slate-800/60 border border-slate-300 dark:border-slate-700 focus:border-violet-600 dark:focus:border-violet-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-violet-600/20 rounded-xl px-4 py-3 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 text-sm transition-all outline-none resize-none {% if form.message.errors %}border-red-500 dark:border-red-500{% endif %}">{{ form.message.value|default:'' }}</textarea>
                         {% if form.message.errors %}
                             <p class="mt-1 text-xs text-red-600 dark:text-red-400">{{ form.message.errors.0 }}</p>
@@ -273,8 +272,8 @@
                             <line x1="12" x2="12.01" y1="16" y2="16"></line>
                         </svg>
                         <p class="text-xs text-amber-900 dark:text-amber-200 leading-relaxed">
-                            <strong class="font-semibold text-amber-900 dark:text-amber-100">{% translate "Avertissement de confidentialité :" %}</strong> 
-                            {% translate "Veuillez ne pas inclure de données médicales sensibles ou de dossiers médicaux personnels dans ce formulaire. Ce canal est destiné aux demandes générales et administratives." %}
+                            <strong class="font-semibold text-amber-900 dark:text-amber-100">{% translate "Privacy Notice:" %}</strong> 
+                            {% translate "Please do not include sensitive medical data or personal health records in this form. This channel is intended for general and administrative inquiries only." %}
                         </p>
                     </div>
 
@@ -284,10 +283,11 @@
                             <input type="checkbox" 
                                    id="id_consent" 
                                    name="consent" 
+                                   {% if form.consent.value %}checked{% endif %}
                                    required 
                                    class="mt-1 w-4 h-4 text-violet-600 bg-slate-50 dark:bg-slate-800 border-slate-300 dark:border-slate-700 rounded focus:ring-violet-500 focus:ring-2 dark:checked:bg-violet-600" />
                             <label for="id_consent" class="text-xs text-slate-600 dark:text-slate-400 cursor-pointer leading-snug">
-                                {% translate "J'accepte que les informations saisies soient exploitées dans le cadre de ma demande et de la relation d'aide qui peut en découler." %}
+                                {% translate "I agree that the submitted information may be used to process my request and manage any subsequent support interactions." %}
                             </label>
                         </div>
                         {% if form.consent.errors %}
@@ -299,8 +299,7 @@
                     <div class="pt-2">
                         <button type="submit" 
                                 class="group inline-flex items-center justify-center gap-2 rounded-full bg-violet-800 dark:bg-violet-600 px-8 py-4 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-violet-700 dark:hover:bg-violet-500 hover:shadow-lg hover:shadow-violet-700/20">
-                                <!-- class="w-full md:w-auto bg-slate-900 dark:bg-violet-600 hover:bg-violet-700 dark:hover:bg-violet-500 text-white font-semibold text-sm px-8 py-4 rounded-xl transition-all shadow-sm flex items-center justify-center gap-2 group"> -->
-                            <span>{% translate "Envoyer le message" %}</span>
+                            <span>{% translate "Send Message" %}</span>
                             <svg class="w-4 h-4 fill-none stroke-current stroke-2 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
                                 <line x1="22" y1="2" x2="11" y2="13"></line>
                                 <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
@@ -312,5 +311,5 @@
         </div>
 
     </div>
-</main>
+</section>
 {% endblock %}

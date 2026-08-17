@@ -1,43 +1,43 @@
 {% extends "base.html" %}
 {% load i18n static %}
 
-{% block title %}{% translate "À propos de nous" %} — HTAP Algérie{% endblock %}
+{% block title %}{% translate "About Us" %} — HTAP Algérie{% endblock %}
 
 {% block content %}
-<!-- 1. En-tête Hero -->
+<!-- 1. Hero Header -->
 <section class="relative bg-gradient-to-br from-slate-900 via-navy to-slate-900 text-white py-16 md:py-20 overflow-hidden">
     <div class="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 bg-brand-purple/20 rounded-full blur-3xl pointer-events-none"></div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-4">
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-xs font-semibold uppercase tracking-wider text-brand-rose">
-            {% translate "Qui sommes-nous ?" %}
+            {% translate "Who are we?" %}
         </div>
         <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight">
-            {% translate "À propos de HTAP Algérie" %}
+            {% translate "About HTAP Algérie" %}
         </h1>
         <p class="text-slate-300 max-w-3xl mx-auto text-sm sm:text-base leading-relaxed">
-            {% translate "L'Association d'Hypertension Artérielle Pulmonaire d'Algérie (HTAP Algérie) est un organisme national de bienfaisance enregistré." %}
+            {% translate "The Pulmonary Arterial Hypertension Association of Algeria (HTAP Algérie) is a registered national charitable organization." %}
         </p>
     </div>
 </section>
 
-<!-- 2. Notre Mission & Présentation -->
+<!-- 2. Our Mission & Overview -->
 <section class="py-16 bg-white dark:bg-slate-900 transition-colors border-b border-slate-200 dark:border-slate-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
             <div class="lg:col-span-7 space-y-6">
                 <span class="text-xs font-bold uppercase tracking-wider text-brand-purple dark:text-brand-rose">
-                    {% translate "Notre Engagement" %}
+                    {% translate "Our Commitment" %}
                 </span>
                 <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">
-                    {% translate "Mettre un terme à l'invisibilité et à l'isolement" %}
+                    {% translate "Putting an end to invisibility and isolation" %}
                 </h2>
                 <div class="space-y-4 text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
                     <p>
-                        {% translate "Notre mission est d'autonomiser la communauté algérienne de lutte contre l'hypertension pulmonaire par l'entremise de la sensibilisation, de l'appui, de l'éducation, de la recherche et du soutien offert aux personnes atteintes d'HTP. Nous visons à briser l'invisibilité et l'isolement que vivent souvent les personnes touchées par cette maladie grave et rare." %}
+                        {% translate "Our mission is to empower the Algerian community fighting against pulmonary hypertension through awareness, advocacy, education, research, and support provided to individuals affected by PAH. We aim to break the invisibility and isolation often experienced by those affected by this severe and rare disease." %}
                     </p>
                     <p>
-                        {% translate "HTAP Algérie offre entre autres aux patients de l'information sur la maladie, du support psychologique, et permet un échange d'expériences précieux entre les personnes atteintes. Notre but principal reste de briser l'isolement de chaque patient." %}
+                        {% translate "HTAP Algérie offers patients information about the disease, psychological support, and a valuable platform to exchange experiences among those affected. Our primary goal remains to break the isolation of every patient." %}
                     </p>
                 </div>
             </div>
@@ -48,9 +48,9 @@
                     <div class="p-3 w-fit rounded-xl bg-violet-100 dark:bg-violet-900/40 text-brand-purple dark:text-brand-rose">
                         <i data-lucide="heart-handshake" class="w-8 h-8"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-900 dark:text-white">{% translate "Un Soutien Continu" %}</h3>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white">{% translate "Continuous Support" %}</h3>
                     <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
-                        {% translate "Nous accompagnons les malades et leurs proches au quotidien à travers un réseau d'entraide, d'orientation médicale et de soutien moral spécialisé." %}
+                        {% translate "We support patients and their loved ones daily through a network of mutual aid, medical guidance, and specialized emotional support." %}
                     </p>
                 </div>
             </div>
@@ -59,7 +59,119 @@
     </div>
 </section>
 
-<!-- 3. Galerie d'images (10 Photos) -->
+<!-- 3. Founder & Tribute -->
+<section class="relative overflow-hidden border-b border-slate-200 bg-slate-50 py-20 dark:border-slate-800 dark:bg-slate-950">
+    <div class="absolute -left-24 top-20 h-72 w-72 rounded-full bg-brand-purple/10 blur-3xl pointer-events-none"></div>
+    <div class="absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-brand-rose/10 blur-3xl pointer-events-none"></div>
+
+    <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
+
+            <!-- Founder Portrait -->
+            <div class="lg:col-span-5">
+                <div class="relative mx-auto max-w-md">
+                    <div class="absolute -inset-4 rounded-[2rem] bg-gradient-to-br from-brand-purple/20 to-brand-rose/20 blur-2xl"></div>
+
+                    <div class="relative overflow-hidden rounded-[2rem] border border-white/80 bg-white p-2 shadow-xl dark:border-slate-700 dark:bg-slate-900">
+                        <div class="aspect-[4/5] overflow-hidden rounded-[1.5rem] bg-slate-200 dark:bg-slate-800">
+                            <img src="{% static 'img/mme-khadidja-ali-kacem.jpg' %}" alt="{% translate 'Mrs. Khadidja Ali Kacem, founder and first president of HTAP Algérie' %}" class="h-full w-full object-cover">
+                        </div>
+
+                        <div class="px-5 py-5 text-center">
+                            <p class="text-xs font-bold uppercase tracking-[0.2em] text-brand-purple dark:text-brand-rose">
+                                {% translate "Founder & First President" %}
+                            </p>
+
+                            <h3 class="mt-2 text-xl font-bold text-slate-900 dark:text-white">
+                                {% translate "Mrs. Khadidja Ali Kacem" %}
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tribute Content -->
+            <div class="space-y-7 lg:col-span-7">
+                <div class="space-y-3">
+                    <span class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-brand-purple dark:text-brand-rose">
+                        <span class="h-px w-8 bg-brand-purple dark:bg-brand-rose"></span>
+                        {% translate "Our Story" %}
+                    </span>
+
+                    <h2 class="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+                        {% translate "An association born from a deeply human commitment" %}
+                    </h2>
+                </div>
+
+                <div class="space-y-5 text-sm leading-7 text-slate-600 dark:text-slate-300 sm:text-base">
+                    <p>
+                        {% blocktranslate %}
+                        The KHADIDJA National Association for Pulmonary Arterial Hypertension (HTAP Algérie) was established in 2018 by its founder and first president, Mrs. Khadidja Ali Kacem.
+                        {% endblocktranslate %}
+                    </p>
+
+                    <p>
+                        {% blocktranslate %}
+                        Through her dedication, Mrs. Khadidja Ali Kacem helped give a voice to those affected by pulmonary arterial hypertension, making awareness, education, and patient support a top priority.
+                        {% endblocktranslate %}
+                    </p>
+
+                    <p>
+                        {% blocktranslate %}
+                        Today, the association bears her name in tribute to its founder and continues the mission she initiated in service of patients and their families.
+                        {% endblocktranslate %}
+                    </p>
+                </div>
+
+                <!-- Tribute Card -->
+                <div class="relative overflow-hidden rounded-2xl border border-brand-purple/15 bg-white p-6 shadow-sm dark:border-brand-purple/20 dark:bg-slate-900 sm:p-8">
+                    <div class="absolute right-0 top-0 h-24 w-24 rounded-full bg-brand-purple/5 blur-2xl"></div>
+
+                    <div class="relative flex gap-4">
+                        <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-purple/10 text-brand-purple dark:bg-brand-purple/20 dark:text-brand-rose">
+                            <i data-lucide="heart" class="h-5 w-5" aria-hidden="true"></i>
+                        </div>
+
+                        <div class="space-y-3">
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white">
+                                {% translate "In memory of Mrs. Khadidja Ali Kacem" %}
+                            </h3>
+
+                            <p class="text-sm italic leading-7 text-slate-600 dark:text-slate-300">
+                                {% blocktranslate %}
+                                May God have mercy on her soul, grant her forgiveness, and make Paradise her final abode. Her name, dedication, and work will remain deeply rooted in the memory of our association and all the individuals she supported.
+                                {% endblocktranslate %}
+                            </p>
+
+                            <div class="pt-2">
+                                <span class="text-xs font-semibold uppercase tracking-wider text-brand-purple dark:text-brand-rose">
+                                    {% translate "Founder of HTAP Algérie — 2018" %}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Association Name -->
+                <div class="flex flex-col gap-2 border-l-2 border-brand-purple pl-5 rtl:border-l-0 rtl:border-r-2 rtl:pl-0 rtl:pr-5">
+                    <span class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                        {% translate "Association Name" %}
+                    </span>
+
+                    <p class="font-semibold text-slate-900 dark:text-white">
+                        {% translate "KHADIDJA National Association for Pulmonary Arterial Hypertension" %}
+                    </p>
+
+                    <span class="text-sm font-medium text-brand-purple dark:text-brand-rose">
+                        {% translate "HTAP Algérie" %}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 3. Image Gallery (10 Photos) -->
 <!-- Swiper CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
@@ -70,10 +182,10 @@
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div class="space-y-2 max-w-2xl">
                 <span class="text-xs font-bold uppercase tracking-wider text-brand-purple dark:text-brand-rose">
-                    {% translate "En Images" %}
+                    {% translate "In Pictures" %}
                 </span>
                 <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">
-                    {% translate "Galerie & Activités" %}
+                    {% translate "Gallery & Activities" %}
                 </h2>
             </div>
 
@@ -228,104 +340,104 @@
     });
 </script>
 
-<!-- 4. Les Objectifs de l'Organisation -->
+<!-- 4. Organization Objectives -->
 <section class="py-16 bg-slate-50 dark:bg-slate-950 transition-colors">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         <div class="text-center max-w-2xl mx-auto space-y-3">
             <span class="text-xs font-bold uppercase tracking-wider text-brand-purple dark:text-brand-rose">
-                {% translate "Nos Actions" %}
+                {% translate "Our Actions" %}
             </span>
             <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">
-                {% translate "Les objectifs de l'organisation" %}
+                {% translate "Organization Objectives" %}
             </h2>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-3">
                 <div class="text-brand-purple dark:text-brand-rose font-black text-lg">01</div>
-                <h3 class="font-bold text-slate-900 dark:text-white text-base">{% translate "Sensibilisation Précoce" %}</h3>
+                <h3 class="font-bold text-slate-900 dark:text-white text-base">{% translate "Early Awareness" %}</h3>
                 <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                    {% translate "Introduire l'hypertension pulmonaire et ses symptômes pour permettre un traitement dès les premiers stades de la maladie." %}
+                    {% translate "Introduce pulmonary hypertension and its symptoms to enable treatment from the earliest stages of the disease." %}
                 </p>
             </div>
 
             <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-3">
                 <div class="text-brand-purple dark:text-brand-rose font-black text-lg">02</div>
-                <h3 class="font-bold text-slate-900 dark:text-white text-base">{% translate "Prise en Charge & Qualité de Vie" %}</h3>
+                <h3 class="font-bold text-slate-900 dark:text-white text-base">{% translate "Care & Quality of Life" %}</h3>
                 <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                    {% translate "Prendre en charge les besoins du patient, élever sa conscience morale et le former à l'utilisation d'outils comme les masques et bouteilles d'oxygène." %}
+                    {% translate "Address patient needs, raise moral awareness, and train them in using essential tools like oxygen masks and cylinders." %}
                 </p>
             </div>
 
             <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-3">
                 <div class="text-brand-purple dark:text-brand-rose font-black text-lg">03</div>
-                <h3 class="font-bold text-slate-900 dark:text-white text-base">{% translate "Accès aux Médicaments" %}</h3>
+                <h3 class="font-bold text-slate-900 dark:text-white text-base">{% translate "Access to Medication" %}</h3>
                 <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                    {% translate "Exiger la fourniture constante et pérenne des médicaments nécessaires pour supprimer les effets de la maladie." %}
+                    {% translate "Advocate for the consistent and sustainable supply of necessary medications to manage disease symptoms." %}
                 </p>
             </div>
 
             <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-3">
                 <div class="text-brand-purple dark:text-brand-rose font-black text-lg">04</div>
-                <h3 class="font-bold text-slate-900 dark:text-white text-base">{% translate "Équipements & Greffes" %}</h3>
+                <h3 class="font-bold text-slate-900 dark:text-white text-base">{% translate "Equipment & Transplants" %}</h3>
                 <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                    {% translate "Allocation de fournitures hospitalières, d'installations médicales/chirurgicales et développement des greffes d'organes (cœur-poumons)." %}
+                    {% translate "Allocation of hospital supplies, medical/surgical equipment, and advancing heart-lung organ transplantation." %}
                 </p>
             </div>
 
             <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-3">
                 <div class="text-brand-purple dark:text-brand-rose font-black text-lg">05</div>
-                <h3 class="font-bold text-slate-900 dark:text-white text-base">{% translate "Soutien Psychologique" %}</h3>
+                <h3 class="font-bold text-slate-900 dark:text-white text-base">{% translate "Psychological Support" %}</h3>
                 <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                    {% translate "Fournir un accompagnement par des psychiatres et spécialistes afin d'éviter l'aggravation de l'état psychologique des patients." %}
+                    {% translate "Provide specialized counseling by psychiatrists and mental health professionals to prevent worsening psychological distress." %}
                 </p>
             </div>
 
             <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-3">
                 <div class="text-brand-purple dark:text-brand-rose font-black text-lg">06</div>
-                <h3 class="font-bold text-slate-900 dark:text-white text-base">{% translate "Formation & Décentralisation" %}</h3>
+                <h3 class="font-bold text-slate-900 dark:text-white text-base">{% translate "Training & Decentralization" %}</h3>
                 <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                    {% translate "Former des médecins spécialisés à l'échelle nationale et rendre les traitements disponibles dans toutes les wilayas." %}
+                    {% translate "Train specialized medical personnel nationwide and ensure treatments are accessible across all provinces (wilayas)." %}
                 </p>
             </div>
 
             <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-3">
                 <div class="text-brand-purple dark:text-brand-rose font-black text-lg">07</div>
-                <h3 class="font-bold text-slate-900 dark:text-white text-base">{% translate "Journée Nationale" %}</h3>
+                <h3 class="font-bold text-slate-900 dark:text-white text-base">{% translate "National Day" %}</h3>
                 <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                    {% translate "Organiser des campagnes de sensibilisation et instaurer une Journée Nationale de l'HTAP." %}
+                    {% translate "Organize awareness campaigns and establish a National PAH Day." %}
                 </p>
             </div>
 
             <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-3">
                 <div class="text-brand-purple dark:text-brand-rose font-black text-lg">08</div>
-                <h3 class="font-bold text-slate-900 dark:text-white text-base">{% translate "Coopération Internationale" %}</h3>
+                <h3 class="font-bold text-slate-900 dark:text-white text-base">{% translate "International Cooperation" %}</h3>
                 <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                    {% translate "Établir des partenariats avec des sociétés savantes et associations nationales et étrangères." %}
+                    {% translate "Establish partnerships with learned societies as well as national and international associations." %}
                 </p>
             </div>
 
             <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-3">
                 <div class="text-brand-purple dark:text-brand-rose font-black text-lg">09</div>
-                <h3 class="font-bold text-slate-900 dark:text-white text-base">{% translate "Cellules Hospitalières" %}</h3>
+                <h3 class="font-bold text-slate-900 dark:text-white text-base">{% translate "Hospital Units" %}</h3>
                 <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                    {% translate "Affecter des cellules médicales spécialisées dans la prise en charge de l'HTAP au niveau hospitalier." %}
+                    {% translate "Establish dedicated medical units specialized in PAH management within hospital centers." %}
                 </p>
             </div>
 
             <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-3">
                 <div class="text-brand-purple dark:text-brand-rose font-black text-lg">10</div>
-                <h3 class="font-bold text-slate-900 dark:text-white text-base">{% translate "Recherche Scientifique" %}</h3>
+                <h3 class="font-bold text-slate-900 dark:text-white text-base">{% translate "Scientific Research" %}</h3>
                 <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                    {% translate "Développer le champ des études sur l'HTAP et fournir des moyens de recherche aux spécialistes." %}
+                    {% translate "Expand research initiatives on PAH and equip medical specialists with dedicated research tools." %}
                 </p>
             </div>
 
             <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-3 md:col-span-2 lg:col-span-2">
                 <div class="text-brand-purple dark:text-brand-rose font-black text-lg">11</div>
-                <h3 class="font-bold text-slate-900 dark:text-white text-base">{% translate "Dépistage Précoce Perinatal" %}</h3>
+                <h3 class="font-bold text-slate-900 dark:text-white text-base">{% translate "Early Perinatal Screening" %}</h3>
                 <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                    {% translate "Encourager le diagnostic précoce pendant la grossesse et dès la naissance afin d'éviter l'apparition de complications." %}
+                    {% translate "Promote early diagnosis during pregnancy and immediately at birth to prevent severe complications." %}
                 </p>
             </div>
 
@@ -333,18 +445,18 @@
     </div>
 </section>
 
-<!-- 5. Section Équipe -->
+<!-- 5. Team Section -->
 <section class="py-16 bg-white dark:bg-slate-900 transition-colors">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         <div class="text-center max-w-2xl mx-auto space-y-3">
             <span class="text-xs font-bold uppercase tracking-wider text-brand-purple dark:text-brand-rose">
-                {% translate "Gouvernance & Bureau" %}
+                {% translate "Governance & Board" %}
             </span>
             <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">
-                {% translate "Notre Équipe" %}
+                {% translate "Our Team" %}
             </h2>
             <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm">
-                {% translate "Les personnes engagées qui dirigent et animent les actions de l'association." %}
+                {% translate "The dedicated individuals leading and driving the association's initiatives." %}
             </p>
         </div>
 
@@ -375,40 +487,40 @@
             {% else %}
                 <div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/80 dark:border-slate-700/60 text-center space-y-4 flex flex-col items-center">
                     <div class="relative w-28 h-28 rounded-full overflow-hidden bg-slate-200 dark:bg-slate-700 ring-4 ring-brand-purple/20">
-                        <img src="" alt="Président" class="w-full h-full object-cover">
+                        <img src="" alt="President" class="w-full h-full object-cover">
                     </div>
                     <div class="space-y-1">
                         <h3 class="font-bold text-slate-900 dark:text-white text-base sm:text-lg">Dr. Ahmed Benali</h3>
-                        <p class="text-xs font-medium text-brand-purple dark:text-brand-rose">{% translate "Président & Cardiologue" %}</p>
+                        <p class="text-xs font-medium text-brand-purple dark:text-brand-rose">{% translate "President & Cardiologist" %}</p>
                     </div>
                     <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed pt-2 border-t border-slate-200 dark:border-slate-700/50 w-full">
-                        {% translate "Spécialiste en pneumologie et engagé depuis plus de 10 ans dans le suivi des maladies vasculaires pulmonaires." %}
+                        {% translate "Pulmonology specialist committed for over 10 years to the care and management of pulmonary vascular diseases." %}
                     </p>
                 </div>
 
                 <div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/80 dark:border-slate-700/60 text-center space-y-4 flex flex-col items-center">
                     <div class="relative w-28 h-28 rounded-full overflow-hidden bg-slate-200 dark:bg-slate-700 ring-4 ring-brand-purple/20">
-                        <img src="" alt="Secrétaire Générale" class="w-full h-full object-cover">
+                        <img src="" alt="Secretary General" class="w-full h-full object-cover">
                     </div>
                     <div class="space-y-1">
-                        <h3 class="font-bold text-slate-900 dark:text-white text-base sm:text-lg">Mme. Sarah Mansouri</h3>
-                        <p class="text-xs font-medium text-brand-purple dark:text-brand-rose">{% translate "Secrétaire Générale" %}</p>
+                        <h3 class="font-bold text-slate-900 dark:text-white text-base sm:text-lg">Mrs. Sarah Mansouri</h3>
+                        <p class="text-xs font-medium text-brand-purple dark:text-brand-rose">{% translate "Secretary General" %}</p>
                     </div>
                     <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed pt-2 border-t border-slate-200 dark:border-slate-700/50 w-full">
-                        {% translate "Coordonne l'accompagnement des familles, la logistique des dons et les relations avec les centres hospitaliers." %}
+                        {% translate "Coordinates family support, donation logistics, and partnerships with hospital centers." %}
                     </p>
                 </div>
 
                 <div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/80 dark:border-slate-700/60 text-center space-y-4 flex flex-col items-center">
                     <div class="relative w-28 h-28 rounded-full overflow-hidden bg-slate-200 dark:bg-slate-700 ring-4 ring-brand-purple/20">
-                        <img src="" alt="Conseiller Médical" class="w-full h-full object-cover">
+                        <img src="" alt="Medical Advisor" class="w-full h-full object-cover">
                     </div>
                     <div class="space-y-1">
                         <h3 class="font-bold text-slate-900 dark:text-white text-base sm:text-lg">Dr. Karim Zerrouki</h3>
-                        <p class="text-xs font-medium text-brand-purple dark:text-brand-rose">{% translate "Responsable Comité Médical" %}</p>
+                        <p class="text-xs font-medium text-brand-purple dark:text-brand-rose">{% translate "Head of Medical Committee" %}</p>
                     </div>
                     <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed pt-2 border-t border-slate-200 dark:border-slate-700/50 w-full">
-                        {% translate "Supervise la validation scientifique des guides d'information et forme les jeunes médecins au dépistage précoce." %}
+                        {% translate "Oversees scientific validation of informational guides and trains young physicians on early screening techniques." %}
                     </p>
                 </div>
             {% endif %}
@@ -416,20 +528,19 @@
     </div>
 </section>
 
-<!-- 6. Appel à l'action -->
+<!-- 6. Call to Action -->
 <section class="py-16 bg-slate-900 text-white relative overflow-hidden">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6 relative z-10">
         <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight">
-            {% translate "Ensemble pour faire face à l'HTAP" %}
+            {% translate "Together against Pulmonary Arterial Hypertension" %}
         </h2>
         <p class="text-slate-300 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
-            {% translate "Rejoignez notre communauté pour soutenir les patients, participer aux campagnes de sensibilisation ou apporter votre expertise." %}
+            {% translate "Join our community to support patients, participate in awareness campaigns, or contribute your expertise." %}
         </p>
         <div class="pt-4 flex flex-wrap items-center justify-center gap-4">
             <a href="{% url 'core:contact' %}" 
                 class="group inline-flex items-center justify-center gap-2 rounded-full bg-violet-800 dark:bg-violet-600 px-8 py-4 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-violet-700 dark:hover:bg-violet-500 hover:shadow-lg hover:shadow-violet-700/20">
-                <!-- class="px-8 py-3.5 rounded-lg bg-brand-purple hover:bg-brand-violet text-white font-bold shadow-lg transition-all transform hover:-translate-y-0.5"> -->
-                {% translate "Nous contacter" %}
+                {% translate "Contact Us" %}
             </a>
         </div>
     </div>
