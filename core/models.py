@@ -73,10 +73,10 @@ class Member(models.Model):
             return self.role_ar or self.role_fr
         if lang == "fr":
             return self.role_fr or self.role_en
-        return self.role_en or self.role_fr or self.role_en
+        return self.role_fr or self.role_en or self.role_en
     
     def __str__(self):
-        return f"{self.name} - {self.role}"
+        return f"{self.display_name} - {self.display_role}"
 
 
 class ContactMessage(models.Model):

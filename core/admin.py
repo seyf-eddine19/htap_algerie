@@ -38,7 +38,6 @@ from .models import Member, ContactMessage
 #     list_editable = ("order", "is_active")
 #     ordering = ("order",)
 
-
 @admin.register(Member)
 class MemberAdmin(admin.ModelAdmin):
     list_display = ("display_name", "display_role", "order", "is_active")
