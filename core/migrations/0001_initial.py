@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
             name='AssociationInfo',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(default='HTaP ALGÉRIE', max_length=200, verbose_name='name')),
+                ('name', models.CharField(default='HTaP ALGERIA', max_length=200, verbose_name='name')),
                 ('full_name', models.CharField(blank=True, max_length=300, verbose_name='full name')),
                 ('description', models.TextField(blank=True, verbose_name='description')),
                 ('history', models.TextField(blank=True, verbose_name='history')),

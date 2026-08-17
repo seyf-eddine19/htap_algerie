@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-17 17:01+0100\n"
+"POT-Creation-Date: 2026-08-17 21:20+0100\n"
 "PO-Revision-Date: 2026-08-17 14:46+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: fr_FR <LL@li.org>\n"
@@ -350,50 +350,185 @@ msgstr "Messages de contact"
 msgid "Your message has been sent successfully."
 msgstr "Votre message a été envoyé avec succès."
 
+#: .\templates\activities\detail.html:45
+msgid "Breadcrumb"
+msgstr "Fil d’Ariane"
+
+#: .\templates\activities\detail.html:48
+msgid "Back to activities"
+msgstr "Retour aux activités"
+
+#: .\templates\activities\detail.html:64 .\templates\activities\list.html:80
+#: .\templates\articles\list.html:77
+msgid "Featured"
+msgstr "À la une"
+
+#: .\templates\activities\detail.html:82
+msgid "Date"
+msgstr "Date"
+
+#: .\templates\activities\detail.html:102
+msgid "Location"
+msgstr "Lieu"
+
+#: .\templates\activities\detail.html:197
+msgid "Photos"
+msgstr "Photos"
+
+#: .\templates\activities\detail.html:202
+msgid "Activity Gallery"
+msgstr "Galerie de l’activité"
+
+#: .\templates\activities\detail.html:230 .\templates\components\footer.html:15
+#: .\templates\components\navbar.html:10 .\templates\core\about.html:166
+#: .\templates\core\about.html:210 .\templates\core\about.html:217
+#: .\templates\core\about.html:224 .\templates\core\about.html:231
+#: .\templates\core\about.html:238 .\templates\core\about.html:245
+#: .\templates\core\about.html:252
+msgid "HTaP ALGERIA"
+msgstr "HTaP ALGÉRIE"
+
+#: .\templates\activities\detail.html:234
+msgid "Need information or support?"
+msgstr "Besoin d’informations ou de soutien ?"
+
+#: .\templates\activities\detail.html:238
+msgid ""
+"Contact our association to learn more about our activities, awareness "
+"initiatives and support for people affected by pulmonary arterial "
+"hypertension."
+msgstr ""
+"Contactez notre association pour en savoir plus sur nos activités, nos "
+"actions de sensibilisation et notre accompagnement des personnes touchées "
+"par l’hypertension artérielle pulmonaire."
+
+#: .\templates\activities\detail.html:243 .\templates\core\home.html:612
+#: .\templates\core\home.html:948
+msgid "Contact us"
+msgstr "Nous contacter"
+
+#: .\templates\activities\detail.html:254
+msgid "Back to all activities"
+msgstr "Retour à toutes les activités"
+
+#: .\templates\activities\list.html:7
+msgid "Our Activities & Events"
+msgstr "Nos activités et événements"
+
+#: .\templates\activities\list.html:9
+msgid ""
+"Discover the activities, awareness campaigns, medical conferences, meetings "
+"and events organized by the National KHADIDJA Association for Pulmonary "
+"Arterial Hypertension in Algeria."
+msgstr ""
+"Découvrez les activités, campagnes de sensibilisation, conférences "
+"médicales, réunions et événements organisés par l’Association Nationale "
+"KHADIDJA de l’Hypertension Artérielle Pulmonaire en Algérie."
+
+#: .\templates\activities\list.html:30 .\templates\core\about.html:348
+msgid "Our Actions"
+msgstr "Nos actions"
+
+#: .\templates\activities\list.html:35
+msgid "Our Activities & Campaigns"
+msgstr "Nos activités et campagnes"
+
+#: .\templates\activities\list.html:39
+msgid ""
+"Follow our activities, awareness campaigns, medical conferences and "
+"community actions across Algeria."
+msgstr ""
+"Suivez nos activités, campagnes de sensibilisation, conférences médicales et "
+"actions communautaires à travers l’Algérie."
+
+#: .\templates\activities\list.html:46
+msgid "Activity filters"
+msgstr "Filtres des activités"
+
+#: .\templates\activities\list.html:49
+msgid "All Types"
+msgstr "Tous les types"
+
+#: .\templates\activities\list.html:132
+msgid "Read Full Report"
+msgstr "Lire le compte rendu complet"
+
+#: .\templates\activities\list.html:156
+msgid "Latest updates"
+msgstr "Dernières actualités"
+
+#: .\templates\activities\list.html:160
+msgid "Recent Activities"
+msgstr "Activités récentes"
+
+#: .\templates\activities\list.html:243
+msgid "View Details"
+msgstr "Voir les détails"
+
+#: .\templates\activities\list.html:265
+msgid "No activities published yet."
+msgstr "Aucune activité publiée pour le moment."
+
+#: .\templates\activities\list.html:279
+msgid "Pagination"
+msgstr "Pagination"
+
+#: .\templates\activities\list.html:283
+msgid "Previous"
+msgstr "Précédent"
+
+#: .\templates\activities\list.html:293
+msgid "Next"
+msgstr "Suivant"
+
 #: .\templates\articles\detail.html:20
+#, fuzzy
+#| msgid "Back to activities"
 msgid "Back to articles"
-msgstr "Retour aux articles"
+msgstr "Retour aux activités"
 
 #: .\templates\articles\detail.html:33
 msgid "By"
-msgstr "Par"
+msgstr ""
 
 #: .\templates\articles\detail.html:97
 msgid "Content under preparation..."
-msgstr "Contenu en préparation..."
+msgstr ""
 
 #: .\templates\articles\detail.html:104
+#, fuzzy
+#| msgid "Read article"
 msgid "Related articles"
-msgstr "Articles associés"
+msgstr "Lire l’article"
 
 #: .\templates\articles\list.html:4 .\templates\articles\list.html:16
 #: .\templates\core\home.html:792
 msgid "News & Publications"
-msgstr "Actualités et publications"
+msgstr "Actualités & Publications"
 
 #: .\templates\articles\list.html:13
+#, fuzzy
+#| msgid "Medical Resource & Patient Information"
 msgid "Media & Information"
-msgstr "Médias et informations"
+msgstr "Ressources médicales et informations pour les patients"
 
 #: .\templates\articles\list.html:19
+#, fuzzy
+#| msgid "Understanding Pulmonary Arterial Hypertension"
 msgid ""
 "Find the latest articles, guides, and medical reports on Pulmonary Arterial "
 "Hypertension."
-msgstr ""
-"Découvrez les derniers articles, guides et rapports médicaux sur "
-"l’hypertension artérielle pulmonaire."
+msgstr "Comprendre l’hypertension artérielle pulmonaire"
 
 #: .\templates\articles\list.html:34
+#, fuzzy
+#| msgid "Read article"
 msgid "Search articles..."
-msgstr "Rechercher des articles..."
+msgstr "Lire l’article"
 
 #: .\templates\articles\list.html:46
 msgid "All"
-msgstr "Tous"
-
-#: .\templates\articles\list.html:77
-msgid "Featured"
-msgstr "À la une"
+msgstr ""
 
 #: .\templates\articles\list.html:89
 msgid "Untitled Article"
@@ -440,14 +575,6 @@ msgstr ""
 #: .\templates\articles\list.html:198
 msgid "Reset filters"
 msgstr "Réinitialiser les filtres"
-
-#: .\templates\components\footer.html:15 .\templates\components\navbar.html:10
-#: .\templates\core\about.html:166 .\templates\core\about.html:210
-#: .\templates\core\about.html:217 .\templates\core\about.html:224
-#: .\templates\core\about.html:231 .\templates\core\about.html:238
-#: .\templates\core\about.html:245 .\templates\core\about.html:252
-msgid "HTaP ALGERIA"
-msgstr "HTaP ALGÉRIE"
 
 #: .\templates\components\footer.html:17 .\templates\components\navbar.html:11
 msgid "KHADIDJA National Association for "
@@ -700,10 +827,6 @@ msgstr "En images"
 #: .\templates\core\about.html:188
 msgid "Gallery & Activities"
 msgstr "Galerie et activités"
-
-#: .\templates\core\about.html:348
-msgid "Our Actions"
-msgstr "Nos actions"
 
 #: .\templates\core\about.html:351
 msgid "Organization Objectives"
@@ -1418,10 +1541,6 @@ msgstr ""
 "Découvrez notre association, notre mission et la réalité vécue par les "
 "personnes touchées par l’HTAP."
 
-#: .\templates\core\home.html:612 .\templates\core\home.html:948
-msgid "Contact us"
-msgstr "Nous contacter"
-
 #: .\templates\core\home.html:684
 msgid "Landline / Fax"
 msgstr "Téléphone fixe / Fax"
@@ -1886,6 +2005,11 @@ msgstr ""
 "Pour obtenir les coordonnées bancaires ou l’accès PayPal, veuillez nous "
 "écrire par e-mail:"
 
+#, fuzzy
+#~| msgid "Our Actions"
+#~ msgid "Our actions"
+#~ msgstr "Nos actions"
+
 #~ msgid "Accueil"
 #~ msgstr "Accueil"
 
@@ -2136,9 +2260,6 @@ msgstr ""
 #~ "Les données épidémiologiques nationales de l'HTAP restent parcellaires et "
 #~ "dispersées. Ces chiffres ne constituent donc pas une estimation de la "
 #~ "prévalence actuelle de l'HTAP dans toute la population algérienne."
-
-#~ msgid "Actualités & Publications"
-#~ msgstr "Actualités & Publications"
 
 #~ msgid "Derniers articles publiés"
 #~ msgstr "Derniers articles publiés"

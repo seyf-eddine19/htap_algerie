@@ -1,55 +1,99 @@
+from django.utils.translation import get_language
 from django.views.generic import DetailView, ListView
 
-from .models import Activity
+from .models import Activity, ActivityType, Language
 
 
-class LanguageMixin:
-    language = "fr"
+def get_activity_language():
+    language = get_language() or Language.ENGLISH
 
-    def get_language(self):
-        return getattr(self.request, "LANGUAGE_CODE", self.language)
+    if language not in dict(Language.choices):
+        language = Language.ENGLISH
 
-    def get_translation(self, obj):
-        language = self.get_language()
-
-        translation = obj.translations.filter(
-            language=language
-        ).first()
-
-        if translation:
-            return translation
-
-        return obj.translations.filter(
-            language="fr"
-        ).first()
+    return language
 
 
-class ActivityListView(LanguageMixin, ListView):
+def get_activity_translation(activity, language):
+    return (
+        activity.translations.filter(language=language).first()
+        or activity.translations.filter(language=Language.ENGLISH).first()
+        or activity.translations.filter(language=Language.FRENCH).first()
+        or activity.translations.filter(language=Language.ARABIC).first()
+        or activity.translations.first()
+    )
+
+
+class ActivityListView(ListView):
     model = Activity
     template_name = "activities/list.html"
     context_object_name = "activities"
     paginate_by = 9
 
     def get_queryset(self):
-        return (
+        queryset = (
             Activity.objects
             .filter(status=Activity.Status.PUBLISHED)
             .prefetch_related("translations", "gallery")
             .order_by("-start_date", "-created_at")
         )
 
+        activity_type = self.request.GET.get("type", "").strip()
+
+        if activity_type in dict(ActivityType.choices):
+            queryset = queryset.filter(activity_type=activity_type)
+
+        featured_id = (
+            Activity.objects
+            .filter(
+                status=Activity.Status.PUBLISHED,
+                is_featured=True,
+            )
+            .values_list("id", flat=True)
+            .first()
+        )
+
+        if featured_id:
+            queryset = queryset.exclude(id=featured_id)
+
+        return queryset
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        context["activity_translations"] = {
-            activity.pk: self.get_translation(activity)
-            for activity in context["activities"]
-        }
+        language = get_activity_language()
+
+        for activity in context["activities"]:
+            activity.active_translation = get_activity_translation(
+                activity,
+                language,
+            )
+
+        featured_activity = (
+            Activity.objects
+            .filter(
+                status=Activity.Status.PUBLISHED,
+                is_featured=True,
+            )
+            .prefetch_related("translations")
+            .order_by("-start_date", "-created_at")
+            .first()
+        )
+
+        if featured_activity:
+            featured_activity.active_translation = get_activity_translation(
+                featured_activity,
+                language,
+            )
+
+        context["featured_activity"] = featured_activity
+        context["activity_types"] = ActivityType.choices
+        context["selected_type"] = self.request.GET.get("type", "").strip()
+        context["current_language"] = language
 
         return context
 
-
-class ActivityDetailView(LanguageMixin, DetailView):
+    
+class ActivityDetailView(DetailView):
     model = Activity
     template_name = "activities/detail.html"
     context_object_name = "activity"
@@ -59,7 +103,6 @@ class ActivityDetailView(LanguageMixin, DetailView):
             Activity.objects
             .filter(status=Activity.Status.PUBLISHED)
             .prefetch_related(
-                "translations",
                 "translations__blocks",
                 "gallery",
             )
@@ -68,8 +111,14 @@ class ActivityDetailView(LanguageMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        context["translation"] = self.get_translation(
-            self.object
+        language = get_activity_language()
+
+        translation = get_activity_translation(
+            self.object,
+            language,
         )
+
+        context["translation"] = translation
+        context["current_language"] = language
 
         return context
