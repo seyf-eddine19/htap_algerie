@@ -25,7 +25,7 @@ class Command(BaseCommand):
 
         article = Article.objects.create(
             category=category,
-            author="HTAP Algérie",
+            author="HTaP ALGERIA",
             status=Article.Status.PUBLISHED,
             is_featured=True,
             published_at=timezone.now(),
@@ -40,7 +40,7 @@ class Command(BaseCommand):
                 "Comprendre ce qu'est l'hypertension artérielle pulmonaire, "
                 "ses symptômes, ses causes et les personnes concernées."
             ),
-            meta_title="À propos d'HTAP | HTAP Algérie",
+            meta_title="À propos d'HTAP | HTaP ALGERIA",
             meta_description=(
                 "Informations sur l'hypertension artérielle pulmonaire, "
                 "ses symptômes, ses causes et les personnes concernées."

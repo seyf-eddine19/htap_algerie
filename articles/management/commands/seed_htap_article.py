@@ -35,7 +35,7 @@ class Command(BaseCommand):
         #     slug="chronic-thromboembolic-pulmonary-hypertension",
         #     defaults={
         #         "category": category,
-        #         "author": "HTAP Algérie",
+        #         "author": "HTaP ALGERIA",
         #         "status": Article.Status.PUBLISHED,
         #         "is_featured": False,
         #         "published_at": timezone.now(),
@@ -46,7 +46,7 @@ class Command(BaseCommand):
             slug="chronic-thromboembolic-pulmonary-hypertension",
             defaults={
                 "category": category,
-                "author": "HTAP Algérie",
+                "author": "HTaP ALGERIA",
                 "status": Article.Status.PUBLISHED,
                 "is_featured": False,
                 "published_at": timezone.now(),
@@ -68,7 +68,7 @@ class Command(BaseCommand):
                 ),
                 "meta_title": (
                     "Chronic Thromboembolic Pulmonary Hypertension | "
-                    "HTAP Algérie"
+                    "HTaP ALGERIA"
                 ),
                 "meta_description": (
                     "Information about chronic thromboembolic pulmonary "
@@ -345,7 +345,7 @@ class Command(BaseCommand):
                 "وتدبيره والعلاجات التدخلية والجراحية المتاحة."
             ),
             meta_title=(
-                "ارتفاع ضغط الدم الرئوي الخثاري الصمّي المزمن | HTAP Algérie"
+                "ارتفاع ضغط الدم الرئوي الخثاري الصمّي المزمن | HTaP ALGERIA"
             ),
             meta_description=(
                 "معلومات حول ارتفاع ضغط الدم الرئوي الخثاري الصمّي المزمن، "
@@ -609,7 +609,7 @@ class Command(BaseCommand):
                 "les différentes options thérapeutiques."
             ),
             meta_title=(
-                "L'HTAP thromboembolique chronique | HTAP Algérie"
+                "L'HTAP thromboembolique chronique | HTaP ALGERIA"
             ),
             meta_description=(
                 "Informations sur l'hypertension pulmonaire "

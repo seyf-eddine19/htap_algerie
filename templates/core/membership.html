@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static i18n %}
 
-{% block title %}{% trans "Membership & Support" %} | {{ association.name|default:"HTAP Algérie" }}{% endblock %}
+{% block title %}{% trans "Membership & Support" %} | {{ association.name|default:"HTaP ALGERIA" }}{% endblock %}
 
 {% block content %}
 
@@ -14,7 +14,7 @@
 
     <div class="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 md:space-y-16">
         
-        {% include "components/section_header.html" with align="center" eyebrow="Support the Association" title="How to Support HTAP Algérie?" description="There are many ways to support our mission. While financial contributions are valuable, your time, skills, and engagement are equally essential. Every contribution makes a difference..." %}
+        {% include "components/section_header.html" with align="center" eyebrow="Support the Association" title="How to Support HTaP ALGERIA?" description="There are many ways to support our mission. While financial contributions are valuable, your time, skills, and engagement are equally essential. Every contribution makes a difference..." %}
 
         <!-- Engagement Cards (Membership & Volunteering) -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -29,7 +29,7 @@
                         </svg>
                     </div>
                     <h3 class="text-xl font-bold text-text-primary dark:text-white">
-                        {% trans "Become a Member of HTAP Algérie" %}
+                        {% trans "Become a Member of HTaP ALGERIA" %}
                     </h3>
                     <p class="text-sm text-text-secondary dark:text-slate-300 leading-relaxed">
                         {% trans "Join us to assist during events, conferences, and meetings organized by the association. Please print, sign, and send the completed membership form along with the required documents to our postal address." %}

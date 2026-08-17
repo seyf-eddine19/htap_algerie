@@ -3,7 +3,7 @@ from django.utils.translation import gettext_lazy as _, get_language
 
 
 # class AssociationInfo(models.Model):
-#     name = models.CharField(_("name"), max_length=200, default="HTAP Algérie")
+#     name = models.CharField(_("name"), max_length=200, default="HTaP ALGERIA")
 #     full_name = models.CharField(_("full name"), max_length=300, blank=True)
 #     description = models.TextField(_("description"), blank=True)
 #     history = models.TextField(_("history"), blank=True)

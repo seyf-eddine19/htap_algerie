@@ -33,7 +33,7 @@ class Command(BaseCommand):
 
         article = Article.objects.create(
             category=category,
-            author="HTAP Algérie",
+            author="HTaP ALGERIA",
             status=Article.Status.PUBLISHED,
             is_featured=False,
             published_at=timezone.now(),
@@ -54,7 +54,7 @@ class Command(BaseCommand):
                 "du cœur et des poumons et les examens utilisés pour diagnostiquer "
                 "et déterminer la cause de l'HTAP."
             ),
-            meta_title="Diagnostic de l'HTAP | HTAP Algérie",
+            meta_title="Diagnostic de l'HTAP | HTaP ALGERIA",
             meta_description=(
                 "Informations sur le diagnostic de l'HTAP, les classifications "
                 "de l'hypertension pulmonaire, les examens cardiaques et "
@@ -1091,7 +1091,7 @@ class Command(BaseCommand):
                 "والفحوصات المستخدمة لتشخيص ارتفاع ضغط الدم الشرياني الرئوي "
                 "وتحديد أسبابه."
             ),
-            meta_title="تشخيص ارتفاع ضغط الدم الشرياني الرئوي | HTAP Algérie",
+            meta_title="تشخيص ارتفاع ضغط الدم الشرياني الرئوي | HTaP ALGERIA",
             meta_description=(
                 "معلومات حول تشخيص ارتفاع ضغط الدم الشرياني الرئوي، "
                 "تصنيفاته، الفحوصات المستخدمة لتقييم القلب والرئتين، "
@@ -2126,7 +2126,7 @@ class Command(BaseCommand):
                 "hypertension, and the examinations used to determine its causes."
             ),
             meta_title=(
-                "Diagnosis of Pulmonary Arterial Hypertension | HTAP Algérie"
+                "Diagnosis of Pulmonary Arterial Hypertension | HTaP ALGERIA"
             ),
             meta_description=(
                 "Information about the diagnosis of pulmonary arterial "

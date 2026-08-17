@@ -1,6 +1,6 @@
-# جمعية HTAP Algérie
+# جمعية HTaP ALGERIA
 
-موقع تعريفي رسمي لجمعية **HTAP Algérie**، يهدف إلى تقديم الجمعية بشكل احترافي، التعريف برسالتها وأهدافها، ونشر المعلومات والتوعية حول ارتفاع ضغط الدم الشرياني الرئوي (HTAP).
+موقع تعريفي رسمي لجمعية **HTaP ALGERIA**، يهدف إلى تقديم الجمعية بشكل احترافي، التعريف برسالتها وأهدافها، ونشر المعلومات والتوعية حول ارتفاع ضغط الدم الشرياني الرئوي (HTAP).
 
 يوفر الموقع منصة رقمية حديثة تساعد المرضى وعائلاتهم والزوار على الوصول بسهولة إلى المعلومات، خدمات التوجيه والمساعدة، أخبار الجمعية وأنشطتها، بالإضافة إلى طرق التواصل والانضمام ودعم الجمعية.
 
@@ -54,9 +54,9 @@
 هذه نسخة أكثر احترافية ومنظمة:
 
 ````markdown
-# HTAP Algérie
+# HTaP ALGERIA
 
-> Official website of HTAP Algérie — Association dedicated to awareness,
+> Official website of HTaP ALGERIA — Association dedicated to awareness,
 > information, guidance, and support for people affected by pulmonary arterial hypertension.
 
 ---
@@ -91,7 +91,7 @@
 
 ## Overview
 
-HTAP Algérie is a multilingual institutional website developed for the
+HTaP ALGERIA is a multilingual institutional website developed for the
 association to provide reliable information about the association,
 pulmonary arterial hypertension, patient support, activities, events,
 articles, membership, and ways to support the association.
@@ -1095,7 +1095,7 @@ Current development areas:
 
 # Content Policy
 
-The website is an institutional platform for HTAP Algérie.
+The website is an institutional platform for HTaP ALGERIA.
 
 All medical and health-related information must be reviewed and approved
 by the association and/or qualified healthcare professionals before
@@ -1108,7 +1108,7 @@ substitute for professional medical advice.
 
 # Ownership
 
-This project is developed for HTAP Algérie.
+This project is developed for HTaP ALGERIA.
 
 The association retains ownership of its:
 
@@ -1129,7 +1129,7 @@ Third-party libraries remain subject to their respective licenses.
 The application source code is proprietary unless otherwise specified
 by the project owner.
 
-Association content and media remain the property of HTAP Algérie or
+Association content and media remain the property of HTaP ALGERIA or
 their respective owners.
 
 ---
@@ -1137,7 +1137,7 @@ their respective owners.
 # Contact
 
 For project-related inquiries, contact the project administrator
-through the official HTAP Algérie communication channels.
+through the official HTaP ALGERIA communication channels.
 
 ```
 

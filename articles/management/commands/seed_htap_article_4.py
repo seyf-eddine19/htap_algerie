@@ -33,7 +33,7 @@ class Command(BaseCommand):
 
         article = Article.objects.create(
             category=category,
-            author="HTAP Algérie",
+            author="HTaP ALGERIA",
             status=Article.Status.PUBLISHED,
             is_featured=False,
             published_at=timezone.now(),
@@ -54,7 +54,7 @@ class Command(BaseCommand):
                 "notamment les connectivites, l'hypertension portale, "
                 "le VIH et les cardiopathies congénitales."
             ),
-            meta_title="HTAP associées | HTAP Algérie",
+            meta_title="HTAP associées | HTaP ALGERIA",
             meta_description=(
                 "Découvrez les différentes formes d'HTAP associées, "
                 "notamment à la connectivite, à l'hypertension portale, "
@@ -1065,7 +1065,7 @@ class Command(BaseCommand):
                 ),
                 "meta_title": (
                     "ارتفاع ضغط الدم الشرياني الرئوي المرتبط بأمراض أخرى "
-                    "| HTAP Algérie"
+                    "| HTaP ALGERIA"
                 ),
                 "meta_description": (
                     "معلومات حول ارتفاع ضغط الدم الشرياني الرئوي المرتبط "
@@ -2009,7 +2009,7 @@ class Command(BaseCommand):
                     "associated with connective tissue disease, portal "
                     "hypertension, HIV infection and congenital heart disease."
                 ),
-                "meta_title": "Associated PAH | HTAP Algérie",
+                "meta_title": "Associated PAH | HTaP ALGERIA",
                 "meta_description": (
                     "Learn about pulmonary arterial hypertension associated "
                     "with connective tissue disease, portal hypertension, "

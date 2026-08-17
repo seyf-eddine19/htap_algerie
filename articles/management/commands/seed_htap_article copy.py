@@ -35,7 +35,7 @@ class Command(BaseCommand):
                 "فهم ماهية ارتفاع ضغط الدم الشرياني الرئوي، "
                 "وأعراضه وأسبابه والأشخاص المعرضين للإصابة به."
             ),
-            meta_title="حول ارتفاع ضغط الدم الشرياني الرئوي | HTAP Algérie",
+            meta_title="حول ارتفاع ضغط الدم الشرياني الرئوي | HTaP ALGERIA",
             meta_description=(
                 "معلومات حول ارتفاع ضغط الدم الشرياني الرئوي، "
                 "وأعراضه وأسبابه والأشخاص المعرضين للإصابة به."
@@ -443,7 +443,7 @@ class Command(BaseCommand):
                 "its symptoms, causes, and the people affected by it."
             ),
             meta_title=(
-                "About Pulmonary Arterial Hypertension | HTAP Algérie"
+                "About Pulmonary Arterial Hypertension | HTaP ALGERIA"
             ),
             meta_description=(
                 "Information about pulmonary arterial hypertension, "

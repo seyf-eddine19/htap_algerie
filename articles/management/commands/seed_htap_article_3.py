@@ -33,7 +33,7 @@ class Command(BaseCommand):
 
         # article = Article.objects.create(
         #     category=category,
-        #     author="HTAP Algérie",
+        #     author="HTaP ALGERIA",
         #     status=Article.Status.PUBLISHED,
         #     is_featured=False,
         #     published_at=timezone.now(),
@@ -44,7 +44,7 @@ class Command(BaseCommand):
             slug="genetique-et-htap",
             defaults={
                 "category": category,
-                "author": "HTAP Algérie",
+                "author": "HTaP ALGERIA",
                 "status": Article.Status.PUBLISHED,
                 "is_featured": False,
                 "published_at": timezone.now(),
@@ -64,7 +64,7 @@ class Command(BaseCommand):
                 "artérielle pulmonaire, les mutations impliquées, leur "
                 "transmission et le conseil génétique."
             ),
-            meta_title="Génétique et HTAP | HTAP Algérie",
+            meta_title="Génétique et HTAP | HTaP ALGERIA",
             meta_description=(
                 "Informations sur la génétique et l'hypertension artérielle "
                 "pulmonaire, les gènes de prédisposition, la transmission "
@@ -1133,7 +1133,7 @@ class Command(BaseCommand):
                     "والطفرات الجينية، وطرق انتقال المرض والاستشارة الوراثية."
                 ),
                 "meta_title": (
-                    "الوراثة وارتفاع ضغط الدم الشرياني الرئوي | HTAP Algérie"
+                    "الوراثة وارتفاع ضغط الدم الشرياني الرئوي | HTaP ALGERIA"
                 ),
                 "meta_description": (
                     "معلومات حول الوراثة وارتفاع ضغط الدم الشرياني الرئوي، "
@@ -2066,7 +2066,7 @@ class Command(BaseCommand):
                     "genetic counseling."
                 ),
                 "meta_title": (
-                    "Genetics and Pulmonary Arterial Hypertension | HTAP Algérie"
+                    "Genetics and Pulmonary Arterial Hypertension | HTaP ALGERIA"
                 ),
                 "meta_description": (
                     "Information about genetics and pulmonary arterial hypertension, "
