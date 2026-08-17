@@ -1664,7 +1664,7 @@ msgstr "Demander de l’aide"
 
 
 #: .\templates\core\home.html:27
-msgid "PAH Algeria Association"
+msgid "HTaP Algeria Association"
 msgstr "Association HTAP Algérie"
 
 
@@ -1680,7 +1680,7 @@ msgstr "Une association dédiée au soutien des patients."
 
 #: .\templates\core\home.html:40
 msgid ""
-"PAH Algeria is committed to supporting individuals affected by pulmonary "
+"HTaP Algeria is committed to supporting individuals affected by pulmonary "
 "arterial hypertension, as well as their families and loved ones."
 msgstr "HTAP Algérie s’engage à soutenir les personnes touchées par l’hypertension artérielle pulmonaire, ainsi que leurs familles et leurs proches."
 
@@ -1733,7 +1733,7 @@ msgstr "Faire avancer la cause"
 
 
 #: .\templates\core\home.html:103
-msgid "Patients and members of the PAH Algeria association"
+msgid "Patients and members of the HTaP Algeria association"
 msgstr "Patients et membres de l’association HTAP Algérie"
 
 

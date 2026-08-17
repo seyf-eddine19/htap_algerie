@@ -1439,7 +1439,7 @@ msgid "Request Help"
 msgstr "طلب المساعدة"
 
 #: .\templates\core\home.html:27
-msgid "PAH Algeria Association"
+msgid "HTaP Algeria Association"
 msgstr "جمعية HTAP الجزائر"
 
 #: .\templates\core\home.html:32
@@ -1452,7 +1452,7 @@ msgstr "جمعية مكرسة لدعم المرضى."
 
 #: .\templates\core\home.html:40
 msgid ""
-"PAH Algeria is committed to supporting individuals affected by pulmonary "
+"HTaP Algeria is committed to supporting individuals affected by pulmonary "
 "arterial hypertension, as well as their families and loved ones."
 msgstr ""
 "تلتزم HTAP الجزائر بدعم الأشخاص المصابين بارتفاع ضغط الدم الشرياني الرئوي "
@@ -1499,7 +1499,7 @@ msgid "Advancing the cause"
 msgstr "دفع القضية إلى الأمام"
 
 #: .\templates\core\home.html:103
-msgid "Patients and members of the PAH Algeria association"
+msgid "Patients and members of the HTaP Algeria association"
 msgstr "مرضى وأعضاء جمعية HTAP الجزائر"
 
 #: .\templates\core\home.html:112
