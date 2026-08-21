@@ -11,7 +11,7 @@ class ArticleTranslationInline(admin.StackedInline):
 class ArticleBlockInline(admin.StackedInline):
     model = ArticleBlock
     extra = 1
-    fields = ("block_type", "order", "title", "text", "image", "image_caption")
+    fields = ("block_type", "order", "title", "text", "image", "caption", "url")
     ordering = ("order", "id")
 
 

@@ -1,0 +1,87 @@
+{% load i18n %}
+
+<nav class="space-y-1.5 font-medium text-sm">
+
+    <!-- Dashboard -->
+    <a href="{% url 'dashboard:home' %}" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-all duration-200 {% if request.resolver_match.url_name == 'home' %}bg-purple-600 text-white shadow-lg shadow-purple-600/30 font-semibold{% else %}text-slate-400 hover:text-white hover:bg-slate-900{% endif %}">
+        <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+        <span>{% trans "Dashboard" %}</span>
+    </a>
+
+    <!-- Administration -->
+    <div class="pt-5">
+
+        <p class="px-3 mb-2 text-[10px] font-bold uppercase tracking-wider text-slate-500">
+            {% trans "Administration" %}
+        </p>
+
+        <div class="space-y-1">
+
+            <!-- Users -->
+            {% if perms.auth.view_user %}
+            <a href="{% url 'accounts:user_list' %}" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-all duration-200 {% if request.resolver_match.url_name == 'user_list' or request.resolver_match.url_name == 'user_create' or request.resolver_match.url_name == 'user_update' or request.resolver_match.url_name == 'user_permissions' or request.resolver_match.url_name == 'user_delete' %}bg-purple-600 text-white shadow-lg shadow-purple-600/30 font-semibold{% else %}text-slate-400 hover:text-white hover:bg-slate-900{% endif %}">
+                <i data-lucide="users-round" class="w-5 h-5"></i>
+                <span>{% trans "Users" %}</span>
+            </a>
+            {% endif %}
+
+            <!-- My Account -->
+            <!-- <a href="{% url 'accounts:account' %}" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-all duration-200 {% if request.resolver_match.url_name == 'account' or request.resolver_match.url_name == 'account_password' %}bg-purple-600 text-white shadow-lg shadow-purple-600/30 font-semibold{% else %}text-slate-400 hover:text-white hover:bg-slate-900{% endif %}">
+                <i data-lucide="user-cog" class="w-5 h-5"></i>
+                <span>{% trans "My Account" %}</span>
+            </a> -->
+
+        </div>
+    </div>
+
+    <!-- Content Management -->
+    <div class="pt-5">
+
+        <p class="px-3 mb-2 text-[10px] font-bold uppercase tracking-wider text-slate-500">
+            {% trans "Content Management" %}
+        </p>
+
+        <div class="space-y-1">
+
+            <!-- Members -->
+            <a href="{% url 'dashboard:members' %}" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-all duration-200 {% if 'member' in request.resolver_match.url_name %}bg-purple-600 text-white shadow-lg shadow-purple-600/30 font-semibold{% else %}text-slate-400 hover:text-white hover:bg-slate-900{% endif %}">
+                <i data-lucide="users" class="w-5 h-5"></i>
+                <span>{% trans "Members" %}</span>
+            </a>
+
+            <!-- Categories -->
+            <a href="{% url 'dashboard:categories' %}" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-all duration-200 {% if 'category' in request.resolver_match.url_name %}bg-purple-600 text-white shadow-lg shadow-purple-600/30 font-semibold{% else %}text-slate-400 hover:text-white hover:bg-slate-900{% endif %}">
+                <i data-lucide="folder-tree" class="w-5 h-5"></i>
+                <span>{% trans "Categories" %}</span>
+            </a>
+
+            <!-- Articles -->
+            <a href="{% url 'dashboard:articles' %}" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-all duration-200 {% if 'article' in request.resolver_match.url_name and 'category' not in request.resolver_match.url_name %}bg-purple-600 text-white shadow-lg shadow-purple-600/30 font-semibold{% else %}text-slate-400 hover:text-white hover:bg-slate-900{% endif %}">
+                <i data-lucide="file-text" class="w-5 h-5"></i>
+                <span>{% trans "Articles" %}</span>
+            </a>
+
+            <!-- Activities -->
+            <a href="{% url 'dashboard:activities' %}" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-all duration-200 {% if 'activity' in request.resolver_match.url_name %}bg-purple-600 text-white shadow-lg shadow-purple-600/30 font-semibold{% else %}text-slate-400 hover:text-white hover:bg-slate-900{% endif %}">
+                <i data-lucide="calendar" class="w-5 h-5"></i>
+                <span>{% trans "Activities" %}</span>
+            </a>
+
+            <!-- Messages -->
+            <a href="{% url 'dashboard:messages' %}" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl transition-all duration-200 {% if 'message' in request.resolver_match.url_name %}bg-purple-600 text-white shadow-lg shadow-purple-600/30 font-semibold{% else %}text-slate-400 hover:text-white hover:bg-slate-900{% endif %}">
+                <div class="flex items-center gap-3">
+                    <i data-lucide="mail" class="w-5 h-5"></i>
+                    <span>{% trans "Messages" %}</span>
+                </div>
+
+                {% if unread_messages_count %}
+                <span class="px-2 py-0.5 text-xs font-bold bg-fuchsia-500 text-white rounded-full">
+                    {{ unread_messages_count }}
+                </span>
+                {% endif %}
+            </a>
+
+        </div>
+    </div>
+
+</nav>

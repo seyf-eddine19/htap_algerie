@@ -73,13 +73,96 @@ class Member(models.Model):
             return self.role_ar or self.role_fr
         if lang == "fr":
             return self.role_fr or self.role_en
-        return self.role_fr or self.role_en or self.role_en
+        return self.role_en or self.role_fr
     
     def __str__(self):
         return f"{self.display_name} - {self.display_role}"
 
 
 class ContactMessage(models.Model):
+    class Subject(models.TextChoices):
+        INFO = "info", _("Information about HTAP")
+        HELP = "help", _("Request for assistance / support")
+        DONATE = "donate", _("Make a donation or volunteer")
+        PARTNERSHIP = "partnership", _("Request for partnership / collaboration")
+        ACTIVITIES = "activities", _("Information about activities / events")
+        OTHER = "other", _("Other inquiry")
+
+    class Wilaya(models.TextChoices):
+        NOT_IN_ALGERIA = "not_in_algeria", _("I am not living in Algeria")
+
+        ADRAR = "01", _("Adrar")
+        CHLEF = "02", _("Chlef")
+        LAGHOUAT = "03", _("Laghouat")
+        OUM_EL_BOUAGHI = "04", _("Oum El Bouaghi")
+        BATNA = "05", _("Batna")
+        BEJAIA = "06", _("Béjaïa")
+        BISKRA = "07", _("Biskra")
+        BECHAR = "08", _("Béchar")
+        BLIDA = "09", _("Blida")
+        BOUIRA = "10", _("Bouira")
+        TAMANRASSET = "11", _("Tamanrasset")
+        TEBESSA = "12", _("Tébessa")
+        TLEMCEN = "13", _("Tlemcen")
+        TIARET = "14", _("Tiaret")
+        TIZI_OUZOU = "15", _("Tizi Ouzou")
+        ALGIERS = "16", _("Algiers")
+        DJELFA = "17", _("Djelfa")
+        JIJEL = "18", _("Jijel")
+        SETIF = "19", _("Sétif")
+        SAIDA = "20", _("Saïda")
+        SKIKDA = "21", _("Skikda")
+        SIDI_BEL_ABBES = "22", _("Sidi Bel Abbès")
+        ANNABA = "23", _("Annaba")
+        GUELMA = "24", _("Guelma")
+        CONSTANTINE = "25", _("Constantine")
+        MEDEA = "26", _("Médéa")
+        MOSTAGANEM = "27", _("Mostaganem")
+        MSILA = "28", _("M'Sila")
+        MASCARA = "29", _("Mascara")
+        OUARGLA = "30", _("Ouargla")
+        ORAN = "31", _("Oran")
+        EL_BAYADH = "32", _("El Bayadh")
+        ILLIZI = "33", _("Illizi")
+        BORDJ_BOU_ARRERIDJ = "34", _("Bordj Bou Arréridj")
+        BOUMERDES = "35", _("Boumerdès")
+        EL_TARF = "36", _("El Tarf")
+        TINDOUF = "37", _("Tindouf")
+        TISSEMSILT = "38", _("Tissemsilt")
+        EL_OUED = "39", _("El Oued")
+        KHENCHELA = "40", _("Khenchela")
+        SOUK_AHRAS = "41", _("Souk Ahras")
+        TIPAZA = "42", _("Tipaza")
+        MILA = "43", _("Mila")
+        AIN_DEFLA = "44", _("Aïn Defla")
+        NAAMA = "45", _("Naâma")
+        AIN_TEMOUCHENT = "46", _("Aïn Témouchent")
+        GHARDAIA = "47", _("Ghardaïa")
+        RELIZANE = "48", _("Relizane")
+        TIMIMOUN = "49", _("Timimoun")
+        BORDJ_BADJI_MOKHTAR = "50", _("Bordj Badji Mokhtar")
+        OULED_DJELLAL = "51", _("Ouled Djellal")
+        BENI_ABBES = "52", _("Béni Abbès")
+        IN_SALAH = "53", _("In Salah")
+        IN_GUEZZAM = "54", _("In Guezzam")
+        TOUGGOURT = "55", _("Touggourt")
+        DJANET = "56", _("Djanet")
+        EL_MGHAIER = "57", _("El M'Ghair")
+        EL_MENIAA = "58", _("El Meniaa")
+
+        # New wilayas — 2026
+        AFLOU = "59", _("Aflou")
+        BARIKA = "60", _("Barika")
+        KSAR_CHELLALA = "61", _("Ksar Chellala")
+        MESSAAD = "62", _("Messaad")
+        AIN_OUSSERA = "63", _("Aïn Oussera")
+        BOUSAADA = "64", _("Bou Saâda")
+        EL_BAYADH_SIDI_CHEIKH = "65", _("El Bayadh Sidi Cheikh")
+        EL_KANTARA = "66", _("El Kantara")
+        BIR_EL_ATER = "67", _("Bir El Ater")
+        KSAR_EL_BOUKHARI = "68", _("Ksar El Boukhari")
+        EL_ARICHA = "69", _("El Aricha")
+
     class Status(models.TextChoices):
         NEW = "new", _("New")
         READ = "read", _("Read")
@@ -89,11 +172,13 @@ class ContactMessage(models.Model):
     first_name = models.CharField(_("first name"), max_length=100)
     last_name = models.CharField(_("last name"), max_length=100, blank=True)
     email = models.EmailField(_("email"))
-
     phone = models.CharField(_("phone"), max_length=50, blank=True)
-    subject = models.CharField(_("subject"), max_length=200)
+    wilaya = models.CharField(_("wilaya"), max_length=20, choices=Wilaya.choices)
+
+    subject = models.CharField(_("subject"), choices=Subject.choices, max_length=200)
     message = models.TextField(_("message"))
 
+    consent = models.BooleanField( _("consent"), default=False)
     status = models.CharField(_("status"), max_length=20, choices=Status.choices, default=Status.NEW)
     created_at = models.DateTimeField(_("created at"), auto_now_add=True)
     updated_at = models.DateTimeField(_("updated at"), auto_now=True)

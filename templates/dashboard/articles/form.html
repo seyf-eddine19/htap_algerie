@@ -1,0 +1,929 @@
+{% extends "dashboard/base.html" %}
+{% load i18n static %}
+
+{% block title %}{% if object %}{% translate "Edit Article" %}{% else %}{% translate "Create Article" %}{% endif %} | HTAP Algérie{% endblock %}
+
+{% block header_title %}{% if object %}{% translate "Edit Article" %}{% else %}{% translate "Create Article" %}{% endif %}{% endblock %}
+
+{% block breadcrumb %}
+<div class="flex items-center gap-2 mt-1 text-xs text-slate-500 dark:text-slate-400">
+    <a href="{% url 'dashboard:articles' %}" class="hover:text-purple-600 dark:hover:text-purple-400 transition">{% translate "Articles" %}</a>
+    <i data-lucide="chevron-right" class="w-3.5 h-3.5 rtl:rotate-180"></i>
+    <span class="text-slate-700 dark:text-slate-200 font-medium">{% if object %}{% translate "Edit" %}{% else %}{% translate "Create" %}{% endif %}</span>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto" x-data="articleEditor()">
+
+    <!-- Header Actions Bar -->
+    <div class="mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+            <h1 class="text-2xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
+                {% if object %}{% translate "Edit Article" %}{% else %}{% translate "Create Article" %}{% endif %}
+            </h1>
+            <p class="mt-1 text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                {% translate "Design, localize, and publish rich editorial content for HTAP Algérie." %}
+            </p>
+        </div>
+
+        <div class="flex items-center gap-2.5 shrink-0">
+            <a href="{% url 'dashboard:articles' %}" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 transition shadow-sm">
+                <i data-lucide="arrow-left" class="w-4 h-4 rtl:rotate-180"></i>
+                <span class="hidden sm:inline">{% translate "Back to Articles" %}</span>
+            </a>
+
+            <button type="button" @click="saveDraft()" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-purple-200 dark:border-purple-900/50 bg-purple-50/50 dark:bg-purple-950/30 text-purple-700 dark:text-purple-300 hover:bg-purple-100 dark:hover:bg-purple-900/50 text-xs font-semibold transition">
+                <i data-lucide="file-check" class="w-4 h-4"></i>
+                {% translate "Save Draft" %}
+            </button>
+
+            <button type="button" @click="submitForm('published')" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-semibold shadow-md transition">
+                <i data-lucide="send" class="w-4 h-4"></i>
+                {% translate "Publish Article" %}
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Form Wrapper -->
+    <form id="article-form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="hidden" name="status" x-model="articleStatus">
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-2">
+
+            <!-- MAIN EDITOR AREA (LEFT COLUMN) -->
+            <div class="lg:col-span-8 space-y-8">
+
+                <!-- 1. GENERAL ARTICLE METADATA -->
+                <section class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+                    <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-800/40 flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-xl bg-purple-100 dark:bg-purple-900/40 text-purple-600 dark:text-purple-400 flex items-center justify-center shrink-0">
+                                <i data-lucide="file-text" class="w-4 h-4"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-sm font-bold text-slate-900 dark:text-slate-100">{% translate "Basic Information" %}</h2>
+                                <p class="text-[11px] text-slate-500 dark:text-slate-400">{% translate "Core activity metadata and main media asset." %}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-6 space-y-6">
+                        {% if form.non_field_errors %}
+                        <div class="rounded-xl border border-rose-200 dark:border-rose-900/50 bg-rose-50 dark:bg-rose-950/30 p-4">
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="alert-circle" class="w-5 h-5 text-rose-600 dark:text-rose-400 shrink-0"></i>
+                                <div class="text-xs text-rose-700 dark:text-rose-300">
+                                    {% for error in form.non_field_errors %}<p>{{ error }}</p>{% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div>
+                                <label for="{{ form.category.id_for_label }}" class="dashboard-label">
+                                    {% translate "Category" %}
+                                </label>
+                                {{ form.category }}
+                                {% if form.category.errors %}<p class="mt-1 text-xs text-rose-600">{{ form.category.errors.0 }}</p>{% endif %}
+                            </div>
+
+                            <div>
+                                <label for="{{ form.author.id_for_label }}" class="dashboard-label">
+                                    {% translate "Author" %}
+                                </label>
+                                {{ form.author }}
+                                {% if form.author.errors %}<p class="mt-1 text-xs text-rose-600">{{ form.author.errors.0 }}</p>{% endif %}
+                            </div>
+                        </div>
+
+                        <!-- FEATURED IMAGE UPLOAD -->
+                        <div>
+                            <label class="dashboard-label">{% translate "Featured Image" %}</label>
+                            
+                            <div class="mt-1 flex flex-col sm:flex-row items-stretch gap-4">
+                                <!-- Image Preview Canvas -->
+                                <div class="w-full sm:w-48 h-36 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 flex flex-col items-center justify-center overflow-hidden shrink-0 relative group">
+                                    <template x-if="featuredImagePreview">
+                                        <div class="w-full h-full relative">
+                                            <img :src="featuredImagePreview" class="w-full h-full object-cover">
+                                            <button type="button" @click="removeFeaturedImage()" class="absolute top-2 end-2 p-1.5 rounded-lg bg-slate-900/80 hover:bg-rose-600 text-white transition shadow-sm">
+                                                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                                            </button>
+                                        </div>
+                                    </template>
+                                    <template x-if="!featuredImagePreview">
+                                        <div class="text-center p-3">
+                                            <i data-lucide="image" class="w-8 h-8 text-slate-400 dark:text-slate-600 mx-auto mb-1"></i>
+                                            <span class="text-[10px] text-slate-400 dark:text-slate-500 font-medium">{% translate "No Image Selected" %}</span>
+                                        </div>
+                                    </template>
+                                </div>
+
+                                <!-- Drag & Drop Dropzone -->
+                                <div class="flex-1 border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-xl p-4 bg-slate-50/50 dark:bg-slate-800/20 hover:bg-purple-50/40 dark:hover:bg-purple-950/20 hover:border-purple-300 dark:hover:border-purple-700 transition flex flex-col items-center justify-center text-center cursor-pointer relative"
+                                     @dragover.prevent="$el.classList.add('border-purple-500')"
+                                     @dragleave.prevent="$el.classList.remove('border-purple-500')"
+                                     @drop.prevent="handleFeaturedImageDrop($event)">
+                                    
+                                    <input type="file" name="{{ form.featured_image.html_name }}" id="{{ form.featured_image.id_for_label }}" accept="image/*" class="absolute inset-0 opacity-0 cursor-pointer w-full h-full" @change="previewFeaturedImage($event)">
+                                    
+                                    <i data-lucide="upload-cloud" class="w-7 h-7 text-purple-600 dark:text-purple-400 mb-2"></i>
+                                    <p class="text-xs font-semibold text-slate-700 dark:text-slate-200">{% translate "Click to upload or drag & drop" %}</p>
+                                    <p class="text-[10px] text-slate-400 dark:text-slate-500 mt-0.5">{% translate "PNG, JPG, WEBP up to 10MB" %}</p>
+                                    
+                                    <template x-if="featuredImageInfo">
+                                        <p class="mt-2 text-[11px] font-mono text-purple-600 dark:text-purple-400 font-medium" x-text="featuredImageInfo"></p>
+                                    </template>
+                                </div>
+                            </div>
+                            {% if form.featured_image.errors %}<p class="mt-1 text-xs text-rose-600">{{ form.featured_image.errors.0 }}</p>{% endif %}
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 2. MULTILINGUAL TABS & EDITING -->
+                <section class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+                    <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-800/40 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-xl bg-indigo-100 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0">
+                                <i data-lucide="languages" class="w-4 h-4"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-sm font-bold text-slate-900 dark:text-slate-100">{% translate "Multilingual Content" %}</h2>
+                                <p class="text-[11px] text-slate-500 dark:text-slate-400">{% translate "Switch tabs to build localized titles and text." %}</p>
+                            </div>
+                        </div>
+
+                        <!-- Language Selector Tabs -->
+                        <div class="flex items-center gap-1 bg-slate-200/70 dark:bg-slate-800 p-1 rounded-xl border border-slate-200/80 dark:border-slate-700/60">
+                            <template x-for="lang in languages" :key="lang.code">
+                                <button type="button" 
+                                        @click="activeLang = lang.code" 
+                                        :class="activeLang === lang.code ? 'bg-white dark:bg-slate-900 text-purple-600 dark:text-purple-400 shadow-sm font-bold' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 font-medium'"
+                                        class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs transition-all">
+                                    <span class="uppercase tracking-wider text-[10px]" x-text="lang.code"></span>
+                                    <span x-text="lang.name"></span>
+                                    <span :class="langStats[lang.code]?.complete ? 'bg-emerald-500' : 'bg-amber-500'" class="w-1.5 h-1.5 rounded-full"></span>
+                                </button>
+                            </template>
+                        </div>
+                    </div>
+
+                    <div class="p-6">
+                        {{ translation_formset.management_form }}
+
+                        {% for translation_form in translation_formset %}
+                        {% with lang_code=translation_form.language.value|default:translation_form.initial.language %}
+                        <div x-show="activeLang === '{{ lang_code }}'" 
+                             x-transition:enter="transition ease-out duration-150"
+                             x-transition:enter-start="opacity-0"
+                             x-transition:enter-end="opacity-100"
+                             dir="{% if lang_code == 'ar' %}rtl{% else %}ltr{% endif %}"
+                             class="space-y-6">
+
+                            {% for hidden in translation_form.hidden_fields %}{{ hidden }}{% endfor %}
+                            <input type="hidden" name="{{ translation_form.language.html_name }}" value="{{ lang_code }}">
+
+                            <!-- Title -->
+                            <div>
+                                <label for="{{ translation_form.title.id_for_label }}" class="dashboard-label">
+                                    {% translate "Article Title" %} ({{ lang_code|upper }}) <span class="text-rose-500">*</span>
+                                </label>
+                                <input type="text" 
+                                       name="{{ translation_form.title.html_name }}" 
+                                       id="{{ translation_form.title.id_for_label }}"
+                                       x-model="titles['{{ lang_code }}']"
+                                       @input="updateLangStats()"
+                                       placeholder="{% translate 'Enter title...' %}" 
+                                       class="dashboard-input text-base font-semibold">
+                                {% if translation_form.title.errors %}<p class="mt-1 text-xs text-rose-600 dark:text-rose-400">{{ translation_form.title.errors.0 }}</p>{% endif %}
+                            </div>
+
+                            <!-- Excerpt -->
+                            <div>
+                                <label for="{{ translation_form.excerpt.id_for_label }}" class="dashboard-label">{% translate "Excerpt / Summary" %}</label>
+                                <textarea name="{{ translation_form.excerpt.html_name }}" 
+                                          id="{{ translation_form.excerpt.id_for_label }}" 
+                                          rows="2" 
+                                          x-model="excerpts['{{ lang_code }}']"
+                                          placeholder="{% translate 'Brief article overview...' %}" 
+                                          class="dashboard-input resize-y"></textarea>
+                                {% if translation_form.excerpt.errors %}<p class="mt-1 text-xs text-rose-600">{{ translation_form.excerpt.errors.0 }}</p>{% endif %}
+                            </div>
+
+                            <!-- SEO Fields -->
+                            <div class="pt-4 border-t border-slate-200 dark:border-slate-800">
+                                <h4 class="text-xs font-bold text-slate-800 dark:text-slate-200 mb-3 flex items-center gap-1.5">
+                                    <i data-lucide="search" class="w-3.5 h-3.5 text-purple-600"></i>
+                                    {% translate "SEO Settings" %}
+                                </h4>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="dashboard-label">{% translate "Meta Title" %}</label>
+                                        <input type="text" name="{{ translation_form.meta_title.html_name }}" value="{{ translation_form.meta_title.value|default:'' }}" class="dashboard-input">
+                                    </div>
+                                    <div>
+                                        <label class="dashboard-label">{% translate "Meta Description" %}</label>
+                                        <input type="text" name="{{ translation_form.meta_description.html_name }}" value="{{ translation_form.meta_description.value|default:'' }}" class="dashboard-input">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        {% endwith %}
+                        {% endfor %}
+                    </div>
+                </section>
+
+                <!-- 3. VISUAL CONTENT BLOCK BUILDER -->
+                <section class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+                    <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-800/40 flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-xl bg-amber-100 dark:bg-amber-900/40 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0">
+                                <i data-lucide="blocks" class="w-4 h-4"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-sm font-bold text-slate-900 dark:text-slate-100">{% translate "Article Content Blocks" %}</h2>
+                                <p class="text-[11px] text-slate-500 dark:text-slate-400">{% translate "Construct your editorial layout for current language:" %} <strong class="uppercase text-purple-600" x-text="activeLang"></strong></p>
+                            </div>
+                        </div>
+
+                        <!-- Add Block Popover Trigger -->
+                        <div class="relative" x-data="{ openMenu: false }">
+                            <button type="button" @click="openMenu = !openMenu" class="inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-semibold shadow-sm transition">
+                                <i data-lucide="plus" class="w-4 h-4"></i>
+                                {% translate "Add Block" %}
+                                <i data-lucide="chevron-down" class="w-3.5 h-3.5 opacity-80"></i>
+                            </button>
+
+                            <div x-show="openMenu" 
+                                 @click.outside="openMenu = false"
+                                 x-transition:enter="transition ease-out duration-100"
+                                 x-transition:enter-start="opacity-0 scale-95"
+                                 x-transition:enter-end="opacity-100 scale-100"
+                                 class="absolute end-0 mt-2 w-72 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl z-30 p-2 grid grid-cols-1 gap-1 max-h-96 overflow-y-auto" x-cloak>
+                                
+                                <template x-for="bType in availableBlockTypes" :key="bType.id">
+                                    <button type="button" @click="addBlock(bType.id); openMenu = false;" class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-purple-50 dark:hover:bg-purple-950/40 text-start transition group">
+                                        <div class="w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 group-hover:bg-purple-600 group-hover:text-white flex items-center justify-center shrink-0 transition">
+                                            <i :data-lucide="bType.icon" class="w-4 h-4"></i>
+                                        </div>
+                                        <div>
+                                            <div class="text-xs font-bold text-slate-800 dark:text-slate-100 group-hover:text-purple-600 dark:group-hover:text-purple-400" x-text="bType.name"></div>
+                                            <div class="text-[10px] text-slate-400 dark:text-slate-500 line-clamp-1" x-text="bType.desc"></div>
+                                        </div>
+                                    </button>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-6">
+                        <!-- Total blocks payload tracker for Django view -->
+                        <input type="hidden" name="blocks-TOTAL_FORMS" :value="blocks.length">
+
+                        <!-- EMPTY STATE -->
+                        <div x-show="currentLangBlocks.length === 0" class="text-center py-12 px-4 border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-2xl">
+                            <div class="w-12 h-12 mx-auto rounded-2xl bg-purple-50 dark:bg-purple-950/50 text-purple-600 dark:text-purple-400 flex items-center justify-center mb-3">
+                                <i data-lucide="layout" class="w-6 h-6"></i>
+                            </div>
+                            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200">{% translate "No Content Blocks Yet" %}</h3>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-sm mx-auto">{% translate "Start building structure for this language by adding paragraphs, headings, media, or callouts." %}</p>
+                        </div>
+
+                        <!-- BLOCKS CONTAINER -->
+                        <div class="space-y-4" :dir="activeLang === 'ar' ? 'rtl' : 'ltr'">
+                            <template x-for="(block, index) in blocks" :key="block.id">
+                                <div>
+                                    <!-- THESE MUST ALWAYS BE PRESENT IN DOM -->
+                                    <input type="hidden" :name="'blocks-' + index + '-order'" :value="getLangOrder(index)">
+                                    <input type="hidden" :name="'blocks-' + index + '-language'" :value="block.lang">
+                                    <input type="hidden" :name="'blocks-' + index + '-block_type'" :value="block.type">
+
+                                    <div x-show="block.lang === activeLang">
+                                        <article class="block-card border border-slate-200 dark:border-slate-800 rounded-2xl bg-slate-50/50 dark:bg-slate-950/40 transition shadow-sm overflow-hidden">
+                                            
+                                            <!-- Block Header Toolbar -->
+                                            <div class="px-4 py-3 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between gap-2 select-none">
+                                                <div class="flex items-center gap-2.5">
+                                                    <i data-lucide="grip-vertical" class="w-4 h-4 text-slate-400"></i>
+                                                    <span class="w-6 h-6 rounded-lg bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300 text-[11px] font-bold flex items-center justify-center" x-text="getLangOrder(index) + 1"></span>
+                                                    <span class="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider" x-text="getBlockLabel(block.type)"></span>
+                                                </div>
+
+                                                <div class="flex items-center gap-1">
+                                                    <button type="button" @click="moveBlockUp(index)" :disabled="getLangOrder(index) === 0" :class="getLangOrder(index) === 0 ? 'opacity-30 cursor-not-allowed' : 'hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300'" class="p-1.5 rounded-lg transition" title="{% translate 'Move Up' %}">
+                                                        <i data-lucide="arrow-up" class="w-3.5 h-3.5"></i>
+                                                    </button>
+
+                                                    <button type="button" @click="moveBlockDown(index)" :disabled="getLangOrder(index) === currentLangBlocks.length - 1" :class="getLangOrder(index) === currentLangBlocks.length - 1 ? 'opacity-30 cursor-not-allowed' : 'hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300'" class="p-1.5 rounded-lg transition" title="{% translate 'Move Down' %}">
+                                                        <i data-lucide="arrow-down" class="w-3.5 h-3.5"></i>
+                                                    </button>
+
+                                                    <button type="button" @click="duplicateBlock(index)" class="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition" title="{% translate 'Duplicate' %}">
+                                                        <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                                                    </button>
+
+                                                    <button type="button" @click="block.collapsed = !block.collapsed" class="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition">
+                                                        <i :data-lucide="block.collapsed ? 'chevron-down' : 'chevron-up'" class="w-3.5 h-3.5"></i>
+                                                    </button>
+
+                                                    <button type="button" @click="confirmDeleteBlock(index)" class="p-1.5 rounded-lg hover:bg-rose-50 dark:hover:bg-rose-950/50 text-rose-600 dark:text-rose-400 transition" title="{% translate 'Delete' %}">
+                                                        <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <div x-show="block.collapsed" class="px-5 py-3 text-xs text-slate-500 dark:text-slate-400 bg-slate-100/50 dark:bg-slate-900/30 truncate" x-text="getBlockSummary(block)"></div>
+
+                                            <!-- Body -->
+                                            <div x-show="!block.collapsed" class="p-5 space-y-4 bg-white dark:bg-slate-900">
+                                                
+                                                <!-- HEADING -->
+                                                <template x-if="block.type === 'heading'">
+                                                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                                        <div class="sm:col-span-2">
+                                                            <label class="dashboard-label">{% translate "Heading Text" %}</label>
+                                                            <input type="text" :name="'blocks-' + index + '-title'" x-model="block.data.title" class="dashboard-input" placeholder="{% translate 'Section Title' %}">
+                                                        </div>
+                                                        <div>
+                                                            <label class="dashboard-label">{% translate "Level" %}</label>
+                                                            <select :name="'blocks-' + index + '-heading_level'" x-model="block.data.level" class="dashboard-input">
+                                                                <option value="h2">H2 - Heading 2</option>
+                                                                <option value="h3">H3 - Heading 3</option>
+                                                                <option value="h4">H4 - Heading 4</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </template>
+
+                                                <!-- PARAGRAPH -->
+                                                <template x-if="block.type === 'paragraph'">
+                                                    <div>
+                                                        <label class="dashboard-label">{% translate "Text Content" %}</label>
+                                                        <textarea :name="'blocks-' + index + '-text'" x-model="block.data.text" rows="5" class="dashboard-input resize-y" placeholder="{% translate 'Write article narrative...' %}"></textarea>
+                                                    </div>
+                                                </template>
+
+                                                <!-- QUOTE -->
+                                                <template x-if="block.type === 'quote'">
+                                                    <div class="space-y-4">
+                                                        <div>
+                                                            <label class="dashboard-label">{% translate "Quotation Text" %}</label>
+                                                            <textarea :name="'blocks-' + index + '-text'" x-model="block.data.text" rows="3" class="dashboard-input" placeholder="{% translate 'Quote details...' %}"></textarea>
+                                                        </div>
+                                                        <div>
+                                                            <label class="dashboard-label">{% translate "Author / Attribution" %}</label>
+                                                            <input type="text" :name="'blocks-' + index + '-caption'" x-model="block.data.caption" class="dashboard-input" placeholder="{% translate 'e.g., Dr. Ahmed, Director' %}">
+                                                        </div>
+                                                    </div>
+                                                </template>
+
+                                                <!-- CALLOUT -->
+                                                <template x-if="block.type === 'callout'">
+                                                    <div class="space-y-4">
+                                                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                                            <div class="sm:col-span-2">
+                                                                <label class="dashboard-label">{% translate "Notice Title" %}</label>
+                                                                <input type="text" :name="'blocks-' + index + '-title'" x-model="block.data.title" class="dashboard-input">
+                                                            </div>
+                                                            <div>
+                                                                <label class="dashboard-label">{% translate "Callout Style" %}</label>
+                                                                <select :name="'blocks-' + index + '-callout_style'" x-model="block.data.style" class="dashboard-input">
+                                                                    <option value="info">Information (Blue)</option>
+                                                                    <option value="success">Success (Green)</option>
+                                                                    <option value="warning">Warning (Amber)</option>
+                                                                    <option value="danger">Important (Red)</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            <label class="dashboard-label">{% translate "Notice Content" %}</label>
+                                                            <textarea :name="'blocks-' + index + '-text'" x-model="block.data.text" rows="2" class="dashboard-input"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </template>
+
+                                                <!-- DIVIDER -->
+                                                <template x-if="block.type === 'divider'">
+                                                    <div class="py-4 text-center">
+                                                        <hr class="border-slate-300 dark:border-slate-700">
+                                                        <span class="text-[10px] text-slate-400 uppercase tracking-widest mt-1 block">{% translate "Visual Divider Line" %}</span>
+                                                    </div>
+                                                </template>
+
+                                                <!-- IMAGE -->
+                                                <template x-if="block.type === 'image'">
+                                                    <div class="space-y-4">
+                                                        <div>
+                                                            <label class="dashboard-label">{% translate "Select Image" %}</label>
+                                                            <input type="file" :name="'blocks-' + index + '-image'" accept="image/*" class="dashboard-file" @change="handleBlockImageUpload($event, block)">
+                                                        </div>
+                                                        <template x-if="block.data.imagePreview">
+                                                            <div class="relative w-full h-48 rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
+                                                                <img :src="block.data.imagePreview" class="w-full h-full object-contain">
+                                                            </div>
+                                                        </template>
+                                                        <div>
+                                                            <label class="dashboard-label">{% translate "Image Caption" %}</label>
+                                                            <input type="text" :name="'blocks-' + index + '-caption'" x-model="block.data.caption" class="dashboard-input" placeholder="{% translate 'Caption...' %}">
+                                                        </div>
+                                                    </div>
+                                                </template>
+
+                                                <!-- VIDEO -->
+                                                <template x-if="block.type === 'video'">
+                                                    <div class="space-y-4">
+                                                        <div>
+                                                            <label class="dashboard-label">{% translate "Video Embed URL" %}</label>
+                                                            <input type="url" :name="'blocks-' + index + '-url'" x-model="block.data.url" @input="updateVideoEmbed(block)" class="dashboard-input" placeholder="https://www.youtube.com/watch?v=...">
+                                                        </div>
+                                                        <template x-if="block.data.embedUrl">
+                                                            <div class="aspect-video w-full rounded-xl overflow-hidden bg-black border border-slate-800">
+                                                                <iframe :src="block.data.embedUrl" class="w-full h-full" frameborder="0" allowfullscreen></iframe>
+                                                            </div>
+                                                        </template>
+                                                    </div>
+                                                </template>
+
+                                                <!-- DOCUMENT -->
+                                                <template x-if="block.type === 'document'">
+                                                    <div class="space-y-4">
+                                                        <div>
+                                                            <label class="dashboard-label">{% translate "Upload Document File" %}</label>
+                                                            <input type="file" :name="'blocks-' + index + '-document'" accept=".pdf,.doc,.docx,.xls,.xlsx" class="dashboard-file" @change="handleBlockDocUpload($event, block)">
+                                                        </div>
+                                                        <template x-if="block.data.fileName">
+                                                            <div class="flex items-center gap-3 p-3 rounded-xl bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-900">
+                                                                <i data-lucide="file" class="w-5 h-5 text-purple-600 dark:text-purple-400"></i>
+                                                                <span class="text-xs font-semibold text-slate-800 dark:text-slate-200" x-text="block.data.fileName"></span>
+                                                            </div>
+                                                        </template>
+                                                    </div>
+                                                </template>
+
+                                                <!-- BUTTON -->
+                                                <template x-if="block.type === 'button'">
+                                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                                        <div>
+                                                            <label class="dashboard-label">{% translate "Button Label" %}</label>
+                                                            <input type="text" :name="'blocks-' + index + '-title'" x-model="block.data.title" class="dashboard-input" placeholder="{% translate 'Click Here' %}">
+                                                        </div>
+                                                        <div>
+                                                            <label class="dashboard-label">{% translate "Link URL" %}</label>
+                                                            <input type="url" :name="'blocks-' + index + '-url'" x-model="block.data.url" class="dashboard-input" placeholder="https://...">
+                                                        </div>
+                                                    </div>
+                                                </template>
+
+                                            </div>
+                                        </article>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+
+            <!-- SIDEBAR: PREVIEW & PUBLICATION SETTINGS (RIGHT COLUMN) -->
+            <div class="lg:col-span-4 space-y-6 sticky top-6">
+
+                <!-- PUBLICATION CONTROL CARD -->
+                <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5 shadow-sm space-y-4">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200 flex items-center gap-2">
+                        <i data-lucide="sliders" class="w-4 h-4 text-purple-600"></i>
+                        {% translate "Publishing Settings" %}
+                    </h3>
+
+                    <div>
+                        <label class="dashboard-label">{% translate "Publication Status" %}</label>
+                        <select x-model="articleStatus" class="dashboard-input">
+                            <option value="draft">{% translate "Draft" %}</option>
+                            <option value="published">{% translate "Published" %}</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="dashboard-label">{% translate "Publish Date" %}</label>
+                        <input type="datetime-local" name="{{ form.published_at.html_name }}" value="{{ form.published_at.value|date:'Y-m-d\TH:i' }}" class="dashboard-input">
+                    </div>
+
+                    <label class="flex items-center gap-3 p-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/40 cursor-pointer">
+                        <input type="checkbox" name="{{ form.is_featured.html_name }}" {% if form.is_featured.value %}checked{% endif %} class="rounded text-purple-600 focus:ring-purple-500">
+                        <span class="text-xs font-semibold text-slate-700 dark:text-slate-200">{% translate "Feature on Homepage" %}</span>
+                    </label>
+                </div>
+
+                <!-- LIVE ARTICLE PREVIEW BOX -->
+                <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5 shadow-sm space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200 flex items-center gap-2">
+                            <i data-lucide="eye" class="w-4 h-4 text-purple-600"></i>
+                            {% translate "Live Device Preview" %}
+                        </h3>
+                        <span class="text-[10px] font-bold uppercase px-2 py-0.5 rounded-md bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300" x-text="activeLang"></span>
+                    </div>
+
+                    <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 space-y-4 max-h-[480px] overflow-y-auto" :dir="activeLang === 'ar' ? 'rtl' : 'ltr'">
+                        
+                        <template x-if="featuredImagePreview">
+                            <img :src="featuredImagePreview" class="w-full h-32 object-cover rounded-lg">
+                        </template>
+
+                        <h2 class="text-base font-extrabold text-slate-900 dark:text-slate-100" x-text="titles[activeLang] || '{% translate "Untitled Article" %}'"></h2>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 italic" x-text="excerpts[activeLang] || ''"></p>
+
+                        <hr class="border-slate-200 dark:border-slate-800">
+
+                        <div class="space-y-3">
+                            <template x-for="block in currentLangBlocks" :key="'prev-' + block.id">
+                                <div>
+                                    <template x-if="block.type === 'heading'">
+                                        <h3 class="text-sm font-bold text-slate-800 dark:text-slate-200" x-text="block.data.title || 'Heading'"></h3>
+                                    </template>
+
+                                    <template x-if="block.type === 'paragraph'">
+                                        <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed" x-text="block.data.text || 'Paragraph text...'"></p>
+                                    </template>
+
+                                    <template x-if="block.type === 'quote'">
+                                        <blockquote class="ps-3 border-s-2 border-purple-500 text-[11px] italic text-slate-600 dark:text-slate-300" x-text="block.data.text"></blockquote>
+                                    </template>
+
+                                    <template x-if="block.type === 'callout'">
+                                        <div class="p-2.5 rounded-lg bg-blue-50 dark:bg-blue-950/40 border border-blue-200 text-[11px] text-blue-900 dark:text-blue-200" x-text="block.data.title || block.data.text"></div>
+                                    </template>
+
+                                    <template x-if="block.type === 'image' && block.data.imagePreview">
+                                        <img :src="block.data.imagePreview" class="w-full h-24 object-cover rounded-lg">
+                                    </template>
+
+                                    <template x-if="block.type === 'divider'">
+                                        <hr class="border-slate-300 dark:border-slate-700">
+                                    </template>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+    <!-- STICKY BOTTOM ACTION BAR -->
+    <div class="sticky bottom-0 w-full start-0 end-0 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 py-3 px-6 z-40">
+        <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+            <a href="{% url 'dashboard:articles' %}" class="text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition">
+                {% translate "Cancel" %}
+            </a>
+
+            <div class="flex items-center gap-3">
+                <button type="button" @click="saveDraft()" class="px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+                    {% translate "Save Draft" %}
+                </button>
+                <button type="button" @click="submitForm('published')" class="px-5 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-semibold shadow-md transition">
+                    {% translate "Publish Article" %}
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- DELETE CONFIRMATION MODAL -->
+    <div x-show="deleteModalOpen" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4" x-cloak>
+        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 max-w-sm w-full p-6 space-y-4 shadow-xl">
+            <div class="w-10 h-10 rounded-xl bg-rose-100 dark:bg-rose-900/40 text-rose-600 dark:text-rose-400 flex items-center justify-center">
+                <i data-lucide="alert-triangle" class="w-5 h-5"></i>
+            </div>
+            <div>
+                <h3 class="text-sm font-bold text-slate-900 dark:text-slate-100">{% translate "Delete Content Block?" %}</h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">{% translate "Are you sure you want to remove this block? This action cannot be undone." %}</p>
+            </div>
+            <div class="flex items-center justify-end gap-2.5">
+                <button type="button" @click="deleteModalOpen = false" class="px-4 py-2 rounded-xl text-xs font-semibold border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300">{% translate "Cancel" %}</button>
+                <button type="button" @click="executeDeleteBlock" class="px-4 py-2 rounded-xl text-xs font-semibold bg-rose-600 text-white">{% translate "Delete" %}</button>
+            </div>
+        </div>
+    </div>
+    
+
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    if (window.lucide) {
+        lucide.createIcons();
+    }
+});
+function articleEditor() {
+    return {
+        activeLang: 'ar',
+        articleStatus: '{{ object.status|default:"draft" }}',
+        deleteModalOpen: false,
+        blockToDeleteIndex: null,
+
+        featuredImagePreview: '{% if object.featured_image %}{{ object.featured_image.url }}{% endif %}',
+        featuredImageInfo: '',
+
+        languages: [
+            { code: 'ar', name: 'العربية' },
+            { code: 'en', name: 'English' },
+            { code: 'fr', name: 'Français' }
+        ],
+
+        titles: {
+            {% for translation_form in translation_formset %}
+                '{{ translation_form.language.value|default:translation_form.initial.language }}': '{{ translation_form.title.value|default:""|escapejs }}',
+            {% endfor %}
+        },
+        
+        excerpts: {
+            {% for translation_form in translation_formset %}
+                '{{ translation_form.language.value|default:translation_form.initial.language }}': '{{ translation_form.excerpt.value|default:""|escapejs }}',
+            {% endfor %}
+        },
+
+        langStats: { ar: { complete: false }, en: { complete: false }, fr: { complete: false } },
+
+        availableBlockTypes: [
+            { id: 'heading', name: '{% translate "Heading" %}', desc: '{% translate "Section titles (H2, H3, H4)" %}', icon: 'heading' },
+            { id: 'paragraph', name: '{% translate "Paragraph" %}', desc: '{% translate "Main text narrative" %}', icon: 'align-left' },
+            { id: 'quote', name: '{% translate "Quote" %}', desc: '{% translate "Highlighted quotation" %}', icon: 'quote' },
+            { id: 'callout', name: '{% translate "Callout" %}', desc: '{% translate "Important alert box" %}', icon: 'alert-circle' },
+            { id: 'divider', name: '{% translate "Divider" %}', desc: '{% translate "Horizontal visual separator" %}', icon: 'minus' },
+            { id: 'image', name: '{% translate "Image" %}', desc: '{% translate "Image with caption" %}', icon: 'image' },
+            { id: 'video', name: '{% translate "Video" %}', desc: '{% translate "YouTube/Vimeo embed" %}', icon: 'video' },
+            { id: 'document', name: '{% translate "Document" %}', desc: '{% translate "Downloadable PDF/DOC file" %}', icon: 'file-text' },
+            { id: 'button', name: '{% translate "Button" %}', desc: '{% translate "Call to action link" %}', icon: 'link' }
+        ],
+
+        blocks: [
+            {% if object %}
+                {% for translation in object.translations.all %}
+                    {% for b in translation.blocks.all %}
+                    {
+                        id: Date.now() + Math.random(),
+                        lang: '{{ translation.language }}',
+                        type: '{{ b.block_type }}',
+                        collapsed: false,
+                        data: {
+                            title: '{{ b.title|escapejs }}',
+                            text: '{{ b.text|escapejs }}',
+                            level: '{{ b.heading_level|default:"h2" }}',
+                            style: '{{ b.callout_style|default:"info" }}',
+                            url: '{{ b.url|escapejs }}',
+                            embedUrl: '',
+                            caption: '{{ b.caption|escapejs }}',
+                            imagePreview: '{% if b.image %}{{ b.image.url }}{% endif %}',
+                            fileName: '{% if b.document %}{{ b.document.name }}{% endif %}'
+                        }
+                    },
+                    {% endfor %}
+                {% endfor %}
+            {% endif %}
+        ],
+
+        get currentLangBlocks() {
+            return this.blocks.filter(b => b.lang === this.activeLang);
+        },
+
+        getLangOrder(globalIndex) {
+            const currentBlock = this.blocks[globalIndex];
+            if (!currentBlock) return 0;
+
+            return this.blocks
+                .slice(0, globalIndex)
+                .filter(b => b.lang === currentBlock.lang).length;
+        },
+        
+        init() {
+            this.updateLangStats();
+            this.blocks.forEach(b => { if (b.type === 'video') this.updateVideoEmbed(b); });
+            this.$watch('blocks', () => {
+                this.$nextTick(() => { if (window.lucide) lucide.createIcons(); });
+            });
+        },
+
+        previewFeaturedImage(e) {
+            const file = e.target.files[0];
+            if (file) {
+                this.featuredImagePreview = URL.createObjectURL(file);
+                this.featuredImageInfo = `${file.name} (${(file.size / (1024*1024)).toFixed(2)} MB)`;
+            }
+        },
+
+        handleFeaturedImageDrop(e) {
+            const file = e.dataTransfer.files[0];
+            if (file) {
+                const input = document.getElementById('{{ form.featured_image.id_for_label }}');
+                const dt = new DataTransfer();
+                dt.items.add(file);
+                input.files = dt.files;
+                this.previewFeaturedImage({ target: { files: [file] } });
+            }
+        },
+
+        removeFeaturedImage() {
+            this.featuredImagePreview = null;
+            this.featuredImageInfo = '';
+            const input = document.getElementById('{{ form.featured_image.id_for_label }}');
+            if (input) input.value = '';
+        },
+
+        updateLangStats() {
+            this.languages.forEach(l => {
+                this.langStats[l.code].complete = !!(this.titles[l.code] && this.titles[l.code].trim() !== '');
+            });
+        },
+
+        addBlock(type) {
+            const newBlock = {
+                id: Date.now() + Math.random(),
+                lang: this.activeLang,
+                type: type,
+                collapsed: false,
+                data: { title: '', text: '', level: 'h2', style: 'info', url: '', embedUrl: '', caption: '', imagePreview: null, fileName: '' }
+            };
+            this.blocks.push(newBlock);
+        },
+
+        duplicateBlock(index) {
+            const original = this.blocks[index];
+            const clone = JSON.parse(JSON.stringify(original));
+            clone.id = Date.now() + Math.random();
+            this.blocks.splice(index + 1, 0, clone);
+        },
+
+        moveBlockUp(globalIndex) {
+            const currentBlock = this.blocks[globalIndex];
+            if (!currentBlock) return;
+
+            let prevIndex = -1;
+            for (let i = globalIndex - 1; i >= 0; i--) {
+                if (this.blocks[i].lang === currentBlock.lang) {
+                    prevIndex = i;
+                    break;
+                }
+            }
+
+            if (prevIndex !== -1) {
+                const item = this.blocks.splice(globalIndex, 1)[0];
+                this.blocks.splice(prevIndex, 0, item);
+            }
+        },
+
+        moveBlockDown(globalIndex) {
+            const currentBlock = this.blocks[globalIndex];
+            if (!currentBlock) return;
+
+            let nextIndex = -1;
+            for (let i = globalIndex + 1; i < this.blocks.length; i++) {
+                if (this.blocks[i].lang === currentBlock.lang) {
+                    nextIndex = i;
+                    break;
+                }
+            }
+
+            if (nextIndex !== -1) {
+                const item = this.blocks.splice(globalIndex, 1)[0];
+                this.blocks.splice(nextIndex, 0, item);
+            }
+        },
+
+        confirmDeleteBlock(index) {
+            this.blockToDeleteIndex = index;
+            this.deleteModalOpen = true;
+        },
+
+        executeDeleteBlock() {
+            if (this.blockToDeleteIndex !== null) {
+                this.blocks.splice(this.blockToDeleteIndex, 1);
+                this.blockToDeleteIndex = null;
+            }
+            this.deleteModalOpen = false;
+        },
+
+        getBlockLabel(type) {
+            const found = this.availableBlockTypes.find(b => b.id === type);
+            return found ? found.name : type;
+        },
+
+        getBlockSummary(block) {
+            if (block.data.title) return block.data.title;
+            if (block.data.text) return block.data.text.substring(0, 40) + '...';
+            return 'Empty block content';
+        },
+
+        updateVideoEmbed(block) {
+            let url = block.data.url;
+            if (!url) return;
+            if (url.includes('youtube.com/watch?v=')) {
+                let id = url.split('v=')[1].split('&')[0];
+                block.data.embedUrl = `https://www.youtube.com/embed/${id}`;
+            } else if (url.includes('vimeo.com/')) {
+                let id = url.split('vimeo.com/')[1];
+                block.data.embedUrl = `https://player.vimeo.com/video/${id}`;
+            }
+        },
+
+        handleBlockImageUpload(e, block) {
+            const file = e.target.files[0];
+            if (file) {
+                block.data.imagePreview = URL.createObjectURL(file);
+            }
+        },
+
+        handleBlockDocUpload(e, block) {
+            const file = e.target.files[0];
+            if (file) {
+                block.data.fileName = file.name;
+            }
+        },
+
+        saveDraft() {
+            this.articleStatus = 'draft';
+            this.$nextTick(() => document.getElementById('article-form').submit());
+        },
+
+        submitForm(status) {
+            this.articleStatus = status;
+            this.$nextTick(() => document.getElementById('article-form').submit());
+        }
+    };
+}
+</script>
+
+<style>
+.dashboard-label {
+    display: block;
+    margin-bottom: 0.375rem;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-weight: 600;
+    color: rgb(71 85 105);
+}
+.dark .dashboard-label {
+    color: rgb(203 213 225);
+}
+
+.dashboard-input {
+    width: 100%;
+    border-radius: 0.75rem;
+    border: 1px solid rgb(226 232 240);
+    background-color: rgb(248 250 252);
+    color: rgb(15 23 42);
+    padding: 0.625rem 0.875rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    outline: none;
+    transition: all 0.2s ease-in-out;
+}
+.dashboard-input:focus {
+    border-color: rgb(147 51 234);
+    box-shadow: 0 0 0 3px rgb(147 51 234 / 0.15);
+}
+.dark .dashboard-input {
+    border-color: rgb(30 41 59);
+    background-color: rgb(15 23 42);
+    color: rgb(241 245 249);
+}
+.dark .dashboard-input:focus {
+    border-color: rgb(168 85 247);
+    box-shadow: 0 0 0 3px rgb(168 85 247 / 0.2);
+}
+
+.dashboard-file {
+    display: block;
+    width: 100%;
+    font-size: 0.875rem;
+    color: rgb(71 85 105);
+}
+.dark .dashboard-file {
+    color: rgb(203 213 225);
+}
+.dashboard-file::file-selector-button {
+    margin-inline-end: 0.75rem;
+    padding: 0.5rem 0.875rem;
+    border: 0;
+    border-radius: 0.5rem;
+    background-color: rgb(243 232 255);
+    color: rgb(126 34 206);
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+.dark .dashboard-file::file-selector-button {
+    background-color: rgb(88 28 135 / 0.4);
+    color: rgb(216 180 254);
+}
+</style>
+{% endblock %}

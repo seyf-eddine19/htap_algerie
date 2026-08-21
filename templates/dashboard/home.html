@@ -1,0 +1,334 @@
+{% extends "dashboard/base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Dashboard Overview" %}{% endblock %}
+{% block header_title %}{% translate "Overview" %}{% endblock %}
+
+{% block content %}
+<div class="space-y-8">
+
+    <!-- Quick Actions Banner -->
+    <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-slate-900 via-purple-950 to-slate-900 dark:from-slate-950 dark:via-purple-950/80 dark:to-slate-950 text-white p-6 sm:p-8 shadow-xl">
+
+        <div class="absolute -end-10 -bottom-10 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -start-20 -top-20 w-48 h-48 bg-fuchsia-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+
+            <div class="text-start">
+                <h3 class="text-2xl font-bold">
+                    {% translate "Welcome to HTAP Algérie" %}
+                </h3>
+
+                <p class="text-slate-300 text-sm mt-1 max-w-2xl">
+                    {% translate "Management platform for the medical association and patient support." %}
+                </p>
+            </div>
+
+            <div class="flex flex-wrap gap-3">
+
+                <a href="{% url 'dashboard:member_create' %}" class="inline-flex items-center gap-2 px-4 py-2.5 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-xl text-xs shadow-lg shadow-purple-600/30 transition">
+                    <i data-lucide="user-plus" class="w-4 h-4"></i>
+                    {% translate "New Member" %}
+                </a>
+
+                <a href="{% url 'dashboard:article_create' %}" class="inline-flex items-center gap-2 px-4 py-2.5 bg-white/10 hover:bg-white/20 text-white font-medium rounded-xl text-xs backdrop-blur-md transition border border-white/10">
+                    <i data-lucide="plus-circle" class="w-4 h-4"></i>
+                    {% translate "New Article" %}
+                </a>
+
+                <a href="{% url 'dashboard:activity_create' %}" class="inline-flex items-center gap-2 px-4 py-2.5 bg-white/10 hover:bg-white/20 text-white font-medium rounded-xl text-xs backdrop-blur-md transition border border-white/10">
+                    <i data-lucide="calendar-plus" class="w-4 h-4"></i>
+                    {% translate "New Activity" %}
+                </a>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Statistics -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+        <!-- Members -->
+        <div class="group bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md dark:hover:shadow-slate-950/50 transition">
+
+            <div class="flex items-center justify-between gap-4">
+
+                <span class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                    {% translate "Members" %}
+                </span>
+
+                <div class="w-10 h-10 rounded-xl bg-purple-50 dark:bg-purple-950/40 text-purple-600 dark:text-purple-400 flex items-center justify-center">
+                    <i data-lucide="users" class="w-5 h-5"></i>
+                </div>
+
+            </div>
+
+            <div class="mt-4 flex items-baseline gap-2">
+
+                <span class="text-3xl font-extrabold text-slate-900 dark:text-white">
+                    {{ members_count|default:"0" }}
+                </span>
+
+                <span class="text-xs text-slate-500 dark:text-slate-400">
+                    {% translate "total" %}
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Articles -->
+        <div class="group bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md dark:hover:shadow-slate-950/50 transition">
+
+            <div class="flex items-center justify-between gap-4">
+
+                <span class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                    {% translate "Articles" %}
+                </span>
+
+                <div class="w-10 h-10 rounded-xl bg-violet-50 dark:bg-violet-950/40 text-violet-600 dark:text-violet-400 flex items-center justify-center">
+                    <i data-lucide="file-text" class="w-5 h-5"></i>
+                </div>
+
+            </div>
+
+            <div class="mt-4 flex items-baseline gap-2">
+
+                <span class="text-3xl font-extrabold text-slate-900 dark:text-white">
+                    {{ articles_count|default:"0" }}
+                </span>
+
+                <span class="text-xs text-slate-500 dark:text-slate-400">
+                    {% translate "published/drafts" %}
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Activities -->
+        <div class="group bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md dark:hover:shadow-slate-950/50 transition">
+
+            <div class="flex items-center justify-between gap-4">
+
+                <span class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                    {% translate "Activities" %}
+                </span>
+
+                <div class="w-10 h-10 rounded-xl bg-fuchsia-50 dark:bg-fuchsia-950/40 text-fuchsia-600 dark:text-fuchsia-400 flex items-center justify-center">
+                    <i data-lucide="calendar" class="w-5 h-5"></i>
+                </div>
+
+            </div>
+
+            <div class="mt-4 flex items-baseline gap-2">
+
+                <span class="text-3xl font-extrabold text-slate-900 dark:text-white">
+                    {{ activities_count|default:"0" }}
+                </span>
+
+                <span class="text-xs text-slate-500 dark:text-slate-400">
+                    {% translate "events" %}
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Messages -->
+        <div class="group bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md dark:hover:shadow-slate-950/50 transition">
+
+            <div class="flex items-center justify-between gap-4">
+
+                <span class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                    {% translate "Messages" %}
+                </span>
+
+                <div class="w-10 h-10 rounded-xl bg-rose-50 dark:bg-rose-950/40 text-rose-600 dark:text-rose-400 flex items-center justify-center">
+                    <i data-lucide="mail" class="w-5 h-5"></i>
+                </div>
+
+            </div>
+
+            <div class="mt-4 flex items-baseline gap-2">
+
+                <span class="text-3xl font-extrabold text-slate-900 dark:text-white">
+                    {{ messages_count|default:"0" }}
+                </span>
+
+                <span class="text-xs text-rose-600 dark:text-rose-400 font-semibold">
+                    {{ unread_messages_count|default:"0" }}
+                    {% translate "unread" %}
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Recent Content -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+        <!-- Recent Messages -->
+        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm p-6 space-y-4">
+
+            <div class="flex items-center justify-between gap-4 pb-4 border-b border-slate-100 dark:border-slate-800">
+
+                <h4 class="font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <i data-lucide="inbox" class="w-5 h-5 text-purple-600 dark:text-purple-400"></i>
+                    {% translate "Recent Messages" %}
+                </h4>
+
+                <a href="{% url 'dashboard:messages' %}" class="inline-flex items-center gap-1 text-xs font-semibold text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 transition">
+                    {% translate "View All" %}
+                    <i data-lucide="{% if LANGUAGE_CODE == 'ar' %}arrow-left{% else %}arrow-right{% endif %}" class="w-3.5 h-3.5"></i>
+                </a>
+
+            </div>
+
+            <div class="space-y-2">
+
+                {% for msg in recent_messages %}
+
+                <a href="{% url 'dashboard:message_detail' msg.pk %}" class="flex items-center justify-between gap-4 p-3 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/70 transition border border-transparent hover:border-slate-100 dark:hover:border-slate-800">
+
+                    <div class="min-w-0 text-start">
+
+                        <p class="text-sm font-semibold text-slate-900 dark:text-white truncate">
+                            {{ msg.first_name }} {{ msg.last_name }}
+                        </p>
+
+                        <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-1 mt-0.5">
+                            {{ msg.subject }}
+                        </p>
+
+                    </div>
+
+                    <span class="shrink-0 px-2.5 py-1 text-[10px] font-semibold rounded-full uppercase tracking-wider
+                        {% if msg.status == 'new' %}
+                            bg-purple-100 text-purple-700 dark:bg-purple-950/50 dark:text-purple-300
+                        {% elif msg.status == 'read' %}
+                            bg-blue-100 text-blue-700 dark:bg-blue-950/50 dark:text-blue-300
+                        {% else %}
+                            bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300
+                        {% endif %}">
+                        {{ msg.get_status_display|default:msg.status }}
+                    </span>
+
+                </a>
+
+                {% empty %}
+
+                <div class="py-8 text-center">
+                    <div class="w-10 h-10 mx-auto mb-3 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-400 flex items-center justify-center">
+                        <i data-lucide="inbox" class="w-5 h-5"></i>
+                    </div>
+
+                    <p class="text-sm text-slate-500 dark:text-slate-400">
+                        {% translate "No recent messages." %}
+                    </p>
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+
+        <!-- Recent Articles -->
+        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm p-6 space-y-4">
+
+            <div class="flex items-center justify-between gap-4 pb-4 border-b border-slate-100 dark:border-slate-800">
+
+                <h4 class="font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <i data-lucide="newspaper" class="w-5 h-5 text-purple-600 dark:text-purple-400"></i>
+                    {% translate "Recent Articles" %}
+                </h4>
+
+                <a href="{% url 'dashboard:articles' %}" class="inline-flex items-center gap-1 text-xs font-semibold text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 transition">
+                    {% translate "View All" %}
+                    <i data-lucide="{% if LANGUAGE_CODE == 'ar' %}arrow-left{% else %}arrow-right{% endif %}" class="w-3.5 h-3.5"></i>
+                </a>
+
+            </div>
+
+            <div class="space-y-2">
+
+                {% for art in recent_articles %}
+
+                <div class="flex items-center justify-between gap-4 p-3 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/70 transition border border-transparent hover:border-slate-100 dark:hover:border-slate-800">
+
+                    <div class="flex items-center gap-3 min-w-0">
+
+                        {% if art.featured_image %}
+
+                        <img src="{{ art.featured_image.url }}" alt="" class="w-11 h-11 rounded-xl object-cover border border-slate-200 dark:border-slate-700 shrink-0">
+
+                        {% else %}
+
+                        <div class="w-11 h-11 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400 shrink-0">
+                            <i data-lucide="image" class="w-5 h-5"></i>
+                        </div>
+
+                        {% endif %}
+
+                        <div class="min-w-0 text-start">
+
+                            {% with translation=art.translations.first %}
+
+                            <p class="text-sm font-semibold text-slate-900 dark:text-white truncate">
+                                {% if translation %}
+                                    {{ translation.title }}
+                                {% else %}
+                                    {% translate "Article" %} #{{ art.pk }}
+                                {% endif %}
+                            </p>
+
+                            {% endwith %}
+
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                                {{ art.created_at|date:"d M Y" }}
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <a href="{% url 'dashboard:article_edit' art.pk %}" title="{% translate 'Edit article' %}" class="shrink-0 p-2 rounded-lg text-slate-400 hover:text-purple-600 dark:hover:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-950/40 transition">
+                        <i data-lucide="edit-3" class="w-4 h-4"></i>
+                    </a>
+
+                </div>
+
+                {% empty %}
+
+                <div class="py-8 text-center">
+
+                    <div class="w-10 h-10 mx-auto mb-3 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-400 flex items-center justify-center">
+                        <i data-lucide="newspaper" class="w-5 h-5"></i>
+                    </div>
+
+                    <p class="text-sm text-slate-500 dark:text-slate-400">
+                        {% translate "No articles available." %}
+                    </p>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

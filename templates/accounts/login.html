@@ -1,0 +1,176 @@
+{% load static i18n %}
+<!DOCTYPE html>
+{% get_current_language as LANGUAGE_CODE %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
+<html lang="{{ LANGUAGE_CODE|default:'fr' }}" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% translate "Login" %}{% endblock %} | HTAP Algérie</title>
+    <link rel="icon" href="{% static 'img/logo.avif' %}" type="image/x-icon">
+
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem("theme");
+            const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
+                document.documentElement.classList.add("dark");
+            } else {
+                document.documentElement.classList.remove("dark");
+            }
+        })();
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            purple: "#7c3aed",
+                            violet: "#6d28d9",
+                            magenta: "#d946ef",
+                            dark: "#0f172a"
+                        }
+                    }
+                }
+            }
+        };
+    </script>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body class="min-h-screen bg-slate-100 dark:bg-slate-950 text-slate-800 dark:text-slate-200 font-sans antialiased transition-colors duration-200">
+
+    <div class="min-h-screen flex items-center justify-center p-4 sm:p-6 relative overflow-hidden">
+
+        <div class="absolute -top-32 -start-32 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
+        <div class="absolute -bottom-32 -end-32 w-96 h-96 bg-fuchsia-500/10 rounded-full blur-3xl"></div>
+
+        <div class="absolute top-5 end-5 flex items-center gap-2">
+            <form action="{% url 'set_language' %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                <select name="language" onchange="this.form.submit()" class="h-9 px-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs font-semibold text-slate-600 dark:text-slate-300 outline-none focus:border-purple-500">
+                    <option value="ar" {% if LANGUAGE_CODE == "ar" %}selected{% endif %}>العربية</option>
+                    <option value="fr" {% if LANGUAGE_CODE == "fr" %}selected{% endif %}>Français</option>
+                    <option value="en" {% if LANGUAGE_CODE == "en" %}selected{% endif %}>English</option>
+                </select>
+            </form>
+
+            <button type="button" onclick="toggleDarkMode()" class="w-9 h-9 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-500 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition">
+                <i data-lucide="moon" class="w-4 h-4 block dark:hidden"></i>
+                <i data-lucide="sun" class="w-4 h-4 hidden dark:block"></i>
+            </button>
+        </div>
+
+        <div class="relative w-full max-w-md">
+
+            <div class="text-center mb-8">
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-tr from-purple-600 to-fuchsia-500 text-white font-bold text-xl shadow-xl shadow-purple-500/20 mb-5">
+                    HA
+                </div>
+
+                <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+                    HTAP Algérie
+                </h1>
+
+                <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">
+                    {% translate "Administration Portal" %}
+                </p>
+            </div>
+
+            {% if messages %}
+            <div class="space-y-3 mb-5">
+                {% for message in messages %}
+                <div class="p-4 rounded-xl text-xs font-medium flex items-center gap-3 border {% if message.tags == 'error' %}bg-rose-50 text-rose-800 border-rose-200 dark:bg-rose-950/30 dark:text-rose-300 dark:border-rose-900{% else %}bg-purple-50 text-purple-800 border-purple-200 dark:bg-purple-950/30 dark:text-purple-300 dark:border-purple-900{% endif %}">
+                    <i data-lucide="{% if message.tags == 'error' %}alert-circle{% else %}info{% endif %}" class="w-4 h-4 shrink-0"></i>
+                    <span>{{ message }}</span>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl shadow-slate-900/5 dark:shadow-black/20 p-6 sm:p-8">
+
+                <div class="mb-7">
+                    <h2 class="text-lg font-bold text-slate-900 dark:text-white">
+                        {% translate "Welcome back" %}
+                    </h2>
+                    <p class="mt-1 text-xs text-slate-500 dark:text-slate-400">
+                        {% translate "Sign in to access the administration dashboard." %}
+                    </p>
+                </div>
+
+                <form method="post" class="space-y-5">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ next }}">
+
+                    {% if form.non_field_errors %}
+                    <div class="p-4 rounded-xl bg-rose-50 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-900 text-xs text-rose-700 dark:text-rose-300">
+                        {{ form.non_field_errors }}
+                    </div>
+                    {% endif %}
+
+                    <div>
+                        <label for="{{ form.username.id_for_label }}" class="block mb-2 text-xs font-semibold text-slate-700 dark:text-slate-300">
+                            {% translate "Username" %}
+                        </label>
+                        <div class="relative">
+                            <i data-lucide="user" class="absolute start-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400"></i>
+                            <input type="text" name="username" id="{{ form.username.id_for_label }}" autocomplete="username" required value="{{ form.username.value|default:'' }}" class="w-full ps-10 pe-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm text-slate-900 dark:text-white outline-none focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 transition" placeholder="{% translate 'Enter your username' %}">
+                        </div>
+                        {% if form.username.errors %}
+                        <p class="mt-1.5 text-[11px] text-rose-600 dark:text-rose-400">{{ form.username.errors|striptags }}</p>
+                        {% endif %}
+                    </div>
+
+                    <div>
+                        <label for="{{ form.password.id_for_label }}" class="block mb-2 text-xs font-semibold text-slate-700 dark:text-slate-300">
+                            {% translate "Password" %}
+                        </label>
+                        <div class="relative">
+                            <i data-lucide="lock" class="absolute start-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400"></i>
+                            <input type="password" name="password" id="{{ form.password.id_for_label }}" autocomplete="current-password" required class="w-full ps-10 pe-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm text-slate-900 dark:text-white outline-none focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 transition" placeholder="{% translate 'Enter your password' %}">
+                        </div>
+                        {% if form.password.errors %}
+                        <p class="mt-1.5 text-[11px] text-rose-600 dark:text-rose-400">{{ form.password.errors|striptags }}</p>
+                        {% endif %}
+                    </div>
+
+                    <button type="submit" class="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-fuchsia-500 hover:from-purple-700 hover:to-fuchsia-600 text-white text-sm font-bold shadow-lg shadow-purple-500/20 transition">
+                        <i data-lucide="log-in" class="w-4 h-4"></i>
+                        {% translate "Sign In" %}
+                    </button>
+                </form>
+            </div>
+
+            <div class="text-center mt-6">
+                <p class="text-[11px] text-slate-400 dark:text-slate-500">
+                    &copy; {% now "Y" %} HTAP Algérie. {% translate "All rights reserved." %}
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        function toggleDarkMode() {
+            const html = document.documentElement;
+            if (html.classList.contains("dark")) {
+                html.classList.remove("dark");
+                localStorage.setItem("theme", "light");
+            } else {
+                html.classList.add("dark");
+                localStorage.setItem("theme", "dark");
+            }
+            lucide.createIcons();
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}Détail Message{% endblock %}
+{% block header_title %}Message de {{ object.first_name }} {{ object.last_name }}{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto space-y-6">
+    <div class="flex items-center justify-between">
+        <a href="{% url 'dashboard:messages' %}" class="inline-flex items-center gap-2 text-xs font-semibold text-slate-500 hover:text-slate-800 transition">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i> Retour aux messages
+        </a>
+        <a href="{% url 'dashboard:message_delete' object.pk %}" class="px-3 py-1.5 text-xs font-semibold text-rose-600 hover:bg-rose-50 rounded-lg transition border border-rose-200">
+            Supprimer ce message
+        </a>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Message Main View -->
+        <div class="lg:col-span-2 bg-white rounded-2xl border border-slate-200/80 shadow-sm p-6 sm:p-8 space-y-6">
+            <div class="border-b border-slate-100 pb-4">
+                <h3 class="text-xl font-bold text-slate-900">{{ object.subject }}</h3>
+                <p class="text-xs text-slate-400 mt-1">Reçu le {{ object.created_at|date:"d F Y à H:i" }}</p>
+            </div>
+
+            <div class="text-slate-700 text-sm leading-relaxed whitespace-pre-line">
+                {{ object.message }}
+            </div>
+        </div>
+
+        <!-- Details Sidebar & Status Change -->
+        <div class="space-y-6">
+            <div class="bg-white rounded-2xl border border-slate-200/80 shadow-sm p-6 space-y-4">
+                <h4 class="font-bold text-slate-900 text-sm pb-2 border-b border-slate-100">Expéditeur</h4>
+                <div class="space-y-3 text-xs">
+                    <div>
+                        <p class="text-slate-400">Nom complet</p>
+                        <p class="font-semibold text-slate-800 text-sm">{{ object.first_name }} {{ object.last_name }}</p>
+                    </div>
+                    <div>
+                        <p class="text-slate-400">Email</p>
+                        <a href="mailto:{{ object.email }}" class="font-semibold text-purple-600 hover:underline">{{ object.email }}</a>
+                    </div>
+                    {% if object.phone %}
+                    <div>
+                        <p class="text-slate-400">Téléphone</p>
+                        <p class="font-semibold text-slate-800">{{ object.phone }}</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Update Status Box -->
+            <div class="bg-white rounded-2xl border border-slate-200/80 shadow-sm p-6 space-y-4">
+                <h4 class="font-bold text-slate-900 text-sm">Changer le statut</h4>
+                <form method="post" action="{% url 'dashboard:message_status' object.pk %}" class="space-y-3">
+                    {% csrf_token %}
+                    <select name="status" class="w-full px-3 py-2 border border-slate-300 rounded-xl text-xs font-semibold focus:ring-2 focus:ring-purple-600 outline-none">
+                        <option value="new" {% if object.status == 'new' %}selected{% endif %}>Nouveau</option>
+                        <option value="read" {% if object.status == 'read' %}selected{% endif %}>Lu</option>
+                        <option value="replied" {% if object.status == 'replied' %}selected{% endif %}>Répondu</option>
+                        <option value="archived" {% if object.status == 'archived' %}selected{% endif %}>Archivé</option>
+                    </select>
+                    <button type="submit" class="w-full py-2 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-xl text-xs shadow-md transition">
+                        Mettre à jour
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

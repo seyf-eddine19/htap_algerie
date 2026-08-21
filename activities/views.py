@@ -74,7 +74,7 @@ class ActivityListView(ListView):
                 status=Activity.Status.PUBLISHED,
                 is_featured=True,
             )
-            .prefetch_related("translations")
+            .prefetch_related("translations", "gallery")
             .order_by("-start_date", "-created_at")
             .first()
         )
@@ -92,7 +92,7 @@ class ActivityListView(ListView):
 
         return context
 
-    
+
 class ActivityDetailView(DetailView):
     model = Activity
     template_name = "activities/detail.html"
@@ -113,12 +113,13 @@ class ActivityDetailView(DetailView):
 
         language = get_activity_language()
 
-        translation = get_activity_translation(
+        context["translation"] = get_activity_translation(
             self.object,
             language,
         )
 
-        context["translation"] = translation
         context["current_language"] = language
 
         return context
+
+    

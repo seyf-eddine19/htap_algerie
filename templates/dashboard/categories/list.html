@@ -1,0 +1,269 @@
+{% extends "dashboard/base.html" %}
+{% load i18n static %}
+
+{% block title %}{% translate "Categories" %} | HTAP Algérie{% endblock %}
+
+{% block header_title %}{% translate "Category Management" %}{% endblock %}
+
+{% block breadcrumb %}
+<div class="flex items-center gap-2 mt-1 text-xs text-slate-500 dark:text-slate-400">
+    <a href="{% url 'dashboard:home' %}" class="hover:text-purple-600 dark:hover:text-purple-400 transition">{% translate "Dashboard" %}</a>
+    <i data-lucide="chevron-right" class="w-3.5 h-3.5 rtl:rotate-180"></i>
+    <span class="text-slate-700 dark:text-slate-200 font-medium">{% translate "Categories" %}</span>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto space-y-6" x-data="categoryList()">
+
+    <!-- Header & Action Bar -->
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+            <h1 class="text-2xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
+                {% translate "Categories" %}
+            </h1>
+            <p class="mt-1 text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                {% translate "Organize medical publications and news articles by topic." %}
+            </p>
+        </div>
+
+        <div class="flex items-center gap-3 shrink-0">
+            <a href="{% url 'dashboard:category_create' %}" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-semibold shadow-md transition">
+                <i data-lucide="plus" class="w-4 h-4"></i>
+                {% translate "New Category" %}
+            </a>
+        </div>
+    </div>
+
+    <!-- Filters Bar -->
+    <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-4 shadow-sm">
+        <form method="get" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3 items-center">
+            
+            <!-- Search Query -->
+            <div class="lg:col-span-7 relative">
+                <i data-lucide="search" class="w-4 h-4 absolute start-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                <input type="text" name="q" value="{{ request.GET.q|default:'' }}" placeholder="{% translate 'Search by name or slug...' %}" class="dashboard-input ps-10">
+            </div>
+
+            <!-- Status Filter -->
+            <div class="lg:col-span-3">
+                <select name="status" class="dashboard-input">
+                    <option value="">{% translate "All Statuses" %}</option>
+                    <option value="active" {% if request.GET.status == "active" %}selected{% endif %}>{% translate "Active" %}</option>
+                    <option value="inactive" {% if request.GET.status == "inactive" %}selected{% endif %}>{% translate "Inactive" %}</option>
+                </select>
+            </div>
+
+            <!-- Submit & Reset Buttons -->
+            <div class="lg:col-span-2 flex items-center gap-2">
+                <button type="submit" class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold transition">
+                    <i data-lucide="filter" class="w-3.5 h-3.5"></i>
+                    {% translate "Filter" %}
+                </button>
+                {% if request.GET.q or request.GET.status %}
+                <a href="{% url 'dashboard:categories' %}" class="p-2.5 rounded-xl border border-rose-200 dark:border-rose-900/50 bg-rose-50 dark:bg-rose-950/30 text-rose-600 dark:text-rose-400 hover:bg-rose-100 transition" title="{% translate 'Clear Filters' %}">
+                    <i data-lucide="x" class="w-4 h-4"></i>
+                </a>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+
+    <!-- Data Table Card -->
+    <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full text-start text-xs">
+                <thead class="bg-slate-50/70 dark:bg-slate-800/40 border-b border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">
+                    <tr>
+                        <th class="px-6 py-3.5 text-start">{% translate "Name" %}</th>
+                        <th class="px-4 py-3.5 text-start">{% translate "Slug" %}</th>
+                        <th class="px-4 py-3.5 text-start">{% translate "Status" %}</th>
+                        <th class="px-4 py-3.5 text-start">{% translate "Display Order" %}</th>
+                        <th class="px-6 py-3.5 text-end">{% translate "Actions" %}</th>
+                    </tr>
+                </thead>
+
+                <tbody class="divide-y divide-slate-100 dark:divide-slate-800/60">
+                    {% for category in object_list|default:categories %}
+                    <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition">
+                        
+                        <!-- Name & Icon -->
+                        <td class="px-6 py-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-9 h-9 rounded-xl bg-purple-50 dark:bg-purple-950/40 border border-purple-100 dark:border-purple-900/50 text-purple-600 dark:text-purple-400 flex items-center justify-center shrink-0">
+                                    <i data-lucide="folder" class="w-4 h-4"></i>
+                                </div>
+                                <a href="{% url 'dashboard:category_edit' category.pk %}" class="font-bold text-slate-900 dark:text-slate-100 hover:text-purple-600 dark:hover:text-purple-400 transition text-sm">
+                                    {{ category.name }}
+                                </a>
+                            </div>
+                        </td>
+
+                        <!-- Slug -->
+                        <td class="px-4 py-4 whitespace-nowrap">
+                            <span class="font-mono text-[11px] text-slate-500 dark:text-slate-400 px-2 py-1 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200/60 dark:border-slate-700/60">
+                                {{ category.slug }}
+                            </span>
+                        </td>
+
+                        <!-- Status Badge -->
+                        <td class="px-4 py-4 whitespace-nowrap">
+                            {% if category.is_active %}
+                            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-100 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                {% translate "Active" %}
+                            </span>
+                            {% else %}
+                            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">
+                                <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
+                                {% translate "Inactive" %}
+                            </span>
+                            {% endif %}
+                        </td>
+
+                        <!-- Order -->
+                        <td class="px-4 py-4 whitespace-nowrap text-slate-600 dark:text-slate-400 font-mono text-xs">
+                            {{ category.order|default:0 }}
+                        </td>
+
+                        <!-- Actions -->
+                        <td class="px-6 py-4 whitespace-nowrap text-end">
+                            <div class="flex items-center justify-end gap-1.5">
+                                <a href="{% url 'dashboard:category_edit' category.pk %}" class="p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition" title="{% translate 'Edit' %}">
+                                    <i data-lucide="edit-3" class="w-4 h-4"></i>
+                                </a>
+
+                                <button type="button" @click="confirmDelete('{% url 'dashboard:category_delete' category.pk %}')" class="p-2 rounded-xl hover:bg-rose-50 dark:hover:bg-rose-950/50 text-rose-600 dark:text-rose-400 transition" title="{% translate 'Delete' %}">
+                                    <i data-lucide="trash-2" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="6" class="px-6 py-12 text-center">
+                            <div class="w-12 h-12 mx-auto rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-400 flex items-center justify-center mb-3">
+                                <i data-lucide="folder-x" class="w-6 h-6"></i>
+                            </div>
+                            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200">{% translate "No Categories Found" %}</h3>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">{% translate "Try adjusting your search criteria or add a new category." %}</p>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination Bar -->
+        {% if is_paginated %}
+        <div class="px-6 py-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/20 flex items-center justify-between">
+            <span class="text-xs text-slate-500 dark:text-slate-400">
+                {% translate "Showing" %} <strong class="font-semibold text-slate-700 dark:text-slate-200">{{ page_obj.start_index }}</strong> - <strong class="font-semibold text-slate-700 dark:text-slate-200">{{ page_obj.end_index }}</strong> {% translate "of" %} <strong class="font-semibold text-slate-700 dark:text-slate-200">{{ page_obj.paginator.count }}</strong>
+            </span>
+
+            <div class="flex items-center gap-1">
+                {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}" class="p-2 rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-white dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition">
+                    <i data-lucide="chevron-left" class="w-4 h-4 rtl:rotate-180"></i>
+                </a>
+                {% endif %}
+
+                <span class="px-3 py-1 text-xs font-bold text-slate-700 dark:text-slate-200">
+                    {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+                </span>
+
+                {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="p-2 rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-white dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition">
+                    <i data-lucide="chevron-right" class="w-4 h-4 rtl:rotate-180"></i>
+                </a>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- DELETE CONFIRMATION MODAL -->
+    <template x-if="deleteModalOpen">
+        <div @keydown.escape.window="closeDeleteModal()" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+            <div @click.outside="closeDeleteModal()" class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 max-w-sm w-full p-6 space-y-4 shadow-xl">
+                <div class="w-10 h-10 rounded-xl bg-rose-100 dark:bg-rose-900/40 text-rose-600 dark:text-rose-400 flex items-center justify-center">
+                    <i data-lucide="alert-triangle" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <h3 class="text-sm font-bold text-slate-900 dark:text-slate-100">{% translate "Delete Category?" %}</h3>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">{% translate "Are you sure you want to delete this category? Articles assigned to it may become uncategorized." %}</p>
+                </div>
+                <div class="flex items-center justify-end gap-2.5">
+                    <button type="button" @click="closeDeleteModal()" class="px-4 py-2 rounded-xl text-xs font-semibold border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300">
+                        {% translate "Cancel" %}
+                    </button>
+                    <form :action="deleteUrl" method="post" class="inline">
+                        {% csrf_token %}
+                        <button type="submit" class="px-4 py-2 rounded-xl text-xs font-semibold bg-rose-600 hover:bg-rose-700 text-white transition">
+                            {% translate "Delete" %}
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </template>
+
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    if (window.lucide) {
+        lucide.createIcons();
+    }
+});
+
+function categoryList() {
+    return {
+        deleteModalOpen: false,
+        deleteUrl: '',
+
+        confirmDelete(url) {
+            this.deleteUrl = url;
+            this.deleteModalOpen = true;
+        },
+
+        closeDeleteModal() {
+            this.deleteModalOpen = false;
+            this.deleteUrl = '';
+        }
+    };
+}
+</script>
+
+<style>
+.dashboard-input {
+    width: 100%;
+    border-radius: 0.75rem;
+    border: 1px solid rgb(226 232 240);
+    background-color: rgb(248 250 252);
+    color: rgb(15 23 42);
+    padding: 0.5rem 0.875rem;
+    font-size: 0.75rem;
+    line-height: 1.25rem;
+    outline: none;
+    transition: all 0.2s ease-in-out;
+}
+.dashboard-input:focus {
+    border-color: rgb(147 51 234);
+    box-shadow: 0 0 0 3px rgb(147 51 234 / 0.15);
+}
+.dark .dashboard-input {
+    border-color: rgb(30 41 59);
+    background-color: rgb(15 23 42);
+    color: rgb(241 245 249);
+}
+.dark .dashboard-input:focus {
+    border-color: rgb(168 85 247);
+    box-shadow: 0 0 0 3px rgb(168 85 247 / 0.2);
+}
+</style>
+{% endblock %}

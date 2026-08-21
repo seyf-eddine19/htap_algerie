@@ -1,7 +1,6 @@
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.views.generic import FormView, TemplateView
-
 from django.utils.translation import gettext_lazy as _
 from .models import Member
 from .forms import ContactMessageForm
@@ -11,10 +10,15 @@ from articles.models import Article
 
 class HomeView(TemplateView):
     template_name = "core/home.html"
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # is_featured=True
-        context['latest_articles'] = Article.objects.filter(status=Article.Status.PUBLISHED).prefetch_related("translations", "category").order_by("-published_at", "-created_at")[:3]
+        context['latest_articles'] = (
+            Article.objects.filter(status=Article.Status.PUBLISHED)
+            .select_related("category")
+            .prefetch_related("translations")
+            .order_by("-published_at", "-created_at")[:3]
+        )
         return context
 
 
@@ -23,7 +27,7 @@ class AboutView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['members'] = Member.objects.filter(is_active=True)
+        context['members'] = Member.objects.filter(is_active=True).only('id', 'name', 'name_ar', 'role_ar', 'role_en', 'role_fr', 'photo', 'bio')
         return context
 
 
@@ -47,3 +51,7 @@ class ContactView(FormView):
         form.save()
         messages.success(self.request, _("Your message has been sent successfully."))
         return redirect("core:contact")
+
+    def form_invalid(self, form):
+        messages.error(self.request, _("Please correct the errors below."))
+        return super().form_invalid(form)

@@ -28,8 +28,10 @@ urlpatterns = [
 urlpatterns += i18n_patterns(
     path('admin/', admin.site.urls),
     path('', include('core.urls')),
-    path('articles', include('articles.urls')),
-    path('activities', include('activities.urls')),
+    path('articles/', include('articles.urls')),
+    path('activities/', include('activities.urls')),
+    path('accounts/', include('accounts.urls')),
+    path('dashboard/', include('dashboard.urls')),
     prefix_default_language=True
 )
 

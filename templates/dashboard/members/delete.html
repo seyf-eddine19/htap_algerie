@@ -1,0 +1,31 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}Supprimer Membre{% endblock %}
+{% block header_title %}Confirmation de suppression{% endblock %}
+
+{% block content %}
+<div class="max-w-md mx-auto pt-10">
+    <div class="bg-white rounded-2xl border border-slate-200/80 shadow-xl p-6 sm:p-8 text-center space-y-6">
+        <div class="w-16 h-16 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center mx-auto border border-rose-100 shadow-inner">
+            <i data-lucide="alert-triangle" class="w-8 h-8"></i>
+        </div>
+
+        <div>
+            <h3 class="text-xl font-bold text-slate-900">Supprimer le membre ?</h3>
+            <p class="text-sm text-slate-500 mt-2">
+                Êtes-vous sûr de vouloir supprimer <strong class="text-slate-800">{{ object.display_name|default:object.name }}</strong> ? Cette action est irréversible.
+            </p>
+        </div>
+
+        <form method="post" class="flex items-center gap-3 pt-2">
+            {% csrf_token %}
+            <a href="{% url 'dashboard:members' %}" class="flex-1 py-2.5 rounded-xl border border-slate-200 text-slate-700 hover:bg-slate-50 font-semibold text-sm transition">
+                Annuler
+            </a>
+            <button type="submit" class="flex-1 py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-semibold rounded-xl text-sm shadow-lg shadow-rose-600/30 transition">
+                Supprimer
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

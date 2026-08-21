@@ -1,0 +1,446 @@
+{% load static i18n %}
+<!DOCTYPE html>
+{% get_current_language as LANGUAGE_CODE %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
+<html lang="{{ LANGUAGE_CODE|default:'fr' }}" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% translate "Dashboard" %}{% endblock %} | HTAP Algérie</title>
+    <link rel="icon" href="{% static 'img/logo.avif' %}" type="image/x-icon">
+
+    <!-- Prevent Dark Mode Flash -->
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem("theme");
+            const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
+                document.documentElement.classList.add("dark");
+            } else {
+                document.documentElement.classList.remove("dark");
+            }
+        })();
+    </script>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            purple: "#7c3aed",
+                            violet: "#6d28d9",
+                            magenta: "#d946ef",
+                            dark: "#0f172a"
+                        }
+                    }
+                }
+            }
+        };
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    {% block extra_head %}{% endblock %}
+</head>
+
+<body class="h-screen w-screen overflow-hidden font-sans antialiased text-slate-800 dark:text-slate-200 bg-slate-100 dark:bg-slate-950 flex flex-col transition-colors duration-200">
+
+    <!-- 1. Global Top Bar -->
+    <div class="bg-slate-950 text-slate-300 text-xs py-1.5 px-4 sm:px-6 lg:px-8 border-b border-slate-800 flex items-center justify-between z-40 shrink-0 h-[33px]">
+        <div class="flex items-center gap-2">
+            <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                {% translate "System Online" %}
+            </span>
+            <span class="hidden sm:inline text-slate-500">•</span>
+            <span class="hidden sm:inline text-slate-400">HTAP Algérie Management Suite</span>
+        </div>
+
+        <div class="flex items-center gap-3 sm:gap-4 text-slate-400">
+
+            <!-- Date -->
+            <span class="text-[11px] hidden sm:inline-flex items-center gap-1">
+                <i data-lucide="clock" class="w-3 h-3 me-1"></i>
+                {% now "d F Y" %}
+            </span>
+
+            <!-- Language Selection -->
+            <div class="relative">
+                <button type="button" onclick="toggleLanguageMenu()" class="inline-flex items-center gap-1.5 hover:text-white transition">
+                    <i data-lucide="languages" class="w-3.5 h-3.5"></i>
+                    <span class="uppercase text-[10px] font-semibold">{{ LANGUAGE_CODE }}</span>
+                    <i data-lucide="chevron-down" class="w-3 h-3"></i>
+                </button>
+
+                <div id="language-menu" class="hidden absolute top-7 end-0 w-36 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl shadow-xl overflow-hidden z-50">
+                    <form action="{% url 'set_language' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+
+                        <button type="submit" name="language" value="ar" class="w-full px-4 py-2.5 text-start text-xs text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition flex items-center justify-between">
+                            <span>العربية</span>
+                            {% if LANGUAGE_CODE == "ar" %}
+                                <i data-lucide="check" class="w-3.5 h-3.5 text-purple-600"></i>
+                            {% endif %}
+                        </button>
+
+                        <button type="submit" name="language" value="fr" class="w-full px-4 py-2.5 text-start text-xs text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition flex items-center justify-between">
+                            <span>Français</span>
+                            {% if LANGUAGE_CODE == "fr" %}
+                                <i data-lucide="check" class="w-3.5 h-3.5 text-purple-600"></i>
+                            {% endif %}
+                        </button>
+
+                        <button type="submit" name="language" value="en" class="w-full px-4 py-2.5 text-start text-xs text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition flex items-center justify-between">
+                            <span>English</span>
+                            {% if LANGUAGE_CODE == "en" %}
+                                <i data-lucide="check" class="w-3.5 h-3.5 text-purple-600"></i>
+                            {% endif %}
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Dark Mode -->
+            <button type="button" onclick="toggleDarkMode()" title="{% translate 'Toggle dark mode' %}" class="inline-flex items-center justify-center w-7 h-7 rounded-lg hover:bg-white/10 hover:text-white transition">
+                <i data-lucide="sun" class="theme-sun-icon w-3.5 h-3.5 hidden dark:block"></i>
+                <i data-lucide="moon" class="theme-moon-icon w-3.5 h-3.5 block dark:hidden"></i>
+            </button>
+
+            <!-- Website -->
+            <a href="/" target="_blank" class="hover:text-white transition flex items-center gap-1">
+                <i data-lucide="globe" class="w-3 h-3"></i>
+                <span class="hidden md:inline">{% translate "Website" %}</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- 2. Main Layout -->
+    <div class="flex-1 flex min-h-0 w-full overflow-hidden">
+
+        <!-- Mobile Sidebar -->
+        <div id="mobile-sidebar" class="fixed inset-0 z-50 flex hidden md:hidden">
+            <div class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm" onclick="toggleSidebar()"></div>
+
+            <div class="relative flex-1 flex flex-col max-w-xs w-full bg-slate-950 text-white p-6 shadow-2xl h-full ltr:mr-auto rtl:ml-auto">
+
+                <!-- Mobile Logo -->
+                <div class="flex items-center justify-between pb-6 border-b border-slate-800 shrink-0">
+                    <div class="flex items-center gap-3">
+
+                        <div class="w-10 h-10 rounded-xl bg-white flex items-center justify-center overflow-hidden shadow-lg shadow-purple-500/20">
+                            <img src="{% static 'img/logo.avif' %}" alt="HTAP Algérie" class="w-full h-full object-contain p-1.5">
+                        </div>
+
+                        <div>
+                            <h1 class="font-bold text-lg leading-tight">HTAP Algérie</h1>
+                            <p class="text-xs text-purple-400 font-medium">{% translate "Administration" %}</p>
+                        </div>
+                    </div>
+
+                    <button type="button" onclick="toggleSidebar()" class="p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-900 transition">
+                        <i data-lucide="x" class="w-6 h-6"></i>
+                    </button>
+                </div>
+
+                <!-- Mobile Navigation -->
+                <div class="flex-1 overflow-y-auto py-6 min-h-0">
+                    {% include "dashboard/partials/sidebar.html" %}
+                </div>
+
+                <!-- Mobile Bottom Actions -->
+                <div class="pt-4 border-t border-slate-800/80 space-y-2 shrink-0">
+
+                    <a href="/" target="_blank" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium text-slate-400 hover:text-white hover:bg-slate-900 transition">
+                        <i data-lucide="external-link" class="w-4 h-4"></i>
+                        {% translate "View website" %}
+                    </a>
+
+                    <a href="{% url 'accounts:account' %}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium text-slate-400 hover:text-white hover:bg-slate-900 transition">
+                        <i data-lucide="user-cog" class="w-4 h-4"></i>
+                        {% translate "My Account" %}
+                    </a>
+
+                    <form method="post" action="{% url 'accounts:logout' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium text-rose-400 hover:text-rose-300 hover:bg-rose-950/30 transition">
+                            <i data-lucide="log-out" class="w-4 h-4"></i>
+                            {% translate "Logout" %}
+                        </button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Desktop Sidebar -->
+        <aside class="hidden md:flex flex-col w-64 shrink-0 bg-slate-950 text-white ltr:border-r rtl:border-l border-slate-800 h-full">
+
+            <!-- Desktop Logo -->
+            <div class="p-6 border-b border-slate-800/80 flex items-center gap-3 shrink-0">
+
+                <div class="w-10 h-10 rounded-xl bg-white flex items-center justify-center overflow-hidden shadow-lg shadow-purple-500/20">
+                    <img src="{% static 'img/logo.avif' %}" alt="HTAP Algérie" class="w-full h-full object-contain p-1.5">
+                </div>
+
+                <div>
+                    <h1 class="font-bold text-base leading-tight tracking-wide">HTAP Algérie</h1>
+                    <p class="text-xs text-purple-400 font-medium">{% translate "Administration" %}</p>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="flex-1 px-4 py-6 overflow-y-auto min-h-0">
+                {% include "dashboard/partials/sidebar.html" %}
+            </div>
+
+            <!-- Desktop Bottom Actions -->
+            <div class="p-4 border-t border-slate-800/80 space-y-2 shrink-0">
+
+                <a href="/" target="_blank" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium text-slate-400 hover:text-white hover:bg-slate-900 transition">
+                    <i data-lucide="external-link" class="w-4 h-4"></i>
+                    {% translate "View website" %}
+                </a>
+
+                <a href="{% url 'accounts:account' %}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium text-slate-400 hover:text-white hover:bg-slate-900 transition">
+                    <i data-lucide="user-cog" class="w-4 h-4"></i>
+                    {% translate "My Account" %}
+                </a>
+
+                <form method="post" action="{% url 'accounts:logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium text-rose-400 hover:text-rose-300 hover:bg-rose-950/30 transition">
+                        <i data-lucide="log-out" class="w-4 h-4"></i>
+                        {% translate "Logout" %}
+                    </button>
+                </form>
+
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col min-w-0 h-full overflow-y-auto">
+
+            <!-- Sticky Header -->
+            <header class="sticky top-0 z-30 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between shrink-0">
+
+                <div class="flex items-center gap-4">
+
+                    <button type="button" onclick="toggleSidebar()" class="md:hidden p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+
+                    <div>
+                        <h2 class="text-lg font-bold text-slate-900 dark:text-white">
+                            {% block header_title %}{% translate "Dashboard" %}{% endblock %}
+                        </h2>
+
+                        {% block breadcrumb %}{% endblock %}
+                    </div>
+
+                </div>
+
+                <!-- Header Controls -->
+                <div class="flex items-center gap-3">
+
+                    <!-- Mobile Dark Mode -->
+                    <button type="button" onclick="toggleDarkMode()" class="sm:hidden inline-flex items-center justify-center w-9 h-9 rounded-xl text-slate-500 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+                        <i data-lucide="moon" class="theme-moon-icon w-4 h-4 block dark:hidden"></i>
+                        <i data-lucide="sun" class="theme-sun-icon w-4 h-4 hidden dark:block"></i>
+                    </button>
+
+                    <!-- User Account -->
+                    <div class="hidden sm:flex items-center gap-2 ltr:ps-4 rtl:pe-4 ltr:border-s rtl:border-e border-slate-200 dark:border-slate-700">
+
+                        <a href="{% url 'accounts:account' %}" class="flex items-center gap-3 group">
+
+                            <div class="w-9 h-9 rounded-full bg-white dark:bg-slate-800 border border-purple-200 dark:border-purple-800 flex items-center justify-center overflow-hidden shadow-sm group-hover:border-purple-400 transition">
+                                <img src="{% static 'img/logo.avif' %}" alt="HTAP Algérie" class="w-full h-full object-contain p-1.5">
+                            </div>
+
+                            <div class="text-start">
+                                <p class="text-xs font-semibold text-slate-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition">
+                                    {{ request.user.get_full_name|default:request.user.username }}
+                                </p>
+
+                                <p class="text-[10px] text-slate-500 dark:text-slate-400">
+                                    {% if request.user.is_superuser %}
+                                        {% translate "Superuser" %}
+                                    {% elif request.user.is_staff %}
+                                        {% translate "Administrator" %}
+                                    {% else %}
+                                        {% translate "User" %}
+                                    {% endif %}
+                                </p>
+                            </div>
+
+                        </a>
+
+                        <!-- Account -->
+                        <a href="{% url 'accounts:account' %}" title="{% translate 'My Account' %}" class="inline-flex items-center justify-center w-8 h-8 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-purple-50 dark:hover:bg-purple-950/30 hover:text-purple-600 dark:hover:text-purple-400 transition">
+                            <i data-lucide="user-cog" class="w-4 h-4"></i>
+                        </a>
+
+                        <!-- Logout -->
+                        <form method="post" action="{% url 'accounts:logout' %}" class="inline">
+                            {% csrf_token %}
+                            <button type="submit" title="{% translate 'Logout' %}" class="inline-flex items-center justify-center w-8 h-8 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-rose-50 dark:hover:bg-rose-950/30 hover:text-rose-600 dark:hover:text-rose-400 transition">
+                                <i data-lucide="log-out" class="w-4 h-4"></i>
+                            </button>
+                        </form>
+
+                    </div>
+                </div>
+            </header>
+
+            <!-- Messages -->
+            {% if messages %}
+            <div class="px-4 sm:px-6 lg:px-8 pt-6 space-y-3 shrink-0">
+
+                {% for message in messages %}
+
+                <div class="p-4 rounded-xl text-sm font-medium flex items-center justify-between gap-3 shadow-sm border
+                    {% if message.tags == 'error' %}
+                        bg-rose-50 text-rose-800 border-rose-200 dark:bg-rose-950/30 dark:text-rose-300 dark:border-rose-900
+                    {% elif message.tags == 'success' %}
+                        bg-emerald-50 text-emerald-800 border-emerald-200 dark:bg-emerald-950/30 dark:text-emerald-300 dark:border-emerald-900
+                    {% else %}
+                        bg-purple-50 text-purple-800 border-purple-200 dark:bg-purple-950/30 dark:text-purple-300 dark:border-purple-900
+                    {% endif %}">
+
+                    <div class="flex items-center gap-3">
+                        <i data-lucide="{% if message.tags == 'error' %}alert-circle{% elif message.tags == 'success' %}check-circle{% else %}info{% endif %}" class="w-5 h-5 flex-shrink-0"></i>
+                        <span>{{ message }}</span>
+                    </div>
+
+                    <button type="button" onclick="this.parentElement.remove()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+                        <i data-lucide="x" class="w-4 h-4"></i>
+                    </button>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+            {% endif %}
+
+            <!-- Page Content -->
+            <main class="flex-1 px-4 sm:px-6 lg:px-8 py-8 max-w-7xl w-full mx-auto">
+                {% block content %}{% endblock %}
+            </main>
+
+            <!-- Footer -->
+            <footer class="mt-auto bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 px-4 sm:px-6 lg:px-8 py-4 shrink-0">
+
+                <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
+
+                    <div>
+                        &copy; {% now "Y" %}
+                        <span class="font-semibold text-slate-700 dark:text-slate-200">HTAP Algérie</span>.
+                        {% translate "All rights reserved." %}
+                    </div>
+
+                    <div class="flex items-center gap-6">
+                        <a href="#" class="hover:text-purple-600 dark:hover:text-purple-400 transition">
+                            {% translate "Technical Support" %}
+                        </a>
+
+                        <a href="#" class="hover:text-purple-600 dark:hover:text-purple-400 transition">
+                            {% translate "Documentation" %}
+                        </a>
+
+                        <span class="text-slate-300 dark:text-slate-700">v1.2.0</span>
+                    </div>
+
+                </div>
+            </footer>
+
+        </div>
+    </div>
+
+    <!-- 3. Gallery Lightbox -->
+    <div id="gallery-lightbox" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md hidden flex items-center justify-center p-4">
+
+        <button type="button" onclick="closeGalleryModal()" class="absolute top-4 end-4 p-2 text-slate-400 hover:text-white bg-slate-900/60 rounded-full transition z-10">
+            <i data-lucide="x" class="w-6 h-6"></i>
+        </button>
+
+        <div class="max-w-4xl w-full flex flex-col items-center">
+
+            <div class="relative max-h-[80vh] overflow-hidden rounded-2xl border border-slate-800 shadow-2xl bg-black">
+                <img id="lightbox-image" src="" alt="Gallery Preview" class="object-contain max-h-[80vh] w-auto mx-auto">
+            </div>
+
+            <div class="mt-4 text-center">
+                <h4 id="lightbox-title" class="text-base font-semibold text-white"></h4>
+                <p id="lightbox-caption" class="text-xs text-slate-400 mt-1"></p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 4. Scripts -->
+    <script>
+        lucide.createIcons();
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById("mobile-sidebar");
+            sidebar.classList.toggle("hidden");
+        }
+
+        function toggleLanguageMenu() {
+            const menu = document.getElementById("language-menu");
+            menu.classList.toggle("hidden");
+        }
+
+        function toggleDarkMode() {
+            const html = document.documentElement;
+
+            if (html.classList.contains("dark")) {
+                html.classList.remove("dark");
+                localStorage.setItem("theme", "light");
+            } else {
+                html.classList.add("dark");
+                localStorage.setItem("theme", "dark");
+            }
+        }
+
+        function openGalleryModal(imageSrc, title = '', caption = '') {
+            const modal = document.getElementById("gallery-lightbox");
+            const img = document.getElementById("lightbox-image");
+            const titleEl = document.getElementById("lightbox-title");
+            const captionEl = document.getElementById("lightbox-caption");
+
+            img.src = imageSrc;
+            titleEl.textContent = title;
+            captionEl.textContent = caption;
+
+            modal.classList.remove("hidden");
+        }
+
+        function closeGalleryModal() {
+            const modal = document.getElementById("gallery-lightbox");
+
+            modal.classList.add("hidden");
+            document.getElementById("lightbox-image").src = "";
+        }
+
+        document.addEventListener("click", function(event) {
+            const menu = document.getElementById("language-menu");
+            const button = event.target.closest("[onclick='toggleLanguageMenu()']");
+
+            if (menu && !menu.contains(event.target) && !button) {
+                menu.classList.add("hidden");
+            }
+        });
+    </script>
+
+    {% block extra_js %}{% endblock %}
+
+</body>
+</html>

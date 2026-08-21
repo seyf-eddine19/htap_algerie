@@ -137,87 +137,76 @@
                         {% endfor %}
                     </div>
                 {% endif %}
-
+                
                 <form method="post" action="{% url 'core:contact' %}" class="space-y-6" novalidate>
                     {% csrf_token %}
 
+                    <!-- Name -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Full Name -->
+                        <!-- First Name -->
                         <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-2" for="id_name">
-                                {% translate "Full Name" %} <span class="text-rose-500 dark:text-rose-400">*</span>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-2" for="id_first_name">
+                                {% translate "First Name" %} <span class="text-rose-500 dark:text-rose-400">*</span>
                             </label>
-                            <input type="text" 
-                                   id="id_name" 
-                                   name="name" 
-                                   value="{{ form.name.value|default:'' }}"
-                                   placeholder="{% translate 'Your full name' %}" 
-                                   required 
-                                   class="w-full bg-slate-50 dark:bg-slate-800/60 border border-slate-300 dark:border-slate-700 focus:border-violet-600 dark:focus:border-violet-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-violet-600/20 rounded-xl px-4 py-3 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 text-sm transition-all outline-none {% if form.name.errors %}border-red-500 dark:border-red-500{% endif %}" />
-                            {% if form.name.errors %}
-                                <p class="mt-1 text-xs text-red-600 dark:text-red-400">{{ form.name.errors.0 }}</p>
+                            <input type="text" id="id_first_name" name="first_name" value="{{ form.first_name.value|default:'' }}" placeholder="{% translate 'Your first name' %}" required autocomplete="given-name" class="w-full bg-slate-50 dark:bg-slate-800/60 border border-slate-300 dark:border-slate-700 focus:border-violet-600 dark:focus:border-violet-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-violet-600/20 rounded-xl px-4 py-3 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 text-sm transition-all outline-none {% if form.first_name.errors %}border-red-500 dark:border-red-500{% endif %}" />
+                            {% if form.first_name.errors %}
+                                <p class="mt-1 text-xs text-red-600 dark:text-red-400">{{ form.first_name.errors.0 }}</p>
                             {% endif %}
                         </div>
 
-                        <!-- Email -->
+                        <!-- Last Name -->
                         <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-2" for="id_email">
-                                {% translate "Email Address" %} <span class="text-rose-500 dark:text-rose-400">*</span>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-2" for="id_last_name">
+                                {% translate "Last Name" %}
                             </label>
-                            <input type="email" 
-                                   id="id_email" 
-                                   name="email" 
-                                   value="{{ form.email.value|default:'' }}"
-                                   placeholder="example@email.com" 
-                                   required 
-                                   class="w-full bg-slate-50 dark:bg-slate-800/60 border border-slate-300 dark:border-slate-700 focus:border-violet-600 dark:focus:border-violet-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-violet-600/20 rounded-xl px-4 py-3 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 text-sm transition-all outline-none {% if form.email.errors %}border-red-500 dark:border-red-500{% endif %}" />
-                            {% if form.email.errors %}
-                                <p class="mt-1 text-xs text-red-600 dark:text-red-400">{{ form.email.errors.0 }}</p>
+                            <input type="text" id="id_last_name" name="last_name" value="{{ form.last_name.value|default:'' }}" placeholder="{% translate 'Your last name' %}" autocomplete="family-name" class="w-full bg-slate-50 dark:bg-slate-800/60 border border-slate-300 dark:border-slate-700 focus:border-violet-600 dark:focus:border-violet-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-violet-600/20 rounded-xl px-4 py-3 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 text-sm transition-all outline-none {% if form.last_name.errors %}border-red-500 dark:border-red-500{% endif %}" />
+                            {% if form.last_name.errors %}
+                                <p class="mt-1 text-xs text-red-600 dark:text-red-400">{{ form.last_name.errors.0 }}</p>
                             {% endif %}
                         </div>
                     </div>
 
+                    <!-- Phone & Wilaya -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Phone -->
                         <div>
                             <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-2" for="id_phone">
                                 {% translate "Phone Number" %}
                             </label>
-                            <input type="tel" 
-                                   id="id_phone" 
-                                   name="phone" 
-                                   value="{{ form.phone.value|default:'' }}"
-                                   placeholder="+213 XX XX XX XX" 
-                                   class="w-full bg-slate-50 dark:bg-slate-800/60 border border-slate-300 dark:border-slate-700 focus:border-violet-600 dark:focus:border-violet-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-violet-600/20 rounded-xl px-4 py-3 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 text-sm transition-all outline-none {% if form.phone.errors %}border-red-500 dark:border-red-500{% endif %}" />
+                            <input type="tel" id="id_phone" name="phone" value="{{ form.phone.value|default:'' }}" placeholder="+213 XX XX XX XX" autocomplete="tel" class="w-full bg-slate-50 dark:bg-slate-800/60 border border-slate-300 dark:border-slate-700 focus:border-violet-600 dark:focus:border-violet-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-violet-600/20 rounded-xl px-4 py-3 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 text-sm transition-all outline-none {% if form.phone.errors %}border-red-500 dark:border-red-500{% endif %}" />
                             {% if form.phone.errors %}
                                 <p class="mt-1 text-xs text-red-600 dark:text-red-400">{{ form.phone.errors.0 }}</p>
                             {% endif %}
                         </div>
 
-                        <!-- Wilaya -->
+                    <!-- Wilaya -->
                         <div>
                             <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-2" for="id_wilaya">
                                 {% translate "Province (Wilaya)" %} <span class="text-rose-500 dark:text-rose-400">*</span>
                             </label>
-                            <select id="id_wilaya" 
-                                    name="wilaya" 
-                                    required 
-                                    class="w-full bg-slate-50 dark:bg-slate-800/60 border border-slate-300 dark:border-slate-700 focus:border-violet-600 dark:focus:border-violet-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-violet-600/20 rounded-xl px-4 py-3 text-slate-900 dark:text-slate-100 text-sm transition-all outline-none {% if form.wilaya.errors %}border-red-500 dark:border-red-500{% endif %}">
-                                <option value="" disabled {% if not form.wilaya.value %}selected{% endif %} class="dark:bg-slate-800">{% translate "Select your wilaya" %}</option>
-                                {% if form.wilaya.field.choices %}
-                                    {% for value, label in form.wilaya.field.choices %}
-                                        <option value="{{ value }}" {% if form.wilaya.value == value %}selected{% endif %} class="dark:bg-slate-800">{{ label }}</option>
-                                    {% endfor %}
-                                {% else %}
-                                    <option value="16" class="dark:bg-slate-800">16 - Algiers</option>
-                                    <option value="09" class="dark:bg-slate-800">09 - Blida</option>
-                                    <option value="31" class="dark:bg-slate-800">31 - Oran</option>
-                                    <option value="13" class="dark:bg-slate-800">13 - Tlemcen</option>
-                                    <option value="other" class="dark:bg-slate-800">{% translate "Other" %}</option>
-                                {% endif %}
+                            <select id="id_wilaya" name="wilaya" required class="w-full bg-slate-50 dark:bg-slate-800/60 border border-slate-300 dark:border-slate-700 focus:border-violet-600 dark:focus:border-violet-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-violet-600/20 rounded-xl px-4 py-3 text-slate-900 dark:text-slate-100 text-sm transition-all outline-none {% if form.wilaya.errors %}border-red-500 dark:border-red-500{% endif %}">
+                                <option value="" disabled {% if not form.wilaya.value %}selected{% endif %} class="dark:bg-slate-800">
+                                    {% translate "Select your wilaya" %}
+                                </option>
+                                {% for value, label in form.wilaya.field.choices %}
+                                    <option value="{{ value }}" {% if form.wilaya.value == value %}selected{% endif %} class="dark:bg-slate-800">{{ label }}</option>
+                                {% endfor %}
                             </select>
                             {% if form.wilaya.errors %}
                                 <p class="mt-1 text-xs text-red-600 dark:text-red-400">{{ form.wilaya.errors.0 }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div>
+                        <!-- Email -->
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-2" for="id_email">
+                                {% translate "Email Address" %} <span class="text-rose-500 dark:text-rose-400">*</span>
+                            </label>
+                            <input type="email" id="id_email" name="email" value="{{ form.email.value|default:'' }}" placeholder="example@email.com" required autocomplete="email" class="w-full bg-slate-50 dark:bg-slate-800/60 border border-slate-300 dark:border-slate-700 focus:border-violet-600 dark:focus:border-violet-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-violet-600/20 rounded-xl px-4 py-3 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 text-sm transition-all outline-none {% if form.email.errors %}border-red-500 dark:border-red-500{% endif %}" />
+                            {% if form.email.errors %}
+                                <p class="mt-1 text-xs text-red-600 dark:text-red-400">{{ form.email.errors.0 }}</p>
                             {% endif %}
                         </div>
                     </div>
@@ -227,21 +216,13 @@
                         <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-2" for="id_subject">
                             {% translate "Subject of Interest" %} <span class="text-rose-500 dark:text-rose-400">*</span>
                         </label>
-                        <select id="id_subject" 
-                                name="subject" 
-                                required 
-                                class="w-full bg-slate-50 dark:bg-slate-800/60 border border-slate-300 dark:border-slate-700 focus:border-violet-600 dark:focus:border-violet-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-violet-600/20 rounded-xl px-4 py-3 text-slate-900 dark:text-slate-100 text-sm transition-all outline-none {% if form.subject.errors %}border-red-500 dark:border-red-500{% endif %}">
-                            <option value="" disabled {% if not form.subject.value %}selected{% endif %} class="dark:bg-slate-800">{% translate "Select a subject" %}</option>
-                            {% if form.subject.field.choices %}
-                                {% for value, label in form.subject.field.choices %}
-                                    <option value="{{ value }}" {% if form.subject.value == value %}selected{% endif %} class="dark:bg-slate-800">{{ label }}</option>
-                                {% endfor %}
-                            {% else %}
-                                <option value="info" class="dark:bg-slate-800">{% translate "Information about HTAP" %}</option>
-                                <option value="help" class="dark:bg-slate-800">{% translate "Request for assistance / support" %}</option>
-                                <option value="donate" class="dark:bg-slate-800">{% translate "Make a donation or volunteer" %}</option>
-                                <option value="other" class="dark:bg-slate-800">{% translate "Other inquiry" %}</option>
-                            {% endif %}
+                        <select id="id_subject" name="subject" required class="w-full bg-slate-50 dark:bg-slate-800/60 border border-slate-300 dark:border-slate-700 focus:border-violet-600 dark:focus:border-violet-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-violet-600/20 rounded-xl px-4 py-3 text-slate-900 dark:text-slate-100 text-sm transition-all outline-none {% if form.subject.errors %}border-red-500 dark:border-red-500{% endif %}">
+                            <option value="" disabled {% if not form.subject.value %}selected{% endif %} class="dark:bg-slate-800">
+                                {% translate "Select a subject" %}
+                            </option>
+                            {% for value, label in form.subject.field.choices %}
+                                <option value="{{ value }}" {% if form.subject.value == value %}selected{% endif %} class="dark:bg-slate-800">{{ label }}</option>
+                            {% endfor %}
                         </select>
                         {% if form.subject.errors %}
                             <p class="mt-1 text-xs text-red-600 dark:text-red-400">{{ form.subject.errors.0 }}</p>
@@ -253,18 +234,13 @@
                         <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-2" for="id_message">
                             {% translate "Your Message" %} <span class="text-rose-500 dark:text-rose-400">*</span>
                         </label>
-                        <textarea id="id_message" 
-                                  name="message" 
-                                  rows="5" 
-                                  required 
-                                  placeholder="{% translate 'How can we help you?' %}" 
-                                  class="w-full bg-slate-50 dark:bg-slate-800/60 border border-slate-300 dark:border-slate-700 focus:border-violet-600 dark:focus:border-violet-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-violet-600/20 rounded-xl px-4 py-3 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 text-sm transition-all outline-none resize-none {% if form.message.errors %}border-red-500 dark:border-red-500{% endif %}">{{ form.message.value|default:'' }}</textarea>
+                        <textarea id="id_message" name="message" rows="5" required placeholder="{% translate 'How can we help you?' %}" class="w-full bg-slate-50 dark:bg-slate-800/60 border border-slate-300 dark:border-slate-700 focus:border-violet-600 dark:focus:border-violet-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-violet-600/20 rounded-xl px-4 py-3 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 text-sm transition-all outline-none resize-none {% if form.message.errors %}border-red-500 dark:border-red-500{% endif %}">{{ form.message.value|default:'' }}</textarea>
                         {% if form.message.errors %}
                             <p class="mt-1 text-xs text-red-600 dark:text-red-400">{{ form.message.errors.0 }}</p>
                         {% endif %}
                     </div>
 
-                    <!-- Medical Data Warning -->
+                    <!-- Privacy Notice -->
                     <div class="bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900/50 rounded-xl p-4 flex gap-3 items-start">
                         <svg class="w-5 h-5 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5 fill-none stroke-current stroke-2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="12" cy="12" r="10"></circle>
@@ -272,20 +248,15 @@
                             <line x1="12" x2="12.01" y1="16" y2="16"></line>
                         </svg>
                         <p class="text-xs text-amber-900 dark:text-amber-200 leading-relaxed">
-                            <strong class="font-semibold text-amber-900 dark:text-amber-100">{% translate "Privacy Notice:" %}</strong> 
+                            <strong class="font-semibold text-amber-900 dark:text-amber-100">{% translate "Privacy Notice:" %}</strong>
                             {% translate "Please do not include sensitive medical data or personal health records in this form. This channel is intended for general and administrative inquiries only." %}
                         </p>
                     </div>
 
-                    <!-- Consent Checkbox -->
+                    <!-- Consent -->
                     <div>
                         <div class="flex items-start gap-3">
-                            <input type="checkbox" 
-                                   id="id_consent" 
-                                   name="consent" 
-                                   {% if form.consent.value %}checked{% endif %}
-                                   required 
-                                   class="mt-1 w-4 h-4 text-violet-600 bg-slate-50 dark:bg-slate-800 border-slate-300 dark:border-slate-700 rounded focus:ring-violet-500 focus:ring-2 dark:checked:bg-violet-600" />
+                            <input type="checkbox" id="id_consent" name="consent" {% if form.consent.value %}checked{% endif %} required class="mt-1 w-4 h-4 text-violet-600 bg-slate-50 dark:bg-slate-800 border-slate-300 dark:border-slate-700 rounded focus:ring-violet-500 focus:ring-2 dark:checked:bg-violet-600" />
                             <label for="id_consent" class="text-xs text-slate-600 dark:text-slate-400 cursor-pointer leading-snug">
                                 {% translate "I agree that the submitted information may be used to process my request and manage any subsequent support interactions." %}
                             </label>
@@ -295,10 +266,18 @@
                         {% endif %}
                     </div>
 
-                    <!-- Submit Button -->
+                    <!-- Non-field Errors -->
+                    {% if form.non_field_errors %}
+                        <div class="p-4 rounded-xl bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900/50">
+                            {% for error in form.non_field_errors %}
+                                <p class="text-sm text-red-700 dark:text-red-300">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <!-- Submit -->
                     <div class="pt-2">
-                        <button type="submit" 
-                                class="group inline-flex items-center justify-center gap-2 rounded-full bg-violet-800 dark:bg-violet-600 px-8 py-4 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-violet-700 dark:hover:bg-violet-500 hover:shadow-lg hover:shadow-violet-700/20">
+                        <button type="submit" class="group inline-flex items-center justify-center gap-2 rounded-full bg-violet-800 dark:bg-violet-600 px-8 py-4 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-violet-700 dark:hover:bg-violet-500 hover:shadow-lg hover:shadow-violet-700/20">
                             <span>{% translate "Send Message" %}</span>
                             <svg class="w-4 h-4 fill-none stroke-current stroke-2 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
                                 <line x1="22" y1="2" x2="11" y2="13"></line>
