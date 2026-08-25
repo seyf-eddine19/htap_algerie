@@ -1,512 +1,439 @@
 {% extends "dashboard/base.html" %}
-{% load i18n %}
+{% load static i18n %}
 
 {% block title %}{% translate "Article Categories" %}{% endblock %}
-
-{% block header_title %}{% translate "Article Categories" %}{% endblock %}
+{% block header_title %}{% translate "Article Categories Management" %}{% endblock %}
 
 {% block breadcrumb %}
 <div class="flex items-center gap-2 mt-1 text-xs text-slate-500 dark:text-slate-400">
-    <span>{% translate "Dashboard" %}</span>
-    <i data-lucide="chevron-right" class="w-3 h-3"></i>
-    <span class="text-purple-600 dark:text-purple-400">{% translate "Article Categories" %}</span>
+    <a href="{% url 'dashboard:home' %}" class="hover:text-purple-600 dark:hover:text-purple-400 transition">{% translate "Dashboard" %}</a>
+    <i data-lucide="chevron-right" class="w-3 h-3 rtl:rotate-180"></i>
+    <span class="text-purple-600 dark:text-purple-400 font-medium">{% translate "Article Categories" %}</span>
 </div>
 {% endblock %}
 
 {% block content %}
-
-<div class="space-y-6">
+<div class="max-w-7xl mx-auto space-y-6">
 
     <!-- Page Header -->
-    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-
-        <div>
-            <h1 class="text-2xl font-bold text-slate-900 dark:text-white">
+    <div class="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+        <div class="min-w-0">
+            <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
                 {% translate "Article Categories" %}
             </h1>
-
-            <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">
-                {% translate "Manage your article categories." %}
+            <p class="mt-1.5 max-w-2xl text-sm text-slate-500 dark:text-slate-400">
+                {% translate "Manage categories used to organize your articles." %}
             </p>
         </div>
 
-        <button type="button" onclick="openCreateModal()" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-sm font-semibold shadow-lg shadow-purple-600/20 transition">
+        <button type="button" data-action="open-create" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-sm font-semibold shadow-lg shadow-purple-600/20 transition">
             <i data-lucide="plus" class="w-4 h-4"></i>
             {% translate "Add Category" %}
         </button>
-
     </div>
 
+    <!-- Filters -->
+    <section class="relative overflow-hidden bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm">
+        <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-purple-500/40 to-transparent"></div>
 
-    <!-- Search -->
-    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 shadow-sm">
+        <form method="get" class="p-4 sm:p-5">
+            <div class="flex flex-col gap-4 lg:flex-row lg:items-end">
 
-        <form method="get" class="flex flex-col sm:flex-row gap-3">
+                <!-- Search -->
+                <div class="flex-1 min-w-0">
+                    <label for="search" class="flex items-center gap-2 mb-2 text-xs font-semibold text-slate-600 dark:text-slate-300">
+                        <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400"></i>
+                        {% translate "Search categories" %}
+                    </label>
+                    <div class="relative group">
+                        <i data-lucide="search" class="absolute start-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-purple-500 transition-colors"></i>
+                        <input type="search" name="q" id="search" value="{{ request.GET.q|default:'' }}" placeholder="{% translate 'Search by name or slug...' %}" autocomplete="off" class="w-full h-11 bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 focus:border-purple-500 dark:focus:border-purple-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-4 focus:ring-purple-500/10 rounded-xl ps-10 pe-4 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 outline-none transition-all duration-200">
+                    </div>
+                </div>
 
-            <div class="relative flex-1">
+                <!-- Status -->
+                <div class="w-full lg:w-52">
+                    <label for="status" class="flex items-center gap-2 mb-2 text-xs font-semibold text-slate-600 dark:text-slate-300">
+                        <i data-lucide="circle-check" class="w-3.5 h-3.5 text-slate-400"></i>
+                        {% translate "Status" %}
+                    </label>
+                    <div class="relative">
+                        <select name="status" id="status" class="appearance-none w-full h-11 bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 focus:border-purple-500 dark:focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 rounded-xl ps-3.5 pe-10 text-sm text-slate-900 dark:text-white outline-none transition-all duration-200 cursor-pointer">
+                            <option value="">{% translate "All Statuses" %}</option>
+                            <option value="active" {% if request.GET.status == "active" %}selected{% endif %}>{% translate "Active" %}</option>
+                            <option value="inactive" {% if request.GET.status == "inactive" %}selected{% endif %}>{% translate "Inactive" %}</option>
+                        </select>
+                        <i data-lucide="chevron-down" class="pointer-events-none absolute end-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400"></i>
+                    </div>
+                </div>
 
-                <i data-lucide="search" class="absolute start-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400"></i>
+                <!-- Actions -->
+                <div class="flex items-center gap-2">
+                    <button type="submit" class="inline-flex items-center justify-center gap-2 h-11 px-5 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-sm font-semibold hover:bg-slate-800 dark:hover:bg-slate-100 shadow-sm transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-slate-900/10 dark:focus:ring-white/10">
+                        <i data-lucide="sliders-horizontal" class="w-4 h-4"></i>
+                        {% translate "Apply" %}
+                    </button>
 
-                <input type="search" name="q" value="{{ request.GET.q|default:'' }}" placeholder="{% translate 'Search by name or slug...' %}" class="w-full ps-10 pe-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                    {% if request.GET.q or request.GET.status %}
+                    <a href="{% url 'dashboard:categories' %}" title="{% translate 'Clear filters' %}" aria-label="{% translate 'Clear filters' %}" class="inline-flex items-center justify-center w-11 h-11 rounded-xl border border-rose-200 dark:border-rose-900/50 bg-rose-50 dark:bg-rose-950/30 text-rose-600 dark:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-900/40 transition-all duration-200">
+                        <i data-lucide="x" class="w-4 h-4"></i>
+                    </a>
+                    {% endif %}
+                </div>
 
             </div>
 
-            <button type="submit" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-slate-900 dark:bg-slate-700 hover:bg-slate-800 dark:hover:bg-slate-600 text-white text-sm font-medium transition">
-                <i data-lucide="search" class="w-4 h-4"></i>
-                {% translate "Search" %}
-            </button>
+            <!-- Active Filters -->
+            {% if request.GET.q or request.GET.status %}
+            <div class="flex flex-wrap items-center gap-2 mt-4 pt-4 border-t border-slate-100 dark:border-slate-800">
+                <span class="text-[11px] font-semibold text-slate-400 dark:text-slate-500">
+                    {% translate "Active filters:" %}
+                </span>
 
-            {% if request.GET.q %}
-                <a href="{% url 'dashboard:categories' %}" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 text-sm font-medium transition">
-                    <i data-lucide="x" class="w-4 h-4"></i>
-                    {% translate "Clear" %}
-                </a>
+                {% if request.GET.q %}
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-purple-50 dark:bg-purple-500/10 border border-purple-100 dark:border-purple-500/20 text-[11px] font-semibold text-purple-700 dark:text-purple-400">
+                    <i data-lucide="search" class="w-3 h-3"></i>
+                    {{ request.GET.q }}
+                </span>
+                {% endif %}
+
+                {% if request.GET.status %}
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[11px] font-semibold text-slate-600 dark:text-slate-300">
+                    <i data-lucide="circle-check" class="w-3 h-3"></i>
+                    {% if request.GET.status == "active" %}
+                        {% translate "Active" %}
+                    {% else %}
+                        {% translate "Inactive" %}
+                    {% endif %}
+                </span>
+                {% endif %}
+            </div>
             {% endif %}
-
         </form>
+    </section>
 
-    </div>
+    <!-- Categories Content -->
+    <section class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm overflow-hidden">
 
+        <!-- Card Header -->
+        <div class="px-5 sm:px-6 py-4 border-b border-slate-200 dark:border-slate-800">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                <div class="flex items-center gap-3">
+                    <div class="flex items-center justify-center w-10 h-10 rounded-xl bg-purple-50 dark:bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-100 dark:border-purple-500/20">
+                        <i data-lucide="folder-tree" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-sm font-bold text-slate-900 dark:text-white">
+                            {% translate "Category List" %}
+                        </h2>
+                        <p class="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
+                            {% blocktranslate count counter=paginator.count|default:categories|length %}
+                                {{ counter }} category
+                            {% plural %}
+                                {{ counter }} categories
+                            {% endblocktranslate %}
+                        </p>
+                    </div>
+                </div>
 
-    <!-- Categories Table -->
-    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm overflow-hidden">
+                {% if request.GET.q or request.GET.status %}
+                <div class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-purple-50 dark:bg-purple-500/10 text-purple-600 dark:text-purple-400 text-[11px] font-semibold">
+                    <i data-lucide="filter" class="w-3.5 h-3.5"></i>
+                    {% translate "Filtered results" %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
 
-        <div class="overflow-x-auto">
-
-            <table class="w-full text-sm">
-
-                <thead class="bg-slate-50 dark:bg-slate-800/60 border-b border-slate-200 dark:border-slate-800">
-
-                    <tr>
-
-                        <th class="px-5 py-4 text-start text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-                            #
-                        </th>
-
-                        <th class="px-5 py-4 text-start text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-                            {% translate "Category" %}
-                        </th>
-
-                        <th class="px-5 py-4 text-start text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-                            {% translate "Slug" %}
-                        </th>
-
-                        <th class="px-5 py-4 text-center text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-                            {% translate "Articles" %}
-                        </th>
-
-                        <th class="px-5 py-4 text-center text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-                            {% translate "Status" %}
-                        </th>
-
-                        <th class="px-5 py-4 text-end text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-                            {% translate "Actions" %}
-                        </th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
-
-                    {% for category in categories %}
-
-                    <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition">
-
-                        <td class="px-5 py-4 text-slate-500 dark:text-slate-400 font-medium">
-                            {{ forloop.counter }}
-                        </td>
-
-                        <td class="px-5 py-4">
-
-                            <div class="flex items-center gap-3">
-
-                                <div class="w-9 h-9 rounded-xl bg-purple-100 dark:bg-purple-950/40 text-purple-600 dark:text-purple-400 flex items-center justify-center">
-                                    <i data-lucide="folder" class="w-4 h-4"></i>
+        {% if categories %}
+            <!-- Desktop Table -->
+            <div class="hidden lg:block overflow-x-auto"> 
+                <table class="w-full text-sm">
+                    <thead class="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800">
+                        <tr>
+                            <th class="px-5 py-3 text-start text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">{% translate "Order" %}</th>
+                            <th class="px-5 py-3 text-start text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">{% translate "Category" %}</th>
+                            <th class="px-5 py-3 text-start text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">{% translate "Slug" %}</th>
+                            <th class="px-5 py-3 text-start text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">{% translate "Articles" %}</th>
+                            <th class="px-5 py-3 text-start text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">{% translate "Status" %}</th>
+                            <th class="px-5 py-3 text-end text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">{% translate "Actions" %}</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+                        {% for category in categories %}
+                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition">
+                            <td class="px-5 py-4">
+                                <span class="inline-flex items-center justify-center min-w-8 h-8 px-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-300">
+                                    {{ category.order }}
+                                </span>
+                            </td>
+                            <td class="px-5 py-4">
+                                <div class="font-semibold text-slate-900 dark:text-white">
+                                    {{ category.name }}
                                 </div>
-
-                                <div>
-                                    <p class="font-semibold text-slate-900 dark:text-white">
-                                        {{ category.name }}
-                                    </p>
-
-                                    <p class="text-xs text-slate-400 dark:text-slate-500 mt-0.5">
-                                        {% translate "Order" %}: {{ category.order }}
-                                    </p>
-                                </div>
-
-                            </div>
-
-                        </td>
-
-                        <td class="px-5 py-4">
-                            <code class="px-2 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs text-slate-600 dark:text-slate-300">
-                                {{ category.slug }}
-                            </code>
-                        </td>
-
-                        <td class="px-5 py-4 text-center">
-
-                            <span class="inline-flex items-center justify-center min-w-8 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-300">
-                                {{ category.article_count }}
-                            </span>
-
-                        </td>
-
-                        <td class="px-5 py-4 text-center">
-
-                            {% if category.is_active %}
-
+                            </td>
+                            <td class="px-5 py-4">
+                                <code class="text-xs text-slate-500 dark:text-slate-400">
+                                    {{ category.slug }}
+                                </code>
+                            </td>
+                            <td class="px-5 py-4">
+                                <span class="inline-flex items-center gap-1.5 text-xs font-medium text-slate-600 dark:text-slate-300">
+                                    <i data-lucide="file-text" class="w-3.5 h-3.5"></i>
+                                    {{ category.article_count }}
+                                </span>
+                            </td>
+                            <td class="px-5 py-4">
+                                {% if category.is_active %}
                                 <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-400 text-xs font-semibold border border-emerald-200 dark:border-emerald-900">
                                     <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
                                     {% translate "Active" %}
                                 </span>
-
-                            {% else %}
-
+                                {% else %}
                                 <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 text-xs font-semibold border border-slate-200 dark:border-slate-700">
                                     <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
                                     {% translate "Inactive" %}
                                 </span>
-
-                            {% endif %}
-
-                        </td>
-
-                        <td class="px-5 py-4">
-
-                            <div class="flex items-center justify-end gap-1.5">
-
-                                <button type="button" onclick="openEditModal('{{ category.pk }}', '{{ category.name|escapejs }}', '{{ category.slug|escapejs }}', '{{ category.order }}', {% if category.is_active %}true{% else %}false{% endif %})" title="{% translate 'Edit' %}" class="inline-flex items-center justify-center w-9 h-9 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-purple-50 dark:hover:bg-purple-950/30 hover:text-purple-600 dark:hover:text-purple-400 transition">
-                                    <i data-lucide="pencil" class="w-4 h-4"></i>
-                                </button>
-
-                                <button type="button" onclick="openDeleteModal('{{ category.pk }}', '{{ category.name|escapejs }}')" title="{% translate 'Delete' %}" class="inline-flex items-center justify-center w-9 h-9 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-rose-50 dark:hover:bg-rose-950/30 hover:text-rose-600 dark:hover:text-rose-400 transition">
-                                    <i data-lucide="trash-2" class="w-4 h-4"></i>
-                                </button>
-
-                            </div>
-
-                        </td>
-
-                    </tr>
-
-                    {% empty %}
-
-                    <tr>
-
-                        <td colspan="6" class="px-5 py-16 text-center">
-
-                            <div class="flex flex-col items-center">
-
-                                <div class="w-14 h-14 rounded-2xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center mb-4">
-                                    <i data-lucide="folder-open" class="w-7 h-7 text-slate-400"></i>
+                                {% endif %}
+                            </td>
+                            <td class="px-5 py-4">
+                                <div class="flex items-center justify-end gap-1">
+                                    <button type="button" data-action="open-edit" data-id="{{ category.pk }}" data-name="{{ category.name }}" data-slug="{{ category.slug }}" data-order="{{ category.order }}" data-active="{% if category.is_active %}true{% else %}false{% endif %}" title="{% translate 'Edit' %}" class="inline-flex items-center justify-center w-9 h-9 rounded-lg text-purple-600 hover:bg-purple-50 dark:hover:bg-purple-950/30 dark:hover:text-purple-400 transition">
+                                        <i data-lucide="pencil" class="w-4 h-4"></i>
+                                    </button>
+                                    <button type="button" data-action="open-delete" data-id="{{ category.pk }}" data-name="{{ category.name }}" title="{% translate 'Delete' %}" class="inline-flex items-center justify-center w-9 h-9 rounded-lg text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30 dark:hover:text-rose-400 transition">
+                                        <i data-lucide="trash-2" class="w-4 h-4"></i>
+                                    </button>
                                 </div>
-
-                                <h3 class="text-sm font-semibold text-slate-900 dark:text-white">
-                                    {% translate "No categories found" %}
-                                </h3>
-
-                                <p class="mt-1 text-xs text-slate-500 dark:text-slate-400">
-                                    {% translate "Create your first article category." %}
-                                </p>
-
-                            </div>
-
-                        </td>
-
-                    </tr>
-
-                    {% endfor %}
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-
-        <!-- Pagination -->
-        {% if is_paginated %}
-
-        <div class="px-5 py-4 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3">
-
-            <p class="text-xs text-slate-500 dark:text-slate-400">
-                {% blocktranslate with current=page_obj.number total=page_obj.paginator.num_pages %}
-                    Page {{ current }} of {{ total }}
-                {% endblocktranslate %}
-            </p>
-
-            <div class="flex items-center gap-1.5">
-
-                {% if page_obj.has_previous %}
-                    <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q|urlencode }}{% endif %}" class="inline-flex items-center justify-center w-9 h-9 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
-                        <i data-lucide="chevron-left" class="w-4 h-4 rtl:rotate-180"></i>
-                    </a>
-                {% endif %}
-
-                <span class="inline-flex items-center justify-center min-w-9 h-9 px-3 rounded-lg bg-purple-600 text-white text-xs font-semibold">
-                    {{ page_obj.number }}
-                </span>
-
-                {% if page_obj.has_next %}
-                    <a href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q|urlencode }}{% endif %}" class="inline-flex items-center justify-center w-9 h-9 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
-                        <i data-lucide="chevron-right" class="w-4 h-4 rtl:rotate-180"></i>
-                    </a>
-                {% endif %}
-
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
 
-        </div>
+            <!-- Mobile / Tablet Cards -->
+            <div class="lg:hidden divide-y divide-slate-100 dark:divide-slate-800">
+                {% for category in categories %}
+                <article class="p-5 hover:bg-slate-50/70 dark:hover:bg-slate-800/40 transition-colors duration-150">
+                    <div class="flex items-start gap-4">
+                        <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-purple-50 dark:bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-100 dark:border-purple-500/20 shrink-0">
+                            <i data-lucide="folder" class="w-5 h-5"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex flex-wrap items-center gap-2 mb-2">
+                                {% if category.is_active %}
+                                <span class="inline-flex items-center gap-1.5 px-2 py-1 rounded-lg bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-500/20 text-[10px] font-semibold">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                    {% translate "Active" %}
+                                </span>
+                                {% else %}
+                                <span class="inline-flex items-center gap-1.5 px-2 py-1 rounded-lg bg-slate-50 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-slate-700 text-[10px] font-semibold">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
+                                    {% translate "Inactive" %}
+                                </span>
+                                {% endif %}
+                            </div>
 
+                            <h3 class="text-sm font-bold text-slate-900 dark:text-white truncate">
+                                {{ category.name }}
+                            </h3>
+                            <p class="mt-1 text-xs text-slate-400 dark:text-slate-500 truncate">
+                                {{ category.slug }}
+                            </p>
+
+                            <div class="flex flex-wrap items-center gap-2 mt-2">
+                                <span class="inline-flex items-center gap-1.5 px-2 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[10px] font-semibold text-slate-600 dark:text-slate-300">
+                                    <i data-lucide="list-ordered" class="w-3 h-3 text-slate-400"></i>
+                                    {% translate "Order" %}: {{ category.order }}
+                                </span>
+                                <span class="inline-flex items-center gap-1.5 px-2 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[10px] font-semibold text-slate-600 dark:text-slate-300">
+                                    <i data-lucide="newspaper" class="w-3 h-3 text-slate-400"></i>
+                                    {{ category.article_count }} {% translate "Articles" %}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between gap-3 mt-4 pt-4 border-t border-slate-100 dark:border-slate-800">
+                        <div class="text-xs text-slate-500 dark:text-slate-400">
+                            <span class="inline-flex items-center gap-1.5">
+                                <i data-lucide="hash" class="w-3.5 h-3.5"></i>
+                                #{{ category.order }}
+                            </span>
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <button type="button" data-action="open-edit" data-id="{{ category.pk }}" data-name="{{ category.name }}" data-slug="{{ category.slug }}" data-order="{{ category.order }}" data-active="{% if category.is_active %}true{% else %}false{% endif %}" title="{% translate 'Edit' %}" class="inline-flex items-center justify-center w-9 h-9 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:text-purple-600 dark:hover:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-500/10 transition">
+                                <i data-lucide="pencil" class="w-4 h-4"></i>
+                            </button>
+                            <button type="button" data-action="open-delete" data-id="{{ category.pk }}" data-name="{{ category.name }}" title="{% translate 'Delete' %}" class="inline-flex items-center justify-center w-9 h-9 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-500/10 transition">
+                                <i data-lucide="trash-2" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+
+        {% else %}
+            <!-- Empty State -->
+            <div class="px-6 py-16 text-center">
+                <div class="mx-auto flex items-center justify-center w-14 h-14 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-400 mb-4">
+                    <i data-lucide="folder-open" class="w-7 h-7"></i>
+                </div>
+                <h3 class="text-sm font-semibold text-slate-900 dark:text-white">
+                    {% if request.GET.q or request.GET.status %}
+                        {% translate "No categories found" %}
+                    {% else %}
+                        {% translate "No categories yet" %}
+                    {% endif %}
+                </h3>
+                <p class="mt-1 text-xs text-slate-500 dark:text-slate-400">
+                    {% if request.GET.q or request.GET.status %}
+                        {% translate "Try adjusting your filters or search term." %}
+                    {% else %}
+                        {% translate "Create your first article category." %}
+                    {% endif %}
+                </p>
+                {% if not request.GET.q and not request.GET.status %}
+                <button type="button" data-action="open-create" class="mt-5 inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-sm font-semibold transition">
+                    <i data-lucide="plus" class="w-4 h-4"></i>
+                    {% translate "Add Category" %}
+                </button>
+                {% endif %}
+            </div>
         {% endif %}
 
-    </div>
+        <!-- Pagination -->
+        {% include "dashboard/partials/pagination.html" %}
+
+    </section>
 
 </div>
 
-
-<!-- Create / Edit Modal -->
-<div id="category-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4">
-
-    <div class="absolute inset-0 bg-slate-950/70 backdrop-blur-sm" onclick="closeCategoryModal()"></div>
-
-    <div class="relative w-full max-w-lg bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
-
-        <div class="px-6 py-5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
-
+<!-- Create/Edit Modal -->
+<div id="category-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm">
+    <div id="category-modal-panel" class="relative w-full max-w-lg bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+        <div class="flex items-center justify-between px-6 py-5 border-b border-slate-200 dark:border-slate-800">
             <div>
-                <h3 id="modal-title" class="text-lg font-bold text-slate-900 dark:text-white">
+                <h3 id="category-modal-title" class="text-lg font-bold text-slate-900 dark:text-white">
                     {% translate "Add Category" %}
                 </h3>
-
-                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
-                    {% translate "Enter the category information." %}
+                <p id="category-modal-description" class="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                    {% translate "Create a new article category." %}
                 </p>
             </div>
-
-            <button type="button" onclick="closeCategoryModal()" class="w-9 h-9 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+            <button type="button" data-action="close-category-modal" class="inline-flex items-center justify-center w-9 h-9 rounded-lg text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-700 dark:hover:text-white transition">
                 <i data-lucide="x" class="w-5 h-5"></i>
             </button>
-
         </div>
 
-
-        <form id="category-form" method="post">
-
+        <form id="category-form" method="post" action="{% url 'dashboard:categories' %}" autocomplete="off">
             {% csrf_token %}
-
-            <input type="hidden" name="action" id="form-action" value="create">
-            <input type="hidden" name="category_id" id="category-id">
+            <input type="hidden" name="action" id="category-action" value="create">
+            <input type="hidden" name="category_id" id="category-id" value="">
 
             <div class="p-6 space-y-5">
+                {% if form.non_field_errors %}
+                <div class="p-3 rounded-xl bg-rose-50 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-900 text-sm text-rose-700 dark:text-rose-300">
+                    {{ form.non_field_errors }}
+                </div>
+                {% endif %}
 
                 <div>
-
-                    <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
+                    <label for="category-name" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                         {% translate "Name" %}
                     </label>
-
-                    <input type="text" name="name" id="category-name" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
-
+                    <input type="text" name="name" id="category-name" autocomplete="off" required value="{{ form.name.value|default:'' }}" placeholder="{% translate 'Category name' %}" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-500/30 focus:border-purple-500">
+                    {% if form.name.errors %}
+                    <p class="mt-1.5 text-xs text-rose-600 dark:text-rose-400">{{ form.name.errors.0 }}</p>
+                    {% endif %}
                 </div>
-
 
                 <div>
-
-                    <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
+                    <label for="category-slug" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                         {% translate "Slug" %}
                     </label>
-
-                    <input type="text" name="slug" id="category-slug" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
-
+                    <input type="text" name="slug" id="category-slug" autocomplete="off" required value="{{ form.slug.value|default:'' }}" placeholder="{% translate 'category-slug' %}" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-500/30 focus:border-purple-500">
+                    {% if form.slug.errors %}
+                    <p class="mt-1.5 text-xs text-rose-600 dark:text-rose-400">{{ form.slug.errors.0 }}</p>
+                    {% endif %}
                 </div>
 
-
-                <div class="grid grid-cols-2 gap-4">
-
-                    <div>
-
-                        <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
-                            {% translate "Order" %}
-                        </label>
-
-                        <input type="number" name="order" id="category-order" value="0" min="0" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
-
-                    </div>
-
-
-                    <div class="flex items-end">
-
-                        <label class="flex items-center gap-3 w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 cursor-pointer">
-
-                            <input type="checkbox" name="is_active" id="category-active" checked class="w-4 h-4 rounded border-slate-300 text-purple-600 focus:ring-purple-500">
-
-                            <span class="text-sm font-medium text-slate-700 dark:text-slate-300">
-                                {% translate "Active" %}
-                            </span>
-
-                        </label>
-
-                    </div>
-
+                <div>
+                    <label for="category-order" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                        {% translate "Order" %}
+                    </label>
+                    <input type="number" name="order" id="category-order" autocomplete="off" min="0" value="{{ form.order.value|default:'0' }}" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-500/30 focus:border-purple-500">
+                    {% if form.order.errors %}
+                    <p class="mt-1.5 text-xs text-rose-600 dark:text-rose-400">{{ form.order.errors.0 }}</p>
+                    {% endif %}
                 </div>
 
+                <label class="flex items-center gap-3 cursor-pointer select-none">
+                    <input type="checkbox" name="is_active" id="category-active" {% if form.is_active.value %}checked{% endif %} class="w-4 h-4 rounded border-slate-300 text-purple-600 focus:ring-purple-500">
+                    <span>
+                        <span class="block text-sm font-medium text-slate-700 dark:text-slate-300">
+                            {% translate "Active" %}
+                        </span>
+                        <span class="block text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                            {% translate "Make this category visible and available for articles." %}
+                        </span>
+                    </span>
+                </label>
             </div>
-
 
             <div class="px-6 py-4 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-200 dark:border-slate-800 flex items-center justify-end gap-3">
-
-                <button type="button" onclick="closeCategoryModal()" class="px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-800 transition">
+                <button type="button" data-action="close-category-modal" class="px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-800 transition">
                     {% translate "Cancel" %}
                 </button>
-
-                <button type="submit" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-sm font-semibold transition">
+                <button type="submit" id="category-submit" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-sm font-semibold transition">
                     <i data-lucide="save" class="w-4 h-4"></i>
-                    <span id="submit-text">{% translate "Create Category" %}</span>
+                    <span>{% translate "Save Category" %}</span>
                 </button>
-
             </div>
-
         </form>
-
     </div>
-
 </div>
 
-
 <!-- Delete Modal -->
-<div id="delete-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4">
-
-    <div class="absolute inset-0 bg-slate-950/70 backdrop-blur-sm" onclick="closeDeleteModal()"></div>
-
-    <div class="relative w-full max-w-md bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
-
+<div id="delete-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm">
+    <div class="w-full max-w-md bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
         <div class="p-6">
-
-            <div class="w-12 h-12 rounded-xl bg-rose-100 dark:bg-rose-950/40 text-rose-600 dark:text-rose-400 flex items-center justify-center mb-4">
+            <div class="w-12 h-12 rounded-xl bg-rose-50 dark:bg-rose-950/30 text-rose-600 dark:text-rose-400 flex items-center justify-center mb-5">
                 <i data-lucide="trash-2" class="w-6 h-6"></i>
             </div>
-
             <h3 class="text-lg font-bold text-slate-900 dark:text-white">
                 {% translate "Delete Category" %}
             </h3>
-
             <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">
                 {% translate "Are you sure you want to delete" %}
-                <strong id="delete-category-name" class="text-slate-700 dark:text-slate-200"></strong>?
+                <strong id="delete-category-name" class="text-slate-800 dark:text-slate-200"></strong>?
             </p>
-
             <p class="mt-2 text-xs text-rose-600 dark:text-rose-400">
                 {% translate "This action cannot be undone." %}
             </p>
-
         </div>
 
-
-        <form method="post">
-
+        <form id="delete-form" method="post" action="{% url 'dashboard:categories' %}">
             {% csrf_token %}
-
             <input type="hidden" name="action" value="delete">
-            <input type="hidden" name="category_id" id="delete-category-id">
+            <input type="hidden" name="category_id" id="delete-category-id" value="">
 
-            <div class="px-6 py-4 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-200 dark:border-slate-800 flex items-center justify-end gap-3">
-
-                <button type="button" onclick="closeDeleteModal()" class="px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-800 transition">
+            <div class="px-6 py-4 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-200 dark:border-slate-800 flex justify-end gap-3">
+                <button type="button" data-action="close-delete-modal" class="px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-800 transition">
                     {% translate "Cancel" %}
                 </button>
-
                 <button type="submit" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-sm font-semibold transition">
                     <i data-lucide="trash-2" class="w-4 h-4"></i>
                     {% translate "Delete" %}
                 </button>
-
             </div>
-
         </form>
-
     </div>
-
 </div>
-
-
 {% endblock %}
 
-
 {% block extra_js %}
-
-<script>
-    function openCreateModal() {
-        const modal = document.getElementById("category-modal");
-        const form = document.getElementById("category-form");
-
-        form.reset();
-
-        document.getElementById("form-action").value = "create";
-        document.getElementById("category-id").value = "";
-        document.getElementById("category-order").value = "0";
-        document.getElementById("category-active").checked = true;
-
-        document.getElementById("modal-title").textContent = "{% translate 'Add Category' %}";
-        document.getElementById("submit-text").textContent = "{% translate 'Create Category' %}";
-
-        modal.classList.remove("hidden");
-        modal.classList.add("flex");
-    }
-
-
-    function openEditModal(id, name, slug, order, active) {
-        const modal = document.getElementById("category-modal");
-
-        document.getElementById("form-action").value = "update";
-        document.getElementById("category-id").value = id;
-        document.getElementById("category-name").value = name;
-        document.getElementById("category-slug").value = slug;
-        document.getElementById("category-order").value = order;
-        document.getElementById("category-active").checked = active;
-
-        document.getElementById("modal-title").textContent = "{% translate 'Edit Category' %}";
-        document.getElementById("submit-text").textContent = "{% translate 'Save Changes' %}";
-
-        modal.classList.remove("hidden");
-        modal.classList.add("flex");
-    }
-
-
-    function closeCategoryModal() {
-        const modal = document.getElementById("category-modal");
-
-        modal.classList.add("hidden");
-        modal.classList.remove("flex");
-    }
-
-
-    function openDeleteModal(id, name) {
-        const modal = document.getElementById("delete-modal");
-
-        document.getElementById("delete-category-id").value = id;
-        document.getElementById("delete-category-name").textContent = name;
-
-        modal.classList.remove("hidden");
-        modal.classList.add("flex");
-    }
-
-
-    function closeDeleteModal() {
-        const modal = document.getElementById("delete-modal");
-
-        modal.classList.add("hidden");
-        modal.classList.remove("flex");
-    }
-
-
-    document.addEventListener("keydown", function(event) {
-        if (event.key === "Escape") {
-            closeCategoryModal();
-            closeDeleteModal();
-        }
-    });
-</script>
-
+<script src="{% static 'js/dashboard/categories.js' %}" defer></script>
 {% endblock %}

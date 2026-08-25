@@ -1,35 +1,25 @@
-# dashboard/views.py
-
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
-from django.contrib.auth.forms import UserChangeForm, UserCreationForm
-from django.contrib.auth.models import Permission, User
-from django.core.exceptions import PermissionDenied
-
-from django.db import transaction
+from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib import messages
-from django.db.models import Count, Q
-from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy
+from django.utils.translation import gettext_lazy as _
+from django.db import transaction
+from django.db.models import Count, Q
 from django.views import View
 from django.views.generic import TemplateView, ListView, CreateView, UpdateView, DeleteView, DetailView
 
 from core.models import Member, ContactMessage
-from articles.models import (
-    Language, Article, ArticleCategory, ArticleTranslation, ArticleBlock,
-)
-from activities.models import (
-    Activity, ActivityType, ActivityTranslation, ActivityBlock, ActivityImage,
-)
-from activities.forms import ( 
-    ActivityForm, ActivityTranslationFormSet, ActivityImageFormSet, ActivityBlockForm,
-)
+from core.forms import MemberForm
+from articles.models import Language, Article, ArticleCategory, ArticleBlock
+from articles.forms import ArticleCategoryForm, ArticleForm, ArticleTranslationFormSet
+from activities.models import Activity, ActivityType
+from activities.forms import ActivityForm, ActivityTranslationFormSet, ActivityImageFormSet, ActivityBlockForm
+
 from .mixins import DashboardAccessMixin, DashboardBaseMixin, DashboardPermissionMixin
 
     
 # ============================================================
 # DASHBOARD HOME
 # ============================================================
-
 class DashboardHomeView(DashboardAccessMixin, TemplateView):
     template_name = "dashboard/home.html"
 
@@ -80,145 +70,13 @@ class DashboardHomeView(DashboardAccessMixin, TemplateView):
 
 
 # ============================================================
-# USERS
-# ============================================================
-
-# class UserListView(DashboardBaseMixin, ListView):
-#     model = User
-#     template_name = "accounts/users/list.html"
-#     context_object_name = "users"
-#     permission_required = "auth.view_user"
-
-#     def get_queryset(self):
-#         return User.objects.order_by("username")
-
-
-# class UserCreateView(DashboardBaseMixin, CreateView):
-#     model = User
-#     form_class = UserCreationForm
-#     template_name = "accounts/users/form.html"
-#     success_url = reverse_lazy("accounts:user_list")
-#     permission_required = "auth.add_user"
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context["title"] = _("Create User")
-#         return context
-
-#     def form_valid(self, form):
-#         messages.success(self.request, _("User created successfully."))
-#         return super().form_valid(form)
-
-
-# class UserUpdateView(DashboardBaseMixin, UpdateView):
-#     model = User
-#     form_class = UserChangeForm
-#     template_name = "accounts/users/form.html"
-#     context_object_name = "user_obj"
-#     success_url = reverse_lazy("accounts:user_list")
-#     permission_required = "auth.change_user"
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context["title"] = _("Update User")
-#         return context
-
-#     def form_valid(self, form):
-#         messages.success(self.request, _("User updated successfully."))
-#         return super().form_valid(form)
-
-
-# class UserDeleteView(DashboardBaseMixin, DeleteView):
-#     model = User
-#     template_name = "accounts/users/delete.html"
-#     context_object_name = "user_obj"
-#     success_url = reverse_lazy("accounts:user_list")
-#     permission_required = "auth.delete_user"
-
-#     def dispatch(self, request, *args, **kwargs):
-#         self.object = self.get_object()
-
-#         if self.object == request.user:
-#             messages.error(request, _("You cannot delete your own account."))
-#             return redirect(self.success_url)
-
-#         return super().dispatch(request, *args, **kwargs)
-
-#     def form_valid(self, form):
-#         username = self.object.username
-#         response = super().form_valid(form)
-
-#         messages.success(
-#             self.request,
-#             _("User '%(username)s' was deleted successfully.") % {
-#                 "username": username
-#             },
-#         )
-
-#         return response
-
-
-# class UserPermissionsView(DashboardBaseMixin, UpdateView):
-#     model = User
-#     template_name = "accounts/users/permissions.html"
-#     context_object_name = "user_obj"
-#     fields = []
-#     permission_required = "auth.change_user"
-
-#     def dispatch(self, request, *args, **kwargs):
-#         if not request.user.is_superuser:
-#             raise PermissionDenied
-
-#         return super().dispatch(request, *args, **kwargs)
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-
-#         context["permissions"] = (
-#             Permission.objects
-#             .select_related("content_type")
-#             .order_by(
-#                 "content_type__app_label",
-#                 "content_type__model",
-#                 "codename",
-#             )
-#         )
-
-#         context["user_permissions"] = set(
-#             self.object.user_permissions.values_list("id", flat=True)
-#         )
-
-#         return context
-
-#     def post(self, request, *args, **kwargs):
-#         self.object = self.get_object()
-
-#         self.object.is_active = "is_active" in request.POST
-#         self.object.is_staff = "is_staff" in request.POST
-
-#         self.object.user_permissions.set(
-#             request.POST.getlist("permissions")
-#         )
-
-#         self.object.save()
-
-#         messages.success(
-#             request,
-#             _("User permissions updated successfully."),
-#         )
-
-#         return redirect("accounts:user_list")
-
-
-# ============================================================
 # MEMBERS
 # ============================================================
-
 class MemberListView(DashboardAccessMixin, ListView):
     model = Member
     template_name = "dashboard/members/list.html"
     context_object_name = "members"
-    paginate_by = 20
+    paginate_by = 2
 
     def get_queryset(self):
         queryset = Member.objects.all().order_by("order", "name")
@@ -246,49 +104,33 @@ class MemberListView(DashboardAccessMixin, ListView):
 
 class MemberCreateView(DashboardBaseMixin, CreateView):
     model = Member
+    form_class = MemberForm
     template_name = "dashboard/members/form.html"
-    fields = [
-        "name",
-        "name_ar",
-        "role_ar",
-        "role_en",
-        "role_fr",
-        "photo",
-        "bio",
-        "order",
-        "is_active",
-    ]
     success_url = reverse_lazy("dashboard:members")
 
     def form_valid(self, form):
-        messages.success(
-            self.request,
-            "Member created successfully."
-        )
-        return super().form_valid(form)
+        response = super().form_valid(form)
+        messages.success(self.request, _("Member created successfully."))
+        return response
+
+    def form_invalid(self, form):
+        messages.error(self.request, _("Please correct the errors below."))
+        return super().form_invalid(form)
 
 class MemberUpdateView(DashboardBaseMixin, UpdateView):
     model = Member
+    form_class = MemberForm
     template_name = "dashboard/members/form.html"
-    fields = [
-        "name",
-        "name_ar",
-        "role_ar",
-        "role_en",
-        "role_fr",
-        "photo",
-        "bio",
-        "order",
-        "is_active",
-    ]
     success_url = reverse_lazy("dashboard:members")
 
     def form_valid(self, form):
-        messages.success(
-            self.request,
-            "Member updated successfully."
-        )
-        return super().form_valid(form)
+        response = super().form_valid(form)
+        messages.success(self.request, _("Member updated successfully."))
+        return response
+
+    def form_invalid(self, form):
+        messages.error(self.request, _("Please correct the errors below."))
+        return super().form_invalid(form)
 
 class MemberDeleteView(DashboardAccessMixin, DeleteView):
     model = Member
@@ -304,13 +146,117 @@ class MemberDeleteView(DashboardAccessMixin, DeleteView):
 
 
 # ============================================================
+# ARTICLE CATEGORIES
+# ============================================================
+class ArticleCategoryManageView(DashboardPermissionMixin, TemplateView):
+    template_name = "dashboard/categories/manage.html"
+    permission_required = "articles.view_articlecategory"
+    paginate_by = 2
+
+    def get_queryset(self):
+        queryset = (ArticleCategory.objects.annotate(article_count=Count("articles")).order_by("order", "name"))
+
+        search = self.request.GET.get("q", "").strip()
+        if search:
+            queryset = queryset.filter(Q(name__icontains=search) | Q(slug__icontains=search))
+
+        return queryset
+
+    def get(self, request, *args, **kwargs):
+        categories = self.get_queryset()
+
+        edit_id = request.GET.get("edit")
+        edit_category = None
+        edit_form = None
+
+        if edit_id:
+            edit_category = get_object_or_404( ArticleCategory, pk=edit_id)
+            edit_form = ArticleCategoryForm( instance=edit_category)
+
+        create_form = ArticleCategoryForm()
+
+        context = {
+            "categories": categories,
+            "create_form": create_form,
+            "edit_form": edit_form,
+            "edit_category": edit_category,
+            "search_query": request.GET.get("q", "").strip(),
+        }
+        return render(request, self.template_name, context)
+
+    def post(self, request, *args, **kwargs):
+        action = request.POST.get("action")
+        if action == "create" and request.user.has_perm("articles.add_articlecategory"):
+            return self.create_category(request)
+
+        if action == "update" and request.user.has_perm("articles.change_articlecategory"):
+            return self.update_category(request)
+
+        if action == "delete" and request.user.has_perm("articles.delete_articlecategory"):
+            return self.delete_category(request)
+
+        messages.error(request, _("You do not have permission to perform this action."))
+        return redirect("dashboard:categories")
+
+    def create_category(self, request):
+        form = ArticleCategoryForm(request.POST)
+        if form.is_valid():
+            category = form.save()
+            messages.success(request, _("Category “%(name)s” was created successfully.") % {"name": category.name})
+            return redirect("dashboard:categories")
+
+        categories = self.get_queryset()
+
+        context = {
+            "categories": categories,
+            "create_form": form,
+            "edit_form": None,
+            "edit_category": None,
+            "search_query": request.GET.get("q", "").strip(),
+        }
+
+        return render(request, self.template_name, context, status=400)
+
+    def update_category(self, request):
+        category_id = request.POST.get("category_id")
+        category = get_object_or_404(ArticleCategory, pk=category_id)
+        form = ArticleCategoryForm(request.POST, instance=category)
+
+        if form.is_valid():
+            category = form.save()
+            messages.success(request, _("Category “%(name)s” was updated successfully.") % {"name": category.name})
+            return redirect("dashboard:categories")
+
+        categories = self.get_queryset()
+
+        context = {
+            "categories": categories,
+            "create_form": ArticleCategoryForm(),
+            "edit_form": form,
+            "edit_category": category,
+            "search_query": request.GET.get("q", "").strip(),
+        }
+
+        return render(request, self.template_name, context, status=400)
+
+    def delete_category(self, request):
+        category_id = request.POST.get("category_id")
+        category = get_object_or_404(ArticleCategory, pk=category_id)
+        category_name = category.name
+        category.delete()
+
+        messages.success(request, _("Category “%(name)s” was deleted successfully.") % {"name": category_name})
+        return redirect("dashboard:categories")
+
+
+# ============================================================
 # ARTICLES
 # ============================================================
 class ArticleListView(DashboardAccessMixin, ListView):
     model = Article
     template_name = "dashboard/articles/list.html"
     context_object_name = "articles"
-    paginate_by = 20
+    paginate_by = 2
 
     def get_queryset(self):
         queryset = (
@@ -351,72 +297,6 @@ class ArticleListView(DashboardAccessMixin, ListView):
         )
 
         return context
-
-class ArticleCreateView(DashboardBaseMixin, CreateView):
-    model = Article
-    template_name = "dashboard/articles/form.html"
-    fields = [
-        "category",
-        "featured_image",
-        "author",
-        "status",
-        "is_featured",
-        "published_at",
-    ]
-    success_url = reverse_lazy("dashboard:articles")
-
-    def form_valid(self, form):
-        response = super().form_valid(form)
-
-        messages.success(
-            self.request,
-            "Article created successfully."
-        )
-
-        return response
-
-class ArticleUpdateView(DashboardBaseMixin, UpdateView):
-    model = Article
-    template_name = "dashboard/articles/form.html"
-    fields = [
-        "category",
-        "featured_image",
-        "author",
-        "status",
-        "is_featured",
-        "published_at",
-    ]
-    success_url = reverse_lazy("dashboard:articles")
-
-    def form_valid(self, form):
-        response = super().form_valid(form)
-
-        messages.success(
-            self.request,
-            "Article updated successfully."
-        )
-
-        return response
-
-class ArticleDeleteView(DashboardAccessMixin, DeleteView):
-    model = Article
-    template_name = "dashboard/articles/delete.html"
-    success_url = reverse_lazy("dashboard:articles")
-
-    def form_valid(self, form):
-        messages.success(
-            self.request,
-            "Article deleted successfully."
-        )
-        return super().form_valid(form)
-
-
-
-from django.db import transaction
-from django.shortcuts import redirect, render
-from django.urls import reverse_lazy
-from django.views.generic import CreateView, UpdateView
-from articles.forms import ArticleForm, ArticleTranslationFormSet
 
 class ArticleCreateView(CreateView):
     model = Article
@@ -531,7 +411,6 @@ class ArticleCreateView(CreateView):
                 document=self.request.FILES.get(f'blocks-{i}-document'),
             )
 
-
 class ArticleUpdateView(UpdateView):
     model = Article
     form_class = ArticleForm
@@ -567,243 +446,15 @@ class ArticleUpdateView(UpdateView):
         else:
             return self.render_to_response(self.get_context_data(form=form))
 
-# ============================================================
-# ARTICLE CATEGORIES
-# ============================================================
-class ArticleCategoryListView(DashboardAccessMixin, ListView):
-    model = ArticleCategory
-    template_name = "dashboard/categories/list.html"
-    context_object_name = "categories"
-    paginate_by = 30
-
-    def get_queryset(self):
-        queryset = (
-            ArticleCategory.objects
-            .annotate(article_count=Count("articles"))
-            .order_by("order", "name")
-        )
-
-        search = self.request.GET.get("q")
-
-        if search:
-            queryset = queryset.filter(
-                Q(name__icontains=search)
-                | Q(slug__icontains=search)
-            )
-
-        return queryset
-
-class ArticleCategoryCreateView(DashboardBaseMixin, CreateView):
-    model = ArticleCategory
-    template_name = "dashboard/categories/form.html"
-    fields = [
-        "name",
-        "slug",
-        "is_active",
-        "order",
-    ]
-    success_url = reverse_lazy("dashboard:categories")
+class ArticleDeleteView(DashboardAccessMixin, DeleteView):
+    model = Article
+    template_name = "dashboard/articles/delete.html"
+    success_url = reverse_lazy("dashboard:articles")
 
     def form_valid(self, form):
-        messages.success(
-            self.request,
-            "Category created successfully."
-        )
+        messages.success(self.request, _("Article deleted successfully."))
         return super().form_valid(form)
 
-class ArticleCategoryUpdateView(DashboardBaseMixin, UpdateView):
-    model = ArticleCategory
-    template_name = "dashboard/categories/form.html"
-    fields = [
-        "name",
-        "slug",
-        "is_active",
-        "order",
-    ]
-    success_url = reverse_lazy("dashboard:categories")
-
-    def form_valid(self, form):
-        messages.success(
-            self.request,
-            "Category updated successfully."
-        )
-        return super().form_valid(form)
-
-class ArticleCategoryDeleteView(DashboardAccessMixin, DeleteView):
-    model = ArticleCategory
-    template_name = "dashboard/categories/delete.html"
-    success_url = reverse_lazy("dashboard:categories")
-
-    def form_valid(self, form):
-        messages.success(
-            self.request,
-            "Category deleted successfully."
-        )
-        return super().form_valid(form)
-
-
-
-class ArticleCategoryManageView(DashboardAccessMixin, ListView):
-    model = ArticleCategory
-    template_name = "dashboard/categories/manage.html"
-    context_object_name = "categories"
-    paginate_by = 30
-
-    def get_queryset(self):
-        queryset = (
-            ArticleCategory.objects
-            .annotate(article_count=Count("articles"))
-            .order_by("order", "name")
-        )
-
-        search = self.request.GET.get("q", "").strip()
-
-        if search:
-            queryset = queryset.filter(
-                Q(name__icontains=search) |
-                Q(slug__icontains=search)
-            )
-
-        return queryset
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        category_id = self.request.GET.get("edit")
-
-        if category_id:
-            context["edit_category"] = get_object_or_404(
-                ArticleCategory,
-                pk=category_id
-            )
-
-        return context
-
-    def post(self, request, *args, **kwargs):
-        action = request.POST.get("action")
-
-        if action == "create":
-            return self.create_category(request)
-
-        if action == "update":
-            return self.update_category(request)
-
-        if action == "delete":
-            return self.delete_category(request)
-
-        messages.error(request, "Invalid action.")
-        return redirect("dashboard:categories")
-
-    def create_category(self, request):
-        name = request.POST.get("name", "").strip()
-        slug = request.POST.get("slug", "").strip()
-        is_active = request.POST.get("is_active") == "on"
-        order = request.POST.get("order", "0").strip()
-
-        if not name:
-            messages.error(request, "Category name is required.")
-            return redirect("dashboard:categories")
-
-        if not slug:
-            messages.error(request, "Category slug is required.")
-            return redirect("dashboard:categories")
-
-        if ArticleCategory.objects.filter(slug=slug).exists():
-            messages.error(
-                request,
-                "A category with this slug already exists."
-            )
-            return redirect("dashboard:categories")
-
-        try:
-            order = int(order)
-        except (TypeError, ValueError):
-            order = 0
-
-        ArticleCategory.objects.create(
-            name=name,
-            slug=slug,
-            is_active=is_active,
-            order=order,
-        )
-
-        messages.success(
-            request,
-            "Category created successfully."
-        )
-
-        return redirect("dashboard:categories")
-
-    def update_category(self, request):
-        category_id = request.POST.get("category_id")
-
-        category = get_object_or_404(
-            ArticleCategory,
-            pk=category_id
-        )
-
-        name = request.POST.get("name", "").strip()
-        slug = request.POST.get("slug", "").strip()
-        is_active = request.POST.get("is_active") == "on"
-        order = request.POST.get("order", "0").strip()
-
-        if not name:
-            messages.error(request, "Category name is required.")
-            return redirect("dashboard:categories")
-
-        if not slug:
-            messages.error(request, "Category slug is required.")
-            return redirect(
-                f"{request.path}?edit={category.pk}"
-            )
-
-        if ArticleCategory.objects.filter(
-            slug=slug
-        ).exclude(
-            pk=category.pk
-        ).exists():
-            messages.error(
-                request,
-                "A category with this slug already exists."
-            )
-            return redirect(
-                f"{request.path}?edit={category.pk}"
-            )
-
-        try:
-            order = int(order)
-        except (TypeError, ValueError):
-            order = 0
-
-        category.name = name
-        category.slug = slug
-        category.is_active = is_active
-        category.order = order
-        category.save()
-
-        messages.success(
-            request,
-            "Category updated successfully."
-        )
-
-        return redirect("dashboard:categories")
-
-    def delete_category(self, request):
-        category_id = request.POST.get("category_id")
-
-        category = get_object_or_404(
-            ArticleCategory,
-            pk=category_id
-        )
-
-        category.delete()
-
-        messages.success(
-            request,
-            "Category deleted successfully."
-        )
-
-        return redirect("dashboard:categories")
 
 # ============================================================
 # ACTIVITIES
@@ -812,7 +463,7 @@ class ActivityListView(DashboardAccessMixin, ListView):
     model = Activity
     template_name = "dashboard/activities/list.html"
     context_object_name = "activities"
-    paginate_by = 20
+    paginate_by = 2
 
     def get_queryset(self):
         queryset = (
@@ -1016,7 +667,7 @@ class ContactMessageListView(DashboardAccessMixin, ListView):
     model = ContactMessage
     template_name = "dashboard/messages/list.html"
     context_object_name = "messages_list"
-    paginate_by = 25
+    paginate_by = 2
 
     def get_queryset(self):
         queryset = ContactMessage.objects.all()

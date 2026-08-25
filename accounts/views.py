@@ -15,7 +15,7 @@ from django.contrib.auth import get_user_model
 from dashboard.mixins import DashboardBaseMixin, DashboardPermissionMixin
 
 from .forms import (
-    AccountPasswordChangeForm, AccountUpdateForm, UserCreateForm, UserUpdateForm,
+    AccountPasswordChangeForm, AccountUpdateForm, UserCreateForm, UserUpdateForm, UserPermissionsForm
 )
 
 User = get_user_model()
@@ -192,9 +192,9 @@ class UserDeleteView(DashboardPermissionMixin, DeleteView):
 
 class UserPermissionsView(DashboardPermissionMixin, UpdateView):
     model = User
+    form_class = UserPermissionsForm
     template_name = "accounts/users/permissions.html"
     context_object_name = "user_obj"
-    fields = []
     permission_required = "auth.change_user"
 
     def dispatch(self, request, *args, **kwargs):
@@ -203,49 +203,10 @@ class UserPermissionsView(DashboardPermissionMixin, UpdateView):
 
         return super().dispatch(request, *args, **kwargs)
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+    def form_valid(self, form):
+        form.save()
 
-        context["permissions"] = (
-            Permission.objects
-            .select_related("content_type")
-            .order_by(
-                "content_type__app_label",
-                "content_type__model",
-                "codename",
-            )
-        )
-
-        context["user_permissions"] = set(
-            self.object.user_permissions.values_list(
-                "id",
-                flat=True
-            )
-        )
-
-        return context
-
-    def post(self, request, *args, **kwargs):
-        self.object = self.get_object()
-
-        self.object.is_active = "is_active" in request.POST
-        self.object.is_staff = "is_staff" in request.POST
-
-        self.object.user_permissions.set(
-            request.POST.getlist("permissions")
-        )
-
-        self.object.save(
-            update_fields=[
-                "is_active",
-                "is_staff",
-            ]
-        )
-
-        messages.success(
-            request,
-            _("User permissions updated successfully.")
-        )
+        messages.success(self.request, _("User permissions updated successfully."))
 
         return redirect("accounts:user_list")
 

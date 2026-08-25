@@ -1,14 +1,7 @@
-# activities/models.py
-
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse
-
-
-class Language(models.TextChoices):
-    ARABIC = "ar", _("Arabic")
-    ENGLISH = "en", _("English")
-    FRENCH = "fr", _("French")
+from articles.models import Language
 
 
 class ActivityType(models.TextChoices):
@@ -47,6 +40,7 @@ class Activity(models.Model):
 
     def get_absolute_url(self):
         return reverse("activities:detail", kwargs={"slug": self.slug})
+
 
 class ActivityTranslation(models.Model):
     activity = models.ForeignKey(Activity, on_delete=models.CASCADE, related_name="translations", verbose_name=_("activity"))

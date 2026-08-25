@@ -2,23 +2,61 @@ from django import forms
 from django.forms import inlineformset_factory
 from django.utils.translation import gettext_lazy as _
 
-from .models import Article, ArticleTranslation, ArticleBlock
+from .models import Article, ArticleTranslation, ArticleBlock, ArticleCategory
+
+
+class ArticleCategoryForm(forms.ModelForm):
+    class Meta:
+        model = ArticleCategory
+        fields = ["name", "slug", "is_active", "order"]
+        widgets = {
+            "name": forms.TextInput(attrs={"class": "form-input", "autocomplete": "off", "placeholder":  _("Category Name")}),
+            "slug": forms.TextInput(attrs={"class": "form-input", "autocomplete": "off", "placeholder":  _("Category Slug")}),
+            "is_active": forms.CheckboxInput(attrs={"class": "form-checkbox"}),
+            "order": forms.NumberInput(attrs={"class": "form-input", "autocomplete": "off", "min": "0"}),
+        }
+
+    def clean_name(self):
+        name = self.cleaned_data["name"].strip()
+
+        if not name:
+            raise forms.ValidationError(_("Category name is required."))
+
+        return name
+
+    def clean_slug(self):
+        slug = self.cleaned_data["slug"].strip().lower()
+
+        if not slug:
+            raise forms.ValidationError(_("Slug is required."))
+
+        return slug
 
 
 class ArticleForm(forms.ModelForm):
+    pub_date = forms.DateTimeField(
+        required=False,
+        widget=forms.DateTimeInput(attrs={'type': 'datetime-local'})
+    )
+
     class Meta:
         model = Article
-        fields = [
-            "slug", "category", "featured_image", "author", "status", "is_featured"
-        ]
+        # fields = ["slug", "category", "featured_image", "author", "status", "is_featured"]
+        fields = ['category', 'author', 'featured_image', 'status', 'is_featured', 'published_at']
         widgets = {
-            "slug": forms.Select(attrs={"class": "form-input"}),
             "category": forms.Select(attrs={"class": "form-input"}),
             "featured_image": forms.ClearableFileInput(attrs={"class": "form-file", "accept": "image/*"}),
             "author": forms.TextInput(attrs={"class": "form-input"}),
             "status": forms.Select(attrs={"class": "form-input"}),
             "is_featured": forms.CheckboxInput(attrs={"class": "form-checkbox"}),
         }
+
+    def clean(self):
+        cleaned_data = super().clean()
+        pub_date = self.cleaned_data.get('pub_date')
+        if pub_date:
+            cleaned_data['published_at'] = pub_date
+        return cleaned_data
 
 
 class ArticleTranslationForm(forms.ModelForm):
@@ -34,6 +72,16 @@ class ArticleTranslationForm(forms.ModelForm):
             "meta_title": forms.TextInput(attrs={"class": "form-input"}),
             "meta_description": forms.Textarea(attrs={"class": "form-input","rows": 3}),
         }
+
+class ArticleTranslationForm(forms.ModelForm):
+    class Meta:
+        model = ArticleTranslation
+        fields = ['language', 'title', 'excerpt', 'meta_title', 'meta_description']
+        widgets = {
+            'meta_title': forms.TextInput(attrs={'class': 'form-input'}),
+            'meta_description': forms.TextInput(attrs={'class': 'form-input'}),
+        }
+
 
 class ArticleBlockForm(forms.ModelForm):
     class Meta:
@@ -263,14 +311,7 @@ class ArticleBlockForm(forms.ModelForm):
     class Meta:
         model = ArticleBlock
         fields = [
-            "block_type",
-            "order",
-            "title",
-            "text",
-            "caption",
-            "image",
-            "document",
-            "url",
+            "block_type", "order", "title", "text", "caption", "image", "document", "url",
         ]
 
         widgets = {
@@ -410,74 +451,21 @@ class ArticleBlockForm(forms.ModelForm):
                 self.add_error("title", _("Button text cannot exceed 100 characters."))
 
         return cleaned_data
-ArticleBlockFormSet = inlineformset_factory(
-    ArticleTranslation, ArticleBlock, form=ArticleBlockForm, extra=3, max_num=3, validate_max=True, can_delete=True,
-)
 
-ArticleTranslationFormSet = inlineformset_factory(
-    Article, ArticleTranslation, form=ArticleTranslationForm, extra=3, max_num=3, validate_max=True, can_delete=True,
-)
-
-
-
-
-
-from django import forms
-from django.forms import inlineformset_factory
-from .models import Article, ArticleTranslation, ArticleBlock, Language
-
-class ArticleForm(forms.ModelForm):
-    pub_date = forms.DateTimeField(
-        required=False,
-        widget=forms.DateTimeInput(attrs={'type': 'datetime-local'})
-    )
-
-    class Meta:
-        model = Article
-        fields = ['category', 'author', 'featured_image', 'status', 'is_featured', 'published_at']
-
-    def clean(self):
-        cleaned_data = super().clean()
-        pub_date = self.cleaned_data.get('pub_date')
-        if pub_date:
-            cleaned_data['published_at'] = pub_date
-        return cleaned_data
-
-
-class ArticleTranslationForm(forms.ModelForm):
-    class Meta:
-        model = ArticleTranslation
-        fields = ['language', 'title', 'excerpt', 'meta_title', 'meta_description']
-        widgets = {
-            'meta_title': forms.TextInput(attrs={'class': 'dashboard-input'}),
-            'meta_description': forms.TextInput(attrs={'class': 'dashboard-input'}),
-        }
-
-
-# Base formset factory for translations (Arabic, English, French)
-ArticleTranslationFormSet = inlineformset_factory(
-    Article,
-    ArticleTranslation,
-    form=ArticleTranslationForm,
-    extra=0,
-    can_delete=False,
-    min_num=3,
-    max_num=3,
-)
 
 class ArticleBlockForm(forms.ModelForm):
     class Meta:
         model = ArticleBlock
         fields = [
-            'block_type', 'order', 'title', 'text', 'caption', 
-            'image', 'document', 'url', 'heading_level', 'callout_style'
+            'block_type', 'order', 'title', 'text', 'caption', 'image', 'document', 'url', 'heading_level', 'callout_style'
         ]
 
 
+# Base formset factory for translations (Arabic, English, French)
+ArticleTranslationFormSet = inlineformset_factory(
+    Article, ArticleTranslation, ArticleTranslationForm, extra=0, can_delete=False, min_num=3, max_num=3,
+)
+
 ArticleBlockFormSet = inlineformset_factory(
-    ArticleTranslation,
-    ArticleBlock,
-    form=ArticleBlockForm,
-    extra=0,
-    can_delete=True
+    ArticleTranslation, ArticleBlock, form=ArticleBlockForm, extra=0, can_delete=True
 )

@@ -1,0 +1,24 @@
+{% if messages %}
+<div class="px-4 sm:px-6 lg:px-8 pt-6 space-y-3 shrink-0">
+    {% for message in messages %}
+    <div data-alert class="p-4 rounded-xl text-sm font-medium flex items-center justify-between gap-3 shadow-sm border
+        {% if message.tags == 'error' %}
+            bg-rose-50 text-rose-800 border-rose-200 dark:bg-rose-950/30 dark:text-rose-300 dark:border-rose-900
+        {% elif message.tags == 'success' %}
+            bg-emerald-50 text-emerald-800 border-emerald-200 dark:bg-emerald-950/30 dark:text-emerald-300 dark:border-emerald-900
+        {% else %}
+            bg-purple-50 text-purple-800 border-purple-200 dark:bg-purple-950/30 dark:text-purple-300 dark:border-purple-900
+        {% endif %}">
+
+        <div class="flex items-center gap-3">
+            <i data-lucide="{% if message.tags == 'error' %}alert-circle{% elif message.tags == 'success' %}check-circle{% else %}info{% endif %}" class="w-5 h-5 flex-shrink-0"></i>
+            <span>{{ message }}</span>
+        </div>
+
+        <button type="button" data-action="dismiss-alert" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+            <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}

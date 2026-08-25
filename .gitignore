@@ -2,6 +2,7 @@
 __pycache__/
 *.py[cod]
 *.pyo
+*.pyd
 
 # Virtual environment
 venv/
@@ -11,6 +12,7 @@ env/
 # Environment variables
 .env
 .env.*
+!.env.example
 
 # Django
 db.sqlite3
@@ -36,3 +38,5 @@ Thumbs.db
 # Coverage
 .coverage
 htmlcov/
+
+

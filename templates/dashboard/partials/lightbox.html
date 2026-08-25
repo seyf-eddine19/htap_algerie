@@ -1,0 +1,16 @@
+<div id="gallery-lightbox" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <button type="button" data-action="close-lightbox" class="absolute top-4 end-4 p-2 text-slate-400 hover:text-white bg-slate-900/60 rounded-full transition z-10">
+        <i data-lucide="x" class="w-6 h-6"></i>
+    </button>
+
+    <div class="max-w-4xl w-full flex flex-col items-center">
+        <div class="relative max-h-[80vh] overflow-hidden rounded-2xl border border-slate-800 shadow-2xl bg-black">
+            <img id="lightbox-image" src="" alt="Gallery Preview" class="object-contain max-h-[80vh] w-auto mx-auto">
+        </div>
+
+        <div class="mt-4 text-center">
+            <h4 id="lightbox-title" class="text-base font-semibold text-white"></h4>
+            <p id="lightbox-caption" class="text-xs text-slate-400 mt-1"></p>
+        </div>
+    </div>
+</div>

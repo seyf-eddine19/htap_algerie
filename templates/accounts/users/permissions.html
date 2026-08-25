@@ -1,7 +1,7 @@
 {% extends "dashboard/base.html" %}
 {% load i18n %}
 
-{% block title %}{% translate "User Permissions" %} | HTAP Algérie{% endblock %}
+{% block title %}{% translate "User Permissions" %}{% endblock %}
 
 {% block header_title %}{% translate "User Permissions" %}{% endblock %}
 
@@ -16,8 +16,9 @@
 {% endblock %}
 
 {% block content %}
-<div class="max-w-5xl mx-auto space-y-6">
+<div class="max-w-7xl mx-auto space-y-6">
 
+    <!-- Top Header -->
     <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
             <h1 class="text-2xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
@@ -34,25 +35,27 @@
         </a>
     </div>
 
+    <!-- Main Card -->
     <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
 
-        <div class="px-6 py-5 border-b border-slate-200 dark:border-slate-800">
+        <!-- User Information Banner -->
+        <div class="px-6 py-5 border-b border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30">
             <div class="flex items-center gap-4">
-                <div class="w-12 h-12 rounded-full bg-purple-100 dark:bg-purple-900/50 text-purple-700 dark:text-purple-300 font-bold flex items-center justify-center text-sm">
+                <div class="w-12 h-12 rounded-full bg-purple-100 dark:bg-purple-950/50 text-purple-700 dark:text-purple-300 font-bold flex items-center justify-center text-sm shadow-inner shrink-0">
                     {{ user_obj.username|slice:":2"|upper }}
                 </div>
 
-                <div>
-                    <h2 class="text-sm font-bold text-slate-900 dark:text-white">
+                <div class="min-w-0 flex-1">
+                    <h2 class="text-sm font-bold text-slate-900 dark:text-white truncate">
                         {{ user_obj.get_full_name|default:user_obj.username }}
                     </h2>
 
-                    <p class="text-[11px] text-slate-500 dark:text-slate-400">
+                    <p class="text-[11px] text-slate-500 dark:text-slate-400 truncate">
                         @{{ user_obj.username }}{% if user_obj.email %} · {{ user_obj.email }}{% endif %}
                     </p>
                 </div>
 
-                <div class="ms-auto">
+                <div class="ms-auto shrink-0 flex items-center gap-2">
                     {% if user_obj.is_superuser %}
                     <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-rose-100 dark:bg-rose-950/50 text-rose-700 dark:text-rose-300">
                         <i data-lucide="shield-alert" class="w-3 h-3"></i>
@@ -62,6 +65,11 @@
                     <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-100 dark:bg-blue-950/50 text-blue-700 dark:text-blue-300">
                         <i data-lucide="shield-check" class="w-3 h-3"></i>
                         {% translate "Staff" %}
+                    </span>
+                    {% else %}
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">
+                        <i data-lucide="user" class="w-3 h-3"></i>
+                        {% translate "Regular User" %}
                     </span>
                     {% endif %}
                 </div>
@@ -73,93 +81,141 @@
 
             <div class="p-6">
 
+                <!-- Status Toggles -->
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-7">
 
-                    <label class="flex items-center gap-3 p-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-purple-300 dark:hover:border-purple-800 bg-slate-50/50 dark:bg-slate-800/30 cursor-pointer transition">
-                        <input type="checkbox" name="is_active" {% if user_obj.is_active %}checked{% endif %} class="w-4 h-4 rounded border-slate-300 text-purple-600 focus:ring-purple-500">
+                    <label class="flex items-center gap-3 p-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-purple-300 dark:hover:border-purple-800 bg-slate-50/50 dark:bg-slate-800/20 cursor-pointer transition">
+                        {{ form.is_active }}
                         <div>
-                            <p class="text-xs font-bold text-slate-800 dark:text-slate-200">{% translate "Active Account" %}</p>
-                            <p class="text-[10px] text-slate-400 mt-0.5">{% translate "Allow login" %}</p>
+                            <p class="text-xs font-bold text-slate-800 dark:text-slate-200">
+                                {% translate "Active Account" %}
+                            </p>
+                            <p class="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">
+                                {% translate "Allow login and access" %}
+                            </p>
                         </div>
                     </label>
 
-                    <label class="flex items-center gap-3 p-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-purple-300 dark:hover:border-purple-800 bg-slate-50/50 dark:bg-slate-800/30 cursor-pointer transition">
-                        <input type="checkbox" name="is_staff" {% if user_obj.is_staff %}checked{% endif %} class="w-4 h-4 rounded border-slate-300 text-purple-600 focus:ring-purple-500">
+                    <label class="flex items-center gap-3 p-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-purple-300 dark:hover:border-purple-800 bg-slate-50/50 dark:bg-slate-800/20 cursor-pointer transition">
+                        {{ form.is_staff }}
                         <div>
-                            <p class="text-xs font-bold text-slate-800 dark:text-slate-200">{% translate "Staff Status" %}</p>
-                            <p class="text-[10px] text-slate-400 mt-0.5">{% translate "Access administration" %}</p>
+                            <p class="text-xs font-bold text-slate-800 dark:text-slate-200">
+                                {% translate "Staff Status" %}
+                            </p>
+                            <p class="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">
+                                {% translate "Access administration panel" %}
+                            </p>
                         </div>
                     </label>
 
-                    <div class="flex items-center gap-3 p-4 rounded-xl border border-rose-200 dark:border-rose-900/50 bg-rose-50/50 dark:bg-rose-950/20">
-                        <i data-lucide="shield-alert" class="w-5 h-5 text-rose-500"></i>
+                    <div class="flex items-center gap-3 p-4 rounded-xl border border-rose-200 dark:border-rose-950/50 bg-rose-50/50 dark:bg-rose-950/20">
+                        <i data-lucide="shield-alert" class="w-5 h-5 text-rose-500 shrink-0"></i>
                         <div>
-                            <p class="text-xs font-bold text-slate-800 dark:text-slate-200">{% translate "Superuser" %}</p>
-                            <p class="text-[10px] text-rose-500 dark:text-rose-400">{% translate "Managed separately" %}</p>
+                            <p class="text-xs font-bold text-slate-800 dark:text-slate-200">
+                                {% translate "Superuser" %}
+                            </p>
+                            <p class="text-[10px] text-rose-500 dark:text-rose-400">
+                                {% translate "Managed via Django Admin" %}
+                            </p>
                         </div>
                     </div>
 
                 </div>
 
-                <div class="flex items-center justify-between mb-4">
+                <!-- Section Title & Global Actions -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
                     <div>
                         <h3 class="text-sm font-bold text-slate-900 dark:text-white">
                             {% translate "Permissions" %}
                         </h3>
-                        <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
+
+                        <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
                             {% translate "Select the permissions assigned directly to this user." %}
                         </p>
                     </div>
 
                     <div class="flex items-center gap-2">
-                        <button type="button" onclick="toggleAllPermissions(true)" class="px-3 py-2 rounded-lg text-[11px] font-semibold text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-950/30 transition">
+
+                        <!-- Search Box -->
+                        <div class="relative">
+                            <i data-lucide="search" class="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                            <input type="text" id="permission-search" placeholder="{% translate 'Filter permissions...' %}" class="w-full sm:w-48 pl-8 pr-3 py-1.5 rounded-lg text-[11px] border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-purple-500">
+                        </div>
+
+                        <button type="button" onclick="toggleAllPermissions(true)" class="px-3 py-1.5 rounded-lg text-[11px] font-semibold text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-950/30 transition border border-transparent hover:border-purple-200 dark:hover:border-purple-900">
                             {% translate "Select All" %}
                         </button>
-                        <button type="button" onclick="toggleAllPermissions(false)" class="px-3 py-2 rounded-lg text-[11px] font-semibold text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+
+                        <button type="button" onclick="toggleAllPermissions(false)" class="px-3 py-1.5 rounded-lg text-[11px] font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition border border-transparent hover:border-slate-200 dark:hover:border-slate-700">
                             {% translate "Clear All" %}
                         </button>
+
                     </div>
                 </div>
 
-                <div class="space-y-3">
+                <!-- Permission Errors -->
+                {% if form.permissions.errors %}
+                <div class="mb-4 p-3 rounded-xl bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-900/50 text-xs text-red-600 dark:text-red-400">
+                    {{ form.permissions.errors }}
+                </div>
+                {% endif %}
 
-                    {% regroup permissions by content_type.app_label as app_permissions %}
+                <!-- Permissions Grouped by App -->
+                <div class="space-y-4" id="permissions-container">
 
-                    {% for app in app_permissions %}
-                    <div class="border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden">
+                    {% for app_label, app_permissions in form.grouped_permissions %}
+                    <div class="permission-group border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden bg-white dark:bg-slate-900" data-app="{{ app_label }}">
 
-                        <div class="px-5 py-3 bg-slate-50/70 dark:bg-slate-800/40 border-b border-slate-200 dark:border-slate-800 flex items-center gap-2">
-                            <i data-lucide="folder-cog" class="w-4 h-4 text-purple-600 dark:text-purple-400"></i>
-                            <span class="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200">
-                                {{ app.grouper }}
-                            </span>
+                        <div class="px-5 py-3 bg-slate-50/70 dark:bg-slate-800/40 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between gap-2">
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="folder-cog" class="w-4 h-4 text-purple-600 dark:text-purple-400"></i>
+                                <span class="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200">
+                                    {{ app_label }}
+                                </span>
+                            </div>
+
+                            <div class="flex items-center gap-2 text-[10px]">
+                                <button type="button" onclick="toggleAppPermissions('{{ app_label }}', true)" class="text-purple-600 dark:text-purple-400 hover:underline">
+                                    {% translate "Select Group" %}
+                                </button>
+                                <span class="text-slate-300 dark:text-slate-700">•</span>
+                                <button type="button" onclick="toggleAppPermissions('{{ app_label }}', false)" class="text-slate-500 dark:text-slate-400 hover:underline">
+                                    {% translate "Clear Group" %}
+                                </button>
+                            </div>
                         </div>
 
                         <div class="p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
-                            {% for permission in app.list %}
-                            <label class="group flex items-center gap-3 p-3 rounded-xl border border-transparent hover:border-slate-200 dark:hover:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer transition">
-                                <input type="checkbox" name="permissions" value="{{ permission.pk }}" {% if permission.pk in user_permissions %}checked{% endif %} class="permission-checkbox w-4 h-4 rounded border-slate-300 text-purple-600 focus:ring-purple-500">
+
+                            {% for item in app_permissions %}
+                            <label class="permission-item group flex items-start gap-3 p-3 rounded-xl border border-transparent hover:border-slate-200 dark:hover:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer transition" data-app="{{ app_label }}">
+
+                                <input type="checkbox" name="permissions" value="{{ item.permission.pk }}" {% if item.permission.pk in form.initial.permissions %}checked{% endif %} class="permission-checkbox mt-0.5 w-4 h-4 rounded border-slate-300 text-purple-600 focus:ring-purple-500 dark:border-slate-700 dark:bg-slate-900">
 
                                 <div class="min-w-0">
-                                    <p class="text-xs font-semibold text-slate-700 dark:text-slate-300 truncate">
-                                        {{ permission.name }}
+                                    <p class="text-xs font-semibold text-slate-700 dark:text-slate-300 truncate group-hover:text-purple-600 dark:group-hover:text-purple-400 transition">
+                                        {{ item.label }}
                                     </p>
-                                    <p class="text-[9px] text-slate-400 font-mono truncate">
-                                        {{ permission.codename }}
+
+                                    <p class="text-[9px] text-slate-400 font-mono truncate mt-0.5">
+                                        {{ item.permission.codename }}
                                     </p>
                                 </div>
+
                             </label>
                             {% endfor %}
+
                         </div>
 
                     </div>
                     {% endfor %}
 
                 </div>
-
             </div>
 
+            <!-- Footer Actions -->
             <div class="px-6 py-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/20 flex items-center justify-end gap-3">
+
                 <a href="{% url 'accounts:user_list' %}" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-semibold hover:bg-white dark:hover:bg-slate-800 transition">
                     {% translate "Cancel" %}
                 </a>
@@ -168,9 +224,11 @@
                     <i data-lucide="shield-check" class="w-4 h-4"></i>
                     {% translate "Save Permissions" %}
                 </button>
+
             </div>
 
         </form>
+
     </div>
 </div>
 {% endblock %}
@@ -178,11 +236,44 @@
 {% block extra_js %}
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-    lucide.createIcons();
+    if (window.lucide) {
+        lucide.createIcons();
+    }
+
+    const searchInput = document.getElementById("permission-search");
+
+    if (searchInput) {
+        searchInput.addEventListener("input", function (e) {
+            const query = e.target.value.toLowerCase().trim();
+
+            document.querySelectorAll(".permission-group").forEach(function (group) {
+                let visibleItems = 0;
+
+                group.querySelectorAll(".permission-item").forEach(function (item) {
+                    const text = item.textContent.toLowerCase();
+                    const matches = text.includes(query);
+
+                    item.style.display = matches ? "flex" : "none";
+
+                    if (matches) {
+                        visibleItems++;
+                    }
+                });
+
+                group.style.display = visibleItems > 0 ? "block" : "none";
+            });
+        });
+    }
 });
 
 function toggleAllPermissions(value) {
-    document.querySelectorAll(".permission-checkbox").forEach(function (checkbox) {
+    document.querySelectorAll("#permissions-container input[type='checkbox']").forEach(function (checkbox) {
+        checkbox.checked = value;
+    });
+}
+
+function toggleAppPermissions(appGroup, value) {
+    document.querySelectorAll(`.permission-item[data-app="${appGroup}"] input[type="checkbox"]`).forEach(function (checkbox) {
         checkbox.checked = value;
     });
 }

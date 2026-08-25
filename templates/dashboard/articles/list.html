@@ -1,7 +1,7 @@
 {% extends "dashboard/base.html" %}
 {% load i18n static %}
 
-{% block title %}{% translate "Articles" %} | HTAP Algérie{% endblock %}
+{% block title %}{% translate "Articles" %}{% endblock %}
 
 {% block header_title %}{% translate "Article Management" %}{% endblock %}
 
@@ -9,79 +9,173 @@
 <div class="flex items-center gap-2 mt-1 text-xs text-slate-500 dark:text-slate-400">
     <a href="{% url 'dashboard:home' %}" class="hover:text-purple-600 dark:hover:text-purple-400 transition">{% translate "Dashboard" %}</a>
     <i data-lucide="chevron-right" class="w-3.5 h-3.5 rtl:rotate-180"></i>
-    <span class="text-slate-700 dark:text-slate-200 font-medium">{% translate "Articles" %}</span>
+    <span class="text-purple-600 dark:text-purple-400 font-medium">{% translate "Articles" %}</span>
 </div>
 {% endblock %}
 
 {% block content %}
-<div class="max-w-7xl mx-auto space-y-6" x-data="articleList()">
+<div class="max-w-7xl mx-auto space-y-6">
 
-    <!-- Header & Action Bar -->
-    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-        <div>
-            <h1 class="text-2xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
-                {% translate "Editorial Articles" %}
+    <!-- Page Header -->
+    <div class="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+        <div class="min-w-0">
+            <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
+                {% translate "Articles" %}
             </h1>
-            <p class="mt-1 text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+            <p class="mt-1.5 max-w-2xl text-sm text-slate-500 dark:text-slate-400">
                 {% translate "Manage, filter, and publish multilingual news and editorial content." %}
             </p>
         </div>
 
-        <div class="flex items-center gap-3 shrink-0">
-            <a href="{% url 'dashboard:article_create' %}" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-semibold shadow-md transition">
-                <i data-lucide="plus" class="w-4 h-4"></i>
-                {% translate "Create New Article" %}
-            </a>
-        </div>
+        <a href="{% url 'dashboard:article_create' %}" class="inline-flex shrink-0 items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 active:bg-purple-800 text-white text-sm font-semibold shadow-sm shadow-purple-600/20 hover:shadow-md hover:shadow-purple-600/25 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500/30">
+            <i data-lucide="plus" class="w-4 h-4"></i>
+            {% translate "Create New Article" %}
+        </a>
     </div>
 
-    <!-- Filters Bar -->
-    <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-4 shadow-sm">
-        <form method="get" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3 items-center">
-            
-            <!-- Search Query -->
-            <div class="lg:col-span-5 relative">
-                <i data-lucide="search" class="w-4 h-4 absolute start-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
-                <input type="text" name="q" value="{{ request.GET.q|default:'' }}" placeholder="{% translate 'Search by title or author...' %}" class="dashboard-input ps-10">
+    <!-- Filters -->
+    <section class="relative overflow-hidden bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm">
+        <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-purple-500/40 to-transparent"></div>
+
+        <form method="get" class="p-4 sm:p-5">
+            <div class="flex flex-col gap-4 lg:flex-row lg:items-end">
+
+                <!-- Search -->
+                <div class="flex-1 min-w-0">
+                    <label for="search" class="flex items-center gap-2 mb-2 text-xs font-semibold text-slate-600 dark:text-slate-300">
+                        <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400"></i>
+                        {% translate "Search articles" %}
+                    </label>
+
+                    <div class="relative group">
+                        <i data-lucide="search" class="absolute start-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-purple-500 transition-colors"></i>
+                        <input type="search" name="q" id="search" value="{{ request.GET.q|default:'' }}" placeholder="{% translate 'Search by title or author...' %}" autocomplete="off" class="w-full h-11 bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 focus:border-purple-500 dark:focus:border-purple-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-4 focus:ring-purple-500/10 rounded-xl ps-10 pe-4 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 outline-none transition-all duration-200">
+                    </div>
+                </div>
+
+                <!-- Category -->
+                <div class="w-full lg:w-60">
+                    <label for="category" class="flex items-center gap-2 mb-2 text-xs font-semibold text-slate-600 dark:text-slate-300">
+                        <i data-lucide="folder-tree" class="w-3.5 h-3.5 text-slate-400"></i>
+                        {% translate "Category" %}
+                    </label>
+
+                    <div class="relative">
+                        <select name="category" id="category" class="appearance-none w-full h-11 bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 focus:border-purple-500 dark:focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 rounded-xl ps-3.5 pe-10 text-sm text-slate-900 dark:text-white outline-none transition-all duration-200 cursor-pointer">
+                            <option value="">{% translate "All Categories" %}</option>
+                            {% for cat in categories %}
+                            <option value="{{ cat.id }}" {% if request.GET.category == cat.id|stringformat:"s" %}selected{% endif %}>{{ cat.name }}</option>
+                            {% endfor %}
+                        </select>
+                        <i data-lucide="chevron-down" class="pointer-events-none absolute end-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400"></i>
+                    </div>
+                </div>
+
+                <!-- Status -->
+                <div class="w-full lg:w-48">
+                    <label for="status" class="flex items-center gap-2 mb-2 text-xs font-semibold text-slate-600 dark:text-slate-300">
+                        <i data-lucide="circle-check" class="w-3.5 h-3.5 text-slate-400"></i>
+                        {% translate "Status" %}
+                    </label>
+
+                    <div class="relative">
+                        <select name="status" id="status" class="appearance-none w-full h-11 bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 focus:border-purple-500 dark:focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 rounded-xl ps-3.5 pe-10 text-sm text-slate-900 dark:text-white outline-none transition-all duration-200 cursor-pointer">
+                            <option value="">{% translate "All Statuses" %}</option>
+                            <option value="published" {% if request.GET.status == "published" %}selected{% endif %}>{% translate "Published" %}</option>
+                            <option value="draft" {% if request.GET.status == "draft" %}selected{% endif %}>{% translate "Draft" %}</option>
+                        </select>
+                        <i data-lucide="chevron-down" class="pointer-events-none absolute end-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400"></i>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="flex items-center gap-2">
+                    <button type="submit" class="inline-flex items-center justify-center gap-2 h-11 px-5 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-sm font-semibold hover:bg-slate-800 dark:hover:bg-slate-100 shadow-sm transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-slate-900/10 dark:focus:ring-white/10">
+                        <i data-lucide="sliders-horizontal" class="w-4 h-4"></i>
+                        {% translate "Apply" %}
+                    </button>
+
+                    {% if request.GET.q or request.GET.category or request.GET.status %}
+                    <a href="{% url 'dashboard:articles' %}" title="{% translate 'Clear filters' %}" aria-label="{% translate 'Clear filters' %}" class="inline-flex items-center justify-center w-11 h-11 rounded-xl border border-rose-200 dark:border-rose-900/50 bg-rose-50 dark:bg-rose-950/30 text-rose-600 dark:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-900/40 transition-all duration-200">
+                        <i data-lucide="x" class="w-4 h-4"></i>
+                    </a>
+                    {% endif %}
+                </div>
             </div>
 
-            <!-- Category Filter -->
-            <div class="lg:col-span-3">
-                <select name="category" class="dashboard-input">
-                    <option value="">{% translate "All Categories" %}</option>
+            <!-- Active Filters -->
+            {% if request.GET.q or request.GET.category or request.GET.status %}
+            <div class="flex flex-wrap items-center gap-2 mt-4 pt-4 border-t border-slate-100 dark:border-slate-800">
+                <span class="text-[11px] font-semibold text-slate-400 dark:text-slate-500">{% translate "Active filters:" %}</span>
+
+                {% if request.GET.q %}
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-purple-50 dark:bg-purple-500/10 border border-purple-100 dark:border-purple-500/20 text-[11px] font-semibold text-purple-700 dark:text-purple-400">
+                    <i data-lucide="search" class="w-3 h-3"></i>
+                    {{ request.GET.q }}
+                </span>
+                {% endif %}
+
+                {% if request.GET.category %}
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[11px] font-semibold text-slate-600 dark:text-slate-300">
+                    <i data-lucide="folder-tree" class="w-3 h-3"></i>
                     {% for cat in categories %}
-                    <option value="{{ cat.id }}" {% if request.GET.category == cat.id|stringformat:"s" %}selected{% endif %}>{{ cat.name }}</option>
+                        {% if request.GET.category == cat.id|stringformat:"s" %}{{ cat.name }}{% endif %}
                     {% endfor %}
-                </select>
-            </div>
+                </span>
+                {% endif %}
 
-            <!-- Status Filter -->
-            <div class="lg:col-span-2">
-                <select name="status" class="dashboard-input">
-                    <option value="">{% translate "All Statuses" %}</option>
-                    <option value="published" {% if request.GET.status == "published" %}selected{% endif %}>{% translate "Published" %}</option>
-                    <option value="draft" {% if request.GET.status == "draft" %}selected{% endif %}>{% translate "Draft" %}</option>
-                </select>
-            </div>
-
-            <!-- Submit Button -->
-            <div class="lg:col-span-2 flex items-center gap-2">
-                <button type="submit" class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold transition">
-                    <i data-lucide="filter" class="w-3.5 h-3.5"></i>
-                    {% translate "Filter" %}
-                </button>
-                {% if request.GET.q or request.GET.category or request.GET.status %}
-                <a href="{% url 'dashboard:articles' %}" class="p-2.5 rounded-xl border border-rose-200 dark:border-rose-900/50 bg-rose-50 dark:bg-rose-950/30 text-rose-600 dark:text-rose-400 hover:bg-rose-100 transition" title="{% translate 'Clear Filters' %}">
-                    <i data-lucide="x" class="w-4 h-4"></i>
-                </a>
+                {% if request.GET.status %}
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[11px] font-semibold text-slate-600 dark:text-slate-300">
+                    <i data-lucide="circle-check" class="w-3 h-3"></i>
+                    {% if request.GET.status == "published" %}
+                        {% translate "Published" %}
+                    {% else %}
+                        {% translate "Draft" %}
+                    {% endif %}
+                </span>
                 {% endif %}
             </div>
+            {% endif %}
         </form>
-    </div>
+    </section>
 
-    <!-- Data Table Card -->
-    <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
-        <div class="overflow-x-auto">
+    <!-- Articles -->
+    <section class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm overflow-hidden">
+
+        <!-- Card Header -->
+        <div class="px-5 sm:px-6 py-4 border-b border-slate-200 dark:border-slate-800">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                <div class="flex items-center gap-3">
+                    <div class="flex items-center justify-center w-10 h-10 rounded-xl bg-purple-50 dark:bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-100 dark:border-purple-500/20">
+                        <i data-lucide="newspaper" class="w-5 h-5"></i>
+                    </div>
+
+                    <div>
+                        <h2 class="text-sm font-bold text-slate-900 dark:text-white">
+                            {% translate "Article List" %}
+                        </h2>
+
+                        <p class="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
+                            {% blocktranslate count counter=paginator.count %}
+                                {{ counter }} article
+                            {% plural %}
+                                {{ counter }} articles
+                            {% endblocktranslate %}
+                        </p>
+                    </div>
+                </div>
+
+                {% if request.GET.q or request.GET.category or request.GET.status %}
+                <div class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-purple-50 dark:bg-purple-500/10 text-purple-600 dark:text-purple-400 text-[11px] font-semibold">
+                    <i data-lucide="filter" class="w-3.5 h-3.5"></i>
+                    {% translate "Filtered results" %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Desktop Table -->
+        <div class="hidden lg:block overflow-x-auto">
             <table class="w-full text-start text-xs">
                 <thead class="bg-slate-50/70 dark:bg-slate-800/40 border-b border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">
                     <tr>
@@ -97,13 +191,13 @@
                 <tbody class="divide-y divide-slate-100 dark:divide-slate-800/60">
                     {% for article in articles %}
                     <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition">
-                        
-                        <!-- Title & Thumbnail -->
+
+                        <!-- Article -->
                         <td class="px-6 py-4">
                             <div class="flex items-center gap-3.5">
                                 <div class="w-12 h-12 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 overflow-hidden shrink-0">
                                     {% if article.featured_image %}
-                                    <img src="{{ article.featured_image.url }}" alt="{{ article.title }}" class="w-full h-full object-cover">
+                                    <img src="{{ article.featured_image.url }}" alt="{{ article.title|default:_('Untitled Article') }}" loading="lazy" class="w-full h-full object-cover">
                                     {% else %}
                                     <div class="w-full h-full flex items-center justify-center text-slate-400">
                                         <i data-lucide="image" class="w-5 h-5"></i>
@@ -111,17 +205,19 @@
                                     {% endif %}
                                 </div>
 
-                                <div class="space-y-1">
+                                <div class="space-y-1 min-w-0">
                                     <div class="flex items-center gap-2">
                                         <a href="{% url 'dashboard:article_edit' article.pk %}" class="font-bold text-slate-900 dark:text-slate-100 hover:text-purple-600 dark:hover:text-purple-400 transition text-sm line-clamp-1">
                                             {{ article.title|default:_("Untitled Article") }}
                                         </a>
+
                                         {% if article.is_featured %}
-                                        <span class="p-1 rounded-md bg-amber-100 dark:bg-amber-900/40 text-amber-600 dark:text-amber-400" title="{% translate 'Featured Article' %}">
+                                        <span class="p-1 rounded-md bg-amber-100 dark:bg-amber-900/40 text-amber-600 dark:text-amber-400 shrink-0" title="{% translate 'Featured Article' %}">
                                             <i data-lucide="star" class="w-3 h-3 fill-current"></i>
                                         </span>
                                         {% endif %}
                                     </div>
+
                                     <div class="text-slate-400 text-[11px] flex items-center gap-2">
                                         <span>{% translate "By" %} {{ article.author|default:_("System") }}</span>
                                     </div>
@@ -131,12 +227,13 @@
 
                         <!-- Category -->
                         <td class="px-4 py-4 whitespace-nowrap">
-                            <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-medium">
+                            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-medium">
+                                <i data-lucide="folder" class="w-3 h-3 text-slate-400"></i>
                                 {{ article.category.name|default:_("Uncategorized") }}
                             </span>
                         </td>
 
-                        <!-- Translation Indicators -->
+                        <!-- Translations -->
                         <td class="px-4 py-4 whitespace-nowrap">
                             <div class="flex items-center gap-1">
                                 <span class="px-1.5 py-0.5 rounded text-[10px] font-bold uppercase border {% if article.has_ar %}bg-emerald-50 dark:bg-emerald-950/40 border-emerald-200 dark:border-emerald-800 text-emerald-600 dark:text-emerald-400{% else %}bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-400 opacity-40{% endif %}">AR</span>
@@ -145,9 +242,9 @@
                             </div>
                         </td>
 
-                        <!-- Status Badge -->
+                        <!-- Status -->
                         <td class="px-4 py-4 whitespace-nowrap">
-                            {% if article.status == 'published' %}
+                            {% if article.status == "published" %}
                             <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-100 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300">
                                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
                                 {% translate "Published" %}
@@ -160,32 +257,46 @@
                             {% endif %}
                         </td>
 
-                        <!-- Publication Date -->
-                        <td class="px-4 py-4 whitespace-nowrap text-slate-500 dark:text-slate-400">
-                            {{ article.published_at|date:"Y-m-d H:i"|default:"—" }}
+                        <!-- Published Date -->
+                        <td class="px-4 py-4 whitespace-nowrap">
+                            {% if article.published_at %}
+                            <span class="inline-flex items-center gap-1.5 text-slate-500 dark:text-slate-400">
+                                <i data-lucide="calendar" class="w-3.5 h-3.5 text-slate-400"></i>
+                                {{ article.published_at|date:"Y-m-d H:i" }}
+                            </span>
+                            {% else %}
+                            <span class="text-xs text-slate-400 dark:text-slate-500">—</span>
+                            {% endif %}
                         </td>
 
                         <!-- Actions -->
                         <td class="px-6 py-4 whitespace-nowrap text-end">
                             <div class="flex items-center justify-end gap-1.5">
-                                <a href="{% url 'dashboard:article_edit' article.pk %}" class="p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition" title="{% translate 'Edit' %}">
-                                    <i data-lucide="edit-3" class="w-4 h-4"></i>
+                                <a href="{% url 'dashboard:article_edit' article.pk %}" title="{% translate 'Edit' %}" aria-label="{% translate 'Edit article' %}" class="inline-flex items-center justify-center w-9 h-9 rounded-lg text-purple-600 hover:bg-purple-50 dark:hover:bg-purple-950/30 dark:hover:text-purple-400 transition">
+                                    <i data-lucide="pencil" class="w-4 h-4"></i>
                                 </a>
 
-                                <button type="button" @click="confirmDelete('{% url 'dashboard:article_delete' article.pk %}')" class="p-2 rounded-xl hover:bg-rose-50 dark:hover:bg-rose-950/50 text-rose-600 dark:text-rose-400 transition" title="{% translate 'Delete' %}">
+                                <a href="{% url 'dashboard:article_delete' article.pk %}" title="{% translate 'Delete' %}" aria-label="{% translate 'Delete article' %}" class="inline-flex items-center justify-center w-9 h-9 rounded-lg text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30 dark:hover:text-rose-400 transition">
                                     <i data-lucide="trash-2" class="w-4 h-4"></i>
-                                </button>
+                                </a>
                             </div>
                         </td>
                     </tr>
+
                     {% empty %}
                     <tr>
-                        <td colspan="6" class="px-6 py-12 text-center">
-                            <div class="w-12 h-12 mx-auto rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-400 flex items-center justify-center mb-3">
-                                <i data-lucide="file-x" class="w-6 h-6"></i>
+                        <td colspan="6" class="px-6 py-20 text-center">
+                            <div class="mx-auto flex items-center justify-center w-16 h-16 rounded-2xl bg-purple-50 dark:bg-purple-500/10 text-purple-500 dark:text-purple-400 border border-purple-100 dark:border-purple-500/20">
+                                <i data-lucide="file-x" class="w-8 h-8"></i>
                             </div>
-                            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200">{% translate "No Articles Found" %}</h3>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">{% translate "Try adjusting your filters or create a new article." %}</p>
+
+                            <h3 class="mt-5 text-base font-bold text-slate-900 dark:text-white">
+                                {% translate "No Articles Found" %}
+                            </h3>
+
+                            <p class="mt-1.5 max-w-md mx-auto text-sm text-slate-500 dark:text-slate-400">
+                                {% translate "Try adjusting your filters or create a new article." %}
+                            </p>
                         </td>
                     </tr>
                     {% endfor %}
@@ -193,116 +304,110 @@
             </table>
         </div>
 
-        <!-- Pagination Bar -->
-        {% if is_paginated %}
-        <div class="px-6 py-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/20 flex items-center justify-between">
-            <span class="text-xs text-slate-500 dark:text-slate-400">
-                {% translate "Showing" %} <strong class="font-semibold text-slate-700 dark:text-slate-200">{{ page_obj.start_index }}</strong> - <strong class="font-semibold text-slate-700 dark:text-slate-200">{{ page_obj.end_index }}</strong> {% translate "of" %} <strong class="font-semibold text-slate-700 dark:text-slate-200">{{ page_obj.paginator.count }}</strong>
-            </span>
+        <!-- Mobile / Tablet Cards -->
+        <div class="lg:hidden divide-y divide-slate-100 dark:divide-slate-800">
+            {% for article in articles %}
+            <article class="p-5 hover:bg-slate-50/70 dark:hover:bg-slate-800/40 transition-colors duration-150">
 
-            <div class="flex items-center gap-1">
-                {% if page_obj.has_previous %}
-                <a href="?page={{ page_obj.previous_page_number }}" class="p-2 rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-white dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition">
-                    <i data-lucide="chevron-left" class="w-4 h-4 rtl:rotate-180"></i>
-                </a>
-                {% endif %}
+                <div class="flex items-start gap-4">
+                    <div class="w-16 h-16 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 overflow-hidden shrink-0">
+                        {% if article.featured_image %}
+                        <img src="{{ article.featured_image.url }}" alt="{{ article.title|default:_('Untitled Article') }}" loading="lazy" class="w-full h-full object-cover">
+                        {% else %}
+                        <div class="w-full h-full flex items-center justify-center text-slate-400">
+                            <i data-lucide="image" class="w-6 h-6"></i>
+                        </div>
+                        {% endif %}
+                    </div>
 
-                <span class="px-3 py-1 text-xs font-bold text-slate-700 dark:text-slate-200">
-                    {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
-                </span>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex flex-wrap items-center gap-1.5 mb-2">
+                            {% if article.status == "published" %}
+                            <span class="inline-flex items-center gap-1.5 px-2 py-1 rounded-lg bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-500/20 text-[10px] font-semibold">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                {% translate "Published" %}
+                            </span>
+                            {% else %}
+                            <span class="inline-flex items-center gap-1.5 px-2 py-1 rounded-lg bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-100 dark:border-amber-500/20 text-[10px] font-semibold">
+                                <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+                                {% translate "Draft" %}
+                            </span>
+                            {% endif %}
 
-                {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}" class="p-2 rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-white dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition">
-                    <i data-lucide="chevron-right" class="w-4 h-4 rtl:rotate-180"></i>
-                </a>
-                {% endif %}
+                            {% if article.is_featured %}
+                            <span class="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-amber-50 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-100 dark:border-amber-500/20 text-[10px] font-semibold">
+                                <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                                {% translate "Featured" %}
+                            </span>
+                            {% endif %}
+                        </div>
+
+                        <h3 class="text-sm font-bold text-slate-900 dark:text-white truncate">
+                            {{ article.title|default:_("Untitled Article") }}
+                        </h3>
+
+                        <p class="mt-1 text-xs text-slate-400 dark:text-slate-500 truncate">
+                            {% translate "By" %} {{ article.author|default:_("System") }}
+                        </p>
+
+                        <div class="flex flex-wrap items-center gap-2 mt-2">
+                            <span class="inline-flex items-center gap-1.5 px-2 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[10px] font-semibold text-slate-600 dark:text-slate-300">
+                                <i data-lucide="folder" class="w-3 h-3 text-slate-400"></i>
+                                {{ article.category.name|default:_("Uncategorized") }}
+                            </span>
+
+                            <div class="flex items-center gap-1">
+                                <span class="inline-flex items-center justify-center min-w-7 h-5 px-1 rounded text-[9px] font-bold border {% if article.has_ar %}bg-emerald-50 dark:bg-emerald-950/40 border-emerald-200 dark:border-emerald-800 text-emerald-600 dark:text-emerald-400{% else %}bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-400{% endif %}">AR</span>
+                                <span class="inline-flex items-center justify-center min-w-7 h-5 px-1 rounded text-[9px] font-bold border {% if article.has_en %}bg-emerald-50 dark:bg-emerald-950/40 border-emerald-200 dark:border-emerald-800 text-emerald-600 dark:text-emerald-400{% else %}bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-400{% endif %}">EN</span>
+                                <span class="inline-flex items-center justify-center min-w-7 h-5 px-1 rounded text-[9px] font-bold border {% if article.has_fr %}bg-emerald-50 dark:bg-emerald-950/40 border-emerald-200 dark:border-emerald-800 text-emerald-600 dark:text-emerald-400{% else %}bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-400{% endif %}">FR</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between gap-3 mt-4 pt-4 border-t border-slate-100 dark:border-slate-800">
+                    <div class="text-xs text-slate-500 dark:text-slate-400">
+                        {% if article.published_at %}
+                        <span class="inline-flex items-center gap-1.5">
+                            <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
+                            {{ article.published_at|date:"d M Y - H:i" }}
+                        </span>
+                        {% else %}
+                        <span class="text-slate-400 dark:text-slate-500">—</span>
+                        {% endif %}
+                    </div>
+
+                    <div class="flex items-center gap-1.5">
+                        <a href="{% url 'dashboard:article_edit' article.pk %}" title="{% translate 'Edit' %}" aria-label="{% translate 'Edit article' %}" class="inline-flex items-center justify-center w-9 h-9 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-500/10 transition-all duration-150">
+                            <i data-lucide="pencil" class="w-4 h-4"></i>
+                        </a>
+
+                        <a href="{% url 'dashboard:article_delete' article.pk %}" title="{% translate 'Delete' %}" aria-label="{% translate 'Delete article' %}" class="inline-flex items-center justify-center w-9 h-9 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-500/10 transition-all duration-150">
+                            <i data-lucide="trash-2" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            {% empty %}
+            <div class="px-6 py-20 text-center">
+                <div class="mx-auto flex items-center justify-center w-16 h-16 rounded-2xl bg-purple-50 dark:bg-purple-500/10 text-purple-500 dark:text-purple-400 border border-purple-100 dark:border-purple-500/20">
+                    <i data-lucide="file-x" class="w-8 h-8"></i>
+                </div>
+
+                <h3 class="mt-5 text-base font-bold text-slate-900 dark:text-white">
+                    {% translate "No Articles Found" %}
+                </h3>
+
+                <p class="mt-1.5 max-w-md mx-auto text-sm text-slate-500 dark:text-slate-400">
+                    {% translate "Try adjusting your filters or create a new article." %}
+                </p>
             </div>
+            {% endfor %}
         </div>
-        {% endif %}
-    </div>
 
-    <!-- DELETE CONFIRMATION MODAL -->
-    <template x-if="deleteModalOpen">
-        <div @keydown.escape.window="closeDeleteModal()" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
-            <div @click.outside="closeDeleteModal()" class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 max-w-sm w-full p-6 space-y-4 shadow-xl">
-                <div class="w-10 h-10 rounded-xl bg-rose-100 dark:bg-rose-900/40 text-rose-600 dark:text-rose-400 flex items-center justify-center">
-                    <i data-lucide="alert-triangle" class="w-5 h-5"></i>
-                </div>
-                <div>
-                    <h3 class="text-sm font-bold text-slate-900 dark:text-slate-100">{% translate "Delete Article?" %}</h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">{% translate "Are you sure you want to delete this article and its translations? This action cannot be undone." %}</p>
-                </div>
-                <div class="flex items-center justify-end gap-2.5">
-                    <button type="button" @click="closeDeleteModal()" class="px-4 py-2 rounded-xl text-xs font-semibold border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300">
-                        {% translate "Cancel" %}
-                    </button>
-                    <form :action="deleteUrl" method="post" class="inline">
-                        {% csrf_token %}
-                        <button type="submit" class="px-4 py-2 rounded-xl text-xs font-semibold bg-rose-600 hover:bg-rose-700 text-white transition">
-                            {% translate "Delete" %}
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </template>
-
+        <!-- Pagination -->
+        {% include "dashboard/partials/pagination.html" %}
+    </section>
 </div>
-{% endblock %}
-
-{% block extra_js %}
-<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    if (window.lucide) {
-        lucide.createIcons();
-    }
-});
-
-function articleList() {
-    return {
-        deleteModalOpen: false,
-        deleteUrl: '',
-
-        confirmDelete(url) {
-            this.deleteUrl = url;
-            this.deleteModalOpen = true;
-        },
-
-        closeDeleteModal() {
-            this.deleteModalOpen = false;
-            this.deleteUrl = '';
-        }
-    };
-}
-</script>
-
-<style>
-.dashboard-input {
-    width: 100%;
-    border-radius: 0.75rem;
-    border: 1px solid rgb(226 232 240);
-    background-color: rgb(248 250 252);
-    color: rgb(15 23 42);
-    padding: 0.5rem 0.875rem;
-    font-size: 0.75rem;
-    line-height: 1.25rem;
-    outline: none;
-    transition: all 0.2s ease-in-out;
-}
-.dashboard-input:focus {
-    border-color: rgb(147 51 234);
-    box-shadow: 0 0 0 3px rgb(147 51 234 / 0.15);
-}
-.dark .dashboard-input {
-    border-color: rgb(30 41 59);
-    background-color: rgb(15 23 42);
-    color: rgb(241 245 249);
-}
-.dark .dashboard-input:focus {
-    border-color: rgb(168 85 247);
-    box-shadow: 0 0 0 3px rgb(168 85 247 / 0.2);
-}
-</style>
 {% endblock %}

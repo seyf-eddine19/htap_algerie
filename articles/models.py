@@ -18,8 +18,8 @@ class ArticleCategory(models.Model):
 
     class Meta:
         ordering = ["order", "name"]
-        verbose_name = _("Article category")
-        verbose_name_plural = _("Article categories")
+        verbose_name = _("Article Category")
+        verbose_name_plural = _("Article Categories")
 
     def __str__(self):
         return self.name
