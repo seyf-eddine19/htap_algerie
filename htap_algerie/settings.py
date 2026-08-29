@@ -91,7 +91,7 @@ DATABASES = {
     }
 }
 
-# PostgreSQL configuration
+# Database Configuration
 if DATABASES["default"]["ENGINE"] == "django.db.backends.postgresql":
     DATABASES["default"].update(
         {
@@ -99,6 +99,20 @@ if DATABASES["default"]["ENGINE"] == "django.db.backends.postgresql":
             "PASSWORD": env("DB_PASSWORD"),
             "HOST": env("DB_HOST", default="127.0.0.1"),
             "PORT": env("DB_PORT", default="5432"),
+        }
+    )
+elif DATABASES["default"]["ENGINE"] == "django.db.backends.mysql":
+    DATABASES["default"].update(
+        {
+            "NAME": env("DB_NAME", default="assoht81_htapdb"),
+            "USER": env("DB_USER", default="assoht81_user"),
+            "PASSWORD": env("DB_PASSWORD"),
+            "HOST": env("DB_HOST", default="127.0.0.1"),
+            "PORT": env("DB_PORT", default="3306"),
+            "OPTIONS": {
+                "init_command": "SET sql_mode='STRICT_TRANS_TABLES'",
+                "charset": "utf8mb4",
+            },
         }
     )
 
