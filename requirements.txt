@@ -1,5 +1,5 @@
 asgiref==3.12.1
-Django==6.1
+Django==5.2.5
 django-environ==0.14.0
 pillow==12.3.0
 PyMySQL==1.2.0

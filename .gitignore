@@ -39,4 +39,4 @@ Thumbs.db
 .coverage
 htmlcov/
 
-
+data.json
