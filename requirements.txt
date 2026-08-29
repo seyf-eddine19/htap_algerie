@@ -2,6 +2,9 @@ asgiref==3.12.1
 Django==6.1
 django-environ==0.14.0
 pillow==12.3.0
+PyMySQL==1.2.0
 setuptools==67.6.1
 sqlparse==0.6.0
 wheel==0.40.0
+
+
