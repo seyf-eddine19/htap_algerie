@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.views.generic import FormView, TemplateView
@@ -6,6 +7,15 @@ from .models import Member
 from .forms import ContactMessageForm
 
 from articles.models import Article
+
+
+def robots_txt(request):
+    content = """User-agent: *
+Allow: /
+
+Sitemap: https://asso-htap.dz/sitemap.xml
+"""
+    return HttpResponse(content, content_type="text/plain")
 
 
 class HomeView(TemplateView):
