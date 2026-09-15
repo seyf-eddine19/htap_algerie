@@ -22,6 +22,7 @@ from django.urls import path, include
 from django.contrib.sitemaps.views import sitemap
 
 from core.sitemaps import StaticViewSitemap, ArticleSitemap, ActivitySitemap
+from core.views import robots_txt
 
 sitemaps = {
     "static": StaticViewSitemap,
@@ -31,6 +32,7 @@ sitemaps = {
 
 urlpatterns = [
     path('i18n/', include('django.conf.urls.i18n')),
+    path("robots.txt", robots_txt, name="robots"),
     path(
         "sitemap.xml",
         sitemap,
